@@ -1,0 +1,136 @@
+@(message: String, taxon: Taxonomy, biolsource: List[Biolsource], groupTax: List[SqlRow] )
+@import helper._
+
+@**********************************
+* Helper generating table headers *
+***********************************@
+
+@header(key:String, title:String) = {
+    <th class="">
+        <a href="">@title</a>
+    </th>
+}
+
+@main {
+
+     <div class="modal hide fade" id="taxDescription">
+	<div class="modal-header">
+		<a href="#" class="close" data-dismiss="modal">&times;</a>
+             	<h3>Taxonomy Structures</h3>
+	</div>
+	<div class="modal-body">
+		<h2 class="fullname">Structure's associated with taxonomy:</h2>
+		<p>@taxon.strtaxonomy.size()</p>
+		@for(str <- taxon.strtaxonomy){
+		<img class="resizemeModal"src="http://glycosuitedb.expasy.org/glycosuite-structures//_@{str.structure.id}.png" alt="">
+		}
+	</div>
+	<div class="modal-footer">
+                <a href="#" class="btn primary" onclick="okClicked ();">OK</a>
+	</div>
+
+     </div>	
+
+
+     <div class="container">
+     	<section>
+        	<div class="page-header">
+		<h1>@message <small>@taxon.species</small>  <span class="label success">Curated Entry</span> <span class="label notice">GlycoSuiteDB</span><br /></h1>
+		</div>
+	</section>
+
+	<section>
+	<div class="row">
+<div class="span12">
+    <div class="span10">
+      <h3>Protein Association</h3>
+      <p style="font-size: 14px; line-height: 20px; text-align:justify">The GlycoSuite database is an annotated and curated relational database of glycan structures. For the taxonomic entry @taxon.species a number of glycan structures, glycoproteins and tissue source's have been curated.</p>
+	
+
+  	<div style="display: block;">
+		@for( (str, i) <- taxon.strtaxonomy.zipWithIndex; if (i <=5 ) ) {
+		<img class="resizeme"src="http://glycosuitedb.expasy.org/glycosuite-structures//_@{str.structure.id}.png" style="left:-20.67%;" alt="">
+		}
+		<p  style="font-weight: bold;"><a href=""  data-toggle="modal" data-id='@taxon' class="announceTaxStructures"><i class="icon-resize-full"></i> See more structures</a></p>
+	</div>
+
+    @**<div style="display: block;">
+	<h6 class="uiStreamMessage uiStreamHeadline uiStreamPassive">test this</h6>
+	<div class="mvm"  style="display: block;">
+		<div class="clearfix photoRedesign"  style="display: inline;">
+			<a style="display: inline;" class="mrs uiScaledThumb photoRedesignSmall photoRedesignLink" href="https://www.facebook.com/photo.php?fbid=479370135410464&amp;set=at.479363392077805.128576.100000124467738.100000495136547&amp;type=1&amp;ref=nf" rel="theater" data-ft="{&quot;type&quot;:41,&quot;tn&quot;:&quot;E&quot;}" ajaxify="https://www.facebook.com/photo.php?fbid=479370135410464&amp;set=at.479363392077805.128576.100000124467738.100000495136547&amp;type=1&amp;ref=nf&amp;src=https%3A%2F%2Ffbcdn-sphotos-a.akamaihd.net%2Fhphotos-ak-snc7%2F318191_479370135410464_2147266772_n.jpg&amp;size=960%2C720&amp;theater"><div class="uiScaledImageContainer photoWrap"><img style="display: inline;" class="img" src="https://fbcdn-sphotos-a.akamaihd.net/hphotos-ak-snc7/s480x480/318191_479370135410464_2147266772_n.jpg" alt="" width="172" height="129"></div></a>
+			<a style="display: inline;" class="mrs uiScaledThumb photoRedesignSmall photoRedesignLink" href="https://www.facebook.com/photo.php?fbid=479368868743924&amp;set=at.479363392077805.128576.100000124467738.100000495136547&amp;type=1&amp;ref=nf" rel="theater" data-ft="{&quot;type&quot;:41,&quot;tn&quot;:&quot;E&quot;}" ajaxify="https://www.facebook.com/photo.php?fbid=479368868743924&amp;set=at.479363392077805.128576.100000124467738.100000495136547&amp;type=1&amp;ref=nf&amp;src=https%3A%2F%2Ffbcdn-sphotos-a.akamaihd.net%2Fhphotos-ak-snc6%2F168256_479368868743924_1677372382_n.jpg&amp;size=960%2C720&amp;theater"><div class="uiScaledImageContainer photoWrap"><img style="display: inline;" class="img" src="https://fbcdn-sphotos-a.akamaihd.net/hphotos-ak-snc6/s480x480/168256_479368868743924_1677372382_n.jpg" style="left:-20.67%;" alt="" width="172" height="129"></div></a>
+		</div>
+	</div> 
+    </div>
+**@
+
+    </div>
+</div>
+    <div class="span4">
+      <h3><small>Glycan Structures</small></h3>
+	<p><i class="icon-chevron-right"></i> <b>@taxon.strtaxonomy.size() </b> structures reported</p>
+	<p><i class="icon-th-large"></i> See more details</p>
+
+     <h3><small>Glycoproteins</small></h3>
+	<p><i class="icon-chevron-right"></i><b>@groupTax.size() </b> glycoproteins curated</p>
+
+	@for( (sql,i) <- groupTax.zipWithIndex; if (i <= 6)) {
+        <p class="short">@sql("protein")</p>
+      }
+
+
+	<p><i class="icon-th-large"></i> See more details</p>
+     <h3><small>External Resources</small></h3>
+	<p><i class="icon-search"></i> Search UniCarb-DB</p>
+	<p><i class="icon-search"></i> Search EUROCarbDB</p>
+@** 	@for((s, i) <- taxon.strtaxonomy.zipWithIndex; if (i <=4) ){
+		<img class="sugar_image" src="http://glycosuitedb.expasy.org/glycosuite-structures//_@{s.id}.png">
+	} **@
+    </div>
+  </div>
+	<div class="row"></div>
+	</section>
+
+	<div>
+	<ul id="myContent">
+		@**	@for((s, i) <- taxon.strtaxonomy.zipWithIndex; if (i <=4) ){
+ 			**@
+			<li style="height: 206px; width: 200px"><img class="resizeModal" src="http://glycosuitedb.expasy.org/glycosuite-structures//_1.png" alt=""></li>
+			<li style="height: 256px; width: 200px"><img  class="resizeModal" src="http://glycosuitedb.expasy.org/glycosuite-structures//_24.png" alt=""></li>
+			<li style="height: 276px; width: 200px"><img  class="resizeModal" src="http://glycosuitedb.expasy.org/glycosuite-structures//_89.png" alt=""></li>
+		</ul>	
+
+	</div>
+     </div>
+
+
+<script type="text/javascript">
+    $(document).ready(new function() {
+      // Prepare layout options.
+      var options = {
+        autoResize: true, // This will auto-update the layout when the browser window is resized.
+        container: $('#myContent'), // Optional, used for some extra CSS styling
+        offset: 2, // Optional, the distance between grid items
+        itemWidth: 210 // Optional, the width of a grid item
+      };
+      
+      // Get a reference to your grid items.
+      var handler = $('#myContent li');
+      
+      // Call the layout function.
+      handler.wookmark(options);
+      
+      // Capture clicks on grid items.
+      handler.click(function(){
+        // Randomize the height of the clicked item.
+        var newHeight = $('img', this).height() + Math.round(Math.random()*300+30);
+        $(this).css('height', newHeight+'px');
+        
+        // Update the layout.
+        handler.wookmark();
+      });
+    });
+  </script
+
+}

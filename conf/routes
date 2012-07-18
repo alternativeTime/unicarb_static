@@ -1,0 +1,44 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Default path will just redirect to the computer list
+GET     /                           controllers.Application.index()
+
+# Computers list (look at the default values for pagination parameters)
+GET     /references                  controllers.Application.list2(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
+GET		/references/:id				 controllers.Application.refdisplay(id:Long)
+
+GET		/streference/:id		     controllers.Application.stref(id:Long)
+GET		/structure/:id	      controllers.Application.structureDetails(id:Long)
+
+GET		/taxonomy/:id      controllers.Application.taxonDetails(id:Long)
+
+GET	/taxonomy			controllers.Application.findAllSpecies()
+
+GET	/unicarb		   controllers.Application.unicarb(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
+GET	/ms		   controllers.Application.ms()
+
+GET	/search			controllers.Application.search()
+GET	/saySearch/:s			controllers.Search.saySearch(s: String)
+
+
+#GET	/unicarb/:id		   controllers.Application.unicarbdisplay(id:Long)
+
+#GET	/taxonomy/:species		controllers.Application.taxonsearch(species:String)
+
+
+# Add computer
+# GET     /computers/new              controllers.Application.create()
+# POST    /computers                  controllers.Application.save()
+
+# Edit existing computer
+# GET     /computers/:id              controllers.Application.edit(id:Long)
+# POST    /computers/:id              controllers.Application.update(id:Long)
+
+# Delete a computer
+# POST    /computers/:id/delete       controllers.Application.delete(id:Long)
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
+GET	/images/*file	    controllers.Assets.at(path="/public/images", file)

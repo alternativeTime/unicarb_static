@@ -1,0 +1,109 @@
+@(references: List[Structure], structureId: Long, proteinNames: ArrayList[String], taxNames: ArrayList[String], sourceNames: ArrayList[String], test: List[Array[String]], uniprot: ArrayList[String])
+@import helper._
+
+@**********************************
+* Helper generating table headers *
+***********************************@
+@header(key:String, title:String) = {
+    <th class="">
+        <a href="">@title</a>
+    </th>
+}
+
+@main {
+
+	<div class="modal hide fade" id="windowDescription">
+				<div class="modal-header">
+					<a href="#" class="close" data-dismiss="modal">&times;</a>
+					<h3>Protein and Taxonomy Information <span class="label success">Curated Entry</span> <span class="label notice">GlycoSuiteDB</span></h3>
+				</div>
+				<div class="modal-body">
+					<h2 class="fullname">This structure has been associated with various records:</h2>
+					
+					<div id="myDiv"><p>testthis</p></div>
+@**
+					@for(protein <- proteinNames){
+		                        <p class="proteinName"><a href="@routes.Application.taxonDetails">@protein</a></p>}
+					<p class="fullname">The following taxonomic details have been curated:</p>
+					@for(tax <- taxNames) {
+					 <p class="proteinName">@tax</p>}
+					<p class="fullname">The following taxonomic details have been curated:</p>
+                                        @for(source <- sourceNames) {
+					<p class="proteinName">@source</p>}
+**@
+					</div>
+				<div class="modal-footer">
+					<a href="#" class="btn primary" onclick="okClicked ();">OK</a>
+					</div>
+				</div>
+			</div>
+
+ 
+    <div class="container">
+	<section id="structureLayout">
+  	<div class="page-header">
+    	<h1>Structure <small>Details for structure</small></h1>
+  	</div>
+
+	<div class="row">
+	 <div class="span16">
+		 <div style="float:left; width:100% ">
+		<img class="sugar_image"  src="http://glycosuitedb.expasy.org/glycosuite-structures//_@{structureId}.png"> 
+			<div style="float:right; margin-right:20px"><h4 class="stats">Information</h4>
+                                <ul class="stats">
+                                        <li>Proteins</li>
+                                        <li>Taxonomy</li>
+                                        <li>Source</li>
+                                </ul>
+                        </div>
+
+		</div>
+	 </div>
+	</div>
+	</section>	
+	
+	<section id="layouts">	
+	 <div class="row">
+	    <br />   @** clean this up **@
+	    <div class="span16">
+
+		<div class="row-fluid"><h4 class="pull-left">Available Descriptions :&nbsp;</h4><ul class="nav nav-pills pull-left"><li><a href="" style="color: #1F7099;" data-toggle="modal" data-id='@taxNames' class="announce"><i class="icon-search"></i> Taxonomy</a></li><li><a style="color: #1F7099;" data-toggle="modal" data-id="@proteinNames" class="announce"><i class="icon-th-list"></i> Protein</a></li><li><a style="color: #1F7099;" data-toggle="modal" data-id="@sourceNames" class="announce" ><i class="icon-th-list"></i> Source</a></li></div>
+
+
+
+		<h4>References associated to structure</h4>
+
+
+	    	<table class="computers zebra-striped">
+	            <thead>
+        	        <tr>
+                	@header("title", "Title")
+			@header("year", "Year")
+                    	@header("authors", "Authors")
+                	</tr>
+            	    </thead>
+            	<tbody>
+
+
+    		@for(stref <- references){
+
+
+        		@for(reference <- stref.references){
+                	@**<p>@stref.id --> @reference.id --> @reference.reference.title</p>**@
+                	<tr><td><a href="../references/@reference.reference.id">@reference.reference.title</a></td><td>@reference.reference.year</td><td>@reference.reference.authors</td></tr>
+        		}
+    		}
+		</tbody>
+    		</table>
+
+
+
+	     </div>
+
+	</div>
+
+    </div>
+
+
+      
+}

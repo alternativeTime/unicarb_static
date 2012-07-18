@@ -1,0 +1,795 @@
+2012-07-13 13:39:24,599 - [INFO] - from play in main 
+Listening for HTTP on port 9000...
+
+2012-07-13 13:41:44,192 - [DEBUG] - from com.jolbox.bonecp.BoneCPDataSource in play-akka.actor.default-dispatcher-1 
+JDBC URL = jdbc:postgresql://localhost:5432/playdb, Username = postgres, partitions = 2, max (per partition) = 5, min (per partition) = 5, helper threads = 3, idle max age = 10 min, idle test period = 5 min
+
+2012-07-13 13:41:44,446 - [INFO] - from play in play-akka.actor.default-dispatcher-1 
+database [default] connected at jdbc:postgresql://localhost:5432/playdb
+
+2012-07-13 13:41:45,077 - [WARN] - from com.jolbox.bonecp.ConnectionPartition in com.google.common.base.internal.Finalizer 
+BoneCP detected an unclosed connection and will now attempt to close it for you. You should be closing this connection in your application - enable connectionWatch for additional debugging assistance.
+
+2012-07-13 13:41:46,413 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in play-akka.actor.default-dispatcher-1 
+select id, hash, apply_script, revert_script, state, last_problem from play_evolutions where state like 'applying_%'
+
+2012-07-13 13:41:46,456 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in play-akka.actor.default-dispatcher-1 
+
+                    select id, hash, apply_script, revert_script from play_evolutions order by id
+                
+
+2012-07-13 13:41:46,671 - [INFO] - from play in play-akka.actor.default-dispatcher-1 
+Application started (Dev)
+
+2012-07-13 14:15:02,740 - [ERROR] - from application in New I/O server worker #1-4 
+
+
+! Internal server error, for request [GET /search] ->
+
+sbt.PlayExceptions$CompilationException: Compilation error [':' expected but '[' found.]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$2$$anonfun$apply$11$$anonfun$apply$12.apply(PlayReloader.scala:224) ~[na:na]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$2$$anonfun$apply$11$$anonfun$apply$12.apply(PlayReloader.scala:224) ~[na:na]
+	at scala.Option.map(Option.scala:133) ~[scala-library.jar:0.11.2]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$2$$anonfun$apply$11.apply(PlayReloader.scala:224) ~[na:na]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$2$$anonfun$apply$11.apply(PlayReloader.scala:221) ~[na:na]
+	at scala.Option.map(Option.scala:133) ~[scala-library.jar:0.11.2]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$2.apply(PlayReloader.scala:221) ~[na:na]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$2.apply(PlayReloader.scala:219) ~[na:na]
+	at scala.Either$LeftProjection.map(Either.scala:183) ~[scala-library.jar:0.11.2]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3.apply(PlayReloader.scala:219) ~[na:na]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3.apply(PlayReloader.scala:214) ~[na:na]
+	at scala.Option.getOrElse(Option.scala:108) ~[scala-library.jar:0.11.2]
+	at sbt.PlayReloader$$anon$2.reload(PlayReloader.scala:214) ~[na:na]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:110) ~[play_2.9.1.jar:2.0]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:110) ~[play_2.9.1.jar:2.0]
+	at akka.dispatch.Future$$anon$3.liftedTree1$1(Future.scala:195) ~[akka-actor.jar:2.0]
+	at akka.dispatch.Future$$anon$3.run(Future.scala:194) ~[akka-actor.jar:2.0]
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:83) ~[akka-actor.jar:2.0]
+	at akka.jsr166y.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1381) ~[akka-actor.jar:2.0]
+	at akka.jsr166y.ForkJoinTask.doExec(ForkJoinTask.java:259) ~[akka-actor.jar:2.0]
+	at akka.jsr166y.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:997) ~[akka-actor.jar:2.0]
+	at akka.jsr166y.ForkJoinPool.runWorker(ForkJoinPool.java:1495) ~[akka-actor.jar:2.0]
+	at akka.jsr166y.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:104) ~[akka-actor.jar:2.0]
+
+2012-07-13 14:15:27,086 - [ERROR] - from application in New I/O server worker #1-2 
+
+
+! Internal server error, for request [GET /search] ->
+
+sbt.PlayExceptions$CompilationException: Compilation error [cannot find symbol [symbol: variable translation] [location: class controllers.Search]]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$2$$anonfun$apply$11$$anonfun$apply$12.apply(PlayReloader.scala:224) ~[na:na]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$2$$anonfun$apply$11$$anonfun$apply$12.apply(PlayReloader.scala:224) ~[na:na]
+	at scala.Option.map(Option.scala:133) ~[scala-library.jar:0.11.2]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$2$$anonfun$apply$11.apply(PlayReloader.scala:224) ~[na:na]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$2$$anonfun$apply$11.apply(PlayReloader.scala:221) ~[na:na]
+	at scala.Option.map(Option.scala:133) ~[scala-library.jar:0.11.2]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$2.apply(PlayReloader.scala:221) ~[na:na]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$2.apply(PlayReloader.scala:219) ~[na:na]
+	at scala.Either$LeftProjection.map(Either.scala:183) ~[scala-library.jar:0.11.2]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3.apply(PlayReloader.scala:219) ~[na:na]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3.apply(PlayReloader.scala:214) ~[na:na]
+	at scala.Option.getOrElse(Option.scala:108) ~[scala-library.jar:0.11.2]
+	at sbt.PlayReloader$$anon$2.reload(PlayReloader.scala:214) ~[na:na]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:110) ~[play_2.9.1.jar:2.0]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:110) ~[play_2.9.1.jar:2.0]
+	at akka.dispatch.Future$$anon$3.liftedTree1$1(Future.scala:195) ~[akka-actor.jar:2.0]
+	at akka.dispatch.Future$$anon$3.run(Future.scala:194) ~[akka-actor.jar:2.0]
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:83) ~[akka-actor.jar:2.0]
+	at akka.jsr166y.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1381) ~[akka-actor.jar:2.0]
+	at akka.jsr166y.ForkJoinTask.doExec(ForkJoinTask.java:259) ~[akka-actor.jar:2.0]
+	at akka.jsr166y.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:997) ~[akka-actor.jar:2.0]
+	at akka.jsr166y.ForkJoinPool.runWorker(ForkJoinPool.java:1495) ~[akka-actor.jar:2.0]
+	at akka.jsr166y.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:104) ~[akka-actor.jar:2.0]
+
+2012-07-13 14:17:18,298 - [ERROR] - from application in New I/O server worker #1-2 
+
+
+! Internal server error, for request [GET /search] ->
+
+sbt.PlayExceptions$CompilationException: Compilation error [cannot find symbol [symbol: variable translation] [location: class controllers.Search]]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$2$$anonfun$apply$11$$anonfun$apply$12.apply(PlayReloader.scala:224) ~[na:na]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$2$$anonfun$apply$11$$anonfun$apply$12.apply(PlayReloader.scala:224) ~[na:na]
+	at scala.Option.map(Option.scala:133) ~[scala-library.jar:0.11.2]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$2$$anonfun$apply$11.apply(PlayReloader.scala:224) ~[na:na]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$2$$anonfun$apply$11.apply(PlayReloader.scala:221) ~[na:na]
+	at scala.Option.map(Option.scala:133) ~[scala-library.jar:0.11.2]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$2.apply(PlayReloader.scala:221) ~[na:na]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$2.apply(PlayReloader.scala:219) ~[na:na]
+	at scala.Either$LeftProjection.map(Either.scala:183) ~[scala-library.jar:0.11.2]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3.apply(PlayReloader.scala:219) ~[na:na]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3.apply(PlayReloader.scala:214) ~[na:na]
+	at scala.Option.getOrElse(Option.scala:108) ~[scala-library.jar:0.11.2]
+	at sbt.PlayReloader$$anon$2.reload(PlayReloader.scala:214) ~[na:na]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:110) ~[play_2.9.1.jar:2.0]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:110) ~[play_2.9.1.jar:2.0]
+	at akka.dispatch.Future$$anon$3.liftedTree1$1(Future.scala:195) ~[akka-actor.jar:2.0]
+	at akka.dispatch.Future$$anon$3.run(Future.scala:194) ~[akka-actor.jar:2.0]
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:83) ~[akka-actor.jar:2.0]
+	at akka.jsr166y.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1381) ~[akka-actor.jar:2.0]
+	at akka.jsr166y.ForkJoinTask.doExec(ForkJoinTask.java:259) ~[akka-actor.jar:2.0]
+	at akka.jsr166y.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:997) ~[akka-actor.jar:2.0]
+	at akka.jsr166y.ForkJoinPool.runWorker(ForkJoinPool.java:1495) ~[akka-actor.jar:2.0]
+	at akka.jsr166y.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:104) ~[akka-actor.jar:2.0]
+
+2012-07-13 14:24:22,351 - [INFO] - from com.jolbox.bonecp.BoneCP in play-akka.actor.default-dispatcher-5 
+Shutting down connection pool...
+
+2012-07-13 14:24:22,409 - [DEBUG] - from com.jolbox.bonecp.ConnectionTesterThread in BoneCP-keep-alive-scheduler 
+Shutting down connection tester thread.
+
+2012-07-13 14:24:22,410 - [INFO] - from com.jolbox.bonecp.BoneCP in play-akka.actor.default-dispatcher-5 
+Connection pool has been shutdown.
+
+2012-07-13 14:24:22,485 - [DEBUG] - from com.jolbox.bonecp.BoneCPDataSource in play-akka.actor.default-dispatcher-5 
+JDBC URL = jdbc:postgresql://localhost:5432/playdb, Username = postgres, partitions = 2, max (per partition) = 5, min (per partition) = 5, helper threads = 3, idle max age = 10 min, idle test period = 5 min
+
+2012-07-13 14:24:22,556 - [INFO] - from play in play-akka.actor.default-dispatcher-5 
+database [default] connected at jdbc:postgresql://localhost:5432/playdb
+
+2012-07-13 14:24:23,770 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in play-akka.actor.default-dispatcher-5 
+select id, hash, apply_script, revert_script, state, last_problem from play_evolutions where state like 'applying_%'
+
+2012-07-13 14:24:23,797 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in play-akka.actor.default-dispatcher-5 
+
+                    select id, hash, apply_script, revert_script from play_evolutions order by id
+                
+
+2012-07-13 14:24:23,832 - [INFO] - from play in play-akka.actor.default-dispatcher-5 
+Application started (Dev)
+
+2012-07-13 14:24:23,901 - [ERROR] - from application in play-akka.actor.actions-dispatcher-1 
+
+
+! @6b2iel0ba - Internal server error, for request [GET /saySearch/s?RES%0A1b:x-dglc-HEX-1:5%0A2b:x-dgal-HEX-1:5%0A3s:n-acetyl%0A4s:n-acetyl%0ALIN%0A1:1o(-1+1)2d%0A2:2d(2+1)3n%0A3:1d(2+1)4n%0A] ->
+
+play.core.ActionInvoker$$anonfun$receive$1$$anon$1: Execution exception [[ClassCastException: models.Translation cannot be cast to java.util.List]]
+	at play.core.ActionInvoker$$anonfun$receive$1.apply(Invoker.scala:82) [play_2.9.1.jar:2.0]
+	at play.core.ActionInvoker$$anonfun$receive$1.apply(Invoker.scala:63) [play_2.9.1.jar:2.0]
+	at akka.actor.Actor$class.apply(Actor.scala:290) [akka-actor.jar:2.0]
+	at play.core.ActionInvoker.apply(Invoker.scala:61) [play_2.9.1.jar:2.0]
+	at akka.actor.ActorCell.invoke(ActorCell.scala:617) [akka-actor.jar:2.0]
+	at akka.dispatch.Mailbox.processMailbox(Mailbox.scala:179) [akka-actor.jar:2.0]
+	at akka.dispatch.Mailbox.run(Mailbox.scala:161) [akka-actor.jar:2.0]
+	at akka.dispatch.ForkJoinExecutorConfigurator$MailboxExecutionTask.exec(AbstractDispatcher.scala:505) [akka-actor.jar:2.0]
+	at akka.jsr166y.ForkJoinTask.doExec(ForkJoinTask.java:259) [akka-actor.jar:2.0]
+	at akka.jsr166y.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:997) [akka-actor.jar:2.0]
+	at akka.jsr166y.ForkJoinPool.runWorker(ForkJoinPool.java:1495) [akka-actor.jar:2.0]
+	at akka.jsr166y.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:104) [akka-actor.jar:2.0]
+Caused by: java.lang.ClassCastException: models.Translation cannot be cast to java.util.List
+	at controllers.Search.saySearch(Search.java:66) ~[classes/:2.0]
+	at Routes$$anonfun$routes$1$$anonfun$apply$21$$anonfun$apply$22.apply(routes_routing.scala:156) ~[classes/:na]
+	at Routes$$anonfun$routes$1$$anonfun$apply$21$$anonfun$apply$22.apply(routes_routing.scala:156) ~[classes/:na]
+	at play.core.Router$HandlerInvoker$$anon$4$$anon$1.invocation(Router.scala:1086) ~[play_2.9.1.jar:2.0]
+	at play.core.j.JavaAction$$anon$1.call(JavaAction.scala:33) ~[play_2.9.1.jar:2.0]
+	at play.core.j.JavaAction$class.apply(JavaAction.scala:74) ~[play_2.9.1.jar:2.0]
+	at play.core.Router$HandlerInvoker$$anon$4$$anon$1.apply(Router.scala:1085) ~[play_2.9.1.jar:2.0]
+	at play.core.ActionInvoker$$anonfun$receive$1$$anonfun$4.apply(Invoker.scala:74) ~[play_2.9.1.jar:2.0]
+	at play.core.ActionInvoker$$anonfun$receive$1$$anonfun$4.apply(Invoker.scala:74) ~[play_2.9.1.jar:2.0]
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:17) ~[play_2.9.1.jar:2.0]
+	at play.core.ActionInvoker$$anonfun$receive$1.apply(Invoker.scala:73) [play_2.9.1.jar:2.0]
+	... 11 common frames omitted
+
+2012-07-13 14:25:05,280 - [WARN] - from com.jolbox.bonecp.ConnectionPartition in com.google.common.base.internal.Finalizer 
+BoneCP detected an unclosed connection and will now attempt to close it for you. You should be closing this connection in your application - enable connectionWatch for additional debugging assistance.
+
+2012-07-13 14:25:13,811 - [INFO] - from com.jolbox.bonecp.BoneCP in play-akka.actor.default-dispatcher-5 
+Shutting down connection pool...
+
+2012-07-13 14:25:13,850 - [INFO] - from com.jolbox.bonecp.BoneCP in play-akka.actor.default-dispatcher-5 
+Connection pool has been shutdown.
+
+2012-07-13 14:25:13,860 - [DEBUG] - from com.jolbox.bonecp.BoneCPDataSource in play-akka.actor.default-dispatcher-5 
+JDBC URL = jdbc:postgresql://localhost:5432/playdb, Username = postgres, partitions = 2, max (per partition) = 5, min (per partition) = 5, helper threads = 3, idle max age = 10 min, idle test period = 5 min
+
+2012-07-13 14:25:13,925 - [INFO] - from play in play-akka.actor.default-dispatcher-5 
+database [default] connected at jdbc:postgresql://localhost:5432/playdb
+
+2012-07-13 14:25:14,720 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in play-akka.actor.default-dispatcher-5 
+select id, hash, apply_script, revert_script, state, last_problem from play_evolutions where state like 'applying_%'
+
+2012-07-13 14:25:14,721 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in play-akka.actor.default-dispatcher-5 
+
+                    select id, hash, apply_script, revert_script from play_evolutions order by id
+                
+
+2012-07-13 14:25:14,729 - [INFO] - from play in play-akka.actor.default-dispatcher-5 
+Application started (Dev)
+
+2012-07-13 14:25:14,936 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-akka.actor.actions-dispatcher-1 
+select t0.id as c0, t0.iupac as c1, t0.ct as c2, t0.gws as c3, t0.gs as c4 
+from translation t0 
+where t0.ct like 'RES
+1b:x-dglc-HEX-1:5
+2b:x-dgal-HEX-1:5
+3s:n-acetyl
+4s:n-acetyl
+LIN
+1:1o(-1+1)2d
+2:2d(2+1)3n
+3:1d(2+1)4n
+' 
+
+2012-07-13 14:25:15,513 - [WARN] - from com.jolbox.bonecp.ConnectionPartition in com.google.common.base.internal.Finalizer 
+BoneCP detected an unclosed connection and will now attempt to close it for you. You should be closing this connection in your application - enable connectionWatch for additional debugging assistance.
+
+2012-07-13 14:26:12,412 - [INFO] - from com.jolbox.bonecp.BoneCP in play-akka.actor.default-dispatcher-5 
+Shutting down connection pool...
+
+2012-07-13 14:26:12,417 - [INFO] - from com.jolbox.bonecp.BoneCP in play-akka.actor.default-dispatcher-5 
+Connection pool has been shutdown.
+
+2012-07-13 14:26:12,425 - [DEBUG] - from com.jolbox.bonecp.BoneCPDataSource in play-akka.actor.default-dispatcher-5 
+JDBC URL = jdbc:postgresql://localhost:5432/playdb, Username = postgres, partitions = 2, max (per partition) = 5, min (per partition) = 5, helper threads = 3, idle max age = 10 min, idle test period = 5 min
+
+2012-07-13 14:26:12,449 - [INFO] - from play in play-akka.actor.default-dispatcher-5 
+database [default] connected at jdbc:postgresql://localhost:5432/playdb
+
+2012-07-13 14:26:12,748 - [WARN] - from com.jolbox.bonecp.ConnectionPartition in com.google.common.base.internal.Finalizer 
+BoneCP detected an unclosed connection and will now attempt to close it for you. You should be closing this connection in your application - enable connectionWatch for additional debugging assistance.
+
+2012-07-13 14:26:13,209 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in play-akka.actor.default-dispatcher-5 
+select id, hash, apply_script, revert_script, state, last_problem from play_evolutions where state like 'applying_%'
+
+2012-07-13 14:26:13,210 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in play-akka.actor.default-dispatcher-5 
+
+                    select id, hash, apply_script, revert_script from play_evolutions order by id
+                
+
+2012-07-13 14:26:13,217 - [INFO] - from play in play-akka.actor.default-dispatcher-5 
+Application started (Dev)
+
+2012-07-13 14:26:13,227 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-akka.actor.actions-dispatcher-1 
+select t0.id as c0, t0.iupac as c1, t0.ct as c2, t0.gws as c3, t0.gs as c4 
+from translation t0 
+where t0.ct like 'RES
+1b:x-dglc-HEX-1:5
+2b:x-dgal-HEX-1:5
+3s:n-acetyl
+4s:n-acetyl
+LIN
+1:1o(-1+1)2d
+2:2d(2+1)3n
+3:1d(2+1)4n
+' 
+
+2012-07-13 14:26:43,587 - [INFO] - from com.jolbox.bonecp.BoneCP in play-akka.actor.default-dispatcher-8 
+Shutting down connection pool...
+
+2012-07-13 14:26:43,590 - [INFO] - from com.jolbox.bonecp.BoneCP in play-akka.actor.default-dispatcher-8 
+Connection pool has been shutdown.
+
+2012-07-13 14:26:43,599 - [DEBUG] - from com.jolbox.bonecp.BoneCPDataSource in play-akka.actor.default-dispatcher-8 
+JDBC URL = jdbc:postgresql://localhost:5432/playdb, Username = postgres, partitions = 2, max (per partition) = 5, min (per partition) = 5, helper threads = 3, idle max age = 10 min, idle test period = 5 min
+
+2012-07-13 14:26:43,623 - [INFO] - from play in play-akka.actor.default-dispatcher-8 
+database [default] connected at jdbc:postgresql://localhost:5432/playdb
+
+2012-07-13 14:26:44,066 - [WARN] - from com.jolbox.bonecp.ConnectionPartition in com.google.common.base.internal.Finalizer 
+BoneCP detected an unclosed connection and will now attempt to close it for you. You should be closing this connection in your application - enable connectionWatch for additional debugging assistance.
+
+2012-07-13 14:26:44,379 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in play-akka.actor.default-dispatcher-8 
+select id, hash, apply_script, revert_script, state, last_problem from play_evolutions where state like 'applying_%'
+
+2012-07-13 14:26:44,380 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in play-akka.actor.default-dispatcher-8 
+
+                    select id, hash, apply_script, revert_script from play_evolutions order by id
+                
+
+2012-07-13 14:26:44,386 - [INFO] - from play in play-akka.actor.default-dispatcher-8 
+Application started (Dev)
+
+2012-07-13 14:26:44,396 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-akka.actor.actions-dispatcher-1 
+select t0.id as c0, t0.iupac as c1, t0.ct as c2, t0.gws as c3, t0.gs as c4 
+from translation t0 
+where t0.ct like 'RES
+1b:x-dglc-HEX-1:5
+2b:x-dgal-HEX-1:5
+3s:n-acetyl
+4s:n-acetyl
+LIN
+1:1o(-1+1)2d
+2:2d(2+1)3n
+3:1d(2+1)4n
+' 
+
+2012-07-13 14:27:01,608 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-akka.actor.actions-dispatcher-1 
+select t0.id as c0, t0.iupac as c1, t0.ct as c2, t0.gws as c3, t0.gs as c4 
+from translation t0 
+where t0.ct like 'RES
+1b:b-dglc-HEX-1:5
+2s:n-acetyl
+3b:b-dglc-HEX-1:5
+4s:n-acetyl
+5b:b-dman-HEX-1:5
+6b:a-dman-HEX-1:5
+7b:a-dman-HEX-1:5
+LIN
+1:1d(2+1)2n
+2:1o(4+1)3d
+3:3d(2+1)4n
+4:3o(4+1)5d
+5:5o(3+1)6d
+6:5o(6+1)7d
+' 
+
+2012-07-13 14:27:50,130 - [INFO] - from com.jolbox.bonecp.BoneCP in play-akka.actor.default-dispatcher-11 
+Shutting down connection pool...
+
+2012-07-13 14:27:50,135 - [INFO] - from com.jolbox.bonecp.BoneCP in play-akka.actor.default-dispatcher-11 
+Connection pool has been shutdown.
+
+2012-07-13 14:27:50,143 - [DEBUG] - from com.jolbox.bonecp.BoneCPDataSource in play-akka.actor.default-dispatcher-11 
+JDBC URL = jdbc:postgresql://localhost:5432/playdb, Username = postgres, partitions = 2, max (per partition) = 5, min (per partition) = 5, helper threads = 3, idle max age = 10 min, idle test period = 5 min
+
+2012-07-13 14:27:50,172 - [INFO] - from play in play-akka.actor.default-dispatcher-11 
+database [default] connected at jdbc:postgresql://localhost:5432/playdb
+
+2012-07-13 14:27:50,301 - [WARN] - from com.jolbox.bonecp.ConnectionPartition in com.google.common.base.internal.Finalizer 
+BoneCP detected an unclosed connection and will now attempt to close it for you. You should be closing this connection in your application - enable connectionWatch for additional debugging assistance.
+
+2012-07-13 14:27:50,923 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in play-akka.actor.default-dispatcher-11 
+select id, hash, apply_script, revert_script, state, last_problem from play_evolutions where state like 'applying_%'
+
+2012-07-13 14:27:50,924 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in play-akka.actor.default-dispatcher-11 
+
+                    select id, hash, apply_script, revert_script from play_evolutions order by id
+                
+
+2012-07-13 14:27:50,930 - [INFO] - from play in play-akka.actor.default-dispatcher-11 
+Application started (Dev)
+
+2012-07-13 14:27:50,942 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-akka.actor.actions-dispatcher-1 
+select t0.id as c0, t0.iupac as c1, t0.ct as c2, t0.gws as c3, t0.gs as c4 
+from translation t0 
+where t0.ct like 'RES
+1b:b-dglc-HEX-1:5
+2s:n-acetyl
+3b:b-dglc-HEX-1:5
+4s:n-acetyl
+5b:b-dman-HEX-1:5
+6b:a-dman-HEX-1:5
+7b:a-dman-HEX-1:5
+LIN
+1:1d(2+1)2n
+2:1o(4+1)3d
+3:3d(2+1)4n
+4:3o(4+1)5d
+5:5o(3+1)6d
+6:5o(6+1)7d
+' 
+
+2012-07-13 14:37:53,399 - [ERROR] - from application in New I/O server worker #1-3 
+
+
+! Internal server error, for request [GET /saySearch/s?RES%0A1b:b-dglc-HEX-1:5%0A2s:n-acetyl%0A3b:b-dglc-HEX-1:5%0A4s:n-acetyl%0A5b:b-dman-HEX-1:5%0A6b:a-dman-HEX-1:5%0A7b:a-dman-HEX-1:5%0ALIN%0A1:1d(2+1)2n%0A2:1o(4+1)3d%0A3:3d(2+1)4n%0A4:3o(4+1)5d%0A5:5o(3+1)6d%0A6:5o(6+1)7d%0A] ->
+
+sbt.PlayExceptions$CompilationException: Compilation error [value gws is not a member of java.util.List[models.Translation]]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$2$$anonfun$apply$11$$anonfun$apply$12.apply(PlayReloader.scala:224) ~[na:na]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$2$$anonfun$apply$11$$anonfun$apply$12.apply(PlayReloader.scala:224) ~[na:na]
+	at scala.Option.map(Option.scala:133) ~[scala-library.jar:0.11.2]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$2$$anonfun$apply$11.apply(PlayReloader.scala:224) ~[na:na]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$2$$anonfun$apply$11.apply(PlayReloader.scala:221) ~[na:na]
+	at scala.Option.map(Option.scala:133) ~[scala-library.jar:0.11.2]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$2.apply(PlayReloader.scala:221) ~[na:na]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$2.apply(PlayReloader.scala:219) ~[na:na]
+	at scala.Either$LeftProjection.map(Either.scala:183) ~[scala-library.jar:0.11.2]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3.apply(PlayReloader.scala:219) ~[na:na]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3.apply(PlayReloader.scala:214) ~[na:na]
+	at scala.Option.getOrElse(Option.scala:108) ~[scala-library.jar:0.11.2]
+	at sbt.PlayReloader$$anon$2.reload(PlayReloader.scala:214) ~[na:na]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:110) ~[play_2.9.1.jar:2.0]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:110) ~[play_2.9.1.jar:2.0]
+	at akka.dispatch.Future$$anon$3.liftedTree1$1(Future.scala:195) ~[akka-actor.jar:2.0]
+	at akka.dispatch.Future$$anon$3.run(Future.scala:194) ~[akka-actor.jar:2.0]
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:83) ~[akka-actor.jar:2.0]
+	at akka.jsr166y.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1381) ~[akka-actor.jar:2.0]
+	at akka.jsr166y.ForkJoinTask.doExec(ForkJoinTask.java:259) ~[akka-actor.jar:2.0]
+	at akka.jsr166y.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:997) ~[akka-actor.jar:2.0]
+	at akka.jsr166y.ForkJoinPool.runWorker(ForkJoinPool.java:1495) ~[akka-actor.jar:2.0]
+	at akka.jsr166y.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:104) ~[akka-actor.jar:2.0]
+
+2012-07-13 14:38:39,002 - [INFO] - from com.jolbox.bonecp.BoneCP in play-akka.actor.default-dispatcher-12 
+Shutting down connection pool...
+
+2012-07-13 14:38:39,002 - [DEBUG] - from com.jolbox.bonecp.ConnectionTesterThread in BoneCP-keep-alive-scheduler 
+Shutting down connection tester thread.
+
+2012-07-13 14:38:39,007 - [INFO] - from com.jolbox.bonecp.BoneCP in play-akka.actor.default-dispatcher-12 
+Connection pool has been shutdown.
+
+2012-07-13 14:38:39,015 - [DEBUG] - from com.jolbox.bonecp.BoneCPDataSource in play-akka.actor.default-dispatcher-12 
+JDBC URL = jdbc:postgresql://localhost:5432/playdb, Username = postgres, partitions = 2, max (per partition) = 5, min (per partition) = 5, helper threads = 3, idle max age = 10 min, idle test period = 5 min
+
+2012-07-13 14:38:39,039 - [INFO] - from play in play-akka.actor.default-dispatcher-12 
+database [default] connected at jdbc:postgresql://localhost:5432/playdb
+
+2012-07-13 14:38:39,097 - [WARN] - from com.jolbox.bonecp.ConnectionPartition in com.google.common.base.internal.Finalizer 
+BoneCP detected an unclosed connection and will now attempt to close it for you. You should be closing this connection in your application - enable connectionWatch for additional debugging assistance.
+
+2012-07-13 14:38:39,864 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in play-akka.actor.default-dispatcher-12 
+select id, hash, apply_script, revert_script, state, last_problem from play_evolutions where state like 'applying_%'
+
+2012-07-13 14:38:39,865 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in play-akka.actor.default-dispatcher-12 
+
+                    select id, hash, apply_script, revert_script from play_evolutions order by id
+                
+
+2012-07-13 14:38:39,883 - [INFO] - from play in play-akka.actor.default-dispatcher-12 
+Application started (Dev)
+
+2012-07-13 14:38:39,899 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-akka.actor.actions-dispatcher-1 
+select t0.id as c0, t0.iupac as c1, t0.ct as c2, t0.gws as c3, t0.gs as c4 
+from translation t0 
+where t0.ct like 'RES
+1b:b-dglc-HEX-1:5
+2s:n-acetyl
+3b:b-dglc-HEX-1:5
+4s:n-acetyl
+5b:b-dman-HEX-1:5
+6b:a-dman-HEX-1:5
+7b:a-dman-HEX-1:5
+LIN
+1:1d(2+1)2n
+2:1o(4+1)3d
+3:3d(2+1)4n
+4:3o(4+1)5d
+5:5o(3+1)6d
+6:5o(6+1)7d
+' 
+
+2012-07-13 14:39:02,651 - [INFO] - from com.jolbox.bonecp.BoneCP in play-akka.actor.default-dispatcher-12 
+Shutting down connection pool...
+
+2012-07-13 14:39:02,655 - [INFO] - from com.jolbox.bonecp.BoneCP in play-akka.actor.default-dispatcher-12 
+Connection pool has been shutdown.
+
+2012-07-13 14:39:02,663 - [DEBUG] - from com.jolbox.bonecp.BoneCPDataSource in play-akka.actor.default-dispatcher-12 
+JDBC URL = jdbc:postgresql://localhost:5432/playdb, Username = postgres, partitions = 2, max (per partition) = 5, min (per partition) = 5, helper threads = 3, idle max age = 10 min, idle test period = 5 min
+
+2012-07-13 14:39:02,689 - [INFO] - from play in play-akka.actor.default-dispatcher-12 
+database [default] connected at jdbc:postgresql://localhost:5432/playdb
+
+2012-07-13 14:39:02,890 - [WARN] - from com.jolbox.bonecp.ConnectionPartition in com.google.common.base.internal.Finalizer 
+BoneCP detected an unclosed connection and will now attempt to close it for you. You should be closing this connection in your application - enable connectionWatch for additional debugging assistance.
+
+2012-07-13 14:39:03,436 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in play-akka.actor.default-dispatcher-12 
+select id, hash, apply_script, revert_script, state, last_problem from play_evolutions where state like 'applying_%'
+
+2012-07-13 14:39:03,437 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in play-akka.actor.default-dispatcher-12 
+
+                    select id, hash, apply_script, revert_script from play_evolutions order by id
+                
+
+2012-07-13 14:39:03,443 - [INFO] - from play in play-akka.actor.default-dispatcher-12 
+Application started (Dev)
+
+2012-07-13 14:39:03,453 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-akka.actor.actions-dispatcher-1 
+select t0.id as c0, t0.iupac as c1, t0.ct as c2, t0.gws as c3, t0.gs as c4 
+from translation t0 
+where t0.ct like 'RES
+1b:b-dglc-HEX-1:5
+2s:n-acetyl
+3b:b-dglc-HEX-1:5
+4s:n-acetyl
+5b:b-dman-HEX-1:5
+6b:a-dman-HEX-1:5
+7b:a-dman-HEX-1:5
+LIN
+1:1d(2+1)2n
+2:1o(4+1)3d
+3:3d(2+1)4n
+4:3o(4+1)5d
+5:5o(3+1)6d
+6:5o(6+1)7d
+' 
+
+2012-07-13 14:40:50,732 - [ERROR] - from application in New I/O server worker #1-2 
+
+
+! Internal server error, for request [GET /saySearch/s?RES%0A1b:b-dglc-HEX-1:5%0A2s:n-acetyl%0A3b:b-dglc-HEX-1:5%0A4s:n-acetyl%0A5b:b-dman-HEX-1:5%0A6b:a-dman-HEX-1:5%0A7b:a-dman-HEX-1:5%0ALIN%0A1:1d(2+1)2n%0A2:1o(4+1)3d%0A3:3d(2+1)4n%0A4:3o(4+1)5d%0A5:5o(3+1)6d%0A6:5o(6+1)7d%0A] ->
+
+sbt.PlayExceptions$CompilationException: Compilation error [not found: value snip]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$2$$anonfun$apply$11$$anonfun$apply$12.apply(PlayReloader.scala:224) ~[na:na]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$2$$anonfun$apply$11$$anonfun$apply$12.apply(PlayReloader.scala:224) ~[na:na]
+	at scala.Option.map(Option.scala:133) ~[scala-library.jar:0.11.2]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$2$$anonfun$apply$11.apply(PlayReloader.scala:224) ~[na:na]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$2$$anonfun$apply$11.apply(PlayReloader.scala:221) ~[na:na]
+	at scala.Option.map(Option.scala:133) ~[scala-library.jar:0.11.2]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$2.apply(PlayReloader.scala:221) ~[na:na]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$2.apply(PlayReloader.scala:219) ~[na:na]
+	at scala.Either$LeftProjection.map(Either.scala:183) ~[scala-library.jar:0.11.2]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3.apply(PlayReloader.scala:219) ~[na:na]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3.apply(PlayReloader.scala:214) ~[na:na]
+	at scala.Option.getOrElse(Option.scala:108) ~[scala-library.jar:0.11.2]
+	at sbt.PlayReloader$$anon$2.reload(PlayReloader.scala:214) ~[na:na]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:110) ~[play_2.9.1.jar:2.0]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:110) ~[play_2.9.1.jar:2.0]
+	at akka.dispatch.Future$$anon$3.liftedTree1$1(Future.scala:195) ~[akka-actor.jar:2.0]
+	at akka.dispatch.Future$$anon$3.run(Future.scala:194) ~[akka-actor.jar:2.0]
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:83) ~[akka-actor.jar:2.0]
+	at akka.jsr166y.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1381) ~[akka-actor.jar:2.0]
+	at akka.jsr166y.ForkJoinTask.doExec(ForkJoinTask.java:259) ~[akka-actor.jar:2.0]
+	at akka.jsr166y.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:997) ~[akka-actor.jar:2.0]
+	at akka.jsr166y.ForkJoinPool.runWorker(ForkJoinPool.java:1495) ~[akka-actor.jar:2.0]
+	at akka.jsr166y.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:104) ~[akka-actor.jar:2.0]
+
+2012-07-13 14:41:13,535 - [ERROR] - from application in New I/O server worker #1-2 
+
+
+! Internal server error, for request [GET /saySearch/s?RES%0A1b:b-dglc-HEX-1:5%0A2s:n-acetyl%0A3b:b-dglc-HEX-1:5%0A4s:n-acetyl%0A5b:b-dman-HEX-1:5%0A6b:a-dman-HEX-1:5%0A7b:a-dman-HEX-1:5%0ALIN%0A1:1d(2+1)2n%0A2:1o(4+1)3d%0A3:3d(2+1)4n%0A4:3o(4+1)5d%0A5:5o(3+1)6d%0A6:5o(6+1)7d%0A] ->
+
+sbt.PlayExceptions$CompilationException: Compilation error [not found: value snip]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$2$$anonfun$apply$11$$anonfun$apply$12.apply(PlayReloader.scala:224) ~[na:na]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$2$$anonfun$apply$11$$anonfun$apply$12.apply(PlayReloader.scala:224) ~[na:na]
+	at scala.Option.map(Option.scala:133) ~[scala-library.jar:0.11.2]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$2$$anonfun$apply$11.apply(PlayReloader.scala:224) ~[na:na]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$2$$anonfun$apply$11.apply(PlayReloader.scala:221) ~[na:na]
+	at scala.Option.map(Option.scala:133) ~[scala-library.jar:0.11.2]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$2.apply(PlayReloader.scala:221) ~[na:na]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$2.apply(PlayReloader.scala:219) ~[na:na]
+	at scala.Either$LeftProjection.map(Either.scala:183) ~[scala-library.jar:0.11.2]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3.apply(PlayReloader.scala:219) ~[na:na]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3.apply(PlayReloader.scala:214) ~[na:na]
+	at scala.Option.getOrElse(Option.scala:108) ~[scala-library.jar:0.11.2]
+	at sbt.PlayReloader$$anon$2.reload(PlayReloader.scala:214) ~[na:na]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:110) ~[play_2.9.1.jar:2.0]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:110) ~[play_2.9.1.jar:2.0]
+	at akka.dispatch.Future$$anon$3.liftedTree1$1(Future.scala:195) ~[akka-actor.jar:2.0]
+	at akka.dispatch.Future$$anon$3.run(Future.scala:194) ~[akka-actor.jar:2.0]
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:83) ~[akka-actor.jar:2.0]
+	at akka.jsr166y.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1381) ~[akka-actor.jar:2.0]
+	at akka.jsr166y.ForkJoinTask.doExec(ForkJoinTask.java:259) ~[akka-actor.jar:2.0]
+	at akka.jsr166y.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:997) ~[akka-actor.jar:2.0]
+	at akka.jsr166y.ForkJoinPool.runWorker(ForkJoinPool.java:1495) ~[akka-actor.jar:2.0]
+	at akka.jsr166y.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:104) ~[akka-actor.jar:2.0]
+
+2012-07-13 14:41:35,035 - [INFO] - from com.jolbox.bonecp.BoneCP in play-akka.actor.default-dispatcher-12 
+Shutting down connection pool...
+
+2012-07-13 14:41:35,037 - [INFO] - from com.jolbox.bonecp.BoneCP in play-akka.actor.default-dispatcher-12 
+Connection pool has been shutdown.
+
+2012-07-13 14:41:35,047 - [DEBUG] - from com.jolbox.bonecp.BoneCPDataSource in play-akka.actor.default-dispatcher-12 
+JDBC URL = jdbc:postgresql://localhost:5432/playdb, Username = postgres, partitions = 2, max (per partition) = 5, min (per partition) = 5, helper threads = 3, idle max age = 10 min, idle test period = 5 min
+
+2012-07-13 14:41:35,072 - [INFO] - from play in play-akka.actor.default-dispatcher-12 
+database [default] connected at jdbc:postgresql://localhost:5432/playdb
+
+2012-07-13 14:41:35,561 - [WARN] - from com.jolbox.bonecp.ConnectionPartition in com.google.common.base.internal.Finalizer 
+BoneCP detected an unclosed connection and will now attempt to close it for you. You should be closing this connection in your application - enable connectionWatch for additional debugging assistance.
+
+2012-07-13 14:41:35,825 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in play-akka.actor.default-dispatcher-12 
+select id, hash, apply_script, revert_script, state, last_problem from play_evolutions where state like 'applying_%'
+
+2012-07-13 14:41:35,826 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in play-akka.actor.default-dispatcher-12 
+
+                    select id, hash, apply_script, revert_script from play_evolutions order by id
+                
+
+2012-07-13 14:41:35,832 - [INFO] - from play in play-akka.actor.default-dispatcher-12 
+Application started (Dev)
+
+2012-07-13 14:41:35,855 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-akka.actor.actions-dispatcher-1 
+select t0.id as c0, t0.iupac as c1, t0.ct as c2, t0.gws as c3, t0.gs as c4 
+from translation t0 
+where t0.ct like 'RES
+1b:b-dglc-HEX-1:5
+2s:n-acetyl
+3b:b-dglc-HEX-1:5
+4s:n-acetyl
+5b:b-dman-HEX-1:5
+6b:a-dman-HEX-1:5
+7b:a-dman-HEX-1:5
+LIN
+1:1d(2+1)2n
+2:1o(4+1)3d
+3:3d(2+1)4n
+4:3o(4+1)5d
+5:5o(3+1)6d
+6:5o(6+1)7d
+' 
+
+2012-07-13 14:42:45,696 - [INFO] - from com.jolbox.bonecp.BoneCP in play-akka.actor.default-dispatcher-16 
+Shutting down connection pool...
+
+2012-07-13 14:42:45,701 - [INFO] - from com.jolbox.bonecp.BoneCP in play-akka.actor.default-dispatcher-16 
+Connection pool has been shutdown.
+
+2012-07-13 14:42:45,719 - [DEBUG] - from com.jolbox.bonecp.BoneCPDataSource in play-akka.actor.default-dispatcher-16 
+JDBC URL = jdbc:postgresql://localhost:5432/playdb, Username = postgres, partitions = 2, max (per partition) = 5, min (per partition) = 5, helper threads = 3, idle max age = 10 min, idle test period = 5 min
+
+2012-07-13 14:42:45,745 - [INFO] - from play in play-akka.actor.default-dispatcher-16 
+database [default] connected at jdbc:postgresql://localhost:5432/playdb
+
+2012-07-13 14:42:46,471 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in play-akka.actor.default-dispatcher-16 
+select id, hash, apply_script, revert_script, state, last_problem from play_evolutions where state like 'applying_%'
+
+2012-07-13 14:42:46,473 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in play-akka.actor.default-dispatcher-16 
+
+                    select id, hash, apply_script, revert_script from play_evolutions order by id
+                
+
+2012-07-13 14:42:46,487 - [INFO] - from play in play-akka.actor.default-dispatcher-16 
+Application started (Dev)
+
+2012-07-13 14:42:46,496 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-akka.actor.actions-dispatcher-1 
+select t0.id as c0, t0.iupac as c1, t0.ct as c2, t0.gws as c3, t0.gs as c4 
+from translation t0 
+where t0.ct like 'RES
+1b:b-dglc-HEX-1:5
+2s:n-acetyl
+3b:b-dglc-HEX-1:5
+4s:n-acetyl
+5b:b-dman-HEX-1:5
+6b:a-dman-HEX-1:5
+7b:a-dman-HEX-1:5
+LIN
+1:1d(2+1)2n
+2:1o(4+1)3d
+3:3d(2+1)4n
+4:3o(4+1)5d
+5:5o(3+1)6d
+6:5o(6+1)7d
+' 
+
+2012-07-13 14:42:46,670 - [WARN] - from com.jolbox.bonecp.ConnectionPartition in com.google.common.base.internal.Finalizer 
+BoneCP detected an unclosed connection and will now attempt to close it for you. You should be closing this connection in your application - enable connectionWatch for additional debugging assistance.
+
+2012-07-13 14:46:05,572 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-akka.actor.actions-dispatcher-1 
+select t0.id as c0, t0.iupac as c1, t0.ct as c2, t0.gws as c3, t0.gs as c4 
+from translation t0 
+where t0.ct like 'RES
+1b:b-dglc-HEX-1:5
+2s:n-acetyl
+3b:b-dglc-HEX-1:5
+4s:n-acetyl
+5b:b-dman-HEX-1:5
+6b:a-dman-HEX-1:5
+7b:a-dman-HEX-1:5
+LIN
+1:1d(2+1)2n
+2:1o(4+1)3d
+3:3d(2+1)4n
+4:3o(4+1)5d
+5:5o(3+1)6d
+6:5o(6+1)7d
+' 
+
+2012-07-13 14:46:18,951 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-akka.actor.actions-dispatcher-1 
+select t0.id as c0, t0.iupac as c1, t0.ct as c2, t0.gws as c3, t0.gs as c4 
+from translation t0 
+where t0.ct like 'RES
+1b:b-dglc-HEX-1:5
+2s:n-acetyl
+3b:b-dglc-HEX-1:5
+4s:n-acetyl
+5b:b-dman-HEX-1:5
+6b:a-dman-HEX-1:5
+7b:a-dman-HEX-1:5
+LIN
+1:1d(2+1)2n
+2:1o(4+1)3d
+3:3d(2+1)4n
+4:3o(4+1)5d
+5:5o(3+1)6d
+6:5o(6+1)7d
+' 
+
+2012-07-13 14:49:31,064 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-akka.actor.actions-dispatcher-1 
+select t0.id as c0, t0.iupac as c1, t0.ct as c2, t0.gws as c3, t0.gs as c4 
+from translation t0 
+where t0.ct like 'RES
+1b:b-dglc-HEX-1:5
+2s:n-acetyl
+3b:b-dglc-HEX-1:5
+4s:n-acetyl
+5b:b-dman-HEX-1:5
+6b:a-dman-HEX-1:5
+7b:a-dman-HEX-1:5
+LIN
+1:1d(2+1)2n
+2:1o(4+1)3d
+3:3d(2+1)4n
+4:3o(4+1)5d
+5:5o(3+1)6d
+6:5o(6+1)7d
+' 
+
+2012-07-13 14:53:34,183 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-akka.actor.actions-dispatcher-1 
+select t0.id as c0, t0.iupac as c1, t0.ct as c2, t0.gws as c3, t0.gs as c4 
+from translation t0 
+where t0.ct like 'RES
+1b:b-dglc-HEX-1:5
+2s:n-acetyl
+3b:b-dglc-HEX-1:5
+4s:n-acetyl
+5b:b-dman-HEX-1:5
+6b:a-dman-HEX-1:5
+7b:a-dman-HEX-1:5
+LIN
+1:1d(2+1)2n
+2:1o(4+1)3d
+3:3d(2+1)4n
+4:3o(4+1)5d
+5:5o(3+1)6d
+6:5o(6+1)7d
+' 
+
+2012-07-13 14:54:47,824 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-akka.actor.actions-dispatcher-1 
+select t0.id as c0, t0.iupac as c1, t0.ct as c2, t0.gws as c3, t0.gs as c4 
+from translation t0 
+where t0.ct like 'RE22S
+1b:b-dglc-HEX-1:5
+2s:n-acetyl
+3b:b-dglc-HEX-1:5
+4s:n-acetyl
+5b:b-dman-HEX-1:5
+6b:a-dman-HEX-1:5
+7b:a-dman-HEX-1:5
+LIN
+1:1d(2+1)2n
+2:1o(4+1)3d
+3:3d(2+1)4n
+4:3o(4+1)5d
+5:5o(3+1)6d
+6:5o(6+1)7d
+' 
+
+2012-07-13 14:55:38,455 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-akka.actor.actions-dispatcher-1 
+select t0.id as c0, t0.iupac as c1, t0.ct as c2, t0.gws as c3, t0.gs as c4 
+from translation t0 
+where t0.ct like 'RES
+1b:b-dglc-HEX-1:5
+2s:n-acetyl
+3b:b-dglc-HEX-1:5
+4s:n-acetyl
+5b:b-dman-HEX-1:5
+6b:a-dman-HEX-1:5
+7b:a-dman-HEX-1:5
+8b:a-dman-HEX-1:5
+9b:a-dman-HEX-1:5
+10b:a-dman-HEX-1:5
+LIN
+1:1d(2+1)2n
+2:1o(4+1)3d
+3:3d(2+1)4n
+4:3o(4+1)5d
+5:5o(3+1)6d
+6:6o(2+1)7d
+7:5o(6+1)8d
+8:8o(3+1)9d
+9:8o(6+1)10d
+' 
+
+2012-07-13 14:57:57,304 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-akka.actor.actions-dispatcher-1 
+select t0.id as c0, t0.iupac as c1, t0.ct as c2, t0.gws as c3, t0.gs as c4 
+from translation t0 
+where t0.ct like 'RES
+1b:b-dglc-HEX-1:5
+2s:n-acetyl
+3b:b-dglc-HEX-1:5
+4s:n-acetyl
+5b:b-dman-HEX-1:5
+6b:a-dman-HEX-1:5
+7b:a-dman-HEX-1:5
+8b:a-dman-HEX-1:5
+9b:a-dman-HEX-1:5
+10b:a-dman-HEX-1:5
+LIN
+1:1d(2+1)2n
+2:1o(4+1)3d
+3:3d(2+1)4n
+4:3o(4+1)5d
+5:5o(3+1)6d
+6:6o(2+1)7d
+7:5o(6+1)8d
+8:8o(3+1)9d
+9:8o(6+1)10d
+' 
+
+2012-07-13 17:03:36,492 - [INFO] - from com.jolbox.bonecp.BoneCP in main 
+Shutting down connection pool...
+
+2012-07-13 17:03:36,641 - [INFO] - from com.jolbox.bonecp.BoneCP in main 
+Connection pool has been shutdown.
+
