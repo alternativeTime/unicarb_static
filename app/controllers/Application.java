@@ -45,11 +45,16 @@ public class Application extends Controller {
     ArrayList proteinNames = new ArrayList();
     HashSet proteinNamesUnique = new HashSet();
     ArrayList taxNames = new ArrayList();
+    ArrayList taxDivs = new ArrayList();
     HashSet taxNamesUnique = new HashSet();
     ArrayList sourceNames = new ArrayList();
     HashSet sourceNamesUnique = new HashSet();
     ArrayList uniprot = new ArrayList();
     HashSet uniprotUnique = new HashSet();
+    ArrayList taxIds = new ArrayList();
+    HashSet taxIdsUnique = new HashSet();
+    HashSet taxDivsUnique = new HashSet();
+
 
     List<String[]> rowList = new ArrayList<String[]>();
      Map<String, Integer> m = new HashMap<String, Integer>();
@@ -76,9 +81,15 @@ public class Application extends Controller {
 		if (!stToTax.isEmpty()){
 			for (Strtaxonomy stTaxEntry : stToTax){
 				String taxName = stTaxEntry.taxonomy.species;
+				Long taxId = stTaxEntry.taxonomy.id;
 				taxNamesUnique.add(taxName);
+				taxIdsUnique.add(taxId);
+				String divtax = "<a href=\"../taxonomy/" + stTaxEntry.taxonomy.id + "\">" + taxName + "</a>";
+				taxDivsUnique.add(divtax);
 			}
 			taxNames.addAll(taxNamesUnique);
+			taxIds.addAll(taxIdsUnique);
+			taxDivs.addAll(taxDivsUnique);
 		}
 
 		if (!stToSource.isEmpty()){
@@ -94,7 +105,7 @@ public class Application extends Controller {
     
 	//Application str;
 	return ok(
-			structureDetails.render(strDisplay, id, proteinNames, taxNames, sourceNames, rowList, uniprot)
+			structureDetails.render(strDisplay, id, proteinNames, taxNames, sourceNames, rowList, uniprot, taxDivs)
 			
 	);
     };
