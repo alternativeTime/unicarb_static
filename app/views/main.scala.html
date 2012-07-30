@@ -73,6 +73,31 @@ var result = $(this).data('id');
                                 };
     	</script>
 
+
+<script>
+                        $(document).ready(function(){
+   $(".announce2").click(function(){ // Click to only happen on announce links
+     $("#Id").val($(this).data('id'));
+     $('#windowDescription').modal('show');
+
+	var resultdiv = $(this).data('id');
+	 var replace = resultdiv.replace("[","");
+        var replace = replace.replace("]","");
+
+	$('p').html(replace).appendTo(document.myDiv);
+
+
+   });
+});
+
+                        function closeDialog () {
+                                $('#windowDescription').modal('hide');
+                                };
+                        function okClicked () {
+                                closeDialog ();
+                                };
+        </script>
+
 <script>
 
 /* Download lazy load plugin and make sure you add it in the head of your page. */
