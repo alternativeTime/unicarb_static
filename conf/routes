@@ -25,7 +25,7 @@ GET	/saySearch/:s			controllers.Search.saySearch(s: String)
 
 #GET	/unicarb/:id		   controllers.Application.unicarbdisplay(id:Long)
 
-#GET	/taxonomy/:species		controllers.Application.taxonsearch(species:String)
+GET	/taxonomysearch/:species		controllers.Application.taxonsearch(species:String)
 
 
 # Add computer
