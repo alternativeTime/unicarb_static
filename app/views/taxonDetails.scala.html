@@ -19,14 +19,14 @@
              	<h3>Taxonomy Structures</h3>
 	</div>
 	<div class="modal-body">
-		<h2 class="fullname">Structure's associated with taxonomy:</h2>
+		@** <h2 class="fullname">Structure's associated with taxonomy:</h2> **@
 
 		<ul class="thumbnails">
         		@for(s <- taxon.strtaxonomy ){
 
         	<li class="span4">
           		<a href="@routes.Application.structureDetails(s.structure.id)" class="thumbnail">
-            		<img src="http://glycosuitedb.expasy.org/glycosuite-structures//_@{s.structure.id}.png" alt="">
+            		<img src="../images/_@{s.structure.id}.png" alt="">
           		</a>
         	</li>
 		}
@@ -51,8 +51,8 @@
 <div class="span12">
 
 	<div class="span10">
-      	<h3>Protein Association</h3>
-      	<p style="font-size: 14px; line-height: 20px; text-align:justify">The GlycoSuite database is an annotated and curated relational database of glycan structures. For the taxonomic entry @taxon.species a number of glycan structures, glycoproteins and tissue source's have been curated.</p>
+      	<h3>@message</h3>
+      	<p style="font-size: 14px; line-height: 20px; text-align:justify">The GlycoSuite database is an annotated and curated relational database of glycan structures. For the taxonomy entry <b>@taxon.species</b> a number of glycan structures, glycoproteins and tissue source's have been curated.</p>
 	 <p  style="font-weight: bold;"><a href=""  data-toggle="modal" data-id='@taxon' class="announceTaxStructures"><i class="icon-resize-full"></i> See more structures</a> <small>limited to six records below</small></p>
 	</div>
 	<ul class="thumbnails">
@@ -60,7 +60,7 @@
 
         <li class="span5">
           <a href="@routes.Application.structureDetails(s.structure.id)" class="thumbnail">
-            <img src="http://glycosuitedb.expasy.org/glycosuite-structures//_@{s.structure.id}.png" alt="">
+            <img src="../images/_@{s.structure.id}.png" alt="">
           </a>
         </li>
 	}
@@ -71,7 +71,7 @@
     <div class="span4">
       <h3><small>Glycan Structures</small></h3>
 	<p><i class="icon-chevron-right"></i> <b>@taxon.strtaxonomy.size() </b> structures reported</p>
-	<p><i class="icon-th-large"></i> See more details</p>
+	<p  style="font-weight: bold;"><a href=""  data-toggle="modal" data-id='@taxon' class="announceTaxStructures"><i class="icon-th-large"></i> See more details</a></p>
 
      <h3><small>Glycoproteins</small></h3>
 	<p><i class="icon-chevron-right"></i><b>@groupTax.size() </b> glycoproteins curated</p>
