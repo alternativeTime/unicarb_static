@@ -203,6 +203,26 @@ public class Application extends Controller {
 	);
     }
 
+    public static Result taxonsearch(String findTaxon) {
+	List<Taxonomy> foundTaxonomy  = Taxonomy.findSpeciesTemp(findTaxon);
+	Long taxId = null;
+	for (Taxonomy tax : foundTaxonomy) {
+		taxId = tax.id;
+		System.out.println("this is the id: " + taxId);
+	};
+	if (taxId > 0) {
+	Taxonomy taxonomy  = Taxonomy.find.byId(taxId);
+        String taxon = taxonomy.species;
+	List<Biolsource> biolsource = Biolsource.findTaxonomyProtein(taxon);
+        List<SqlRow> listSql = Biolsource.findTaxonomyProteinSQL(taxon);
+	
+        //return TODO;
+	return ok(
+                taxonDetails.render("Taxonomy Description", taxonomy, biolsource, listSql));
+	}
+	else { return TODO;}
+    }
+
 
     /**
      * Display the paginated list of computers.
