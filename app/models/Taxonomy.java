@@ -37,6 +37,11 @@ public class Taxonomy extends Model {
 		.findList();
     }
 
+   public static List<Taxonomy> findSpeciesTemp(String species) {
+	return
+	   find.where().ilike("species", species).findList();
+   }
+
 
    public static List<String> findSpecies() {
    final List<String> result = new ArrayList<String>();
@@ -51,13 +56,12 @@ public class Taxonomy extends Model {
 
    public static /*List<Taxonomy>*/  List<SqlRow> findTaxonomy(String term)  {
 
-
 	String sql = "SELECT t.species FROM public.taxonomy as t WHERE t.species ilike '" + term + "%'";
 
-        RawSql rawSql = RawSqlBuilder.parse(sql).columnMapping("t.species", "t.species").columnMapping("t.species", "t.species").create();
+    RawSql rawSql = RawSqlBuilder.parse(sql).columnMapping("t.species", "t.species").columnMapping("t.species", "t.species").create();
 
-        SqlQuery sqlQuery = Ebean.createSqlQuery(sql);
-        List<SqlRow> listSql = sqlQuery.findList();
+    SqlQuery sqlQuery = Ebean.createSqlQuery(sql);
+    List<SqlRow> listSql = sqlQuery.findList();
 
 	System.out.println("query test");
 	return listSql;
