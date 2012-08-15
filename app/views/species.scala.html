@@ -57,6 +57,7 @@ document.write(msg);
 		;
 		$( "#tags" ).autocomplete({
 			source: availableTags,
+			minLength: 3,
 			select: function (event, ui) {
 			var selectobj = ui.item;
 			$("#hidCidade").val(ui.item.label);
