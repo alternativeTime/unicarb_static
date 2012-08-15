@@ -6,22 +6,19 @@
 			<script src="http://code.jquery.com/ui/1.8.21/jquery-ui.min.js" type="text/javascript"></script>
 			<script src="http://jquery-ui.googlecode.com/svn/tags/latest/external/jquery.bgiframe-2.1.2.js" type="text/javascript"></script>
 			<script src="http://jquery-ui.googlecode.com/svn/tags/latest/ui/minified/i18n/jquery-ui-i18n.min.js" type="text/javascript"></script>
-<script>
+@**<script>
 var species = new String(@jsSpecies);
 var msg = species.replace("replacethis", "lalal");
 alert('after\n' + msg);
 document.write(msg);
 </script>
+**@
 <script>
 	$(function() {
 		var availableTags = [
 "ActionScript",
 			"AppleScript",
 			"Asp",
-			"BASIC",
-			"C",
-			"C++",
-			"Clojure",
 			"COBOL",
 			"ColdFusion",
 			"Erlang",
@@ -44,9 +41,6 @@ document.write(msg);
                         "C",
                         "C++2",
                         "Clojure2",
-                        "COBOL2",
-                        "ColdFusion2",
-                        "Erlang2",
                         "Fortran2",
                         "Groovy2",
                         "Haskell2",
@@ -57,11 +51,18 @@ document.write(msg);
                         "PHP2",
                         "Python2",
                         "Ruby2",
+			"HOMO SAPIENS",
                         "Scala2",
 ]
 		;
 		$( "#tags" ).autocomplete({
-			source: availableTags
+			source: availableTags,
+			select: function (event, ui) {
+			var selectobj = ui.item;
+			$("#hidCidade").val(ui.item.label);
+			
+			}
+			
 		});
 	});
 	</script>
@@ -70,10 +71,12 @@ document.write(msg);
 	
 <div class="demo">
 
-<div class="ui-widget">
+	<form action="taxonomysearch/">
 	<label for="tags">Tags: </label>
-	<input id="tags">
-</div>
+	<input id="tags" class="ui-widget" name="tags">
+	<input id="hidCidade" type="hidden" />
+	<input type="submit" value="go" />
+	</form>
     
  	<h1>hellow</h1> 
 }
