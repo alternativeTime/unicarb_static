@@ -103,7 +103,7 @@
       
     <h2>Biological Associations</h2>
     	@for(tax <- taxsources){
-    	<p><span class="label important">Taxonomy</span><a href="../taxonomysearch/@tax"> @tax</a></p> 
+    	<p><span class="label important">Taxonomy</span><a href="../taxonomysearch?taxonomy=@tax"> @tax</a></p> 
     	}
     	@for(protein <- proteinsources){
     	<p><span class="label warning">Protein</span> @protein</p> 
