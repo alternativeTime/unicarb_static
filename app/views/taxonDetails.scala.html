@@ -6,122 +6,116 @@
 ***********************************@
 
 @header(key:String, title:String) = {
-    <th class="">
-        <a href="">@title</a>
-    </th>
+<th class="">
+  <a href="">@title</a>
+</th>
 }
 
 @main {
 
-     <div class="modal hide fade" id="taxDescription">
-	<div class="modal-header">
-		<a href="#" class="close" data-dismiss="modal">&times;</a>
-             	<h3>Taxonomy Structures</h3>
-	</div>
-	<div class="modal-body">
-		@** <h2 class="fullname">Structure's associated with taxonomy:</h2> **@
+<div class="modal hide fade" id="taxDescription">
+  <div class="modal-header">
+    <a href="#" class="close" data-dismiss="modal">&times;</a>
+    <h3>Taxonomy Structures</h3>
+  </div>
+  <div class="modal-body">
+    @** <h2 class="fullname">Structure's associated with taxonomy:</h2> **@
 
-		<ul class="thumbnails">
-        		@for(s <- taxon.strtaxonomy ){
+    <ul class="thumbnails">
+      @for(s <- taxon.strtaxonomy ){
 
-        	<li class="span4">
-          		<a href="@routes.Application.structureDetails(s.structure.id)" class="thumbnail">
-            		<img src="../images/_@{s.structure.id}.png" alt="">
-          		</a>
-        	</li>
-		}
-		</ul>
-	</div>
-	<div class="modal-footer">
-                <a href="#" class="btn primary" onclick="okClicked ();">OK</a>
-	</div>
-
-     </div>	
-
-
-     <div class="container">
-     	<section>
-        	<div class="page-header">
-		<h1>@message <small>@taxon.species</small>  <span class="label success">Curated Entry</span> <span class="label notice">GlycoSuiteDB</span><br /></h1>
-		</div>
-	</section>
-
-	<section>
-	<div class="row">
-<div class="span12">
-
-	<div class="span10">
-      	<h3>@message</h3>
-      	<p style="font-size: 14px; line-height: 20px; text-align:justify">The GlycoSuite database is an annotated and curated relational database of glycan structures. For the taxonomy entry <b>@taxon.species</b> a number of glycan structures, glycoproteins and tissue source's have been curated.</p>
-	 <p  style="font-weight: bold;"><a href=""  data-toggle="modal" data-id='@taxon' class="announceTaxStructures"><i class="icon-resize-full"></i> See more structures</a> <small>limited to six records below</small></p>
-	</div>
-	<ul class="thumbnails">
-	@for((s, i) <- taxon.strtaxonomy.zipWithIndex; if (i <=5) ){
-
-        <li class="span5">
-          <a href="@routes.Application.structureDetails(s.structure.id)" class="thumbnail">
-            <img src="../images/_@{s.structure.id}.png" alt="">
-          </a>
-        </li>
-	}
-      </ul>
-	<p  style="font-weight: bold;"><a href=""  data-toggle="modal" data-id='@taxon' class="announceTaxStructures"><i class="icon-resize-full"></i> See more structures</a></p>
-	
-</div>
-    <div class="span4">
-      <h3><small>Glycan Structures</small></h3>
-	<p><i class="icon-chevron-right"></i> <b>@taxon.strtaxonomy.size() </b> structures reported</p>
-	<p  style="font-weight: bold;"><a href=""  data-toggle="modal" data-id='@taxon' class="announceTaxStructures"><i class="icon-th-large"></i> See more details</a></p>
-
-     <h3><small>Glycoproteins</small></h3>
-	<p><i class="icon-chevron-right"></i><b>@groupTax.size() </b> glycoproteins curated</p>
-
-	@for( (sql,i) <- groupTax.zipWithIndex; if (i <= 6)) {
-        <p class="short">@sql("protein")</p>
+      <li class="span4">
+        <a href="@routes.Application.structureDetails(s.structure.id)" class="thumbnail">
+          <img src="../images/_@{s.structure.id}.png" alt="">
+        </a>
+      </li>
       }
+    </ul>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn primary" onclick="okClicked ();">OK</a>
+  </div>
+
+</div>	
 
 
-	<p><i class="icon-th-large"></i> See more details</p>
-     <h3><small>External Resources</small></h3>
-	<p><i class="icon-search"></i> Search UniCarb-DB</p>
-	<p><i class="icon-search"></i> Search EUROCarbDB</p>
-@** 	@for((s, i) <- taxon.strtaxonomy.zipWithIndex; if (i <=4) ){
-		<img class="sugar_image" src="http://glycosuitedb.expasy.org/glycosuite-structures//_@{s.id}.png">
-	} **@
+<div class="row-fluid">
+  <div class="span8">
+    <section>
+    <div class="page-header">
+      <h1>@message <span class="pull-right"><span class="label success">Curated Entry</span> <span class="label notice">GlycoSuiteDB</span></span></h1> 
+      <h4 class="subheader">@taxon.species</h4>
+    </div>
+    </section>
+
+    <h3>@message</h3>
+    <p style="font-size: 14px; line-height: 20px; text-align:justify">The GlycoSuite database is an annotated and curated relational database of glycan structures. For the taxonomy entry <b>@taxon.species</b> a number of glycan structures, glycoproteins and tissue source's have been curated.</p>
+    <p  style="font-weight: bold;"><a href=""  data-toggle="modal" data-id='@taxon' class="announceTaxStructures"><i class="icon-resize-full"></i> See more structures</a> <small>limited to six records below</small></p>
+    <ul class="thumbnails">
+      @for((s, i) <- taxon.strtaxonomy.zipWithIndex; if (i <=5) ){
+      <li class="span5">
+        <a href="@routes.Application.structureDetails(s.structure.id)" class="thumbnail">
+          <img src="../images/_@{s.structure.id}.png" alt="">
+        </a>
+      </li>
+      }
+    </ul>
+    <p  style="font-weight: bold;"><a href=""  data-toggle="modal" data-id='@taxon' class="announceTaxStructures"><i class="icon-resize-full"></i> See more structures</a></p>
+  </div>
+
+  <div class="span4 sidebar">
+    <div class="info">
+      <h3>Glycan Structures</h3>
+      <p><i class="icon-chevron-right"></i> <b>@taxon.strtaxonomy.size() </b> structures reported</p>
+      <p  style="font-weight: bold;"><a href=""  data-toggle="modal" data-id='@taxon' class="announceTaxStructures"><i class="icon-th-large"></i> See more details</a></p>
+    </div>
+
+    <div class="info">
+      <h3>Glycoproteins</h3>
+      <p><i class="icon-chevron-right"></i><b>@groupTax.size() </b> glycoproteins curated</p>
+      @for( (sql,i) <- groupTax.zipWithIndex; if (i <= 6)) {
+      <p class="short">@sql("protein")</p>
+      }
+      <p><i class="icon-th-large"></i> See more details</p>
+    </div>
+
+    <div class="info">
+      <h3>External Resources</h3>
+      <p><i class="icon-search"></i> Search UniCarb-DB</p>
+      <p><i class="icon-search"></i> Search EUROCarbDB</p>
+      @** 	@for((s, i) <- taxon.strtaxonomy.zipWithIndex; if (i <=4) ){
+      <img class="sugar_image" src="http://glycosuitedb.expasy.org/glycosuite-structures//_@{s.id}.png">
+      } **@
     </div>
   </div>
-	<div class="row"></div>
-	</section>
+</div>
 
-     </div>
+     <script type="text/javascript">
+       $(document).ready(new function() {
+         // Prepare layout options.
+         var options = {
+           autoResize: true, // This will auto-update the layout when the browser window is resized.
+           container: $('#myContent'), // Optional, used for some extra CSS styling
+           offset: 2, // Optional, the distance between grid items
+           itemWidth: 210 // Optional, the width of a grid item
+         };
 
+         // Get a reference to your grid items.
+         var handler = $('#myContent li');
 
-<script type="text/javascript">
-    $(document).ready(new function() {
-      // Prepare layout options.
-      var options = {
-        autoResize: true, // This will auto-update the layout when the browser window is resized.
-        container: $('#myContent'), // Optional, used for some extra CSS styling
-        offset: 2, // Optional, the distance between grid items
-        itemWidth: 210 // Optional, the width of a grid item
-      };
-      
-      // Get a reference to your grid items.
-      var handler = $('#myContent li');
-      
-      // Call the layout function.
-      handler.wookmark(options);
-      
-      // Capture clicks on grid items.
-      handler.click(function(){
-        // Randomize the height of the clicked item.
-        var newHeight = $('img', this).height() + Math.round(Math.random()*300+30);
-        $(this).css('height', newHeight+'px');
-        
-        // Update the layout.
-        handler.wookmark();
-      });
-    });
-  </script
+         // Call the layout function.
+         handler.wookmark(options);
 
-}
+         // Capture clicks on grid items.
+         handler.click(function(){
+           // Randomize the height of the clicked item.
+           var newHeight = $('img', this).height() + Math.round(Math.random()*300+30);
+           $(this).css('height', newHeight+'px');
+
+           // Update the layout.
+           handler.wookmark();
+         });
+       });
+       </script
+
+     }

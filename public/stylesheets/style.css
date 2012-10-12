@@ -134,16 +134,16 @@ body{
     text-align:center;
 }
 
-header{
-    display:block;
-    background-color:rgba(247,247,247,1);
-    padding:10px 20px 10px 30px;
-    border-bottom:1px rgba(233,233,233,1) solid;
-    position:fixed;
-    top:0;left:0;right:0;  
-    z-index:401;
-    box-shadow:inset 0px -1px 4px 0px rgba(0,0,0,0.05);
-}
+/*header{*/
+    /*display:block;*/
+    /*background-color:rgba(247,247,247,1);*/
+    /*padding:10px 20px 10px 30px;*/
+    /*border-bottom:1px rgba(233,233,233,1) solid;*/
+    /*position:fixed;*/
+    /*top:0;left:0;right:0;  */
+    /*z-index:401;*/
+    /*box-shadow:inset 0px -1px 4px 0px rgba(0,0,0,0.05);*/
+/*}*/
 header i{
     margin-top:2px !important;
 }
