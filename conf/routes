@@ -22,6 +22,8 @@ GET	/ms		   controllers.Application.ms()
 GET	/search			controllers.Application.search()
 GET	/saySearch/:s			controllers.Search.saySearch(s: String)
 
+GET	/browse			controllers.Application.browse()
+
 
 #GET	/unicarb/:id		   controllers.Application.unicarbdisplay(id:Long)
 

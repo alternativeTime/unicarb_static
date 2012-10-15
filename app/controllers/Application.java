@@ -38,6 +38,10 @@ public class Application extends Controller {
     			); 
     };
 
+    public static Result browse() {
+	return ok();
+    }
+
     public static Result structureDetails(Long id) {
 
 	//Structure strDisplay = Structure.find.byId(id);
