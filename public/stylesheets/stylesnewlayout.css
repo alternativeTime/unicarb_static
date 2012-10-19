@@ -164,18 +164,18 @@ hr {
   text-shadow: none;
 }
 
-.topbar div > ul a:hover, .nav a:hover { 
+.topbar div > ul a:hover { 
   background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABGdBTUEAALGPC/xhBQAAAANQTFRFAAAAp3o92gAAAAF0Uk5TM/82uXAAAAAKSURBVAjXY2AAAAACAAHiIbwzAAAAAElFTkSuQmCC);
   background:rgba(0, 0, 0, 0.35);
   color: #FFF;
 }
 
-.topbar div > ul .active > a, .nav .active > a {
+.topbar div > ul .active > a {
   background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABGdBTUEAALGPC/xhBQAAAANQTFRFAAAAp3o92gAAAAF0Uk5TM/82uXAAAAAKSURBVAjXY2AAAAACAAHiIbwzAAAAAElFTkSuQmCC);
   color: #FFF;
 }
 
-.topbar div > ul .active > a:hover, .nav .active > a:hover {
+.topbar div > ul .active > a:hover, {
   background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABGdBTUEAALGPC/xhBQAAAANQTFRFAAAAp3o92gAAAAF0Uk5TM/82uXAAAAAKSURBVAjXY2AAAAACAAHiIbwzAAAAAElFTkSuQmCC);
   background:rgba(0, 0, 0, 0.45);
 }
@@ -188,6 +188,7 @@ hr {
 .content { margin-top: 100px; }
 
 .home .row-fluid { margin-bottom: 20px; }
+.browse .row-fluid { margin-bottom: 20px; }
 .row-fluid .imglogo { margin: 0 0 20px 0; }
 
 h1.splash { font-size: 54px; }
@@ -314,6 +315,129 @@ h2.lead { margin: 30px 0; font-size: 25px; }
 th[class*="span"] {
     margin-left: 0px;
 }
+
+
+/* !LAYOUT - BROWSE ////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+.filterbar {
+  padding: 20px 0;
+  background: #008FD5;
+  color: #FFF;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+.filterbar ul {
+  margin: 0;
+  border: 0px solid #FFF;
+}
+.filterbar ul li { 
+  margin-bottom: 0px;
+  list-style: none; 
+  display: block;
+  width: 100%;
+}
+
+.filterbar.tabbable .nav.nav-tabs li a {
+  background: none;
+  list-style: none;
+  color: #FFF;
+  border: 0px solid #DDD;
+}
+
+.filterbar.tabbable .nav.nav-tabs li.active a {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABGdBTUEAALGPC/xhBQAAAANQTFRFAAAAp3o92gAAAAF0Uk5TM/82uXAAAAAKSURBVAjXY2AAAAACAAHiIbwzAAAAAElFTkSuQmCC);
+  list-style: none;
+  color: #FFF;
+  border: 0px solid #DDD;
+}
+
+.filterbar.tabbable .nav.nav-tabs li.active:hover a {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABGdBTUEAALGPC/xhBQAAAANQTFRFAAAAp3o92gAAAAF0Uk5TM/82uXAAAAAKSURBVAjXY2AAAAACAAHiIbwzAAAAAElFTkSuQmCC);
+  background:rgba(0, 0, 0, 0.45);
+  list-style: none;
+  color: #FFF;
+  border: 0px solid #DDD;
+}
+
+.filterbar.tabbable .nav.nav-tabs li:hover a {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABGdBTUEAALGPC/xhBQAAAANQTFRFAAAAp3o92gAAAAF0Uk5TM/82uXAAAAAKSURBVAjXY2AAAAACAAHiIbwzAAAAAElFTkSuQmCC);
+  background:rgba(0, 0, 0, 0.45);
+  color: #FFF;
+  border: 0px solid #DDD;
+}
+
+.filterbar ul li a { 
+  padding: 10px 0px 10px 20px;
+}
+
+.filterbar ul li.active a::before {
+content: "";
+display: inline-block;
+border-right: 10px solid white;
+border-bottom: 10px solid transparent;
+border-top: 10px solid transparent;
+/*position: absolute;*/
+/*right: -11px;*/
+float: right;
+margin: 5px 0px 10px 0px;
+}
+
+.filterbar.tabbable ul li a {
+  margin: 0;
+  font-family: "OpenSans", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+  font-size: 20px;
+  line-height: 27px;
+  font-weight: 200;
+  border: 0px solid #DDD;
+}
+
+#tab1 .control-group { display: none; }
+#tab1 .control-group.active { display: block; }
+
+.rightpanel { margin-top: -47px; }
+
+.rightpanel .nav { /*margin-bottom: 0px;*/ }
+.tabbable .nav.nav-tabs { width: 100%; }
+.tabbable .nav.nav-tabs li a {
+  background: whiteSmoke;
+  color: #008FD5;
+  border-bottom: 1px solid #DDD;
+}
+.tabbable .nav.nav-tabs li a:hover {
+  background: #0071A9;
+  color: #FFF;
+}
+.tabbable .nav.nav-tabs li.active a {
+  background: #FFF;
+  color: #008FD5;
+  border-bottom: 1px solid #FFF;
+}
+
+.filterbar h3 {
+    color: #FFF;
+  }
+
+.results {
+  padding: 0px;
+  height: 560px;
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+    /*-webkit-box-shadow:  -6px -2px 6px -6px rgba(0, 0, 0, 0.4);*/
+            /*box-shadow:  -6px -2px 6px -6px rgba(0, 0, 0, 0.4);*/
+    position: relative;
+  }
+
+.controls label {
+    width: 100%;
+    text-align: left;
+}
+
+.tabbable .details { margin-left: 0px; }
+
 
 /*******************************************************************************************************
 => Home + Common
