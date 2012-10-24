@@ -10,6 +10,8 @@
     <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("/public", "stylesheets/jquery.lightbox-0.5.css")">
     <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("/public", "stylesheets/stylesnewlayout.css")">
 
+    <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("/public", "stylesheets/select2.css")">
+
     <script src="http://static.scripting.com/github/bootstrap2/js/jquery.js"></script>
     @**	<script src="http://static.scripting.com/github/bootstrap2/js/bootstrap-modal.js"></script> **@
     <script src="@routes.Assets.at("/public","javascripts/jquery.ae.image.resize.min.js")"></script>
@@ -25,6 +27,7 @@
     <script src="@routes.Assets.at("/public","javascripts/jPages.js")"></script>
     <script src="@routes.Assets.at("/public","javascripts/jquery.lazyload.js")"></script>
 
+    <script src="@routes.Assets.at("/public","javascripts/select2.js")"></script>
 
 
     <script>
@@ -35,6 +38,12 @@
     </script>
     <script>
       $(document).ready(function(){
+
+        $("#e1").select2({
+          placeholder: "Select a State",
+          allowClear: true,
+        });
+
         $(".announceTaxStructures").click(function(){ // Click to only happen on announce links
           $("#Id").val($(this).data('id'));
           $('#taxDescription').modal('show');
@@ -153,7 +162,7 @@
             <li><a href="#contact">Contact</a></li>
           </ul>
           @*<p class="pull-right">Logged in as <a href="#">username</a></p> *@
-          <div class="pull-right">
+          <div id="headersearch" class="pull-right">
             <form action="">
               <input type="text" placeholder="To search proteins, tax, source">
             </form>

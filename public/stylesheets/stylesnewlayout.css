@@ -105,7 +105,7 @@ hr {
 .breadcrumb {
     margin: 0 0 18px;
     padding: 0px;
-    background-color: #FFF;
+    background-color: transparent;
     background-repeat: repeat-x;
     background-image: none;
     border: 0px solid #DDD;
@@ -183,6 +183,10 @@ hr {
 /* !LAYOUT - HOME //////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+#main {
+  background: url(../images/UniCarbKB_Logo.png) top right no-repeat;
+}
 
 .container-fluid { margin: 0 auto; width: 80%; }
 .content { margin-top: 100px; }
@@ -374,14 +378,14 @@ th[class*="span"] {
 }
 
 .filterbar ul li.active a::before {
-content: "";
-display: inline-block;
-border-right: 10px solid white;
-border-bottom: 10px solid transparent;
-border-top: 10px solid transparent;
-/*position: absolute;*/
-/*right: -11px;*/
-float: right;
+  content: "";
+  display: inline-block;
+  border-right: 10px solid white;
+  border-bottom: 10px solid transparent;
+  border-top: 10px solid transparent;
+  /*position: absolute;*/
+  /*right: -11px;*/
+  float: right;
 margin: 5px 0px 10px 0px;
 }
 
@@ -396,6 +400,9 @@ margin: 5px 0px 10px 0px;
 
 #tab1 .control-group { display: none; }
 #tab1 .control-group.active { display: block; }
+
+#tab2 .row-fluid { margin: 18px 0 0 0; }
+#tab2 h3 { margin: 0px 0 5px 0; }
 
 .rightpanel { margin-top: -47px; }
 
