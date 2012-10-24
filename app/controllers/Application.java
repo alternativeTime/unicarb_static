@@ -39,7 +39,7 @@ public class Application extends Controller {
     };
 
     public static Result browse() {
-	return ok();
+	return ok(browse.render());
     }
 
     public static Result structureDetails(Long id) {
