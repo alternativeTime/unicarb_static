@@ -42,6 +42,11 @@ public class Application extends Controller {
 	return ok(browse.render());
     }
 
+    public static Result browseunicarb() {
+	List<String> taxonomy  = Taxonomy.findSpecies();
+        return ok(browseunicarb.render(taxonomy));
+    }	
+
     public static Result structureDetails(Long id) {
 
 	//Structure strDisplay = Structure.find.byId(id);
