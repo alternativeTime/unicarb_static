@@ -23,7 +23,7 @@ GET	/search			controllers.Application.search()
 GET	/saySearch/:s			controllers.Search.saySearch(s: String)
 
 GET	/browse			controllers.Application.browse()
-GET	/browseunicarb		controllers.Application.browseunicarb()
+GET	/browseunicarb		controllers.Application.browseunicarb(search ?= "")
 
 
 #GET	/unicarb/:id		   controllers.Application.unicarbdisplay(id:Long)

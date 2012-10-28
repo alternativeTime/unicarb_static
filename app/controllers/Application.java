@@ -42,7 +42,7 @@ public class Application extends Controller {
 	return ok(browse.render());
     }
 
-    public static Result browseunicarb() {
+    public static Result browseunicarb(String x) {
 	List<String> taxonomy  = Taxonomy.findSpecies();
         return ok(browseunicarb.render(taxonomy));
     }	
