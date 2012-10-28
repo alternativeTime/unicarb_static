@@ -44,7 +44,7 @@
       </div>
       <div class="row-fluid">
         <div class="span3 filterbar tabbable">
-          <ul class="nav nav-tabs">
+          <ul class="nav nav-tabs" id="myTabBar">
             <li><a href="#filter1" data-toggle="tab">Taxonomy</a></li>
             <li class=""><a href="#filter2" data-toggle="tab">Protein</a></li>
             <li><a href="#filter3" data-toggle="tab">Structure</a></li>
@@ -52,7 +52,7 @@
         </div><!-- /col -->
         <div class="span9 rightpanel">
           <div class="tabbable"> <!-- Only required for left/right tabs -->
-            <ul class="nav nav-tabs">
+            <ul class="nav nav-tabs" id="myTab">
               <li class="active"><a href="#tab1" data-toggle="tab">Filters</a></li>
               <li><a href="#tab2" data-toggle="tab">Results</a></li>
               <li><a href="#tab3" data-toggle="tab">Related Results</a></li>
@@ -236,5 +236,14 @@
         </div><!-- /col -->
       </div><!-- /row -->
     </section>
+
+<script>
+  $(function () {
+    var test = 'last';
+    $('#myTabBar a:' + test).tab('show');
+    $('#myTab a[href="#tab2"]').tab('show');
+  })
+</script>
+
 
 }
