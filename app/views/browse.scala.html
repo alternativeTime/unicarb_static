@@ -1,9 +1,9 @@
 @main{
 
       <ul class="breadcrumb">
-        <li><a href="#">Curated Database</a> <span class="divider">/</span></li>
-        <li><a href="#">GlycoSuite</a> <span class="divider">/</span></li>
-        <li><a href="../references">Reference</a> <span class="divider">/</span></li>
+        <li><i class="icon-folder-open" ></i><a href="#"> Curated Database</a> <span class="divider">></span></li>
+        <li><i class="icon-hdd" ></i><a href="#"> GlycoSuite</a> <span class="divider">></span></li>
+        <li><i class="icon-list-alt" ></i><a href="../references"> Reference</a> <span class="divider">></span></li>
         <li class="active">You are here</li>
       </ul>
 
@@ -41,113 +41,117 @@
                 <div id="filter1" class="control-group glycosuitedb">
                   <div class="controls">
                     <label class="checkbox">
-                      <input type="checkbox"> Query by Disease State: 
-                      <select name=disease MULTIPLE id="e1" style="width:300px">
-                        <option selected value="">ANY</option>
-                        <option value =" #none">NONE</option>
-                        <option value =" #any" >ALL</option>
-                        <option value="Adenocarcinoma">Adenocarcinoma</option>
-                        <option value="Adenocarcinoma, Grade II">Adenocarcinoma, Grade II</option>
-                        <option value="Alzheimer's">Alzheimer's</option>
-                        <option value="Amyloidosis, A-I Amyloid">Amyloidosis, A-I Amyloid</option>
-                        <option value="Amyloidosis, AA Amyloid">Amyloidosis, AA Amyloid</option>
-                        <option value="Amyloidosis, AL Amyloid">Amyloidosis, AL Amyloid</option>
-                        <option value="Anemia, Aplastic">Anemia, Aplastic</option>
-                        <option value="Arthritis">Arthritis</option>
-                        <option value="Aspartylglycosaminuria">Aspartylglycosaminuria</option>
-                        <option value="Bronchiectasis, due to Kartagener's Syndrome">Bronchiectasis, due to Kartagener's Syndrome</option>
-                        <option value="Bronchitis, Chronic">Bronchitis, Chronic</option>
-                        <option value="Cancer, Bile duct">Cancer, Bile duct</option>
-                        <option value="Cancer, Ovarian">Cancer, Ovarian</option>
-                        <option value="Cancer, Ovarian (Cystic)">Cancer, Ovarian (Cystic)</option>
-                        <option value="Carbohydrate-Deficient Glycoprotein Syndrome, Type II">Carbohydrate-Deficient Glycoprotein Syndrome, Type II</option>
-                        <option value="Carcinoid Tumor, with multiple liver metastasis">Carcinoid Tumor, with multiple liver metastasis</option>
-                        <option value="Carcinoma">Carcinoma</option>
-                        <option value="Carcinoma, Gallbladder which metastasises to the liver">Carcinoma, Gallbladder which metastasises to the liver</option>
-                        <option value="Carcinoma, Hepatocellular">Carcinoma, Hepatocellular</option>
-                        <option value="Carcinoma, Lewis Lung">Carcinoma, Lewis Lung</option>
-                        <option value="Carcinoma, Squamous cell">Carcinoma, Squamous cell</option>
-                        <option value="Chondrosarcoma">Chondrosarcoma</option><option value="Choriocarcinoma">Choriocarcinoma</option>
-                        <option value="Choriocarcinoma, with Hyperthyroidism">Choriocarcinoma, with Hyperthyroidism</option>
-                        <option value="Cyst">Cyst</option>
-                        <option value="Cystic Fibrosis">Cystic Fibrosis</option>
-                        <option value="Diabetes Mellitus">Diabetes Mellitus</option>
-                        <option value="Diabetes Mellitus, Non-insulin dependent">Diabetes Mellitus, Non-insulin dependent</option>
-                        <option value="Diverticulosis">Diverticulosis</option>
-                        <option value="Dyscrasia, Plasma Cell">Dyscrasia, Plasma Cell</option>
-                        <option value="Erythroleukemia with associated Polycythemia">Erythroleukemia with associated Polycythemia</option>
-                        <option value="Fibrosarcoma">Fibrosarcoma</option>
-                        <option value="Fucosidosis">Fucosidosis</option>
-                        <option value="Gangliosidosis GM1">Gangliosidosis GM1</option>
-                        <option value="Gaucher Disease">Gaucher Disease</option>
-                        <option value="Glioma">Glioma</option>
-                        <option value="Heavy Chain Disease">Heavy Chain Disease</option>
-                        <option value="Hydatidiform Mole">Hydatidiform Mole</option>
-                        <option value="Hydatidiform Mole, Invasive">Hydatidiform Mole, Invasive</option>
-                        <option value="Hypercholesterolemia, Familial">Hypercholesterolemia, Familial</option>
-                        <option value="Hyperlipoproteinemia, Familial Type V">Hyperlipoproteinemia, Familial Type V</option>
-                        <option value="Infantile Sialidosis, Type II (Dysmorphic)">Infantile Sialidosis, Type II (Dysmorphic)</option>
-                        <option value="Kidney Failure, Chronic">Kidney Failure, Chronic</option>
-                        <option value="Leukemia">Leukemia</option>
-                        <option value="Leukemia, Acute lymphoblastic">Leukemia, Acute lymphoblastic</option>
-                        <option value="Leukemia, Acute lymphoblastic and HIV-1">Leukemia, Acute lymphoblastic and HIV-1</option>
-                        <option value="Leukemia, Acute myelogenous">Leukemia, Acute myelogenous</option>
-                        <option value="Leukemia, Chronic myelogenous">Leukemia, Chronic myelogenous</option>
-                        <option value="Leukemia, Promyelocytic">Leukemia, Promyelocytic</option>
-                        <option value="Lymphoma">Lymphoma</option>
-                        <option value="Lymphoma, Burkitt">Lymphoma, Burkitt</option>
-                        <option value="Lymphoma, Lymphoblastic">Lymphoma, Lymphoblastic</option>
-                        <option value="Lymphoma, Thymic">Lymphoma, Thymic</option>
-                        <option value="Lysosomal storage disease">Lysosomal storage disease</option>
-                        <option value="Malaria Tropica, Malignant">Malaria Tropica, Malignant</option>
-                        <option value="Malignant material">Malignant material</option>
-                        <option value="Mannosidosis, alpha">Mannosidosis, alpha</option>
-                        <option value="Mannosidosis, beta">Mannosidosis, beta</option>
-                        <option value="Melanoma">Melanoma</option>
-                        <option value="Myeloma">Myeloma</option>
-                        <option value="Myeloma (Mouse)">Myeloma (Mouse)</option>
-                        <option value="Myeloma, Multiple with an accompanying Hypogammaglobulinaemia">Myeloma, Multiple with an accompanying Hypogammaglobulinaemia</option>
-                        <option value="Neuroblastoma">Neuroblastoma</option>
-                        <option value="Pancreatitis, Chronic">Pancreatitis, Chronic</option>
-                        <option value="Parasite Nippostrongylus brasiliensis infection">Parasite Nippostrongylus brasiliensis infection</option>
-                        <option value="Plasmacytoma (Mouse)">Plasmacytoma (Mouse)</option>
-                        <option value="Sialidosis (Mucolipidosis I)">Sialidosis (Mucolipidosis I)</option>
-                        <option value="Sialidosis, severe infantile with abdominal ascites">Sialidosis, severe infantile with abdominal ascites</option>
-                        <option value="Tn Polyagglutinability Syndrome">Tn Polyagglutinability Syndrome</option>
-                        <option value="Tumor, Endodermal Sinus">Tumor, Endodermal Sinus</option>
-                        <option value="Tumor, Glial">Tumor, Glial</option>
-                        <option value="Tumor, Pituitary">Tumor, Pituitary</option>
-                        <option value="Tumor, Subcutaneous">Tumor, Subcutaneous</option>
-                        <option value="Waldenstrom Macroglobulinaemia">Waldenstrom Macroglobulinaemia</option>
-                        <option value="Wiskott-Aldrich Syndrome">Wiskott-Aldrich Syndrome</option>
-                        <option value="Zajdela Hepatocarcinoma">Zajdela Hepatocarcinoma</option>
+                      <input id="querydiseasecheck" type="checkbox"> Query by Disease State: 
+                      <div id="querydiseasehide" class="control-group">
+                        <select name=disease MULTIPLE id="e1" style="width:300px">
+                          <option selected value="">ANY</option>
+                          <option value =" #none">NONE</option>
+                          <option value =" #any" >ALL</option>
+                          <option value="Adenocarcinoma">Adenocarcinoma</option>
+                          <option value="Adenocarcinoma, Grade II">Adenocarcinoma, Grade II</option>
+                          <option value="Alzheimer's">Alzheimer's</option>
+                          <option value="Amyloidosis, A-I Amyloid">Amyloidosis, A-I Amyloid</option>
+                          <option value="Amyloidosis, AA Amyloid">Amyloidosis, AA Amyloid</option>
+                          <option value="Amyloidosis, AL Amyloid">Amyloidosis, AL Amyloid</option>
+                          <option value="Anemia, Aplastic">Anemia, Aplastic</option>
+                          <option value="Arthritis">Arthritis</option>
+                          <option value="Aspartylglycosaminuria">Aspartylglycosaminuria</option>
+                          <option value="Bronchiectasis, due to Kartagener's Syndrome">Bronchiectasis, due to Kartagener's Syndrome</option>
+                          <option value="Bronchitis, Chronic">Bronchitis, Chronic</option>
+                          <option value="Cancer, Bile duct">Cancer, Bile duct</option>
+                          <option value="Cancer, Ovarian">Cancer, Ovarian</option>
+                          <option value="Cancer, Ovarian (Cystic)">Cancer, Ovarian (Cystic)</option>
+                          <option value="Carbohydrate-Deficient Glycoprotein Syndrome, Type II">Carbohydrate-Deficient Glycoprotein Syndrome, Type II</option>
+                          <option value="Carcinoid Tumor, with multiple liver metastasis">Carcinoid Tumor, with multiple liver metastasis</option>
+                          <option value="Carcinoma">Carcinoma</option>
+                          <option value="Carcinoma, Gallbladder which metastasises to the liver">Carcinoma, Gallbladder which metastasises to the liver</option>
+                          <option value="Carcinoma, Hepatocellular">Carcinoma, Hepatocellular</option>
+                          <option value="Carcinoma, Lewis Lung">Carcinoma, Lewis Lung</option>
+                          <option value="Carcinoma, Squamous cell">Carcinoma, Squamous cell</option>
+                          <option value="Chondrosarcoma">Chondrosarcoma</option><option value="Choriocarcinoma">Choriocarcinoma</option>
+                          <option value="Choriocarcinoma, with Hyperthyroidism">Choriocarcinoma, with Hyperthyroidism</option>
+                          <option value="Cyst">Cyst</option>
+                          <option value="Cystic Fibrosis">Cystic Fibrosis</option>
+                          <option value="Diabetes Mellitus">Diabetes Mellitus</option>
+                          <option value="Diabetes Mellitus, Non-insulin dependent">Diabetes Mellitus, Non-insulin dependent</option>
+                          <option value="Diverticulosis">Diverticulosis</option>
+                          <option value="Dyscrasia, Plasma Cell">Dyscrasia, Plasma Cell</option>
+                          <option value="Erythroleukemia with associated Polycythemia">Erythroleukemia with associated Polycythemia</option>
+                          <option value="Fibrosarcoma">Fibrosarcoma</option>
+                          <option value="Fucosidosis">Fucosidosis</option>
+                          <option value="Gangliosidosis GM1">Gangliosidosis GM1</option>
+                          <option value="Gaucher Disease">Gaucher Disease</option>
+                          <option value="Glioma">Glioma</option>
+                          <option value="Heavy Chain Disease">Heavy Chain Disease</option>
+                          <option value="Hydatidiform Mole">Hydatidiform Mole</option>
+                          <option value="Hydatidiform Mole, Invasive">Hydatidiform Mole, Invasive</option>
+                          <option value="Hypercholesterolemia, Familial">Hypercholesterolemia, Familial</option>
+                          <option value="Hyperlipoproteinemia, Familial Type V">Hyperlipoproteinemia, Familial Type V</option>
+                          <option value="Infantile Sialidosis, Type II (Dysmorphic)">Infantile Sialidosis, Type II (Dysmorphic)</option>
+                          <option value="Kidney Failure, Chronic">Kidney Failure, Chronic</option>
+                          <option value="Leukemia">Leukemia</option>
+                          <option value="Leukemia, Acute lymphoblastic">Leukemia, Acute lymphoblastic</option>
+                          <option value="Leukemia, Acute lymphoblastic and HIV-1">Leukemia, Acute lymphoblastic and HIV-1</option>
+                          <option value="Leukemia, Acute myelogenous">Leukemia, Acute myelogenous</option>
+                          <option value="Leukemia, Chronic myelogenous">Leukemia, Chronic myelogenous</option>
+                          <option value="Leukemia, Promyelocytic">Leukemia, Promyelocytic</option>
+                          <option value="Lymphoma">Lymphoma</option>
+                          <option value="Lymphoma, Burkitt">Lymphoma, Burkitt</option>
+                          <option value="Lymphoma, Lymphoblastic">Lymphoma, Lymphoblastic</option>
+                          <option value="Lymphoma, Thymic">Lymphoma, Thymic</option>
+                          <option value="Lysosomal storage disease">Lysosomal storage disease</option>
+                          <option value="Malaria Tropica, Malignant">Malaria Tropica, Malignant</option>
+                          <option value="Malignant material">Malignant material</option>
+                          <option value="Mannosidosis, alpha">Mannosidosis, alpha</option>
+                          <option value="Mannosidosis, beta">Mannosidosis, beta</option>
+                          <option value="Melanoma">Melanoma</option>
+                          <option value="Myeloma">Myeloma</option>
+                          <option value="Myeloma (Mouse)">Myeloma (Mouse)</option>
+                          <option value="Myeloma, Multiple with an accompanying Hypogammaglobulinaemia">Myeloma, Multiple with an accompanying Hypogammaglobulinaemia</option>
+                          <option value="Neuroblastoma">Neuroblastoma</option>
+                          <option value="Pancreatitis, Chronic">Pancreatitis, Chronic</option>
+                          <option value="Parasite Nippostrongylus brasiliensis infection">Parasite Nippostrongylus brasiliensis infection</option>
+                          <option value="Plasmacytoma (Mouse)">Plasmacytoma (Mouse)</option>
+                          <option value="Sialidosis (Mucolipidosis I)">Sialidosis (Mucolipidosis I)</option>
+                          <option value="Sialidosis, severe infantile with abdominal ascites">Sialidosis, severe infantile with abdominal ascites</option>
+                          <option value="Tn Polyagglutinability Syndrome">Tn Polyagglutinability Syndrome</option>
+                          <option value="Tumor, Endodermal Sinus">Tumor, Endodermal Sinus</option>
+                          <option value="Tumor, Glial">Tumor, Glial</option>
+                          <option value="Tumor, Pituitary">Tumor, Pituitary</option>
+                          <option value="Tumor, Subcutaneous">Tumor, Subcutaneous</option>
+                          <option value="Waldenstrom Macroglobulinaemia">Waldenstrom Macroglobulinaemia</option>
+                          <option value="Wiskott-Aldrich Syndrome">Wiskott-Aldrich Syndrome</option>
+                          <option value="Zajdela Hepatocarcinoma">Zajdela Hepatocarcinoma</option>
                         <option>
                       </select>
                       <span>Or</span>
                       <input type="text" placeholder="Disease keyword">
+                    </div>
                     </label>
                   </div>
                   <div class="controls">
                     <label class="checkbox">
                       <div class="row-fluid">
                         <div class="span12">
-                          <input type="checkbox"> Query by Mass: 
-                          <input type="text" name="mass_range" size=20 >&nbsp;+/-&nbsp;<input type=text name=mass_plusminus size=4>&nbsp;Da
-                        </div>
-                        <div class="span4">
-                          <span class=strong>Mass is:</span>
-                          <br>
-                          <input type="radio" name="mass_is_monoiso" value="true" checked>&nbsp;monoisotopic
-                          <br>
-                          <input type="radio" name="mass_is_monoiso">&nbsp;average
-                        </div>
+                          <input id="querymasscheck" type="checkbox"> Query by Mass: 
+                          <div id="querymasshide" class="control-group">
+                            <input type="text" name="mass_range" size=20 >&nbsp;+/-&nbsp;<input type=text name=mass_plusminus size=4>&nbsp;Da
+                            <div class="span4">
+                              <span class=strong>Mass is:</span>
+                              <br>
+                              <input type="radio" name="mass_is_monoiso" value="true" checked>&nbsp;monoisotopic
+                              <br>
+                              <input type="radio" name="mass_is_monoiso">&nbsp;average
+                            </div>
 
-                        <div class="span6">
-                          <input type="radio" name="mass_iontype" value="M" checked>&nbsp;uncharged
-                          <br>
-                          <input type="radio" name="mass_iontype" value="MH+">&nbsp;MH+
-                          <br>
-                          <input type="radio" name="mass_iontype" value="MH-">&nbsp;MH-
+                            <div class="span6">
+                              <input type="radio" name="mass_iontype" value="M" checked>&nbsp;uncharged
+                              <br>
+                              <input type="radio" name="mass_iontype" value="MH+">&nbsp;MH+
+                              <br>
+                              <input type="radio" name="mass_iontype" value="MH-">&nbsp;MH-
+                            </div>
+                          </div>
                         </div>
                       </div>
 
@@ -155,42 +159,60 @@
                   </div>
                   <div class="controls">
                     <label class="checkbox">
-                      <input type="checkbox"> Query by Composition 
-                      <input type="text" placeholder="Text input">
-
-                      <span class=strong>Enter a composition, or a composition range.</span><br>
-                        
                       <div class="row-fluid">
-                        <div class="span4">
-                          <input name=mscomp_Hexose      type=text size=3 >&nbsp;Hex<br>
-                          <input name=mscomp_HexNAc      type=text size=3 >&nbsp;HexNAc<br>
-                          <input name=mscomp_deoxyHexose type=text size=3 >&nbsp;dHex<br>
-                          <input name=mscomp_pentose   type=text size=3 >&nbsp;Pent<br>
-                        </div>
+                        <div class="span12">
+                          <input id="querycompositioncheck" type="checkbox"> Query by Composition 
+                          <div id="querycompositionhide" class="control-group">
+                            <input type="text" placeholder="Text input">
+                            <span class=strong>Enter a composition, or a composition range.</span>
+                            <div class="row-fluid">
+                              <div class="span4">
+                                <input name=mscomp_Hexose      type=text size=3 >&nbsp;Hex<br>
+                                <input name=mscomp_HexNAc      type=text size=3 >&nbsp;HexNAc<br>
+                                <input name=mscomp_deoxyHexose type=text size=3 >&nbsp;dHex<br>
+                                <input name=mscomp_pentose   type=text size=3 >&nbsp;Pent<br>
+                              </div>
 
-                        <div class="span4">
-                          <input name=mscomp_NeuAc type=text size=3 >&nbsp;NeuAc<br>
-                          <input name=mscomp_NeuGc type=text size=3 >&nbsp;NeuGc<br>
-                          <input name=mscomp_KDN   type=text size=3 >&nbsp;KDN<br>
-                          <input name=mscomp_HexA type=text size=3 >&nbsp;HexA<br>
-                        </div>
+                              <div class="span4">
+                                <input name=mscomp_NeuAc type=text size=3 >&nbsp;NeuAc<br>
+                                <input name=mscomp_NeuGc type=text size=3 >&nbsp;NeuGc<br>
+                                <input name=mscomp_KDN   type=text size=3 >&nbsp;KDN<br>
+                                <input name=mscomp_HexA type=text size=3 >&nbsp;HexA<br>
+                              </div>
 
-                        <div class="span4">
-                          <input name=mscomp_phosphate type=text size=3 >&nbsp;P<br>
-                          <input name=mscomp_sulfate  type=text size=3 >&nbsp;S<br>
-                          <input name=mscomp_methyl type=text size=3 >&nbsp;Methyl<br>
-                          <input name=mscomp_acetyl type=text size=3 >&nbsp;Acetyl<br>
+                              <div class="span4">
+                                <input name=mscomp_phosphate type=text size=3 >&nbsp;P<br>
+                                <input name=mscomp_sulfate  type=text size=3 >&nbsp;S<br>
+                                <input name=mscomp_methyl type=text size=3 >&nbsp;Methyl<br>
+                                <input name=mscomp_acetyl type=text size=3 >&nbsp;Acetyl<br>
+                              </div>
+                            </div>
+                            <input type=checkbox name="mscomp_absolute" value="true">&nbsp;<span class=strong>Match this exact composition (empty boxes imply '0')</span><BR>
+                            <BR><span class=strong>and/or number of monosaccharide residues</span><BR><INPUT type=text name=mscomp_total size=3 >
+                          </div>
                         </div>
                       </div>
+                    </label>
+                  </div>
+                  <div class="controls">
+                    <label class="checkbox">
+                      <input id="queryattachedcheck" type="checkbox"> Query by Attached 
+                      <div id="queryattachedhide" class="control-group">
+                      <select class="" name="mydropdown">
+                        <option value="">Select a Protine database to search:</option>
+                        <option value="Milk">Fresh Milk</option>
+                        <option value="Cheese">Old Cheese</option>
+                        <option value="Bread">Hot Bread</option>
+                      </select>
+                      <input type="text" placeholder="Text input">
+                    </div>
+                    </label>
+                  </div>
+                  <div class="controls">
+                    <label class="checkbox">
+                      <input id="queryproteincheck" type="checkbox"> Query by Protein 
 
-                      <input type=checkbox name="mscomp_absolute" value="true">&nbsp;<span class=strong>Match this exact composition (empty boxes imply '0')</span><BR>
-                      <BR><span class=strong>and/or number of monosaccharide residues</span><BR><INPUT type=text name=mscomp_total size=3 >
-
-                    </label>
-                  </div>
-                  <div class="controls">
-                    <label class="checkbox">
-                      <input type="checkbox"> Query by Attached 
+                      <div id="queryproteinhide" class="control-group">
                       <select class="" name="mydropdown">
                         <option value="">Select a Protine database to search:</option>
                         <option value="Milk">Fresh Milk</option>
@@ -198,12 +220,13 @@
                         <option value="Bread">Hot Bread</option>
                       </select>
                       <input type="text" placeholder="Text input">
+                    </div>
                     </label>
                   </div>
                   <div class="controls">
                     <label class="checkbox">
-                      <input type="checkbox"> Query by Protein 
-
+                      <input id="querytaxonomycheck" type="checkbox"> Taxonomy 
+                      <div id="querytaxonomyhide" class="control-group">
                       <select class="" name="mydropdown">
                         <option value="">Select a Protine database to search:</option>
                         <option value="Milk">Fresh Milk</option>
@@ -211,11 +234,13 @@
                         <option value="Bread">Hot Bread</option>
                       </select>
                       <input type="text" placeholder="Text input">
+                    </div>
                     </label>
                   </div>
                   <div class="controls">
                     <label class="checkbox">
-                      <input type="checkbox"> Taxonomy 
+                      <input id="querybiologicalcheck" type="checkbox"> Biological 
+                      <div id="querybiologicalhide" class="control-group">
                       <select class="" name="mydropdown">
                         <option value="">Select a Protine database to search:</option>
                         <option value="Milk">Fresh Milk</option>
@@ -223,11 +248,13 @@
                         <option value="Bread">Hot Bread</option>
                       </select>
                       <input type="text" placeholder="Text input">
+                    </div>
                     </label>
                   </div>
                   <div class="controls">
                     <label class="checkbox">
-                      <input type="checkbox"> Biological 
+                      <input id="querysourcecheck" type="checkbox"> Source 
+                      <div id="querysourcehide" class="control-group">
                       <select class="" name="mydropdown">
                         <option value="">Select a Protine database to search:</option>
                         <option value="Milk">Fresh Milk</option>
@@ -235,11 +262,13 @@
                         <option value="Bread">Hot Bread</option>
                       </select>
                       <input type="text" placeholder="Text input">
+                    </div>
                     </label>
                   </div>
                   <div class="controls">
                     <label class="checkbox">
-                      <input type="checkbox"> Source 
+                      <input id="queryreferencecheck" type="checkbox"> Reference 
+                      <div id="queryreferencehide" class="control-group">
                       <select class="" name="mydropdown">
                         <option value="">Select a Protine database to search:</option>
                         <option value="Milk">Fresh Milk</option>
@@ -247,11 +276,13 @@
                         <option value="Bread">Hot Bread</option>
                       </select>
                       <input type="text" placeholder="Text input">
+                    </div>
                     </label>
                   </div>
                   <div class="controls">
                     <label class="checkbox">
-                      <input type="checkbox"> Reference 
+                      <input id="querylinkagecheck" type="checkbox"> Linkage 
+                      <div id="querylinkagecheck" class="control-group">
                       <select class="" name="mydropdown">
                         <option value="">Select a Protine database to search:</option>
                         <option value="Milk">Fresh Milk</option>
@@ -259,25 +290,15 @@
                         <option value="Bread">Hot Bread</option>
                       </select>
                       <input type="text" placeholder="Text input">
-                    </label>
-                  </div>
-                  <div class="controls">
-                    <label class="checkbox">
-                      <input type="checkbox"> Linkage 
-                      <select class="" name="mydropdown">
-                        <option value="">Select a Protine database to search:</option>
-                        <option value="Milk">Fresh Milk</option>
-                        <option value="Cheese">Old Cheese</option>
-                        <option value="Bread">Hot Bread</option>
-                      </select>
-                      <input type="text" placeholder="Text input">
+                    </div>
                     </label>
                   </div>
                 </div>
                 <div id="filter2" class="tab-pane control-group eurocarb">
                   <div class="controls">
                     <label class="checkbox">
-                      <input type="checkbox"> Linkage 
+                      <input id="querycheck" type="checkbox"> Linkage 
+                      <div class="control-group">
                       <select class="" name="mydropdown">
                         <option value="">Select a Protine database to search:</option>
                         <option value="Milk">Fresh Milk</option>
@@ -285,6 +306,7 @@
                         <option value="Bread">Hot Bread</option>
                       </select>
                       <input type="text" placeholder="Text input">
+                    </div>
                     </label>
                   </div>
                 </div>
@@ -292,6 +314,7 @@
                   <div class="controls">
                     <label class="checkbox">
                       <input type="checkbox"> Linkage 
+                      <div class="control-group">
                       <select class="" name="mydropdown">
                         <option value="">Select a Protine database to search:</option>
                         <option value="Milk">Fresh Milk</option>
@@ -299,6 +322,7 @@
                         <option value="Bread">Hot Bread</option>
                       </select>
                       <input type="text" placeholder="Text input">
+                    </div>
                     </label>
                   </div>
                 </div>
