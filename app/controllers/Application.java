@@ -42,9 +42,41 @@ public class Application extends Controller {
 	return ok(browse.render());
     }
 
-    public static Result browseunicarb(String x) {
+    public static Result browseunicarb() {
+
 	List<String> taxonomy  = Taxonomy.findSpecies();
-        return ok(browseunicarb.render(taxonomy));
+
+	List<Biolsource> biolsource = null;
+	List<SqlRow> listSql = null;
+	Taxonomy taxonomyId = null;
+
+	if (request().queryString().size() > 0  ) {
+		Map<String, String[]> params = request().queryString();
+		String[] searchTaxonomy = null;
+		for (Map.Entry<String, String[]> entry : params.entrySet() ){
+			searchTaxonomy = entry.getValue();
+		}
+		for (String queryTaxonomy : searchTaxonomy) {
+			System.out.println("search taxonomy: " + queryTaxonomy);
+
+			List<Taxonomy> foundTaxonomy  = Taxonomy.findSpeciesTemp(queryTaxonomy);
+        		Long taxId = null;
+        		for (Taxonomy tax : foundTaxonomy) {
+                		taxId = tax.id;
+                		System.out.println("this is the id: " + taxId);
+        		};
+        		if (taxId > 0) {
+        			taxonomyId  = Taxonomy.find.byId(taxId);
+        			String taxon = taxonomyId.species;
+        			biolsource = Biolsource.findTaxonomyProtein(taxon);
+        			listSql = Biolsource.findTaxonomyProteinSQL(taxon);
+			}
+		}
+
+	return ok(browseunicarb.render(taxonomy, taxonomyId, biolsource, listSql));
+	}
+
+        return ok(browseunicarb.render(taxonomy, taxonomyId, biolsource, listSql));
     }	
 
     public static Result structureDetails(Long id) {
