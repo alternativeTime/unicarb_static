@@ -1,14 +1,14 @@
 @main{
 
       <ul class="breadcrumb">
-        <li><i class="icon-folder-open" ></i><a href="#"> Curated Database</a> <span class="divider">></span></li>
+        <li><i class="icon-folder-open" ></i><a href="#"> UniCarbKB Database</a> <span class="divider">></span></li>
         <li><i class="icon-hdd" ></i><a href="#"> GlycoSuite</a> <span class="divider">></span></li>
         <li><i class="icon-list-alt" ></i><a href="../references"> Reference</a> <span class="divider">></span></li>
         <li class="active">You are here</li>
       </ul>
 
     <section id="layouts" class="browse">
-      <h1>Browse</h1>
+      <h1>Search UniCarbKB</h1>
       <h4 class="subheader">Currently returning results from GlycosuiteDB, EuroCarb, and NextProt</h4>
       <div class="row-fluid">
         <div class="span12">
@@ -31,14 +31,24 @@
         <div class="span9 rightpanel">
           <div class="tabbable"> <!-- Only required for left/right tabs -->
             <ul class="nav nav-tabs">
-              <li class="active"><a href="#tab1" data-toggle="tab">Filters</a></li>
-              <li><a href="#tab2" data-toggle="tab">Results</a></li>
+              <li class="active"><a href="#tab1" data-toggle="tab">Search</a></li>
+              <li><a href="#tab2" data-toggle="tab">Search Results</a></li>
               <li><a href="#tab3" data-toggle="tab">Related Results</a></li>
+	      <li><a href="" data-toggle="tab">Glycan Builder</a></li>
             </ul>
             <div class="tab-content results">
               <div class="tab-pane active" id="tab1">
-                <h2>Filter</h2>
+                <h2>Search by biological content</h2>
                 <div id="filter1" class="control-group glycosuitedb">
+		  <div class="controls">
+                    <label class="checkbox">
+                      <input id="querytaxonomycheck" type="checkbox"> Query by Attached
+                      <div id="querytaxonomyhide" class="control-group">
+			<select  name=taxonomy MULTIPLE id="e1" style="width:300px"  id="listBox"></select>
+                        <button type="submit" class="btn">Search</button>
+                    </div>
+                    </label>
+                  </div>
                   <div class="controls">
                     <label class="checkbox">
                       <input id="querydiseasecheck" type="checkbox"> Query by Disease State: 
