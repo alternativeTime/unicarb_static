@@ -52,7 +52,7 @@
       <div class="row-fluid">
         <div class="span3 filterbar tabbable">
           <ul class="nav nav-tabs" id="myTabBar">
-            <li><a href="#filter1" data-toggle="tab">GlycosuiteDB</a></li>
+            <li><a href="#filter1" data-toggle="tab">Glycosuite <span class="pull-right count">42</span></a></li>
             <li class=""><a href="#filter2" data-toggle="tab">EuroCarb</a></li>
             <li><a href="#filter3" data-toggle="tab">NextProt</a></li>
           </ul>
@@ -289,7 +289,7 @@
                 </div>
               </div>
               <div class="tab-pane" id="tab2">
-                <h2>Browse Results</h2>
+                <h2>Search returned (42) results from Glycosuite</h2>
 		@if(taxon !=null) {
 
 		@for( (taxon, ii) <- taxon.zipWithIndex) {
@@ -300,9 +300,10 @@
                     <p class="">A total of  ---- @groupTax.size() glycoproteins: @for( (sql,i) <- groupTax.zipWithIndex; if (i <= 6)) { <a href="">@sql("protein"), </a> } </p>
                   </div>
                   <div class="span3">
-                    <p class="pull-right">@if(taxon == null) {} else { @taxon.strtaxonomy.size() structures }</p>
+                    <p class="pull-right structures"><a href="#">@if(taxon == null) {} else { @taxon.strtaxonomy.size() structures }</a></p>
                   </div>
                 </div>
+                <hr>
 		}}
               </div>
             </div>

@@ -398,6 +398,8 @@ margin: 5px 0px 10px 0px;
   border: 0px solid #DDD;
 }
 
+.filterbar.tabbable .count { padding: 0 20px 0 0; color: #A2E0FF; }
+
 #tab1 .control-group { display: none; }
 #tab1 .control-group.active { display: block; }
 
@@ -427,6 +429,10 @@ margin: 5px 0px 10px 0px;
     color: #FFF;
   }
 
+/* !LAYOUT - BROWSE ////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////*/
+
 .results {
   padding: 0px;
   height: 560px;
@@ -444,6 +450,15 @@ margin: 5px 0px 10px 0px;
 }
 
 .tabbable .details { margin-left: 0px; }
+
+p.structures {
+  padding: 10px; background: #008FD5; 
+  -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px;
+}
+p.structures:hover {
+  background: #0071A9;
+}
+p.structures a { padding-left: 30px; height: 22px; display: block; color: #FFF; }
 
 
 /*******************************************************************************************************

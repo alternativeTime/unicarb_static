@@ -50,9 +50,9 @@
       <div class="row-fluid">
         <div class="span3 filterbar tabbable">
           <ul class="nav nav-tabs" id="myTabBar">
-            <li><a href="#filter1" data-toggle="tab">Taxonomy</a></li>
-            <li class=""><a href="#filter2" data-toggle="tab">Protein</a></li>
-            <li><a href="#filter3" data-toggle="tab">Structure</a></li>
+            <li><a href="#filter1" data-toggle="tab">Glycosuite</a></li>
+            <li class=""><a href="#filter2" data-toggle="tab">EurocarbDB</a></li>
+            <li><a href="#filter3" data-toggle="tab">Nextprot</a></li>
           </ul>
         </div><!-- /col -->
         <div class="span9 rightpanel">
@@ -199,7 +199,7 @@
                 <div class="row-fluid">
                   <h3><a href="#">@taxon.species</a><span class="pull-right"><span class="label success">Curated Entry</span> <span class="label notice">GlycoSuiteDB</span></span></h3>
                   <div class="details span9">
-                    <p class="">A total of @groupTax.size() </b> glycoproteins: @for( (sql,i) <- groupTax.zipWithIndex; if (i <= 6)) { @sql("protein") } </p>
+                    <p class="">A total of @groupTax.size() glycoproteins: @for( (sql,i) <- groupTax.zipWithIndex; if (i <= 6)) { <a href="#">@sql("protein")</a>, } </p>
                   </div>
                   <div class="span3">
                     <p class="pull-right">@taxon.strtaxonomy.size() structures</p>
@@ -244,7 +244,7 @@
 
 <script>
   $(function () {
-    var test = 'last'; @* target this during page reload *@
+    var test = 'first'; @* target this during page reload *@
     $('#myTabBar a:' + test).tab('show');
     $('#myTab a[href="#tab2"]').tab('show');
   })
