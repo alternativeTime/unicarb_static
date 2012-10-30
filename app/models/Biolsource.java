@@ -27,7 +27,7 @@ public class Biolsource extends Model {
     //@ManyToOne
     //Biolsource biolsource;
 
-    
+    public static List<String> proteinNames;
     /**
      * Generic query helper for entity Reference with id Long
      */
@@ -42,6 +42,28 @@ public class Biolsource extends Model {
 	SqlQuery sqlQuery = Ebean.createSqlQuery(sql);
 	List<SqlRow> listSql = sqlQuery.findList();
 	return listSql;
+    }
+
+    public static List<String> findTaxonomyProteinString(String taxon) {
+	String sql = "SELECT biolsource.protein, proteins.name FROM public.biolsource, public.proteins WHERE biolsource.protein = proteins.name and biolsource.taxonomy ilike '" + taxon +  "' group by  biolsource.protein, proteins.name";
+
+	RawSql rawSql = RawSqlBuilder.parse(sql).columnMapping("proteins.name", "proteins.name").columnMapping("biolsource.protein", "biolsource.protein").create();
+
+	SqlQuery sqlQuery = Ebean.createSqlQuery(sql);
+        List<SqlRow> listSql = sqlQuery.findList();
+	System.out.println("check rowsss " + listSql.size() );
+	String protein = "";
+	List<String> proteinNames = new ArrayList<String>();
+	 
+	for (SqlRow row : listSql) {
+                //System.out.println("check row " + row.getString("protein") );
+		String proteinfound = row.getString("protein").toString();
+		proteinNames.add(proteinfound, "test");
+		System.out.println("check row again " + proteinfound);
+		
+        }
+
+        return proteinNames;	
     }
 	public static List<Biolsource> findTaxonomyProtein(String taxon) {
         return

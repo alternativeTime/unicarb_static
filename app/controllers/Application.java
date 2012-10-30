@@ -43,8 +43,11 @@ public class Application extends Controller {
 
         List<Biolsource> biolsource = null;
         List<SqlRow> listSql = null;
+	ArrayList<SqlRow> listSqlArray = new ArrayList<SqlRow>();
         Taxonomy taxonomyId = null;
 	ArrayList<Taxonomy> taxonomyList = new ArrayList<Taxonomy>();
+	List<String> listSql22 = new ArrayList<String>();
+	List<String> listSql2 = null;
 
         if (request().queryString().size() > 0  ) {
                 Map<String, String[]> params = request().queryString();
@@ -67,13 +70,17 @@ public class Application extends Controller {
                                 String taxon = taxonomyId.species;
                                 biolsource = Biolsource.findTaxonomyProtein(taxon);
                                 listSql = Biolsource.findTaxonomyProteinSQL(taxon);
+				//listSqlArray.add(listSql);
+				listSql2 = Biolsource.findTaxonomyProteinString(taxon);
+				listSql22.addAll(listSql2);
                         }
                 }
 
-        return ok(browse.render(taxonomy, taxonomyList, biolsource, listSql));
+
+        return ok(browse.render(taxonomy, taxonomyList, biolsource, listSql22));
         }
 
-        return ok(browse.render(taxonomy, taxonomyList, biolsource, listSql));
+        return ok(browse.render(taxonomy, taxonomyList, biolsource, listSql2));
     }
 
     /*
