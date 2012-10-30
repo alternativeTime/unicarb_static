@@ -1,4 +1,33 @@
+@(taxonomy: List[String], taxon: ArrayList[Taxonomy],  biolsource: List[Biolsource], groupTax: List[SqlRow] )
+
+
 @main{
+
+
+<script>
+      $(document).ready(function(){
+        $("#e1").select2({
+          placeholder: "Select Taxonomy Descriptions",
+          allowClear: true,
+        });
+	});
+</script>
+
+<script>
+        $(function() {
+        var myArray = new Array();
+        @for(a <- taxonomy){
+                myArray.push("@a");
+        }
+        options = '';
+        for (var i = 0; i < myArray.length; i++) {
+                options += '<option value="' + myArray[i] + '">' + myArray[i] + '</option>';
+        }
+        $('#e1').html(options);
+
+        });
+</script>
+
 
       <ul class="breadcrumb">
         <li><i class="icon-folder-open" ></i><a href="#"> UniCarbKB Database</a> <span class="divider">></span></li>
@@ -22,7 +51,7 @@
       </div>
       <div class="row-fluid">
         <div class="span3 filterbar tabbable">
-          <ul class="nav nav-tabs">
+          <ul class="nav nav-tabs" id="myTabBar">
             <li><a href="#filter1" data-toggle="tab">GlycosuiteDB</a></li>
             <li class=""><a href="#filter2" data-toggle="tab">EuroCarb</a></li>
             <li><a href="#filter3" data-toggle="tab">NextProt</a></li>
@@ -38,102 +67,24 @@
             </ul>
             <div class="tab-content results">
               <div class="tab-pane active" id="tab1">
-                <h2>Search by biological content</h2>
+                <h2><img src="../images/icon_search.png"> Search Features &amp; Results</h2>
+
                 <div id="filter1" class="control-group glycosuitedb">
 		  <div class="controls">
                     <label class="checkbox">
-                      <input id="querytaxonomycheck" type="checkbox"> Query by Attached
-                      <div id="querytaxonomyhide" class="control-group">
-			<select  name=taxonomy MULTIPLE id="e1" style="width:300px"  id="listBox"></select>
+			<form class="form-search">
+                        <div id="selection">
+                        <select  name=taxonomy MULTIPLE id="e1" style="width:350px"  id="listBox"></select>
                         <button type="submit" class="btn">Search</button>
-                    </div>
+                        </div>
+                        </form>
+
                     </label>
                   </div>
                   <div class="controls">
                     <label class="checkbox">
                       <input id="querydiseasecheck" type="checkbox"> Query by Disease State: 
                       <div id="querydiseasehide" class="control-group">
-                        <select name=disease MULTIPLE id="e1" style="width:300px">
-                          <option selected value="">ANY</option>
-                          <option value =" #none">NONE</option>
-                          <option value =" #any" >ALL</option>
-                          <option value="Adenocarcinoma">Adenocarcinoma</option>
-                          <option value="Adenocarcinoma, Grade II">Adenocarcinoma, Grade II</option>
-                          <option value="Alzheimer's">Alzheimer's</option>
-                          <option value="Amyloidosis, A-I Amyloid">Amyloidosis, A-I Amyloid</option>
-                          <option value="Amyloidosis, AA Amyloid">Amyloidosis, AA Amyloid</option>
-                          <option value="Amyloidosis, AL Amyloid">Amyloidosis, AL Amyloid</option>
-                          <option value="Anemia, Aplastic">Anemia, Aplastic</option>
-                          <option value="Arthritis">Arthritis</option>
-                          <option value="Aspartylglycosaminuria">Aspartylglycosaminuria</option>
-                          <option value="Bronchiectasis, due to Kartagener's Syndrome">Bronchiectasis, due to Kartagener's Syndrome</option>
-                          <option value="Bronchitis, Chronic">Bronchitis, Chronic</option>
-                          <option value="Cancer, Bile duct">Cancer, Bile duct</option>
-                          <option value="Cancer, Ovarian">Cancer, Ovarian</option>
-                          <option value="Cancer, Ovarian (Cystic)">Cancer, Ovarian (Cystic)</option>
-                          <option value="Carbohydrate-Deficient Glycoprotein Syndrome, Type II">Carbohydrate-Deficient Glycoprotein Syndrome, Type II</option>
-                          <option value="Carcinoid Tumor, with multiple liver metastasis">Carcinoid Tumor, with multiple liver metastasis</option>
-                          <option value="Carcinoma">Carcinoma</option>
-                          <option value="Carcinoma, Gallbladder which metastasises to the liver">Carcinoma, Gallbladder which metastasises to the liver</option>
-                          <option value="Carcinoma, Hepatocellular">Carcinoma, Hepatocellular</option>
-                          <option value="Carcinoma, Lewis Lung">Carcinoma, Lewis Lung</option>
-                          <option value="Carcinoma, Squamous cell">Carcinoma, Squamous cell</option>
-                          <option value="Chondrosarcoma">Chondrosarcoma</option><option value="Choriocarcinoma">Choriocarcinoma</option>
-                          <option value="Choriocarcinoma, with Hyperthyroidism">Choriocarcinoma, with Hyperthyroidism</option>
-                          <option value="Cyst">Cyst</option>
-                          <option value="Cystic Fibrosis">Cystic Fibrosis</option>
-                          <option value="Diabetes Mellitus">Diabetes Mellitus</option>
-                          <option value="Diabetes Mellitus, Non-insulin dependent">Diabetes Mellitus, Non-insulin dependent</option>
-                          <option value="Diverticulosis">Diverticulosis</option>
-                          <option value="Dyscrasia, Plasma Cell">Dyscrasia, Plasma Cell</option>
-                          <option value="Erythroleukemia with associated Polycythemia">Erythroleukemia with associated Polycythemia</option>
-                          <option value="Fibrosarcoma">Fibrosarcoma</option>
-                          <option value="Fucosidosis">Fucosidosis</option>
-                          <option value="Gangliosidosis GM1">Gangliosidosis GM1</option>
-                          <option value="Gaucher Disease">Gaucher Disease</option>
-                          <option value="Glioma">Glioma</option>
-                          <option value="Heavy Chain Disease">Heavy Chain Disease</option>
-                          <option value="Hydatidiform Mole">Hydatidiform Mole</option>
-                          <option value="Hydatidiform Mole, Invasive">Hydatidiform Mole, Invasive</option>
-                          <option value="Hypercholesterolemia, Familial">Hypercholesterolemia, Familial</option>
-                          <option value="Hyperlipoproteinemia, Familial Type V">Hyperlipoproteinemia, Familial Type V</option>
-                          <option value="Infantile Sialidosis, Type II (Dysmorphic)">Infantile Sialidosis, Type II (Dysmorphic)</option>
-                          <option value="Kidney Failure, Chronic">Kidney Failure, Chronic</option>
-                          <option value="Leukemia">Leukemia</option>
-                          <option value="Leukemia, Acute lymphoblastic">Leukemia, Acute lymphoblastic</option>
-                          <option value="Leukemia, Acute lymphoblastic and HIV-1">Leukemia, Acute lymphoblastic and HIV-1</option>
-                          <option value="Leukemia, Acute myelogenous">Leukemia, Acute myelogenous</option>
-                          <option value="Leukemia, Chronic myelogenous">Leukemia, Chronic myelogenous</option>
-                          <option value="Leukemia, Promyelocytic">Leukemia, Promyelocytic</option>
-                          <option value="Lymphoma">Lymphoma</option>
-                          <option value="Lymphoma, Burkitt">Lymphoma, Burkitt</option>
-                          <option value="Lymphoma, Lymphoblastic">Lymphoma, Lymphoblastic</option>
-                          <option value="Lymphoma, Thymic">Lymphoma, Thymic</option>
-                          <option value="Lysosomal storage disease">Lysosomal storage disease</option>
-                          <option value="Malaria Tropica, Malignant">Malaria Tropica, Malignant</option>
-                          <option value="Malignant material">Malignant material</option>
-                          <option value="Mannosidosis, alpha">Mannosidosis, alpha</option>
-                          <option value="Mannosidosis, beta">Mannosidosis, beta</option>
-                          <option value="Melanoma">Melanoma</option>
-                          <option value="Myeloma">Myeloma</option>
-                          <option value="Myeloma (Mouse)">Myeloma (Mouse)</option>
-                          <option value="Myeloma, Multiple with an accompanying Hypogammaglobulinaemia">Myeloma, Multiple with an accompanying Hypogammaglobulinaemia</option>
-                          <option value="Neuroblastoma">Neuroblastoma</option>
-                          <option value="Pancreatitis, Chronic">Pancreatitis, Chronic</option>
-                          <option value="Parasite Nippostrongylus brasiliensis infection">Parasite Nippostrongylus brasiliensis infection</option>
-                          <option value="Plasmacytoma (Mouse)">Plasmacytoma (Mouse)</option>
-                          <option value="Sialidosis (Mucolipidosis I)">Sialidosis (Mucolipidosis I)</option>
-                          <option value="Sialidosis, severe infantile with abdominal ascites">Sialidosis, severe infantile with abdominal ascites</option>
-                          <option value="Tn Polyagglutinability Syndrome">Tn Polyagglutinability Syndrome</option>
-                          <option value="Tumor, Endodermal Sinus">Tumor, Endodermal Sinus</option>
-                          <option value="Tumor, Glial">Tumor, Glial</option>
-                          <option value="Tumor, Pituitary">Tumor, Pituitary</option>
-                          <option value="Tumor, Subcutaneous">Tumor, Subcutaneous</option>
-                          <option value="Waldenstrom Macroglobulinaemia">Waldenstrom Macroglobulinaemia</option>
-                          <option value="Wiskott-Aldrich Syndrome">Wiskott-Aldrich Syndrome</option>
-                          <option value="Zajdela Hepatocarcinoma">Zajdela Hepatocarcinoma</option>
-                        <option>
-                      </select>
                       <span>Or</span>
                       <input type="text" placeholder="Disease keyword">
                     </div>
@@ -339,50 +290,34 @@
               </div>
               <div class="tab-pane" id="tab2">
                 <h2>Browse Results</h2>
+		@if(taxon !=null) {
+
+		@for( (taxon, ii) <- taxon.zipWithIndex) {
+
                 <div class="row-fluid">
-                  <h3><a href="#">Example Result 01</a><span class="pull-right"><span class="label success">Curated Entry</span> <span class="label notice">GlycoSuiteDB</span></span></h3>
+                  <h3><a href="#">@if(taxon == null) {Result} else {@taxon.species}</a><span class="pull-right"><span class="label success">Curated Entry</span> <span class="label notice">GlycoSuiteDB</span></span></h3>
                   <div class="details span9">
-                    <p class="">Lorem ipsum dolor sit amet, consectetur adipiscing amet semper bibendum, leo ipsum rhoncus sapien, vitae adipiscing mauris velit at tellus.</p>
+                    <p class="">A total of  ---- @groupTax.size() glycoproteins: @for( (sql,i) <- groupTax.zipWithIndex; if (i <= 6)) { <a href="">@sql("protein"), </a> } </p>
                   </div>
                   <div class="span3">
-                    <p class="pull-right">12.06.12</p>
+                    <p class="pull-right">@if(taxon == null) {} else { @taxon.strtaxonomy.size() structures }</p>
                   </div>
                 </div>
-                <div class="row-fluid">
-                  <h3><a href="#">Example Result 01</a><span class="pull-right"><span class="label success">Curated Entry</span> <span class="label notice">GlycoSuiteDB</span></span></h3>
-                  <div class="details span9">
-                    <p class="">Lorem ipsum dolor sit amet, consectetur adipiscing amet semper bibendum, leo ipsum rhoncus sapien, vitae adipiscing mauris velit at tellus.</p>
-                  </div>
-                  <div class="span3">
-                    <p class="pull-right">12.06.12</p>
-                  </div>
-                </div>
-              </div>
-              <div class="tab-pane" id="tab3">
-                <h2>Browse Related Results</h2>
-                <div class="row-fluid">
-                  <h3><a href="#">Example Result 01</a><span class="pull-right"><span class="label success">Curated Entry</span> <span class="label notice">GlycoSuiteDB</span></span></h3>
-                  <div class="details span9">
-                    <p class="">Lorem ipsum dolor sit amet, consectetur adipiscing amet semper bibendum, leo ipsum rhoncus sapien, vitae adipiscing mauris velit at tellus.</p>
-                  </div>
-                  <div class="span3">
-                    <p class="pull-right">12.06.12</p>
-                  </div>
-                </div>
-                <div class="row-fluid">
-                  <h3><a href="#">Example Result 01</a><span class="pull-right"><span class="label success">Curated Entry</span> <span class="label notice">GlycoSuiteDB</span></span></h3>
-                  <div class="details span9">
-                    <p class="">Lorem ipsum dolor sit amet, consectetur adipiscing amet semper bibendum, leo ipsum rhoncus sapien, vitae adipiscing mauris velit at tellus.</p>
-                  </div>
-                  <div class="span3">
-                    <p class="pull-right">12.06.12</p>
-                  </div>
-                </div>
+		}}
               </div>
             </div>
           </div>
         </div><!-- /col -->
       </div><!-- /row -->
     </section>
+
+<script>
+	$(function () {
+    	var test = 'first'; @* target this during page reload *@
+    	$('#myTabBar a:' + test).tab('show');
+    	$('#myTab a[href="#tab1"]').tab('show');
+  	})
+</script>
+
 
 }
