@@ -1,4 +1,4 @@
-@(taxonomy: List[String], taxon: ArrayList[Taxonomy],  biolsource: List[Biolsource], groupTax: List[SqlRow] )
+@(taxonomy: List[String], taxon: ArrayList[Taxonomy],  biolsource: List[Biolsource], groupTax: List[List[String]] )
 
 
 @main{
@@ -52,14 +52,14 @@
       <div class="row-fluid">
         <div class="span3 filterbar tabbable">
           <ul class="nav nav-tabs" id="myTabBar">
-            <li><a href="#filter1" data-toggle="tab">Glycosuite <span class="pull-right count">42</span></a></li>
+            <li><a href="#filter1" data-toggle="tab">Glycosuite <span class="pull-right count">@taxon.size()</span></a></li>
             <li class=""><a href="#filter2" data-toggle="tab">EuroCarb</a></li>
             <li><a href="#filter3" data-toggle="tab">NextProt</a></li>
           </ul>
         </div><!-- /col -->
         <div class="span9 rightpanel">
           <div class="tabbable"> <!-- Only required for left/right tabs -->
-            <ul class="nav nav-tabs">
+            <ul class="nav nav-tabs" id="myTab">
               <li class="active"><a href="#tab1" data-toggle="tab">Search</a></li>
               <li><a href="#tab2" data-toggle="tab">Search Results (42)</a></li>
               <li><a href="#tab3" data-toggle="tab">Related Results</a></li>
@@ -289,22 +289,22 @@
                 </div>
               </div>
               <div class="tab-pane" id="tab2">
-                <h2>Search returned (42) results from Glycosuite</h2>
+                <h2>Search returned (@taxon.size()) results from Glycosuite</h2>
 		@if(taxon !=null) {
 
 		@for( (taxon, ii) <- taxon.zipWithIndex) {
 
                 <div class="row-fluid">
-                  <h3><a href="#">@if(taxon == null) {Result} else {@taxon.species}</a><span class="pull-right"><span class="label success">Curated Entry</span> <span class="label notice">GlycoSuiteDB</span></span></h3>
+                  <h3><a href="#">@taxon.species</a><span class="pull-right"><span class="label success">Curated Entry</span> <span class="label notice">GlycoSuiteDB</span></span></h3>
                   <div class="details span9">
-                    <p class="">A total of  ---- @groupTax.size() glycoproteins: @for( (sql,i) <- groupTax.zipWithIndex; if (i <= 6)) { <a href="">@sql("protein"), </a> } </p>
+		  <p class="">@taxon.taxprotein.size() glycoproteins are associated with this taxonomy including: @for( (tax, i) <- taxon.taxprotein.zipWithIndex; if (i <= 6)) {  <a href="">@tax.protein, </a> }</p>
                   </div>
                   <div class="span3">
-                    <p class="pull-right structures"><a href="#">@if(taxon == null) {} else { @taxon.strtaxonomy.size() structures }</a></p>
+                    <p class="pull-right structures"><a href="#">@taxon.strtaxonomy.size() structures </a></p>
                   </div>
                 </div>
-                <hr>
 		}}
+                <hr>
               </div>
             </div>
           </div>
@@ -312,13 +312,24 @@
       </div><!-- /row -->
     </section>
 
+@if(taxon.size() != 0 ) {
 <script>
 	$(function () {
     	var test = 'first'; @* target this during page reload *@
     	$('#myTabBar a:' + test).tab('show');
-    	$('#myTab a[href="#tab1"]').tab('show');
+    	$('#myTab a[href="#tab2"]').tab('show');
   	})
 </script>
+}
 
+@if(taxon.size() == 0 ) {
+<script>
+        $(function () {
+        var test = 'first'; @* target this during page reload *@
+        $('#myTabBar a:' + test).tab('show');
+        $('#myTab a[href="#tab1"]').tab('show');
+        })
+</script>
+}
 
 }
