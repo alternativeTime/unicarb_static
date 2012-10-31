@@ -47,7 +47,9 @@ public class Application extends Controller {
         Taxonomy taxonomyId = null;
 	ArrayList<Taxonomy> taxonomyList = new ArrayList<Taxonomy>();
 	List<String> listSql22 = new ArrayList<String>();
-	List<String> listSql2 = null;
+	//List<String> listSql2 = null;
+	//ArrayList<String[]> listSql2 = new ArrayList<String[]>();
+	List<List<String>> listSql2 = new ArrayList<List<String>>();
 
         if (request().queryString().size() > 0  ) {
                 Map<String, String[]> params = request().queryString();
@@ -72,12 +74,18 @@ public class Application extends Controller {
                                 listSql = Biolsource.findTaxonomyProteinSQL(taxon);
 				//listSqlArray.add(listSql);
 				listSql2 = Biolsource.findTaxonomyProteinString(taxon);
-				listSql22.addAll(listSql2);
+				//listSql22.addAll(listSql2);
+				for(List<String> xx : listSql2){
+					for(String xxx : xx) {
+					System.out.println("damn it: " + xxx );
+					}
+				
+				}
                         }
                 }
 
 
-        return ok(browse.render(taxonomy, taxonomyList, biolsource, listSql22));
+        return ok(browse.render(taxonomy, taxonomyList, biolsource, listSql2));
         }
 
         return ok(browse.render(taxonomy, taxonomyList, biolsource, listSql2));

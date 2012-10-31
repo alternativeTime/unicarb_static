@@ -1,4 +1,4 @@
-@(taxonomy: List[String], taxon: ArrayList[Taxonomy],  biolsource: List[Biolsource], groupTax: List[SqlRow] )
+@(taxonomy: List[String], taxon: ArrayList[Taxonomy],  biolsource: List[Biolsource], groupTax: List[List[String]] )
 
 
 @main{
@@ -290,21 +290,23 @@
               </div>
               <div class="tab-pane" id="tab2">
                 <h2>Search returned (42) results from Glycosuite</h2>
-		@if(taxon !=null) {
-
-		@for( (taxon, ii) <- taxon.zipWithIndex) {
 
                 <div class="row-fluid">
-                  <h3><a href="#">@if(taxon == null) {Result} else {@taxon.species}</a><span class="pull-right"><span class="label success">Curated Entry</span> <span class="label notice">GlycoSuiteDB</span></span></h3>
+                  <h3><a href="#"></a><span class="pull-right"><span class="label success">Curated Entry</span> <span class="label notice">GlycoSuiteDB</span></span></h3>
                   <div class="details span9">
-                    <p class="">A total of  ---- @groupTax.size() glycoproteins: @for( (sql,i) <- groupTax.zipWithIndex; if (i <= 6)) { <a href="">@sql("protein"), </a> } </p>
+                    <p class="">A total of  ---- @groupTax.size() glycoproteins: @for( (sql,i) <- groupTax.zipWithIndex; if (i <= 6)) { <a href="">@sql, </a> } </p>
+
+		    @for((tax) <- groupTax) {
+			<h3>test</h3> 
+			<p>@for((t) <- tax) { @for((tt) <- t) {@tt} }</p>
+			} >
                   </div>
                   <div class="span3">
-                    <p class="pull-right structures"><a href="#">@if(taxon == null) {} else { @taxon.strtaxonomy.size() structures }</a></p>
+                    <p class="pull-right structures"><a href="#"></a></p>
                   </div>
                 </div>
                 <hr>
-		}}
+		
               </div>
             </div>
           </div>
