@@ -188,6 +188,11 @@ hr {
   background: url(../images/UniCarbKB_Logo.png) top right no-repeat;
 }
 
+.home .container-fluid.content{ 
+  background: url(../images/UniCarbKB_Logo_150.png) top center no-repeat;
+}
+h2.subheader { margin-top: 170px; text-align: center; }
+
 .container-fluid { margin: 0 auto; width: 80%; }
 .content { margin-top: 100px; }
 
@@ -200,7 +205,7 @@ h2.lead { margin: 30px 0; font-size: 25px; }
 
 .widget {
   margin: 0;
-  padding: 20px;
+  padding: 20px 20px 20px 30px;
   width: 100%;
   background: #008FD5;
   -moz-border-radius: 5px;
@@ -264,8 +269,22 @@ h2.lead { margin: 30px 0; font-size: 25px; }
   padding:5px 0px;
 }
 
+#layouts .sidebar {
+  margin-top: 100px;
+  background: #FFF;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none
+  -o-box-shadow: none;
+  box-shadow: none;
+  position: relative;
+}
+
 .sidebar {
-  background: whiteSmoke;
+  margin-top: 0px;
+  background: whitesmoke;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   border-radius: 5px;
@@ -278,7 +297,7 @@ h2.lead { margin: 30px 0; font-size: 25px; }
 
 .sidebar .nav {
   margin: 0 0 18px 0;
-  padding: 20px;
+  padding: 20px 0;
   background: whiteSmoke;
   -moz-border-radius: 5px 5px 0 0;
   -webkit-border-radius: 5px 5px 0 0;
@@ -287,13 +306,13 @@ h2.lead { margin: 30px 0; font-size: 25px; }
 }
 
 .sidebar .nav a {
-  padding: 10px 0;
+  padding: 15px 20px;
   color: #008FD5;
   margin-top: 2px;
   margin-bottom: 2px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
 }
 
 .sidebar .info {
@@ -312,6 +331,60 @@ h2.lead { margin: 30px 0; font-size: 25px; }
   height: 0;
 }
 
+/* !LAYOUT - REFERENCE LISTING /////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+table {
+  width: 100%;
+  margin-bottom: 18px;
+  padding: 0;
+  border-collapse: separate;
+  font-size: 13px;
+  border: 0px solid #DDD;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+table th + th {
+    padding-top: 9px;
+    font-weight: bold;
+    vertical-align: middle;
+    border-left: 0px solid #DDD;
+    border-bottom: 1px solid #DDD;
+  }
+
+.pagination ul {
+  float: left;
+  margin: 0;
+  border: 0px solid #DDD;
+  border: 0px solid rgba(0, 0, 0, 0.15);
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.pagination a {
+  float: left;
+  padding: 0 14px;
+  line-height: 34px;
+  border-right: 1px solid;
+  border-right-color: #DDD;
+  border-right-color: rgba(0, 0, 0, 0.15);
+  background-color: #008FD5;
+  color: #FFF;
+  text-decoration: none;
+}
+.pagination a:hover { background: #004e74; }
+
+.pagination .disabled a, .pagination .disabled a:hover {
+    background-color: #008FD5;
+    color: #A2E0FF;
+  }
+
 /* !LAYOUT - REFERENCE /////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////*/
@@ -320,6 +393,29 @@ th[class*="span"] {
     margin-left: 0px;
 }
 
+.RP {
+  background-color: whitesmoke;
+  margin: 0 0 60px 0;
+  padding: 20px;
+  display: block;
+}
+
+.a-l-k {
+  position: relative;
+  display: -moz-inline-box;
+  display: inline-block;
+  left: 0px;
+}
+
+.fA {
+  background-color: white;
+  border: 1px solid #EEE;
+  cursor: pointer;
+  margin: 0px 20px 20px 0px;
+  padding: 0px;
+  vertical-align: top;
+  border-image: initial;
+}
 
 /* !LAYOUT - BROWSE ////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
