@@ -37,12 +37,6 @@
     </script>
     <script>
       $(document).ready(function(){
-
-        $("#e1").select2({
-          placeholder: "Select a e",
-          allowClear: true,
-        });
-
         $(".announceTaxStructures").click(function(){ // Click to only happen on announce links
           $("#Id").val($(this).data('id'));
           $('#taxDescription').modal('show');

@@ -1,85 +1,65 @@
 @(result: List[Translation])
 @import helper._
 
-<html class="hoverable webkit webkit-chrome-5 signedOut" lang="en"><!--<![endif]--><head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>UniCarb Search</title>
-  
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("/public", "stylesheets/reset.gz.css")">
-  <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("/public", "stylesheets/application.gz.css")">
-   <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("/public", "stylesheets/bootstrapnewlayout.css")">
-        <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("/public", "stylesheets/stylesnewlayout.css")">
-         <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("/public", "stylesheets/bootstrap-responsive.css")">
 
-	<header>
-        <div class="topbar">
-      <div class="topbar-inner">
-        <div class="container">
-          <a class="brand" href="">UniCarbKB</a>
-          <ul class="nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-          @*<p class="pull-right">Logged in as <a href="#">username</a></p> *@
-          @**<div class="pull-right">
-            <form action="">
-            <input type="text" placeholder="To search proteins, tax, source">
-            </form>
-          </div>
-        **@
+@main{
 
-        </div>
+      <ul class="breadcrumb">
+        <li><i class="icon-folder-open" ></i><a href="#"> UniCarbKB Database</a> <span class="divider">></span></li>
+        <li><i class="icon-hdd" ></i><a href="#"> GlycoSuite</a> <span class="divider">></span></li>
+        <li><i class="icon-list-alt" ></i><a href="../references"> Reference</a> <span class="divider">></span></li>
+        <li class="active">You are here</li>
+      </ul>
+
+    <section id="layouts" class="browse">
+      <h1>Search UniCarbKB</h1>
+      <h4 class="subheader">Currently returning results from GlycosuiteDB, EuroCarb, and NextProt</h4>
+      <div class="row-fluid">
+        <div class="span12">
+         </div>
       </div>
-    </div>
-</header>
+      <div class="row-fluid">
+        <div class="span3 filterbar tabbable">
+          <ul class="nav nav-tabs" id="myTabBar">
+            <li><a href="#filter1" data-toggle="tab">Glycosuite <span class="pull-right count"></span></a></li>
+            <li class=""><a href="#filter2" data-toggle="tab">EuroCarb</a></li>
+            <li><a href="#filter3" data-toggle="tab">NextProt</a></li>
+          </ul>
+        </div><!-- /col -->
+        <div class="span9 rightpanel">
+          <div class="tabbable"> <!-- Only required for left/right tabs -->
+            <ul class="nav nav-tabs" id="myTab">
+              <li class="active"><a href="#tab1" data-toggle="tab">Search</a></li>
+              <li><a href="#tab2" data-toggle="tab">Search Results</a></li>
+              <li><a href="#tab3" data-toggle="tab">Related Results</a></li>
+	      <li><a href="" data-toggle="tab">Glycan Builder</a></li>
+            </ul>
+            <div class="tab-content results">
+              <div class="tab-pane active" id="tab1">
+                <h2><img src="../images/icon_search.png"> Search Features &amp; Results</h2>
+		@for(result <- result){
+		<img src="http://unicarb-db.biomedicine.gu.se/unicarbdb/get_sugar_image.action?download=true&scale=1.0&outputType=png&inputType=gws&tolerateUnknown=1&sequences=@{result.gws}" />
+		}
+
+		 <div class="row-fluid">
+                  <h3><a href="#">Something here</a><span class="pull-right"><span class="label success">Curated Entry</span> <span class="label notice">GlycoSuiteDB</span></span></h3>
+                  <div class="details span9">
+                    <p class="">something here</p>
+                  </div>
+                  <div class="span3">
+                    <p class="pull-right structures"><a href="#"></a></p>
+                  </div>
+                </div>
 
 
-<div id="splash">
+              </div>
+              <div class="tab-pane" id="tab2">
+              </div>
+            </div>
+          </div>
+        </div><!-- /col -->
+      </div><!-- /row -->
+    </section>
 
-<div class="blue">
-  <div class="inner">
-
-    <h3 class="third">
-      
-      <strong>Glycan Builder</strong>
-      An intuitive interface for building and displaying glycan structures using a collection of notation formats.
-    </h3>
-
-    <h3 class="third">
-      
-      <strong>Find Structures</strong>
-      Build your glycan or epitope and search the UniCarbKB structure database. This new design is built using new technologies and discussed by the developer <a href="https://bitbucket.org/daviddamerell/glycanbuilderv/wiki/Home">David Damerell</a>
-    </h3>
-
-    <h3 class="third last">
-      
-      <strong>Publication</strong>
-      The GlycanBuilder: a fast, intuitive and flexible software tool for building and displaying glycan structures, <i>Alessio Ceroni, Anne Dell, and Stuart M Haslam, Source Code Biol Med. 2007; 2: 3. <a href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1994674/">PubMed</a></i>
-    </h3>
-
-    <br class="clear">  
-
-  </div>
-
-</div>
-
-<div id="wrap">
-<div id="static" class="contact" style="display: block; opacity: 1; visibility: visible; "><h1>Glycan Search</h1>
-
-<h2>Exact result returned for your queried structure</h2>
-
-
-@for(result <- result){
-<img src="http://unicarb-db.biomedicine.gu.se/unicarbdb/get_sugar_image.action?download=true&scale=2.0&outputType=png&inputType=gws&tolerateUnknown=1&sequences=@{result.gws}" />
 }
-</div>
-</div>
 
-</div>
-
-
-
-</body></html>
