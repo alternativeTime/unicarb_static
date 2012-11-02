@@ -18,12 +18,12 @@ public class Taxprotein extends Model {
     @Id
     public Long id;
     
-    public String taxonomy;
+    public String species;
    
     public String protein;
 
 	@ManyToOne
-	public Taxonomy taxonomyRelationship;
+	public Taxonomy taxonomy;
 
     public static Model.Finder<Long,Taxprotein> find = new Model.Finder<Long,Taxprotein>(Long.class, Taxprotein.class);
     
