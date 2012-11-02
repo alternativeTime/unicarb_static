@@ -1,98 +1,43 @@
-<html class="hoverable webkit webkit-chrome-5 signedOut" lang="en"><!--<![endif]--><head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>UniCarb Search</title>
-  
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("/public", "stylesheets/reset.gz.css")">
-  <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("/public", "stylesheets/application.gz.css")">
-   <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("/public", "stylesheets/bootstrapnewlayout.css")">
-        <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("/public", "stylesheets/stylesnewlayout.css")">
-         <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("/public", "stylesheets/bootstrap-responsive.css")">
+@main {
 
-	<script type="text/javascript"> 
-        var vaadin = {
-                vaadinConfigurations: {
-                        'fb' :{
-                                appUri:'/GlycanBuilder', 
-                                pathInfo: '/GlycanBuilder', 
-                                themeUri: '/GlycanBuilder/VAADIN/themes/ucdb_2011theme', 
-                                versionInfo : {vaadinVersion:"6.0.0-INTERNAL-NONVERSIONED-DEBUG-BUILD",applicationVersion:"NONVERSIONED"}
-                        }
-                        
-                }};
-	</script> 
+<script type="text/javascript"> 
+var vaadin = {
+ vaadinConfigurations: {
+'fb' :{
+appUri:'/GlycanBuilder', 
+ pathInfo: '/GlycanBuilder', 
+themeUri: '/GlycanBuilder/VAADIN/themes/ucdb_2011theme', 
+versionInfo : {vaadinVersion:"6.0.0-INTERNAL-NONVERSIONED-DEBUG-BUILD",applicationVersion:"NONVERSIONED"}
+ }
+}};
+</script> 
   
-	<script language='javascript' src='GlycanBuilder/VAADIN/widgetsets/ac.uk.icl.dell.vaadin.glycanbuilder.widgetset.GlycanbuilderWidgetset/ac.uk.icl.dell.vaadin.glycanbuilder.widgetset.GlycanbuilderWidgetset.nocache.js'></script> 
+<script language='javascript' src='GlycanBuilder/VAADIN/widgetsets/ac.uk.icl.dell.vaadin.glycanbuilder.widgetset.GlycanbuilderWidgetset/ac.uk.icl.dell.vaadin.glycanbuilder.widgetset.GlycanbuilderWidgetset.nocache.js'></script> 
 <link rel="stylesheet" type="text/css" href="/GlycanBuilder/VAADIN/themes/ucdb_2011theme/styles.css"/>
           
-</head>
+
 <body onLoad="Write()">
 
-<header>
-        <div class="topbar">
-      <div class="topbar-inner">
-        <div class="container">
-          <a class="brand" href="">UniCarbKB</a>
-          <ul class="nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-          @*<p class="pull-right">Logged in as <a href="#">username</a></p> *@
-          @**<div class="pull-right">
-            <form action="">
-            <input type="text" placeholder="To search proteins, tax, source">
-            </form>
-          </div>
-        **@
-
-        </div>
+<section id="layouts" class="browse">
+      <h1>Glycan Builder</h1>
+      <h4 class="subheader">An intuitive interface for building and displaying glycan structures using a collection of notation formats.</h4>
+      <div class="row-fluid">
+	
+	<div class="span6">
+	<h3 class="builder">Find Structures</h3>	
+	<p class="builder">Build your glycan or epitope and search the UniCarbKB structure database. This new design is built using new technologies and discussed by the developer David Damerell.</p>
+	</div>
+	
+	<div class="span6">
+	<h3 class="builder">Publication</h3>
+	<p class="builder">The GlycanBuilder: a fast, intuitive and flexible software tool for building and displaying glycan structures, Alessio Ceroni, Anne Dell, and Stuart M Haslam, Source Code Biol Med. 2007; 2: 3. PubMed</p>
+	</div>
+	
+	
       </div>
-    </div>
-</header>
+</section>
 
 
-<div id="splash">
-@**
-<div class="white">
-  <div class="inner">
-    
-    <h2 >Built Your Glycan and Query It</h2>
-    <a href="/" class="btn-logo"></a>
-    <a href="javascript:;" class="btn-logo color-2">Connect with Facebook</a>
-    <a href="javascript:;" class="btn-email">Or sign in with email</a>
-
-  
-  </div>
-</div>
-**@
-<div class="blue">
-  <div class="inner">
-
-    <h3 class="third">
-      
-      <strong>Glycan Builder</strong>
-      An intuitive interface for building and displaying glycan structures using a collection of notation formats.
-    </h3>
-
-    <h3 class="third">
-      
-      <strong>Find Structures</strong>
-      Build your glycan or epitope and search the UniCarbKB structure database. This new design is built using new technologies and discussed by the developer <a href="https://bitbucket.org/daviddamerell/glycanbuilderv/wiki/Home">David Damerell</a>
-    </h3>
-
-    <h3 class="third last">
-      
-      <strong>Publication</strong>
-      The GlycanBuilder: a fast, intuitive and flexible software tool for building and displaying glycan structures, <i>Alessio Ceroni, Anne Dell, and Stuart M Haslam, Source Code Biol Med. 2007; 2: 3. <a href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1994674/">PubMed</a></i>
-    </h3>
-
-    <br class="clear">  
-
-  </div>
-
-</div>
 
 <div id="wrap">
 <a class="btn" href=""><i class="icon-refresh"></i> Refresh</a> <a class="btn btn-warning" href="#"> Builder Applet</a>
@@ -118,7 +63,7 @@ window.location = x ;
        </script>
        
        
-       <script type="text/javascript"> 
+<script type="text/javascript"> 
 function Write()
 {
 var Scr = new ActiveXObject("Scripting.FileSystemObject");
@@ -151,51 +96,23 @@ CTF.Close();
  }
  </script>
        
-
+@*
 	<select id="format.field">
            <option>glycoct</option>
            <option>glycoct_condensed</option>
            <option>glyde</option>
            <option>linucs</option>
            <option>gws</option>
-         </select>
+         </select>*@
 
-	<form id="frm1" name="frm1" action="ms" method="POST">
-	<input type="button" name="Search" value="Search" onclick='window["glycanCanvas"].runCommand("export~glycoct_condensed",callBack);'/>
+	<form id="frm1" name="frm1" action="ms" method="POST" class="form-search">
+	<input type="button" class="btn" name="Search" value="Search" onclick='window["glycanCanvas"].runCommand("export~glycoct_condensed",callBack);'/>
         </form>
 </div>
 
 
 </div>
 
-@**
-<div id="sidebar"><a href="/" class="btn-nav btn-logo">
-  <span class="text">Snip!</span>
-  <span class="icon"></span>
-  <span class="notch"></span>
-</a>
-<a href="/" class="btn-nav btn-discover">
-  <span class="text">Discover</span>
-  <span class="icon"></span>
-  <span class="notch"></span>
-</a>
-<a href="javascript:;" class="btn-nav btn-profile" style="display: none; ">
-  <span class="text">Profile</span>
-  <span class="icon"></span>
-  <span class="notch"></span>
-</a>
-<a href="/about" class="btn-nav btn-about">
-  <span class="text">About</span>
-  <span class="icon"></span>
-  <span class="notch"></span>
-</a>
-<a href="/how" class="btn-nav btn-search">
-  <span class="text">How to Snip</span>
-  <span class="icon"></span>
-  <span class="notch"></span>
-</a>
+}
 
-</div>
-**@
 
-</body></html>

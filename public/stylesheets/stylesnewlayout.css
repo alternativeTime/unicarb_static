@@ -52,6 +52,26 @@ h3 {
   line-height: 27px;
 }
 
+h3.builder {
+  position: relative;
+  font-family: "OpenSans", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+  font-weight: 200;
+  color: #111;
+  font-size: 26px;
+  line-height: 18px;
+  text-rendering: optimizelegibility;
+}
+
+p.builder {
+ line-height: 1.5;
+ font-family: "OpenSans", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+ text-rendering: optimizeLegibility;
+ font-size: 16px;
+ font-weight: 200;
+}
+
+
+
 .sidebar h3 {
     margin-top: 0px;
 }
