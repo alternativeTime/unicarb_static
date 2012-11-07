@@ -1,4 +1,4 @@
-@(result: List[Translation], structure: Structure)
+@(result: List[Translation], structure: List[Structure])
 @import helper._
 
 
@@ -41,7 +41,7 @@
 		<img src="http://unicarb-db.biomedicine.gu.se/unicarbdb/get_sugar_image.action?download=true&scale=1.0&outputType=png&inputType=gws&tolerateUnknown=1&sequences=@{result.gws}" />
 		}
 
-		<div class="row-fluid">
+@*		<div class="row-fluid">
 		  <div class="span3">
                     <p class="structures"><a href="#">@structure.references.size() Publications</a></p>
                   </div>
@@ -57,13 +57,10 @@
 		  </div>
 
                 </div>
-
+*@
 		 <div class="row-fluid">
                   <h3><a href="#">Publications</a><span class="pull-right"></span></h3>
                   <div class="details span9">
-			@for(reference <- stref.references){
-			<p>@reference.reference.title</p>
-			}
                   </div>
                 </div>
 

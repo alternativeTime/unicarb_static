@@ -66,6 +66,7 @@ public class Search extends Controller {
 	
 		List<Translation> translation = null;
 		Structure findStructure = null;
+		List<Structure> strDisplay = null;
 		
 		Map<String, String[]> id = request().queryString();
 		String urlcall = "";
@@ -105,13 +106,14 @@ public class Search extends Controller {
 		for (Translation trans : translation) {
 			Long gsId = trans.gs;
 			findStructure = Structure.find.byId(gsId);
+                        strDisplay = Structure.findStructureRef(gsId);
 			
 		}
 		}catch (IOException e) {
 			
 		}
 		 
-		return ok (saySearch.render(translation, findStructure) );
+		return ok (saySearch.render(translation, strDisplay) );
 	}
 }
 
