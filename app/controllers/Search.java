@@ -59,13 +59,13 @@ import com.google.common.base.Charsets;
 import com.google.common.io.Files;
 
 public class Search extends Controller {
+
 	
 	public static Result saySearch(String structure) throws SugarImporterException, GlycoVisitorException, IOException, ParserConfigurationException, SAXException {
 		
 	
 		List<Translation> translation = null;
-	
-		
+		Structure findStructure = null;
 		
 		Map<String, String[]> id = request().queryString();
 		String urlcall = "";
@@ -101,11 +101,17 @@ public class Search extends Controller {
 		 
 		 
 		translation = Translation.searchTranslation(text);
+			
+		for (Translation trans : translation) {
+			Long gsId = trans.gs;
+			findStructure = Structure.find.byId(gsId);
+			
+		}
 		}catch (IOException e) {
 			
 		}
 		 
-		return ok (saySearch.render(translation) );
+		return ok (saySearch.render(translation, findStructure) );
 	}
 }
 
