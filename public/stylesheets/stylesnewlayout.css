@@ -275,7 +275,7 @@ h2.lead { margin: 30px 0; font-size: 25px; }
 .widget a span.count {
   display: block;
   color: #FFF;
-  font-size: 21px;
+  font-size: 24px;
   font-weight: bold;
   line-height: 20px;
   text-decoration: none;
@@ -284,8 +284,8 @@ h2.lead { margin: 30px 0; font-size: 25px; }
 .widget a span.desc {
   display: block;
   color: #A2E0FF;
-  font-size: 11px;
-  line-height: 13px;
+  font-size: 12px;
+  line-height: 14px;
 }
 
 .content .leftContent .cntPara {
@@ -325,8 +325,8 @@ h2.lead { margin: 30px 0; font-size: 25px; }
 }
 
 .sidebar .nav {
-  margin: 0 0 18px 0;
-  padding: 20px 0;
+  margin: 0 0 0 0;
+  padding: 0px 0;
   background: whiteSmoke;
   -moz-border-radius: 5px 5px 0 0;
   -webkit-border-radius: 5px 5px 0 0;
