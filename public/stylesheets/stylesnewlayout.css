@@ -70,6 +70,15 @@ p.builder {
  font-weight: 200;
 }
 
+h3.builderresult{
+  font-family: 'Crete Round', sans-serif;
+  font-weight: 200;
+  color: #111;
+  font-size: 26px;
+  line-height: 18px;
+  text-rendering: optimizelegibility;  
+}
+
 
 
 .sidebar h3 {
@@ -225,7 +234,7 @@ h2.lead { margin: 30px 0; font-size: 25px; }
 
 .widget {
   margin: 0;
-  padding: 20px 20px 20px 30px;
+  padding: 20px 0px 20px 30px;
   width: 100%;
   background: #008FD5;
   -moz-border-radius: 5px;
@@ -523,6 +532,7 @@ margin: 5px 0px 10px 0px;
 #tab2 h3 { margin: 0px 0 5px 0; }
 
 .rightpanel { margin-top: -47px; }
+.rightpanelBuilder { margin-top: -15px;}
 
 .rightpanel .nav { /*margin-bottom: 0px;*/ }
 .tabbable .nav.nav-tabs { width: 100%; }
