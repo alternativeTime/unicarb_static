@@ -1,4 +1,4 @@
-@(result: List[Translation], structure: List[Structure])
+@(result: List[Translation], structure: List[Structure], taxonomy: ArrayList[String], structureObject: Structure)
 @import helper._
 
 
@@ -40,34 +40,44 @@
 		@for(result <- result){
 		<img src="http://unicarb-db.biomedicine.gu.se/unicarbdb/get_sugar_image.action?download=true&scale=1.0&outputType=png&inputType=gws&tolerateUnknown=1&sequences=@{result.gws}" />
 		}
-
-@*		<div class="row-fluid">
+		<div class="row-fluid">
+		  <a class="btn" href="../search"><i class="icon-refresh"></i> Build Structure</a>
+		</div>
+		<div class="row-fluid">
 		  <div class="span3">
-                    <p class="structures"><a href="#">@structure.references.size() Publications</a></p>
+                    <p class="structures"><a href="#">@structureObject.references.size() Publications</a></p>
                   </div>
 		  <div class="span3">
-                    <p class="structures"><a href="#">@structure.strtaxonomy.size() Biological Content</a></p>
+                    <p class="structures"><a href="#">@structureObject.strtaxonomy.size() Biological Content</a></p>
                   </div>
 
 		   <div class="span3">
-                    <p class="structures"><a href="#">@structure.stsource.size() Protein</a></p>
+                    <p class="structures"><a href="#">@structureObject.stsource.size() Protein</a></p>
                   </div>
 		  <div class="span3">
-		    <a class="btn" href="search"><i class="icon-refresh"></i>Build Structure</a>
 		  </div>
 
                 </div>
-*@
+
 		 <div class="row-fluid">
                   <h3><a href="#">Publications</a><span class="pull-right"></span></h3>
                   <div class="details span9">
+		  @for(stref <- structure){
+                        @for( (reference,i) <- stref.references.zipWithIndex; if (i <=3)){
+                        <p><a href="../references/@reference.reference.id">@reference.reference.title</a>, @reference.reference.year, @reference.reference.authors</p>
+                        }
+                }
+
+
                   </div>
                 </div>
 
 		<div class="row-fluid">
                   <h3><a href="#">Biological Associations</a><span class="pull-right"></span></h3>
-                  <div class="details span9">
-                    <p class="">something here</p>
+                  <div class="details span9" style="font-size: 14px; font-weight: normal; line-height: 22px; margin-bottom: 9px;">
+		    @for( (tax,j) <- taxonomy.zipWithIndex; if (j <=3)){
+			<a href="" style="font-size: 14px; font-weight: normal; line-height: 22px; margin-bottom: 9px; color: #4B5C66;">@tax, </a> 
+		    }
                   </div>
 		</div>
 
@@ -80,6 +90,14 @@
         </div><!-- /col -->
       </div><!-- /row -->
     </section>
+
+<script>
+        $(function () {
+        var test = 'second'; @* target this during page reload *@
+        $('#myTabBar a:' + test).tab('show');
+        })
+</script>
+
 
 }
 
