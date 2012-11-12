@@ -34,6 +34,20 @@ public class Proteins extends Model {
         return options;
     }*/
 
+    public static HashSet proteinSummary() {
+
+        HashSet proteinUnique = new HashSet();
+        List<Proteins> proteins = Proteins.find.all();
+
+        for (Proteins protein : proteins) {
+                proteinUnique.add(protein.name);
+
+        }
+
+    return proteinUnique;
+    }
+
+
     
 }
 

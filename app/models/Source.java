@@ -26,7 +26,24 @@ public class Source extends Model {
     @OneToMany
     public List<Stsource> stsource;
 
+
     public static Model.Finder<Long,Source> find = new Model.Finder<Long,Source>(Long.class, Source.class);
+
+    public static HashSet sourceSummary() {
+
+	HashSet sourceUnique = new HashSet();
+	List<Source> source = Source.find.all();
+
+	for (Source sources : source) {
+		sourceUnique.add(sources.div1);
+		sourceUnique.add(sources.div2);
+		sourceUnique.add(sources.div3);
+		sourceUnique.add(sources.div4);
+		
+	}
+
+    return sourceUnique;
+    }
     
 }
 
