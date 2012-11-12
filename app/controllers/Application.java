@@ -40,6 +40,8 @@ public class Application extends Controller {
 
     public static Result browse() {
 	List<String> taxonomy  = Taxonomy.findSpecies();
+	HashSet sourceUnique = Source.sourceSummary();
+	HashSet proteinUnique = Proteins.proteinSummary();
 
         List<Biolsource> biolsource = null;
         List<SqlRow> listSql = null;
@@ -85,10 +87,10 @@ public class Application extends Controller {
                 }
 
 
-        return ok(browse.render(taxonomy, taxonomyList, biolsource, listSql2));
+        return ok(browse.render(taxonomy, taxonomyList, biolsource, listSql2, sourceUnique, proteinUnique));
         }
 
-        return ok(browse.render(taxonomy, taxonomyList, biolsource, listSql2));
+        return ok(browse.render(taxonomy, taxonomyList, biolsource, listSql2, sourceUnique, proteinUnique));
     }
 
     /*
