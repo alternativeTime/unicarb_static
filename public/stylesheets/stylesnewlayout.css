@@ -222,7 +222,7 @@ hr {
 }
 h2.subheader { margin-top: 170px; text-align: center; }
 
-.container-fluid { margin: 0 auto; width: 80%; }
+.container-fluid { margin: 0 auto; width: 80%; overflow: visible; }
 .content { margin-top: 100px; }
 
 .home .row-fluid { margin-bottom: 20px; }
@@ -263,13 +263,17 @@ h2.lead { margin: 30px 0; font-size: 25px; }
   background: transparent url("/images/glyphicons_096_vector_path_polygon.png") no-repeat;
 }
 .publications a {
-  background: transparent url("/images/glyphicons_318_more-items.png") no-repeat;
+  background: transparent url("/images/glyphicons_351_book_open.png") no-repeat center left;
 }
 .unicarbdb a {
   background: transparent url("/images/glyphicons_041_charts.png") no-repeat;
 }
 .structures a {
   background: transparent url("/images/glyphicons_326_share.png") no-repeat;
+}
+
+.biological a {
+  background: transparent url("/images/glyphicons_326_biological.png") no-repeat;
 }
 
 .widget a span.count {
@@ -577,14 +581,14 @@ margin: 5px 0px 10px 0px;
 
 .tabbable .details { margin-left: 0px; }
 
-p.structures {
+p.structures, p.publications, p.biological {
   padding: 10px; background: #008FD5; 
   -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px;
 }
-p.structures:hover {
+p.structures:hover, p.publications:hover, p.biological:hover {
   background: #0071A9;
 }
-p.structures a { padding-left: 30px; height: 22px; display: block; color: #FFF; }
+p.structures a, p.publications a, p.biological a { padding-left: 30px; height: 22px; display: block; color: #FFF; }
 
 
 /*******************************************************************************************************

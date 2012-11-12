@@ -45,10 +45,10 @@
 		</div>
 		<div class="row-fluid">
 		  <div class="span3">
-                    <p class="structures"><a href="#">@structureObject.references.size() Publications</a></p>
+                    <p class="publications"><a href="#">@structureObject.references.size() Publications</a></p>
                   </div>
 		  <div class="span3">
-                    <p class="structures"><a href="#">@structureObject.strtaxonomy.size() Biological Content</a></p>
+                    <p class="biological"><a href="#">@structureObject.strtaxonomy.size() Biological Content</a></p>
                   </div>
 
 		   <div class="span3">
@@ -59,18 +59,16 @@
 
                 </div>
 
-		 <div class="row-fluid">
-                  <h3><a href="#">Publications</a><span class="pull-right"></span></h3>
-                  <div class="details span9">
-		  @for(stref <- structure){
-                        @for( (reference,i) <- stref.references.zipWithIndex; if (i <=3)){
-                        <p><a href="../references/@reference.reference.id">@reference.reference.title</a>, @reference.reference.year, @reference.reference.authors</p>
-                        }
-                }
-
-
-                  </div>
-                </div>
+    <div class="row-fluid">
+      <h3><a href="#">Publications</a><span class="pull-right"></span></h3>
+      <div class="details span9">
+        @for(stref <- structure){
+          @for( (reference,i) <- stref.references.zipWithIndex; if (i <=3)){
+            <p><a href="../references/@reference.reference.id">@reference.reference.title</a>, @reference.reference.year, @reference.reference.authors</p>
+          }
+        }
+      </div>
+    </div>
 
 		<div class="row-fluid">
                   <h3><a href="#">Biological Associations</a><span class="pull-right"></span></h3>
