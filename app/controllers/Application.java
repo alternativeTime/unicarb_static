@@ -296,8 +296,8 @@ public class Application extends Controller {
 	return ok ( index.render() );
     }
 
-    public static Result search() {
-	return ok (search.render() );
+    public static Result builder() {
+	return ok (builder.render() );
     }
 
     /*public static Result saySearch(String structure) {

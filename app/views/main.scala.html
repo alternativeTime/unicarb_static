@@ -147,17 +147,20 @@
         <div class="container-fluid">
           <a class="brand" href="/">UniCarbKB</a>
           <ul class="nav">
-            <li class="active"><a href="/">Home</a></li>
-            <li class="dropdown" id="menu1">
+            <li class=""><a href="/">Home</a></li>
+            @* <li class="dropdown" id="menu1">
               <a class="dropdown-toggle" data-toggle="dropdown" href="/browse">Browse <b class="caret"></b></a> 
-            </li>
-	    <li><a href="/search">Glycan Builder</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+            </li> *@
+	    <li><a href="/browse">Browse</a></li>
+	    <li><a href="/builder">Glycan Builder</a></li>
           </ul>
           @*<p class="pull-right">Logged in as <a href="#">username</a></p> *@
-          @*<div id="headersearch" class="pull-right">
-            <form action="">
+          <div id="headersearch" class="pull-right">
+	    <ul>
+       	    <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+	    </ul>
+          @*  <form action="">
               <input type="text" placeholder="To search proteins, tax, source">
             </form>
             <ul>

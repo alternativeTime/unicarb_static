@@ -1,0 +1,124 @@
+@main {
+
+<script type="text/javascript"> 
+var vaadin = {
+ vaadinConfigurations: {
+'fb' :{
+appUri:'/GlycanBuilder', 
+ pathInfo: '/GlycanBuilder', 
+themeUri: '/GlycanBuilder/VAADIN/themes/ucdb_2011theme', 
+versionInfo : {vaadinVersion:"6.0.0-INTERNAL-NONVERSIONED-DEBUG-BUILD",applicationVersion:"NONVERSIONED"}
+ }
+}};
+</script> 
+  
+<script language='javascript' src='GlycanBuilder/VAADIN/widgetsets/ac.uk.icl.dell.vaadin.glycanbuilder.widgetset.GlycanbuilderWidgetset/ac.uk.icl.dell.vaadin.glycanbuilder.widgetset.GlycanbuilderWidgetset.nocache.js'></script> 
+<link rel="stylesheet" type="text/css" href="/GlycanBuilder/VAADIN/themes/ucdb_2011theme/styles.css"/>
+          
+
+<body onLoad="Write()">
+
+<ul class="breadcrumb">
+        <li><i class="icon-folder-open" ></i><a href="#"> UniCarbKB Database</a> <span class="divider">></span></li>
+        <li><i class="icon-hdd" ></i><a href="/browse"> Glycan Builder</a> <span class="divider">></span></li>
+        <li class="active" > You are here</li>
+      </ul>
+
+<section id="layouts" class="browse">
+      <h1>Glycan Builder</h1>
+      <h4 class="subheader">An intuitive interface for building and displaying glycan structures</h4>
+      <div class="row-fluid">
+	
+	<div class="span6">
+	<h3 class="builder">Find Structures</h3>	
+	<p class="builder">Build your glycan or epitope and search the UniCarbKB structure database. This new design is built using new technologies and discussed by the developer David Damerell.</p>
+	</div>
+	
+	<div class="span6">
+	<h3 class="builder">Publication</h3>
+	<p class="builder">The GlycanBuilder: a fast, intuitive and flexible software tool for building and displaying glycan structures, Alessio Ceroni, Anne Dell, and Stuart M Haslam, Source Code Biol Med. 2007; 2: 3. PubMed</p>
+	</div>
+	
+	
+      </div>
+</section>
+
+
+
+<div id="wrap">
+<a class="btn" href=""><i class="icon-refresh"></i> Refresh</a> <a class="btn btn-warning" href="#"> Builder Applet</a>
+<iframe id="__gwt_historyFrame" style="width:0;height:0;border:0;overflow:hidden" src="javascript:false"></iframe>
+
+        <div id="fb" style="height:450px; width:80%;margin:0"></div>
+
+	<script type="text/javascript"> 
+	var callBack=[];
+        callBack.run=function(response){
+          //document.write(response);
+	 var r = response;
+	  //document.write(r);
+	  //document.form.frm1.Search = 'test this';
+	  //document.form.frm1.submit();
+	//document.forms["frm2"].submit();
+	var url = "../saySearch/s?";
+	var x = url + encodeURI(r);
+	//var s = [ url, "" , r].join("");
+	//document.write(x);
+window.location = x ;
+        }
+       </script>
+       
+       
+<script type="text/javascript"> 
+function Write()
+{
+var Scr = new ActiveXObject("Scripting.FileSystemObject");
+var CTF = Scr.CreateTextFile("/tmp/tmp.out", true);
+CTF.WriteLine('Roseindia');
+CTF.Close();
+}
+</script>
+
+<script language="JavaScript">
+ cookie_name = "Basic_Cookie";
+ function write_cookie() {
+ if(document.cookie) {
+ index = document.cookie.indexOf(cookie_name);
+ } else {
+ index = -1;
+ }
+ 
+ if (index == -1) {
+ document.cookie=cookie_name+"=1; expires=Wednesday, 01-Aug-2040 08:00:00 GMT";
+ } else {
+ countbegin = (document.cookie.indexOf("=", index) + 1);
+ countend = document.cookie.indexOf(";", index);
+ if (countend == -1) {
+ countend = document.cookie.length;
+ }
+ count = eval(document.cookie.substring(countbegin, countend)) + 1;
+ document.cookie=cookie_name+"="+count+"; expires=Wednesday, 01-Aug-2040 08:00:00 GMT";
+ }
+ }
+ </script>
+       
+@*
+	<select id="format.field">
+           <option>glycoct</option>
+           <option>glycoct_condensed</option>
+           <option>glyde</option>
+           <option>linucs</option>
+           <option>gws</option>
+         </select>*@
+
+	<form id="frm1" name="frm1" action="ms" method="POST" class="form-search">
+	<input type="button" class="btn" name="Search" value="Search" onclick='window["glycanCanvas"].runCommand("export~glycoct_condensed",callBack);'/>
+        </form>
+</div>
+
+
+</div>
+
+}
+
+
