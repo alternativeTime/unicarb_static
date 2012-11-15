@@ -1,14 +1,13 @@
-@(taxonomy: List[String], taxon: ArrayList[Taxonomy],  biolsource: List[Biolsource], groupTax: List[List[String]], sources: HashSet[String], proteins: HashSet[String] )
-
+@(taxonomy: List[String], taxon: ArrayList[Taxonomy],  biolsource: List[Biolsource], groupTax: List[List[String]], sources: HashSet[String], proteins: HashSet[String], proteinList: ArrayList[Proteins], tissueList: ArrayList[Tissue], tissueTerms: List[Tissue] )
 
 @main{
-
 
 <script>
       $(document).ready(function(){
         $("#e1").select2({
           placeholder: "Select multiple species...",
           allowClear: true,
+	minimumInputLength: 1,
         });
 	});
 </script>
@@ -77,7 +76,6 @@
 </script>
 
 
-
       <ul class="breadcrumb">
         <li><i class="icon-folder-open" ></i><a href="#"> UniCarbKB Database</a> <span class="divider">></span></li>
         <li><i class="icon-hdd" ></i><a href="#"> GlycoSuite</a> <span class="divider">></span></li>
@@ -101,7 +99,7 @@
       <div class="row-fluid">
         <div class="span3 filterbar tabbable">
           <ul class="nav nav-tabs" id="myTabBar">
-            <li><a href="#filter1" data-toggle="tab">Glycosuite <span class="pull-right count">@if(taxon.size() >0 ) {@taxon.size() }</span></a></li>
+            <li><a href="#filter1" data-toggle="tab">Glycosuite <span class="pull-right count">@if(taxon.size() != 0) {@taxon.size()} @if(proteinList.size() != 0) {@proteinList.size()}</span></a></li>
             <li class=""><a href="#filter2" data-toggle="tab">EuroCarb</a></li>
             <li><a href="#filter3" data-toggle="tab">NextProt</a></li>
           </ul>
@@ -110,19 +108,18 @@
           <div class="tabbable"> <!-- Only required for left/right tabs -->
             <ul class="nav nav-tabs" id="myTab">
               <li class="active"><a href="#tab1" data-toggle="tab">Search</a></li>
-              <li><a href="#tab2" data-toggle="tab">Search Results (42)</a></li>
+              <li><a href="#tab2" data-toggle="tab">Search Results</a></li>
               <li><a href="#tab3" data-toggle="tab">Related Results</a></li>
             </ul>
             <div class="tab-content results">
-	      <div class="tab-pane active" id="tab1">
+              <div class="tab-pane active" id="tab1">
                 <h2><img src="../images/icon_search.png"> Search Features &amp; Results</h2>
-              </div>
 
-              <div class="tab-pane active span9" id="tab1">
-                <h3>Biological Content</h3>
-		<p>Search structures in the database that are associated with multiple biological feature:</p>
-
-		<div class="controls">
+                <div id="filter1" class="control-group glycosuitedb">
+		<div class="row-fluid">
+		<div class="span6" id="tab1">
+		  
+		  <div class="controls">
                     <label class="checkbox">
 			<form class="form-search">
 			<h4 style="color: #424242; font-size: 1.5em; font-weight: 300;">Taxonomy</h4>
@@ -134,21 +131,21 @@
                         </form>
                     </label>
                   </div>
-
-		<div class="controls">
+		  
+		  <div class="controls">
                     <label class="checkbox">
                         <form class="form-search">
 			<h4 style="color: #424242; font-size: 1.5em; font-weight: 300;">Localisation</h4>
 			@*<p>Search for curated data associated with tissue types:</p>*@
                         <div id="selection">
-                        <select  name=disease MULTIPLE id="e2" style="width:350px"  id="listBox"></select>
+                        <select  name=tissue MULTIPLE id="e2" style="width:350px"  id="listBox"></select>
                         <button type="submit" class="btn">Search</button>
                         </div>
                         </form>
                     </label>
                   </div>
-
-		<div class="controls">
+		  
+		  <div class="controls">
                     <label class="checkbox">
                         <form class="form-search">
 			<h4 style="color: #424242; font-size: 1.5em; font-weight: 300;">Protein Association</h4>
@@ -159,46 +156,20 @@
                         </div>
                         </form>
                     </label>
-                  </div>  
-
-
-	      </div>
-	      <div class="tab-pane active span9" id="tab1">
-                <h3>Structure</h3>
+                  </div>
+             
+		
+		 </div> @* end of first spand *@
+		  
+		<div class="span6" id="tab1">
+	
 		<div class="controls">
                         @*<h4>Glycan Builder</h4>*@
                         <p>Find structures by composition and mass or build your glycan structure:</p>        
 		  <a class="btn btn-primary" href="/search">Glycan Builder</a>
 	 	</div>
-
-		<div class="controls">
-                    <label class="checkbox">
-                      <div class="row-fluid">
-                        <div class="span12">
-                          <input id="querymasscheck" type="checkbox"> Query by Mass: 
-                          <div id="querymasshide" class="control-group">
-                            <input type="text" name="mass_range" size=20 >&nbsp;+/-&nbsp;<input type=text name=mass_plusminus size=4>&nbsp;Da
-                            <div class="span4">
-                              <span class=strong>Mass is:</span>
-                              <br>
-                              <input type="radio" name="mass_is_monoiso" value="true" checked>&nbsp;monoisotopic
-                              <br>
-                              <input type="radio" name="mass_is_monoiso">&nbsp;average
-                            </div>
-
-                            <div class="span6">
-                              <input type="radio" name="mass_iontype" value="M" checked>&nbsp;uncharged
-                              <br>
-                              <input type="radio" name="mass_iontype" value="MH+">&nbsp;MH+
-                              <br>
-                              <input type="radio" name="mass_iontype" value="MH-">&nbsp;MH-
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-		    </label>
-                </div>
-
+	
+	
 		<div class="controls">
                     <label class="checkbox">
                       <div class="row-fluid">
@@ -234,23 +205,91 @@
                       </div>
                     </label>
                   </div>
-
-		<h3></h3>
-                <div class="controls">
+	
+		 <div class="controls">
                         <h3>Publications</h3>
                         <p>Browse all publications</p>
                   <a class="btn btn-primary" href="/references">Publications</a>
                 </div>
-
-
+	
+		</div> @* end of seconf spand *@
+		
+		
+		</div>
+		
+		</div>
+		
+                <div id="filter2" class="tab-pane control-group eurocarb">
+                  <div class="controls">
+                    <label class="checkbox">
+                      <input id="querycheck" type="checkbox"> Linkage 
+                      <div class="control-group">
+                      <select class="" name="mydropdown">
+                        <option value="">Select a Protine database to search:</option>
+                        <option value="Milk">Fresh Milk</option>
+                        <option value="Cheese">Old Cheese</option>
+                        <option value="Bread">Hot Bread</option>
+                      </select>
+                      <input type="text" placeholder="Text input">
+                    </div>
+                    </label>
+                  </div>
+                </div>
+                <div id="filter3" class="tab-pane control-group nextprot">
+                  <div class="controls">
+                    <label class="checkbox">
+                      <input type="checkbox"> Linkage 
+                      <div class="control-group">
+                      <select class="" name="mydropdown">
+                        <option value="">Select a Protine database to search:</option>
+                        <option value="Milk">Fresh Milk</option>
+                        <option value="Cheese">Old Cheese</option>
+                        <option value="Bread">Hot Bread</option>
+                      </select>
+                      <input type="text" placeholder="Text input">
+                    </div>
+                    </label>
+                  </div>
+                </div>
               </div>
               <div class="tab-pane" id="tab2">
-                <h2>Search returned (@taxon.size()) results from Glycosuite</h2>
+                
+		
+		<h2>Search returned (@if(taxon.size() != 0) {@taxon.size()} @if(proteinList.size() != 0) {@proteinList.size()} @if(tissueList.size() != 0) { @tissueList.size()}) results from Glycosuite</h2>
+		
+		@if(proteinList != null) {
+		@for(p <- proteinList) {
+		<div class="row-fluid">
+		  <h3><a href="#">@p.name</a></h3>
+		  <div class="details span9">
+		  <p class="">@p.stproteins.size() structures are associated with this protein</p>
+		  </div>
+		  <div class="span3">
+                    <p class="pull-right structures"><a href="#">@p.stproteins.size() structures </a></p>
+                  </div>
+		</div>
+		}
+		}
+
+		@if(tissueList != null && tissueTerms != null) {
+
+                @for(p <- tissueList) {
+                <div class="row-fluid">
+                  <h3><a href="#">@p.div1, @p.div2, @p.div3, @p.div4</a></h3>
+                  <div class="details span9">
+                  <p class="">@p.stsource.size() structures are associated with this protein</p>
+                  </div>
+                  <div class="span3">
+                    <p class="pull-right structures"><a href="#">@p.stsource.size() structures </a></p>
+                  </div>
+                </div>
+                }
+                }
+
+		
 		@if(taxon !=null) {
 
-		@for( (taxon, ii) <- taxon.zipWithIndex) {
-
-                <div class="row-fluid">
+		@for( (taxon, ii) <- taxon.zipWithIndex) {        <div class="row-fluid">
                   <h3><a href="#">@taxon.species</a><span class="pull-right"><span class="label success">Curated Entry</span> <span class="label notice">GlycoSuiteDB</span></span></h3>
                   <div class="details span9">
 		  <p class="">@taxon.taxprotein.size() glycoproteins are associated with this taxonomy including: @for( (tax, i) <- taxon.taxprotein.zipWithIndex; if (i <= 6)) {  <a href="">@tax.protein, </a> }</p>
@@ -258,10 +297,12 @@
                   <div class="span3">
                     <p class="pull-right structures"><a href="#">@taxon.strtaxonomy.size() structures </a></p>
                   </div>
+	
                 </div>
 		}}
                 <hr>
               </div>
+	      @* end tab2 *@
             </div>
           </div>
         </div><!-- /col -->
@@ -278,13 +319,23 @@
 </script>
 }
 
-@if(taxon.size() == 0 ) {
+@if(taxon.size() == 0  ) {
 <script>
         $(function () {
         var test = 'first'; @* target this during page reload *@
         $('#myTabBar a:' + test).tab('show');
         $('#myTab a[href="#tab1"]').tab('show');
         })
+</script>
+}
+
+@if(proteinList.size() != 0 ) {
+<script>
+	$(function () {
+    	var test = 'first'; @* target this during page reload *@
+    	$('#myTabBar a:' + test).tab('show');
+    	$('#myTab a[href="#tab2"]').tab('show');
+  	})
 </script>
 }
 

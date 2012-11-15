@@ -26,6 +26,11 @@ public class Proteins extends Model {
 
     public static Model.Finder<Long,Proteins> find = new Model.Finder<Long,Proteins>(Long.class, Proteins.class);
 
+    public static List<Proteins> findProteins(String protein) {
+        return
+           find.where().ilike("name", protein).findList();
+   }
+
    /* public static Map<String,String> options() {
         LinkedHashMap<String,String> options = new LinkedHashMap<String,String>();
         for(Proteins c: Proteins.find.orderBy("name").findList()) {

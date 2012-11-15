@@ -40,26 +40,34 @@ public class Application extends Controller {
 
     public static Result browse() {
 	List<String> taxonomy  = Taxonomy.findSpecies();
-	HashSet sourceUnique = Source.sourceSummary();
+	HashSet sourceUnique = Tissue.sourceSummary();
 	HashSet proteinUnique = Proteins.proteinSummary();
+	List<Tissue> foundTissue = null;
 
         List<Biolsource> biolsource = null;
         List<SqlRow> listSql = null;
 	ArrayList<SqlRow> listSqlArray = new ArrayList<SqlRow>();
         Taxonomy taxonomyId = null;
+	Proteins proteinId = null;
+	Tissue tissueId = null;
 	ArrayList<Taxonomy> taxonomyList = new ArrayList<Taxonomy>();
+	ArrayList<Proteins> proteinList = new ArrayList<Proteins>();
+	ArrayList<Tissue> tissueList = new ArrayList<Tissue>();
 	List<String> listSql22 = new ArrayList<String>();
-	//List<String> listSql2 = null;
-	//ArrayList<String[]> listSql2 = new ArrayList<String[]>();
 	List<List<String>> listSql2 = new ArrayList<List<String>>();
 
         if (request().queryString().size() > 0  ) {
                 Map<String, String[]> params = request().queryString();
-                String[] searchTaxonomy = null;
+                String[] searchTerms = null;
+		String key = null;
                 for (Map.Entry<String, String[]> entry : params.entrySet() ){
-                        searchTaxonomy = entry.getValue();
+			key = entry.getKey();
+                        searchTerms = entry.getValue();
                 }
-                for (String queryTaxonomy : searchTaxonomy) {
+
+		System.out.println("key is: " + key);
+		if(key.equals("taxonomy")){
+                for (String queryTaxonomy : searchTerms) {
                         System.out.println("search taxonomy: " + queryTaxonomy);
 
                         List<Taxonomy> foundTaxonomy  = Taxonomy.findSpeciesTemp(queryTaxonomy);
@@ -77,20 +85,47 @@ public class Application extends Controller {
 				//listSqlArray.add(listSql);
 				listSql2 = Biolsource.findTaxonomyProteinString(taxon);
 				//listSql22.addAll(listSql2);
-				for(List<String> xx : listSql2){
-					for(String xxx : xx) {
-					System.out.println("damn it: " + xxx );
-					}
-				
-				}
                         }
                 }
+		}
+
+		if(key.equals("protein")) {
+		System.out.println("hshshshshsh");
+		for (String queryProtein : searchTerms) {
+			System.out.println("test: " + queryProtein );
+			List<Proteins> foundProteins = Proteins.findProteins(queryProtein);
+			Long protId = null;
+			for (Proteins protein : foundProteins){
+				protId = protein.id;
+				System.out.println("found protein " + protein);
+			}
+			if (protId > 0 ) {
+				proteinId = Proteins.find.byId(protId);	
+				proteinList.add(proteinId);
+			}
+
+		}
+		}
+
+		if(key.equals("tissue")) {
+		for (String queryTissue : searchTerms) {
+			foundTissue = Tissue.findTissue(queryTissue);
+			Long tissId = null;
+			for (Tissue source : foundTissue) {
+				tissId = source.id;
+			}
+			if (tissId > 0 ) {
+				tissueId = Tissue.find.byId(tissId);
+				tissueList.add(tissueId);
+			}
+		}
+		}	
 
 
-        return ok(browse.render(taxonomy, taxonomyList, biolsource, listSql2, sourceUnique, proteinUnique));
+        return ok(browse.render(taxonomy, taxonomyList, biolsource, listSql2, sourceUnique, proteinUnique, proteinList, tissueList, foundTissue));
         }
 
-        return ok(browse.render(taxonomy, taxonomyList, biolsource, listSql2, sourceUnique, proteinUnique));
+        return ok(browse.render(taxonomy, taxonomyList, biolsource, listSql2, sourceUnique, proteinUnique, proteinList, tissueList, foundTissue));
     }
 
     /*
@@ -189,7 +224,7 @@ public class Application extends Controller {
 
 		if (!stToSource.isEmpty()){
 			for (Stsource stSourceEntry : stToSource) {
-				String div = "<a href=\"../taxonomy/" +  stSourceEntry.source.id + "\"> > " + stSourceEntry.source.div1 + " > " + stSourceEntry.source.div2 + " > " + stSourceEntry.source.div3 + " > " + stSourceEntry.source.div4 + "</a> <br />";
+				String div = "<a href=\"../taxonomy/" +  stSourceEntry.tissue.id + "\"> > " + stSourceEntry.tissue.div1 + " > " + stSourceEntry.tissue.div2 + " > " + stSourceEntry.tissue.div3 + " > " + stSourceEntry.tissue.div4 + "</a> <br />";
 				sourceNamesUnique.add(div);
 			}
 			

@@ -19,7 +19,7 @@ public class Stsource extends Model {
     public Structure structure; 
 
     @ManyToOne
-    public Source source;
+    public Tissue tissue;
 
     public static Model.Finder<Long,Stsource> find = new Model.Finder<Long,Stsource>(Long.class, Stsource.class);
 
