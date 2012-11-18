@@ -1,4 +1,4 @@
-@(taxonomy: List[String], taxon: ArrayList[Taxonomy],  biolsource: List[Biolsource], groupTax: List[List[String]], sources: HashSet[String], proteins: HashSet[String], proteinList: ArrayList[Proteins], tissueList: ArrayList[Tissue], tissueTerms: List[Tissue] )
+@(taxonomy: List[String], taxon: ArrayList[Taxonomy],  biolsource: List[Biolsource], groupTax: List[List[String]], sources: HashSet[String], proteins: HashSet[String], proteinList: ArrayList[Proteins], tissueList: ArrayList[Tissue], tissueTerms: List[Tissue], glycobasePerturbation: List[GlycobaseSource] )
 
 @main{
 
@@ -144,6 +144,10 @@
             <div class="tab-content results">
               <div class="tab-pane active" id="tab1">
                 <h2><img src="../images/icon_search.png"> Search Features &amp; Results</h2>
+
+@if(glycobasePerturbation != null ) {
+@for(g <- glycobasePerturbation) {}
+}
 
                 <div id="filter1" class="control-group glycosuitedb">
 		<div class="row-fluid">

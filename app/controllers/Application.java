@@ -42,7 +42,11 @@ public class Application extends Controller {
 	List<String> taxonomy  = Taxonomy.findSpecies();
 	HashSet sourceUnique = Tissue.sourceSummary();
 	HashSet proteinUnique = Proteins.proteinSummary();
+	HashSet pertubationUnique = GlycobaseSource.perturbationSummary();
+	proteinUnique.addAll(pertubationUnique);
 	List<Tissue> foundTissue = null;
+	List<GlycobaseSource> glycobasesource = null;
+	List<GlycobaseSource> glycobaseFindPerturbation = null;
 
         List<Biolsource> biolsource = null;
         List<SqlRow> listSql = null;
@@ -91,19 +95,22 @@ public class Application extends Controller {
 
 		if(key.equals("protein")) {
 		System.out.println("hshshshshsh");
+		String glycobasePerturbationFind = "";
 		for (String queryProtein : searchTerms) {
-			System.out.println("test: " + queryProtein );
+
+			String glycobasePerturbation = queryProtein;
+			glycobaseFindPerturbation = GlycobaseSource.findPerturbation(glycobasePerturbation);
+
 			List<Proteins> foundProteins = Proteins.findProteins(queryProtein);
 			Long protId = null;
 			for (Proteins protein : foundProteins){
 				protId = protein.id;
 				System.out.println("found protein " + protein);
-			}
-			if (protId > 0 ) {
+			//}
+			//if (protId > 0 && protId != null ) {
 				proteinId = Proteins.find.byId(protId);	
 				proteinList.add(proteinId);
 			}
-
 		}
 		}
 
@@ -122,10 +129,10 @@ public class Application extends Controller {
 		}	
 
 
-        return ok(browse.render(taxonomy, taxonomyList, biolsource, listSql2, sourceUnique, proteinUnique, proteinList, tissueList, foundTissue));
+        return ok(browse.render(taxonomy, taxonomyList, biolsource, listSql2, sourceUnique, proteinUnique, proteinList, tissueList, foundTissue, glycobaseFindPerturbation));
         }
 
-        return ok(browse.render(taxonomy, taxonomyList, biolsource, listSql2, sourceUnique, proteinUnique, proteinList, tissueList, foundTissue));
+        return ok(browse.render(taxonomy, taxonomyList, biolsource, listSql2, sourceUnique, proteinUnique, proteinList, tissueList, foundTissue, glycobaseFindPerturbation));
     }
 
     /*
