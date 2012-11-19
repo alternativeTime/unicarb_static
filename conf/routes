@@ -19,11 +19,13 @@ GET	/taxonomy			controllers.Application.findAllSpecies()
 GET	/unicarb		   controllers.Application.unicarb(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
 GET	/ms		   controllers.Application.ms()
 
-GET	/search			controllers.Application.search()
+GET	/builder			controllers.Application.builder()
 GET	/saySearch/:s			controllers.Search.saySearch(s: String)
 
 GET	/browse			controllers.Application.browse()
 GET	/browseunicarb		controllers.Application.browseunicarb()
+
+GET	/proteinsummary		controllers.Application.proteinsummary()
 #taxonomy:String ?= "")
 
 
