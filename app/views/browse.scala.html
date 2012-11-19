@@ -146,7 +146,13 @@
                 <h2><img src="../images/icon_search.png"> Search Features &amp; Results</h2>
 
 @if(glycobasePerturbation != null ) {
-@for(g <- glycobasePerturbation) {}
+<p>help</p>
+@for(g <- glycobasePerturbation) {
+<p>@g.perturbation</p>
+}
+}
+@if(glycobasePerturbation == null ) {
+<p>test this</p>
 }
 
                 <div id="filter1" class="control-group glycosuitedb">
@@ -367,6 +373,21 @@
                 </div>
                 </div>
 		 }
+
+		@if(glycobasePerturbation != null ) {
+		@for((glycobase, count) <- glycobasePerturbation.zipWithIndex; if(count <=1) ){
+		<h3>@glycobase.perturbation<span class="pull-right"><span class="label success">Curated Entry</span> <span class="label notice">GlycoBase</span></span></h3>
+		<div class="details span9">
+                  <p class="">some text here</p>
+		</div>
+		<div class="span3">
+                    <p class="pull-right structures"><a href="#"></a></p>
+                  </div>
+                </div>
+                }}
+
+			
+		
 
 
 		@for( (taxon, ii) <- taxon.zipWithIndex) {        <div class="row-fluid">

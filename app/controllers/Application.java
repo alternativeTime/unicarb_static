@@ -38,6 +38,12 @@ public class Application extends Controller {
     			); 
     };
 
+    public static Result proteinsummary() {
+	return ok(
+		proteinsummary.render()
+	);
+    }
+
     public static Result browse() {
 	List<String> taxonomy  = Taxonomy.findSpecies();
 	HashSet sourceUnique = Tissue.sourceSummary();
@@ -99,6 +105,7 @@ public class Application extends Controller {
 		for (String queryProtein : searchTerms) {
 
 			String glycobasePerturbation = queryProtein;
+			
 			glycobaseFindPerturbation = GlycobaseSource.findPerturbation(glycobasePerturbation);
 
 			List<Proteins> foundProteins = Proteins.findProteins(queryProtein);
