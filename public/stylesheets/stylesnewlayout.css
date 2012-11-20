@@ -132,7 +132,7 @@ hr {
 ////////////////////////////////////////////////////////////////////////////////////////////////*/
 
 .breadcrumb {
-    margin: 0 0 18px;
+    margin: -20px 0 18px;
     padding: 0px;
     background-color: transparent;
     background-repeat: repeat-x;
@@ -400,10 +400,6 @@ table th + th {
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
-table td + td {
-  border-left: 0px solid #DDD;
-}
-
 .pagination a {
   float: left;
   padding: 0 14px;
@@ -545,7 +541,7 @@ margin: 5px 0px 10px 0px;
 #tab2 .row-fluid { margin: 18px 0 0 0; }
 #tab2 h3 { margin: 0px 0 5px 0; }
 
-/*.rightpanel { margin-top: -47px; }*/
+.rightpanel { margin-top: 0px; }
 .rightpanelBuilder { margin-top: -15px;}
 
 .rightpanel .nav { /*margin-bottom: 0px;*/ }
