@@ -1,11 +1,6 @@
-@(taxonomy: List[String], taxon: Taxonomy,  biolsource: List[Biolsource], groupTax: List[SqlRow] ) 
+@(taxonomy: List[String] )
 
 @main{
-
-<script>
-	var url ="";
-	url = document.URL;
-</script>
 
 <script>
 	$(function() {
@@ -22,7 +17,7 @@
 	});
 
 
-	
+
 
 </script>
 
@@ -49,15 +44,15 @@
       </div>
       <div class="row-fluid">
         <div class="span3 filterbar tabbable">
-          <ul class="nav nav-tabs" id="myTabBar">
-            <li><a href="#filter1" data-toggle="tab">Glycosuite <span class="pull-right count">42</span></a></li>
-            <li class=""><a href="#filter2" data-toggle="tab">EurocarbDB</a></li>
-            <li><a href="#filter3" data-toggle="tab">Nextprot</a></li>
+          <ul class="nav nav-tabs">
+            <li><a href="#filter1" data-toggle="tab">Taxonomy</a></li>
+            <li class=""><a href="#filter2" data-toggle="tab">Protein</a></li>
+            <li><a href="#filter3" data-toggle="tab">Structure</a></li>
           </ul>
         </div><!-- /col -->
         <div class="span9 rightpanel">
           <div class="tabbable"> <!-- Only required for left/right tabs -->
-            <ul class="nav nav-tabs" id="myTab">
+            <ul class="nav nav-tabs">
               <li class="active"><a href="#tab1" data-toggle="tab">Filters</a></li>
               <li><a href="#tab2" data-toggle="tab">Results</a></li>
               <li><a href="#tab3" data-toggle="tab">Related Results</a></li>
@@ -195,17 +190,16 @@
                 </div>
               </div>
               <div class="tab-pane" id="tab2">
-                <h2>Search returned (42) results from Glycosuite</h2>
+                <h2>Browse Results</h2>
                 <div class="row-fluid">
-                  <h3><a href="#">@taxon.species</a><span class="pull-right"><span class="label success">Curated Entry</span> <span class="label notice">GlycoSuiteDB</span></span></h3>
+                  <h3><a href="#">Example Result 01</a><span class="pull-right"><span class="label success">Curated Entry</span> <span class="label notice">GlycoSuiteDB</span></span></h3>
                   <div class="details span9">
-                    <p class="">A total of @groupTax.size() glycoproteins: @for( (sql,i) <- groupTax.zipWithIndex; if (i <= 6)) { <a href="#">@sql("protein")</a>, } </p>
+                    <p class="">Lorem ipsum dolor sit amet, consectetur adipiscing amet semper bibendum, leo ipsum rhoncus sapien, vitae adipiscing mauris velit at tellus.</p>
                   </div>
                   <div class="span3">
-                    <p class="pull-right structures"><a href="#">@taxon.strtaxonomy.size() structures</a></p>
+                    <p class="pull-right">12.06.12</p>
                   </div>
                 </div>
-                <hr>
                 <div class="row-fluid">
                   <h3><a href="#">Example Result 01</a><span class="pull-right"><span class="label success">Curated Entry</span> <span class="label notice">GlycoSuiteDB</span></span></h3>
                   <div class="details span9">
@@ -242,14 +236,5 @@
         </div><!-- /col -->
       </div><!-- /row -->
     </section>
-
-<script>
-  $(function () {
-    var test = 'first'; @* target this during page reload *@
-    $('#myTabBar a:' + test).tab('show');
-    $('#myTab a[href="#tab2"]').tab('show');
-  })
-</script>
-
 
 }

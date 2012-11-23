@@ -45,17 +45,30 @@ public class Application extends Controller {
     }
 
     public static Result browse() {
-	List<String> taxonomy  = Taxonomy.findSpecies();
+	List<String> taxonomy  = Taxonomy.findSpecies(); 
+	HashSet taxUnique = Taxonomy.findSpeciesUnique();
+
 	HashSet sourceUnique = Tissue.sourceSummary();
+	HashSet tissueUnique = GlycobaseSource.tissueSummary();
+	sourceUnique.addAll(tissueUnique);
+
 	HashSet proteinUnique = Proteins.proteinSummary();
 	HashSet pertubationUnique = GlycobaseSource.perturbationSummary();
 	proteinUnique.addAll(pertubationUnique);
+
+
 	List<Tissue> foundTissue = null;
 	List<GlycobaseSource> glycobasesource = null;
 	List<GlycobaseSource> glycobaseFindPerturbation = null;
 
         List<Biolsource> biolsource = null;
         List<SqlRow> listSql = null;
+	List<SqlRow> glycobaseSql = null;
+	ArrayList<SqlRow> glycobaseSqlArray = new ArrayList<SqlRow>();
+
+	List<SqlRow> glycobaseSqlTissue = null;
+        ArrayList<SqlRow> glycobaseSqlArrayTissue = new ArrayList<SqlRow>();
+
 	ArrayList<SqlRow> listSqlArray = new ArrayList<SqlRow>();
         Taxonomy taxonomyId = null;
 	Proteins proteinId = null;
@@ -65,8 +78,18 @@ public class Application extends Controller {
 	ArrayList<Tissue> tissueList = new ArrayList<Tissue>();
 	List<String> listSql22 = new ArrayList<String>();
 	List<List<String>> listSql2 = new ArrayList<List<String>>();
+	String output = "";
+	String outputtissue = "";
+	String outputprotein = "";
+	List<String> outputlist = new ArrayList<String>();
+	List<String> outputtissuelist = new ArrayList<String>();
+	List<String> outputproteinlist = new ArrayList<String>();
+	int countGlycobase = 0;
+	int countTissueGlycobase = 0;
+	int countProteinGlycobase = 0;
 
         if (request().queryString().size() > 0  ) {
+		String glycobasePerturbationFind = "";
                 Map<String, String[]> params = request().queryString();
                 String[] searchTerms = null;
 		String key = null;
@@ -79,14 +102,18 @@ public class Application extends Controller {
 		if(key.equals("taxonomy")){
                 for (String queryTaxonomy : searchTerms) {
                         System.out.println("search taxonomy: " + queryTaxonomy);
+		
+			String glycobasePerturbation = queryTaxonomy;
+			output = GlycobaseSource.findGlycobaseTaxonomy(glycobasePerturbation);
+			outputlist.add(output);
 
                         List<Taxonomy> foundTaxonomy  = Taxonomy.findSpeciesTemp(queryTaxonomy);
                         Long taxId = null;
                         for (Taxonomy tax : foundTaxonomy) {
                                 taxId = tax.id;
                                 System.out.println("this is the id: " + taxId);
-                        };
-                        if (taxId > 0) {
+                        //};
+                        //if (taxId > 0) {
                                 taxonomyId  = Taxonomy.find.byId(taxId);
 				taxonomyList.add(taxonomyId);
                                 String taxon = taxonomyId.species;
@@ -100,13 +127,13 @@ public class Application extends Controller {
 		}
 
 		if(key.equals("protein")) {
-		System.out.println("hshshshshsh");
-		String glycobasePerturbationFind = "";
 		for (String queryProtein : searchTerms) {
 
 			String glycobasePerturbation = queryProtein;
 			
-			glycobaseFindPerturbation = GlycobaseSource.findPerturbation(glycobasePerturbation);
+			//glycobaseFindPerturbation = GlycobaseSource.findPerturbation(glycobasePerturbation);
+			outputprotein = GlycobaseSource.findPerturbation(glycobasePerturbation);
+			outputproteinlist.add(outputprotein);
 
 			List<Proteins> foundProteins = Proteins.findProteins(queryProtein);
 			Long protId = null;
@@ -124,6 +151,13 @@ public class Application extends Controller {
 		if(key.equals("tissue")) {
 		for (String queryTissue : searchTerms) {
 			foundTissue = Tissue.findTissue(queryTissue);
+			//glycobaseSqlTissue = GlycobaseSource.findGlycobaseTissue(queryTissue);
+                        //glycobaseSqlArrayTissue.addAll(glycobaseSqlTissue);
+
+                        outputtissue = GlycobaseSource.findGlycobaseTissue(queryTissue);
+                        outputtissuelist.add(outputtissue);
+
+
 			Long tissId = null;
 			for (Tissue source : foundTissue) {
 				tissId = source.id;
@@ -133,54 +167,26 @@ public class Application extends Controller {
 				tissueList.add(tissueId);
 			}
 		}
-		}	
-
-
-        return ok(browse.render(taxonomy, taxonomyList, biolsource, listSql2, sourceUnique, proteinUnique, proteinList, tissueList, foundTissue, glycobaseFindPerturbation));
-        }
-
-        return ok(browse.render(taxonomy, taxonomyList, biolsource, listSql2, sourceUnique, proteinUnique, proteinList, tissueList, foundTissue, glycobaseFindPerturbation));
-    }
-
-    /*
-    browseunicarb class to be deleted after mockup stage
-    */
-    public static Result browseunicarb() {  
-
-	List<String> taxonomy  = Taxonomy.findSpecies();
-
-	List<Biolsource> biolsource = null;
-	List<SqlRow> listSql = null;
-	Taxonomy taxonomyId = null;
-
-	if (request().queryString().size() > 0  ) {
-		Map<String, String[]> params = request().queryString();
-		String[] searchTaxonomy = null;
-		for (Map.Entry<String, String[]> entry : params.entrySet() ){
-			searchTaxonomy = entry.getValue();
-		}
-		for (String queryTaxonomy : searchTaxonomy) {
-			System.out.println("search taxonomy: " + queryTaxonomy);
-
-			List<Taxonomy> foundTaxonomy  = Taxonomy.findSpeciesTemp(queryTaxonomy);
-        		Long taxId = null;
-        		for (Taxonomy tax : foundTaxonomy) {
-                		taxId = tax.id;
-                		System.out.println("this is the id: " + taxId);
-        		};
-        		if (taxId > 0) {
-        			taxonomyId  = Taxonomy.find.byId(taxId);
-        			String taxon = taxonomyId.species;
-        			biolsource = Biolsource.findTaxonomyProtein(taxon);
-        			listSql = Biolsource.findTaxonomyProteinSQL(taxon);
-			}
 		}
 
-	return ok(browseunicarb.render(taxonomy, taxonomyId, biolsource, listSql));
+	for(String xyz : outputlist) {
+		if(xyz.length() > 10) {countGlycobase++;}
 	}
 
-        return ok(browseunicarb.render(taxonomy, taxonomyId, biolsource, listSql));
-    }	
+	for(String xyz : outputtissuelist) {
+		if(xyz.length() > 10) {countTissueGlycobase++;}
+	}
+
+	for(String xyz : outputproteinlist) {
+		if(xyz.length() > 10) {countProteinGlycobase++;}
+	}
+
+        return ok(browse.render(taxonomy, taxonomyList, biolsource, listSql2, sourceUnique, proteinUnique, proteinList, tissueList, foundTissue, glycobaseFindPerturbation, glycobaseSqlArray, glycobaseSqlArrayTissue, outputlist, countGlycobase, outputtissuelist, countTissueGlycobase, outputproteinlist, countProteinGlycobase));
+        }
+
+        return ok(browse.render(taxonomy, taxonomyList, biolsource, listSql2, sourceUnique, proteinUnique, proteinList, tissueList, foundTissue, glycobaseFindPerturbation, glycobaseSqlArray, glycobaseSqlArrayTissue, outputlist, countGlycobase, outputtissuelist, countTissueGlycobase, outputproteinlist, countProteinGlycobase));
+    }
+
 
     public static Result structureDetails(Long id) {
 

@@ -49,12 +49,32 @@ public class Taxonomy extends Model {
    public static List<String> findSpecies() {
    final List<String> result = new ArrayList<String>();
    List<Taxonomy> taxonomy = Taxonomy.find.all();
+   HashSet glycobasetax = GlycobaseSource.taxSummary(); 
    for (Taxonomy tax : taxonomy){
 	final String species = tax.species;
          result.add(species);
    }
+   String tax = "";
+   for(Object glycotax : glycobasetax) {
+	System.out.println("check this value " + glycotax);
+	if(glycotax != null) {tax = glycotax.toString();
+		result.add(tax);
+	}
+   }
+
+
    Collections.sort(result);
    return result;
+   }
+
+   public static HashSet findSpeciesUnique() {
+	HashSet taxUnique = new HashSet();
+	List<Taxonomy> taxonomy = Taxonomy.find.all();
+
+	for(Taxonomy tax : taxonomy) {
+		taxUnique.add(tax);
+	}
+   return taxUnique;
    }
 
    public static /*List<Taxonomy>*/  List<SqlRow> findTaxonomy(String term)  {
