@@ -234,7 +234,7 @@ h2.lead { margin: 30px 0; font-size: 25px; }
 
 .widget {
   margin: 0;
-  padding: 20px 0px 20px 30px;
+  padding: 20px 20px 10px 30px;
   width: 100%;
   background: #008FD5;
   -moz-border-radius: 5px;
@@ -260,20 +260,20 @@ h2.lead { margin: 30px 0; font-size: 25px; }
 }
 
 .glyco a {
-  background: transparent url("/images/glyphicons_096_vector_path_polygon.png") no-repeat;
+  background: transparent url("/images/glyphicons_096_vector_path_polygon.png") no-repeat center left;
 }
 .publications a {
   background: transparent url("/images/glyphicons_351_book_open.png") no-repeat center left;
 }
 .unicarbdb a {
-  background: transparent url("/images/glyphicons_041_charts.png") no-repeat;
+  background: transparent url("/images/glyphicons_041_charts.png") no-repeat center left;
 }
 .structures a {
-  background: transparent url("/images/glyphicons_326_share.png") no-repeat;
+  background: transparent url("/images/glyphicons_326_share.png") no-repeat center left;
 }
 
 .biological a {
-  background: transparent url("/images/glyphicons_326_biological.png") no-repeat;
+  background: transparent url("/images/glyphicons_326_biological.png") no-repeat center left;
 }
 
 .widget a span.count {
@@ -330,7 +330,7 @@ h2.lead { margin: 30px 0; font-size: 25px; }
 
 .sidebar .nav {
   margin: 0 0 0 0;
-  padding: 0px 0;
+  padding: 20px 0;
   background: whiteSmoke;
   -moz-border-radius: 5px 5px 0 0;
   -webkit-border-radius: 5px 5px 0 0;
@@ -351,6 +351,38 @@ h2.lead { margin: 30px 0; font-size: 25px; }
 .sidebar .info {
   padding: 20px;
   border-bottom: 1px solid #DDD;
+}
+
+.details .info {
+  padding-top: 20px;
+  border-top: 1px solid #DDD;
+}
+
+.details {
+  margin-top: 0px;
+  background: whitesmoke;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  -o-box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  position: relative;
+  margin-top: 113px;
+  background: #FFF;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none
+  -o-box-shadow: none;
+  box-shadow: none;
+  position: relative;
+}
+
+.details h3 {
+    margin-top: 0px;
 }
 
 .timeline-arrow {
