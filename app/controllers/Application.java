@@ -87,6 +87,7 @@ public class Application extends Controller {
 	int countGlycobase = 0;
 	int countTissueGlycobase = 0;
 	int countProteinGlycobase = 0;
+	String compositionSearch = null;
 
         if (request().queryString().size() > 0  ) {
 		String glycobasePerturbationFind = "";
@@ -98,7 +99,18 @@ public class Application extends Controller {
                         searchTerms = entry.getValue();
                 }
 
-		System.out.println("key is: " + key);
+		
+		if(key.contains("comp")) {
+		for (String queryComp : searchTerms) {
+			if (queryComp.length() < 1) {
+			compositionSearch = compositionSearch + "0";
+			}
+			else {
+			//compositionSearch = compositionSearch + queryComp;
+			}
+		}
+		}	
+
 		if(key.equals("taxonomy")){
                 for (String queryTaxonomy : searchTerms) {
                         System.out.println("search taxonomy: " + queryTaxonomy);
