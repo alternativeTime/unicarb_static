@@ -87,7 +87,6 @@ public class Application extends Controller {
 	int countGlycobase = 0;
 	int countTissueGlycobase = 0;
 	int countProteinGlycobase = 0;
-	String compositionSearch = null;
 
         if (request().queryString().size() > 0  ) {
 		String glycobasePerturbationFind = "";
@@ -99,15 +98,18 @@ public class Application extends Controller {
                         searchTerms = entry.getValue();
                 }
 
-		
+		String composition  = "";	
 		if(key.contains("comp")) {
 		for (String queryComp : searchTerms) {
-			if (queryComp.length() < 1) {
-			compositionSearch = compositionSearch + "0";
-			}
-			else {
-			//compositionSearch = compositionSearch + queryComp;
-			}
+                	String b = queryComp;
+                	int c = Integer.parseInt(b);
+                	if (c >=-1 && c <1 ) {
+                	composition += c;
+                	}	
+
+                	if(c >0 && c< 1000) {
+                	composition += c;
+                	}
 		}
 		}	
 
@@ -192,6 +194,9 @@ public class Application extends Controller {
 	for(String xyz : outputproteinlist) {
 		if(xyz.length() > 10) {countProteinGlycobase++;}
 	}
+
+
+
 
         return ok(browse.render(taxonomy, taxonomyList, biolsource, listSql2, sourceUnique, proteinUnique, proteinList, tissueList, foundTissue, glycobaseFindPerturbation, glycobaseSqlArray, glycobaseSqlArrayTissue, outputlist, countGlycobase, outputtissuelist, countTissueGlycobase, outputproteinlist, countProteinGlycobase));
         }
