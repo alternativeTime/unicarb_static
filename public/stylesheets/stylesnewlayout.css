@@ -169,9 +169,10 @@ hr {
 ////////////////////////////////////////////////////////////////////////////////////////////////*/
 
 .topbar-inner, .topbar .fill {
-  background-color: #008FD5;
-  background: #008FD5;
-  background: rgba(0, 143, 213, 0.75);
+  background-color: #4B5C66;
+  background: #4B5C66;
+  /*background: rgba(0, 143, 213, 0.75);*/
+  background: rgba(75, 92, 102, 0.75);
   /*background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKAQMAAAC3/F3+AAAABGdBTUEAALGPC/xhBQAAAANQTFRFAI/V7difBQAAAAF0Uk5TgK1eW0YAAAALSURBVAjXY2DABwAAHgABboVHMgAAAABJRU5ErkJggg==);*/
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
@@ -197,21 +198,69 @@ hr {
   background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABGdBTUEAALGPC/xhBQAAAANQTFRFAAAAp3o92gAAAAF0Uk5TM/82uXAAAAAKSURBVAjXY2AAAAACAAHiIbwzAAAAAElFTkSuQmCC);
   background:rgba(0, 0, 0, 0.35);
   color: #FFF;
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
 
 .topbar div > ul .active > a {
   background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABGdBTUEAALGPC/xhBQAAAANQTFRFAAAAp3o92gAAAAF0Uk5TM/82uXAAAAAKSURBVAjXY2AAAAACAAHiIbwzAAAAAElFTkSuQmCC);
   color: #FFF;
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
 
 .topbar div > ul .active > a:hover, {
   background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABGdBTUEAALGPC/xhBQAAAANQTFRFAAAAp3o92gAAAAF0Uk5TM/82uXAAAAAKSURBVAjXY2AAAAACAAHiIbwzAAAAAElFTkSuQmCC);
   background:rgba(0, 0, 0, 0.45);
+
+
+
+
+
+
+
+
 }
 
 /* !LAYOUT - HOME //////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+
+
+
+
+
+
+
 
 #main {
   background: url(../images/UniCarbKB_Logo.png) top right no-repeat;
@@ -353,32 +402,18 @@ h2.lead { margin: 30px 0; font-size: 25px; }
   border-bottom: 1px solid #DDD;
 }
 
-.details .info {
+.proteinsummary .details .info {
+  margin-top: 20px;
   padding-top: 20px;
   border-top: 1px solid #DDD;
 }
 
-.details {
-  margin-top: 0px;
-  background: whitesmoke;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
-  -webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-  -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.4);
-  -o-box-shadow: 0 2px 6px rgba(0,0,0,0.4);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+.proteinsummary .details {
   position: relative;
-  margin-top: 113px;
+  margin-top: 93px;
   background: #FFF;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none
-  -o-box-shadow: none;
-  box-shadow: none;
-  position: relative;
+  -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px;
+  -webkit-box-shadow: none; -moz-box-shadow: none -o-box-shadow: none; box-shadow: none;
 }
 
 .details h3 {
@@ -394,6 +429,20 @@ h2.lead { margin: 30px 0; font-size: 25px; }
   left: 34px;
   width: 0;
   height: 0;
+}
+
+.info .references {
+  margin-bottom: 20px;
+}
+
+.info .references .title {
+  margin: 0;
+  font-weight: bold;
+  color: #4B5C66;
+}
+
+.info .references .author {
+  margin-bottom: 0;
 }
 
 /* !LAYOUT - REFERENCE LISTING /////////////////////////////////////////////////////////////////////

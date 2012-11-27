@@ -1,13 +1,8 @@
-@main {
-
-  <ul class="breadcrumb">
-    <li><i class="icon-folder-open" ></i><a href="#"> UniCarbKB Database</a> <span class="divider">></span></li>
-    <li><i class="icon-hdd" ></i><a href="/browse"> Browse</a> <span class="divider">></span></li>
-    <li><i class="icon-hdd" ></i><a href="/browse"> Protein Summary</a> <span class="divider">></span></li>
+@main { <ul class="breadcrumb"> <li><i class="icon-folder-open" ></i><a href="#"> UniCarbKB Database</a> <span class="divider">></span></li>    <li><i class="icon-hdd" ></i><a href="/browse"> Browse</a> <span class="divider">></span></li> <li><i class="icon-hdd" ></i><a href="/browse"> Protein Summary</a> <span class="divider">></span></li>
     <li class="active" > You are here</li>
   </ul>
 
-  <section id="layouts">
+  <section id="layouts" class="proteinsummary">
 
   <div class="row-fluid">
     <div class="span6">
@@ -65,28 +60,28 @@
             <td>Confirmed</td>
             <td>97</td>
             <td>33</td>
-            <td>N-linked (GlcNAc...) </td>
+            <td>N-linked (GlcNAc...) <span class="label notice">Ref: 1</span></td>
             <td>UniProtKB</td>
           </tr>
           <tr>
             <td>Confirmed</td>
             <td>128</td>
             <td>33</td>
-            <td>N-linked (GlcNAc...) </td>
+            <td>N-linked (GlcNAc...) <span class="label notice">Ref: 2</span></td>
             <td>UniProtKB</td>
           </tr>
           <tr>
             <td>Confirmed</td>
             <td>135</td>
             <td>33</td>
-            <td>N-linked (GlcNAc...)</td>
+            <td>N-linked (GlcNAc...) <span class="label notice">Ref: 3</span></td>
             <td>UniProtKB</td>
           </tr>
           <tr>
             <td>Confirmed</td>
             <td>146</td>
             <td>33</td>
-            <td>N-linked (GlcNAc...)</td>
+            <td>N-linked (GlcNAc...) <span class="label notice">Ref: 4</span></td>
             <td>UniProtKB</td>
           </tr>
         </tbody>
@@ -135,28 +130,38 @@
       </div>
 
       <div class="info">
-	<h3>References</h3>
-	<p>"Molecular cloning, sequence, and specificity of expression of the gene encoding the low molecular weight human salivary mucin (MUC7)."
-Bobek L.A., Tsai H., Biesbrock A.R., Levine M.J.
-J. Biol. Chem. 268:20563-20569(1993) [PubMed: 7690757]</p>
+        <h3>References</h3>
+        <ol>
+          <li class="references">
+            <p class="title">"Molecular cloning, sequence, and specificity of expression of the gene encoding the low molecular weight human salivary mucin (MUC7)."</p>
+            <p class="author"><a>Bobek L.A.</a>, <a>Tsai H.</a>, <a>Biesbrock A.R.</a>, <a>Levine M.J.</a></p>
+            <p class="ref">J. Biol. Chem. 268:20563-20569(1993) [PubMed: 7690757]</p>
+          </li>
 
-	<p>"Low-molecular-mass human salivary mucin, MG2: structure and binding of Pseudomonas aeruginosa."
-Reddy M.S., Levine M.J., Paranchych W.
-Crit. Rev. Oral Biol. Med. 4:315-323(1993) [PubMed: 8104046] </p>
+          <li class="references">
+            <p class="title">"Low-molecular-mass human salivary mucin, MG2: structure and binding of Pseudomonas aeruginosa."</p>
+            <p class="author"><a>Reddy M.S.</a>, <a>Levine M.J.</a>, <a>Paranchych W.</a></p>
+            <p class="ref">Crit. Rev. Oral Biol. Med. 4:315-323(1993) [PubMed: 8104046]</p>
+          </li>
 
-	<p>"The status, quality, and expansion of the NIH full-length cDNA project: the Mammalian Gene Collection (MGC)."
-The MGC Project Team
-Genome Res. 14:2121-2127(2004) [PubMed: 15489334]</p>
+          <li class="references">
+            <p class="title">"The status, quality, and expansion of the NIH full-length cDNA project: the Mammalian Gene Collection (MGC)."</p>
+            <p class="author"><a>The MGC Project Team</a></p>
+            <p class="ref">Genome Res. 14:2121-2127(2004) [PubMed: 15489334]</p>
+          </li>
 
-        <p>"Generation and annotation of the DNA sequences of human chromosomes 2 and 4."
-Hillier L.W., Graves T.A., Fulton R.S., Fulton L.A., Pepin K.H., Minx P., Wagner-McPherson C., Layman D., Wylie K., Sekhon M., Becker M.C., Fewell G.A., Delehaunty K.D., Miner T.L., Nash W.E., Kremitzki C., Oddy L., Du H.  Wilson R.K.
-Nature 434:724-731(2005) [PubMed: 15815621]</p>
+          <li class="references">
+            <p class="title">"Generation and annotation of the DNA sequences of human chromosomes 2 and 4."</p>
+            <p class="author"><a>Hillier L.W.</a>, <a>Graves T.A.</a>, <a>Fulton R.S.</a>, <a>Fulton L.A.</a>, <a>Pepin K.H.</a>, <a>Minx P.</a>, <a>Wagner-McPherson C.</a>, <a>Layman D.</a>, <a>Wylie K.</a>, <a>Sekhon M.</a>, <a>Becker M.C.</a>, <a>Fewell G.A.</a>, <a>Delehaunty K.D.</a>, <a>Miner T.L.</a>, <a>Nash W.E.</a>, <a>Kremitzki C.</a>, <a>Oddy L.</a>, <a>Du H.  Wilson R.K.</a></p>
+            <p class="ref">Nature 434:724-731(2005) [PubMed: 15815621]</p>
+          </li>
 
-	<p>"Molecular cloning, sequence, and specificity of expression of the gene encoding the low molecular weight human salivary mucin (MUC7)."
-Bobek L.A., Tsai H., Biesbrock A.R., Levine M.J.
-J. Biol. Chem. 268:20563-20569(1993) [PubMed: 7690757</p>
-
-
+          <li class="references">
+            <p class="title">"Molecular cloning, sequence, and specificity of expression of the gene encoding the low molecular weight human salivary mucin (MUC7)."</p>
+            <p class="author"><a>Bobek L.A.</a>, <a>Tsai H.</a>, <a>Biesbrock A.R.</a>, <a>Levine M.J.</a></p>
+            <p class="ref">J. Biol. Chem. 268:20563-20569(1993) [PubMed: 7690757</p>
+          </li>
+        </ol>
       </div>
 
     </div><!-- /col -->
