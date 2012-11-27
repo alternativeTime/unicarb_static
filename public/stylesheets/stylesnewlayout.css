@@ -222,7 +222,7 @@ hr {
 }
 h2.subheader { margin-top: 170px; text-align: center; }
 
-.container-fluid { margin: 0 auto; width: 80%; overflow: visible; }
+.container-fluid { margin: 0 auto; width: 80%; min-width: 940px; overflow: visible; }
 .content { margin-top: 100px; }
 
 .home .row-fluid { margin-bottom: 20px; }
@@ -544,13 +544,25 @@ th[class*="span"] {
 }
 
 
+.browse .search {
+  background: Whitesmoke;
+  -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px;
+}
+
+.search .info {
+  margin: 0;
+  padding: 20px 20px 0 20px;
+}
+
+.search .info h4 {
+  margin-top: 0;
+}
+
 .filterbar {
   padding: 20px 0;
   background: #008FD5;
   color: #FFF;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
+  -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px;
 }
 .filterbar ul {
   margin: 0;
@@ -648,6 +660,11 @@ margin: 5px 0px 10px 0px;
 .filterbar h3 {
     color: #FFF;
   }
+
+  #tab1 .composition label {
+      text-align: left;
+      <label class=""
+    }
 
 /* !LAYOUT - BROWSE ////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
