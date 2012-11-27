@@ -266,20 +266,27 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
             </div> @* end of first span *@
             <div class="span5 composition" id="tab1">
               <h4>Query by Composition</h4>
-              <form class="form-search row-fluid">
+              <form class="form-search row-fluid" action="/compositions">
                 <div class="span6">
                   <label class="checkbox"><input class="span1" name=comp type=text> Hex</label>
                   <label class="checkbox"><input class="span1" name=comp type=text> HexNAc</label>
                   <label class="checkbox"><input class="span1" name=comp type=text> dHex</label>
-                  <label class="checkbox"><input class="span1" name=comp type=text> Pent</label>
-                </div>
-
-                <div class="span6">
                   <label class="checkbox"><input class="span1" name=comp type=text> NeuAc</label>
                   <label class="checkbox"><input class="span1" name=comp type=text> NeuGc</label>
+                  <label class="checkbox"><input class="span1" name=comp type=text> Pentose</label>
+                  <label class="checkbox"><input class="span1" name=comp type=text> Sulphate</label>
+		</div>
+		
+		<div class="span6">
+                  <label class="checkbox"><input class="span1" name=comp type=text> Phosphate</label>
                   <label class="checkbox"><input class="span1" name=comp type=text> KDN</label>
+                  <label class="checkbox"><input class="span1" name=comp type=text> KDO</label>
                   <label class="checkbox"><input class="span1" name=comp type=text> HexA</label>
+                  <label class="checkbox"><input class="span1" name=comp type=text> Methyl</label>
+		  <label class="checkbox"><input class="span1" name=comp type=text> Acetyl</label>
+		  <label class="checkbox"><input class="span1" name=comp type=text> Other</label>
                 </div>
+
                 <button type="submit" class="btn btn-primary"> Composition Search</button>
               </form>
             </div> @* end of second spand *@

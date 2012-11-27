@@ -44,6 +44,29 @@ public class Application extends Controller {
 	);
     }
 
+    public static Result compositions() {
+	List<Structure> compositionResult = null;
+	 if (request().queryString().size() > 0  ) {
+                Map<String, String[]> params = request().queryString();
+                String[] searchTerms = null;
+                String key = null;
+                for (Map.Entry<String, String[]> entry : params.entrySet() ){
+                        key = entry.getKey();
+                        searchTerms = entry.getValue();
+                }
+                if(key.contains("comp")) {
+                        String out =  Structure.buildComposition(searchTerms);
+                        System.out.println("output is " + out);
+                        compositionResult = Structure.findComposition(out);
+                }
+    	
+    	return ok(
+		compositions.render(compositionResult)
+		 );
+	}
+	return ok(compositions.render(compositionResult));
+    }
+
     public static Result browse() {
 	List<String> taxonomy  = Taxonomy.findSpecies(); 
 	HashSet taxUnique = Taxonomy.findSpeciesUnique();
@@ -98,9 +121,15 @@ public class Application extends Controller {
                         searchTerms = entry.getValue();
                 }
 
-		if(key.contains("comp")) {
-			String out =  Structure.buildCompositionArray(searchTerms);
-		}
+		/*if(key.contains("comp")) {
+			String out =  Structure.buildComposition(searchTerms);
+			System.out.println("output is " + out);
+			List<Structure> compositions = Structure.findComposition(out);
+
+			return ok(compositions.render(compositions));
+
+			
+		}*/
 
 		if(key.equals("taxonomy")){
                 for (String queryTaxonomy : searchTerms) {
