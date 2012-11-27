@@ -18,8 +18,8 @@
       	  <div class="filterbar tabbable clearfix">
            <ul class="nav nav-tabs" id="myTabBar">
            <li class="active"><a href="#filter1" data-toggle="tab">GlycoSuiteDB <span class="pull-right count">  </span></a></li>
-           <li class=""><a href="#filter2" data-toggle="tab">EUROCarbDB</a></li>
-           <li><a href="#filter3" data-toggle="tab">GlycoBase <span class="pull-right count">   </span></a></li> </ul>
+           @*<li class=""><a href="#filter2" data-toggle="tab">EUROCarbDB</a></li>
+           <li><a href="#filter3" data-toggle="tab">GlycoBase <span class="pull-right count">   </span></a></li> </ul>*@
           </div>
 
           <div class="info">
@@ -35,12 +35,20 @@
   	</div>
 
 	<div class="span9 rightpanel">
+	  @if(structure.size() >1 ) {
 	  <ul class="media-grid">
 	  @for(structure <- structure) {
-	   <li><a href="#"><img style="max-height: 150px; max-width: 200px" src="../images/cfg/_@{structure.id}.png" alt=""></a></li>
+	   <li><a href="#"><img style="max-height: 150px; max-width: 200px" src="../images/cfg/@{structure.id}.png" alt=""></a></li>
 	  }
 	    		</ul>
+	  }
+	  @if(structure.size() <1 ) {
+	  <div class="row-fluid">
+	  <h3>No structures with that compostion were found</h3>
 
+          <a class="btn btn-info" href="/browse"> Try Searching Again! </a>
+          }
+	</div>
 	</div>
 
 	</div>
