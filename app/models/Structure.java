@@ -72,10 +72,29 @@ public class Structure extends Model {
     public static Finder<Long,Structure> find = new Finder<Long,Structure>(Long.class, Structure.class);
 
 
-	public static Content render(Structure strDisplay) {
+    public static String buildComposition(String input, String current) {
+	String comp = current;
+	String in = input;
+	String join = comp += in;
+
+	return join; 
+    }
+
+    public static String buildCompositionArray(String[] input) {
+	String build = "";
+	for(String composition : input) {
+	if (composition.length() < 1 ) {
+	build += "0" ;
+	}
+	build += composition;	
+	}
+        return build;   
+    }
+
+     public static Content render(Structure strDisplay) {
 		// TODO Auto-generated method stub
 		return null;
-	}
+     }
     
     
 }

@@ -98,24 +98,12 @@ public class Application extends Controller {
                         searchTerms = entry.getValue();
                 }
 
-		String composition  = "";	
 		if(key.contains("comp")) {
-		for (String queryComp : searchTerms) {
-                	String b = queryComp;
-                	int c = Integer.parseInt(b);
-                	if (c >=-1 && c <1 ) {
-                	composition += c;
-                	}	
-
-                	if(c >0 && c< 1000) {
-                	composition += c;
-                	}
+			String out =  Structure.buildCompositionArray(searchTerms);
 		}
-		}	
 
 		if(key.equals("taxonomy")){
                 for (String queryTaxonomy : searchTerms) {
-                        System.out.println("search taxonomy: " + queryTaxonomy);
 		
 			String glycobasePerturbation = queryTaxonomy;
 			output = GlycobaseSource.findGlycobaseTaxonomy(glycobasePerturbation);
@@ -125,17 +113,12 @@ public class Application extends Controller {
                         Long taxId = null;
                         for (Taxonomy tax : foundTaxonomy) {
                                 taxId = tax.id;
-                                System.out.println("this is the id: " + taxId);
-                        //};
-                        //if (taxId > 0) {
                                 taxonomyId  = Taxonomy.find.byId(taxId);
 				taxonomyList.add(taxonomyId);
                                 String taxon = taxonomyId.species;
                                 biolsource = Biolsource.findTaxonomyProtein(taxon);
                                 listSql = Biolsource.findTaxonomyProteinSQL(taxon);
-				//listSqlArray.add(listSql);
 				listSql2 = Biolsource.findTaxonomyProteinString(taxon);
-				//listSql22.addAll(listSql2);
                         }
                 }
 		}
