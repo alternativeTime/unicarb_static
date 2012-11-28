@@ -26,6 +26,7 @@ public class Reference extends Model {
     public String volume;
     public String pages;
     public String medline;
+    public String pmid;
     public String title;
     public String authors; 
 
