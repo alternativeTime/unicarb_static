@@ -574,7 +574,7 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
       @for((glyco, count) <- glycobasePerturbation.zipWithIndex; if (count < 1)) {
       <h3>@glyco.tax_species<span class="pull-right"><span class="label success">Curated Entry</span> <span class="label notice">GlycoBase</span></span></h3>
       <div class="details span9">
-        <p class="">sssss structures are associated with this protein
+        <p class=""> structures are associated with this protein
           @for((g, countprotein) <- glycobasePerturbation.zipWithIndex; if (countprotein < 10)) {
           @g.perturbation,
           }
@@ -677,7 +677,7 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
         <p class="">@taxon.taxprotein.size() glycoproteins are associated with this taxonomy including: @for( (tax, i) <- taxon.taxprotein.zipWithIndex; if (i <= 6)) {  <a href="">@tax.protein, </a> }</p>
       </div>
       <div class="span3">
-        <p class="pull-right structures"><a href="#">@taxon.strtaxonomy.size() structures </a></p>
+        <p class="pull-right structures"><a href="/taxonomysearch?taxonomy=@taxon.species">@taxon.strtaxonomy.size() structures </a></p>
       </div>
 
     </div>
