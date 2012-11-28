@@ -23,7 +23,7 @@ GET	/saySearch/:s			controllers.Search.saySearch(s: String)
 
 GET	/browse			controllers.Application.browse()
 
-GET	/proteinsummary		controllers.Application.proteinsummary()
+GET	/proteinsummary/:s		controllers.Application.proteinsummary(s: String)
 #taxonomy:String ?= "")
 
 

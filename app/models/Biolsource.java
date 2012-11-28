@@ -21,8 +21,8 @@ public class Biolsource extends Model {
     public String protein;
     public String taxonomy;
 
-   // @OneToMany
-   // public List<Sourceref> sourceref; 
+   	@OneToMany
+   	public List<Sourceref> sourceref; 
 
     //@ManyToOne
     //Biolsource biolsource;
@@ -31,9 +31,9 @@ public class Biolsource extends Model {
     /**
      * Generic query helper for entity Reference with id Long
      */
-    public static Finder<Long,Biolsource> find = new Finder<Long,Biolsource>(Long.class, Biolsource.class); 
-   
-    public static List<SqlRow> findTaxonomyProteinSQL(String taxon) {
+   	public static Finder<Long,Biolsource> find = new Finder<Long,Biolsource>(Long.class, Biolsource.class);
+    
+	public static List<SqlRow> findTaxonomyProteinSQL(String taxon) {
 
 	String sql = "SELECT biolsource.protein, proteins.name FROM public.biolsource, public.proteins WHERE biolsource.protein = proteins.name and biolsource.taxonomy ilike '" + taxon +  "' group by  biolsource.protein, proteins.name";
 
@@ -94,6 +94,13 @@ public class Biolsource extends Model {
                 .ilike("taxonomy", "%" + taxon + "%")
                 .findList();
     }
+
+	public static List<Biolsource> findBiolSourceIds(String protein) {
+		return
+			find.where()
+				.ilike("protein", protein)
+				.findList();
+	}
     
 }
 

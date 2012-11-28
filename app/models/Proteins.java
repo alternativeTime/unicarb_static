@@ -55,6 +55,8 @@ public class Proteins extends Model {
     return proteinUnique;
     }
 
+	
+
 
     
 }

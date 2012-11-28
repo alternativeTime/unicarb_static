@@ -38,9 +38,20 @@ public class Application extends Controller {
     			); 
     };
 
-    public static Result proteinsummary() {
+    public static Result proteinsummary(String protein) {
+	
+		ArrayList<Biolsource> biolSourceProtein = new ArrayList<Biolsource>();
+		List<Biolsource> biolSourceProteins = Biolsource.findBiolSourceIds(protein);
+		for(Biolsource biol : biolSourceProteins){
+			Biolsource objectBiolSource = Ebean.find(Biolsource.class, biol.id);
+				biolSourceProtein.add(objectBiolSource);
+		}
+		
+		List<Proteins> proteins = Proteins.findProteins(protein);
+		
+		
 	return ok(
-		proteinsummary.render()
+		proteinsummary.render(biolSourceProtein, proteins)
 	);
     }
 
