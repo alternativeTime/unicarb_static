@@ -197,19 +197,17 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
     <div class="row-fluid">
       <div class="filterbar tabbable clearfix">
         <ul class="nav nav-tabs" id="myTabBar">
+          <li class="title">Select a Database to search: </li>
           <li><a href="#filter1" data-toggle="tab">GlycoSuiteDB <span class="pull-right count">@if(taxon.size() != 0) {@taxon.size()} @if(proteinList.size() != 0) {@proteinList.size()} @if(tissueList.size() != 0) {@tissueList.size()}</span></a></li>
           <li class=""><a href="#filter2" data-toggle="tab">EUROCarbDB</a></li>
           <li><a href="#filter3" data-toggle="tab">GlycoBase <span class="pull-right count">@if(rawTissue.size() !=0) {@rawTissue.size()} @if(rawTissue.size() !=0) {@rawTax.size()} @if(count != 0) {@count} @if(counttissue != 0) {@counttissue}</span></a></li> </ul>
       </div>
 
       <div class="info">
-        <h4>GLYCAN BUILDER</h4>
-        <p>Build and search a glycan structure<a href="/search"> using the new interface</a>.</p>
-      </div>
-
-      <div class="info">
-        <h4>CURATED PUBLICATIONS</h4>
-        <p>Search the <a href="/references">growing list publications and associated structures and metadata</a>.</p>
+        <h4>Other Options:</h4>
+        <p><b>Glycan Builder:</b> Build and search a glycan structure<a href="/search"> using the new interface</a>.</p>
+        
+        <p><b>Curated Publications:</b> Search the <a href="/references">growing list of publications, associated structures, and metadata</a>.</p>
       </div>
     </div>
   </div>
@@ -218,8 +216,9 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
     <div class="tabbable"> <!-- Only required for left/right tabs -->
 
       <ul class="nav nav-tabs" id="myTab">
-        <li class="active"><a href="#tab1" data-toggle="tab">Search Criteria</a></li>
-        <li><a href="#tab2" data-toggle="tab">Results</a></li>
+        <li class="active"><a href="#tab1" data-toggle="tab"><h2>Search Query</h2></a></li>
+        <li><a href="#tab2" data-toggle="tab"><h2>Search returned 
+              @if(taxon.size() != 0) {@taxon.size()} @if(proteinList.size() != 0) {@proteinList.size()} @if(tissueList.size() != 0) {@tissueList.size()} results...</h2></a></li>
         <li><a href="#tab3" data-toggle="tab">Related Results</a></li>
       </ul>
 
@@ -227,64 +226,82 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
 
         <div class="tab-pane active" id="tab1">
 
-          <h2><img src="../images/icon_search.png"> Search Features &amp; Results</h2>
+          <!--<h2><img src="../images/icon_search.png"> Search Features &amp; Results</h2>-->
           <div id="filter1" class="control-group row-fluid glycosuitedb">
-            <div class="span7" id="tab1">
-              <div class="controls">
+            <div id="tab1" class="span12" >
+
+              <div class="multi-option clearfix">
+                <span class="pull-left label">Search by: </span>
+                <label class="radio">
+                  <input type="radio" name="glycosuitedbSearch" value="Taxonomy" checked> <h4>Taxonomy</h4>
+                </label>
+                <label class="radio">
+                  <input type="radio" name="glycosuitedbSearch" value="Localisation"> <h4>Localisation</h4>
+                </label>
+                <label class="radio">
+                  <input type="radio" name="glycosuitedbSearch" value="ProteinLocalisation"> <h4>Protein Localisation</h4>
+                </label>
+                <label class="radio">
+                  <input type="radio" name="glycosuitedbSearch" value="Composition"> <h4>Composition</h4>
+                </label>
+              </div>
+
+              <div id="glycosuitedbTaxonomy" class="controls">
                 <label class="checkbox">
                   <form class="form-search">
-                    <h4>Taxonomy</h4>
-                    <div id="selection">
-                      <select  name=taxonomy MULTIPLE id="e1" style="width:350px"  id="listBox"></select>
+                    <!--<h4>Taxonomy</h4>-->
+                    <div id="selection" class="row-fluid">
+                      <select  name=taxonomy MULTIPLE id="e1" id="listBox" class="span10"></select>
                       <button type="submit" class="btn">Search</button>
                     </div>
                   </form>
                 </label>
               </div>
-              <div class="controls">
+              <div id="glycosuitedbLocalisation" class="controls">
                 <label class="checkbox">
                   <form class="form-search">
-                    <h4>Localisation</h4>
-                    <div id="selection">
-                      <select  name=tissue MULTIPLE id="e2" style="width:350px"  id="listBox"></select>
+                    <!--<h4>Localisation</h4>-->
+                    <div id="selection" class="row-fluid">
+                      <select  name=tissue MULTIPLE id="e2" id="listBox" class="span10"></select>
                       <button type="submit" class="btn">Search</button>
                     </div>
                   </form>
                 </label>
               </div>
-              <div class="controls">
+              <div id="glycosuitedbAssociation" class="controls">
                 <label class="checkbox">
                   <form class="form-search">
-                    <h4 style="color: #424242; font-size: 1.5em; font-weight: 300;">Protein Association</h4>
-                    <div id="selection">
-                      <select  name=protein MULTIPLE id="e3" style="width:350px"  id="listBox"></select>
+                    <!--<h4>Protein Association</h4>-->
+                    <div id="selection" class="row-fluid">
+                      <select  name=protein MULTIPLE id="e3" id="listBox" class="span10"></select>
                       <button type="submit" class="btn">Search</button>
                     </div>
                   </form>
                 </label>
               </div>
-            </div> @* end of first span *@
-            <div class="span5 composition" id="tab1">
-              <h4>Query by Composition</h4>
-              <form class="form-search row-fluid" action="/compositions">
-                <div class="span6">
-                  <label class="checkbox"><input class="span1" name=comp type=text> Hex</label>
-                  <label class="checkbox"><input class="span1" name=comp type=text> HexNAc</label>
-                  <label class="checkbox"><input class="span1" name=comp type=text> dHex</label>
-                  <label class="checkbox"><input class="span1" name=comp type=text> NeuAc</label>
-                  <label class="checkbox"><input class="span1" name=comp type=text> NeuGc</label>
-                  <label class="checkbox"><input class="span1" name=comp type=text> Pentose</label>
-                  <label class="checkbox"><input class="span1" name=comp type=text> Sulphate</label>
-		</div>
-		
-		<div class="span6">
-                  <label class="checkbox"><input class="span1" name=comp type=text> Phosphate</label>
-                  <label class="checkbox"><input class="span1" name=comp type=text> KDN</label>
-                  <label class="checkbox"><input class="span1" name=comp type=text> KDO</label>
-                  <label class="checkbox"><input class="span1" name=comp type=text> HexA</label>
-                  <label class="checkbox"><input class="span1" name=comp type=text> Methyl</label>
-		  <label class="checkbox"><input class="span1" name=comp type=text> Acetyl</label>
-		  <label class="checkbox"><input class="span1" name=comp type=text> Other</label>
+              <form id="glycosuitedbComposition" class="form-search row-fluid controls" action="/compositions">
+                <!--<h4>Query by Composition</h4>-->
+                <div class="span4">
+                  <label class="checkbox"><input class="span2" name=comp type=text> Hex</label>
+                  <label class="checkbox"><input class="span2" name=comp type=text> HexNAc</label>
+                  <label class="checkbox"><input class="span2" name=comp type=text> dHex</label>
+                  <label class="checkbox"><input class="span2" name=comp type=text> NeuAc</label>
+                  <label class="checkbox"><input class="span2" name=comp type=text> NeuGc</label>
+                </div>
+
+                <div class="span4">
+                  <label class="checkbox"><input class="span2" name=comp type=text> Pentose</label>
+                  <label class="checkbox"><input class="span2" name=comp type=text> Sulphate</label>
+                  <label class="checkbox"><input class="span2" name=comp type=text> Phosphate</label>
+                  <label class="checkbox"><input class="span2" name=comp type=text> KDN</label>
+                  <label class="checkbox"><input class="span2" name=comp type=text> KDO</label>
+                </div>
+
+                <div class="span4">
+                  <label class="checkbox"><input class="span2" name=comp type=text> HexA</label>
+                  <label class="checkbox"><input class="span2" name=comp type=text> Methyl</label>
+                  <label class="checkbox"><input class="span2" name=comp type=text> Acetyl</label>
+                  <label class="checkbox"><input class="span2" name=comp type=text> Other</label>
                 </div>
 
                 <button type="submit" class="btn btn-primary"> Composition Search</button>
@@ -294,166 +311,191 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
           </div> @* end filter1 *@
 
           <div id="filter2" class="tab-pane control-group row-fluid eurocarb">
-            <div class="span7">
-              <div class="controls">
-                <label class="checkbox">
-                  <form class="form-search">
-                    <h4>Taxonomy</h4>
-                    <div id="selection">
-                      <select  name=taxonomy MULTIPLE id="e1" style="width:350px"  id="listBox"></select>
-                      <button type="submit" class="btn">Search</button>
-                    </div>
-                  </form>
-                </label>
-              </div>
 
-              <div class="controls">
-                <label class="checkbox">
-                  <form class="form-search">
-                    <h4>Localisation</h4>
-                    <div id="selection">
-                      <select  name=tissue MULTIPLE id="e2" style="width:350px"  id="listBox"></select>
-                      <button type="submit" class="btn">Search</button>
-                    </div>
-                  </form>
-                </label>
-              </div>
 
-              <div class="controls">
-                <label class="checkbox">
-                  <form class="form-search">
-                    <h4>Protein Association</h4>
-                    <div id="selection">
-                      <select  name=protein MULTIPLE id="e3" style="width:350px"  id="listBox"></select>
-                      <button type="submit" class="btn">Search</button>
-                    </div>
-                  </form>
-                </label>
-              </div>
+            <div class="multi-option clearfix">
+              <span class="pull-left label">Search by: </span>
+              <label class="radio">
+                <input type="radio" name="eurocarbdbSearch" value="Taxonomy" checked> <h4>Taxonomy</h4>
+              </label>
+              <label class="radio">
+                <input type="radio" name="eurocarbdbSearch" value="Localisation"> <h4>Localisation</h4>
+              </label>
+              <label class="radio">
+                <input type="radio" name="eurocarbdbSearch" value="ProteinAssociation"> <h4>Protein Association</h4>
+              </label>
+            </div>
 
-              <div class="controls">
-                <label class="checkbox">
-                  <input id="querycheck" type="checkbox"> Linkage 
-                  <div class="control-group">
-                    <select class="" name="mydropdown">
-                      <option value="">Select a Protine database to search:</option>
-                      <option value="Milk">Fresh Milk</option>
-                      <option value="Cheese">Old Cheese</option>
-                      <option value="Bread">Hot Bread</option>
-                    </select>
-                    <input type="text" placeholder="Text input">
+            <div id="eurocarbdbTaxonomy" class="controls">
+              <label class="checkbox">
+                <form class="form-search">
+                  <!--<h4>Taxonomy</h4>-->
+                  <div id="selection" class="row-fluid">
+                    <select  name=taxonomy MULTIPLE id="e1" id="listBox" class="span10"></select>
+                    <button type="submit" class="btn">Search</button>
                   </div>
-                </label>
-              </div>
-            </div> @* end of first span *@
+                </form>
+              </label>
+            </div>
 
-            <div class="span5">
-              <div class="controls">
-                <p>Find structures by composition and mass or build your glycan structure:</p>
-                <a class="btn btn-primary" href="/builder">Glycan Builder</a>
-              </div>
-
-              <div class="controls">
-                <input id="querycompositioncheck" type="checkbox"> Query by Composition
-                <div id="querycompositionhide" class="control-group">
-                  <input type="text"><br>
-                  <span>Enter a composition, or a composition range.</span>
-                  <div class="row-fluid">
-                    <div class="span4">
-                      <label class="checkbox"><input class="span1" name=mscomp_Hexose type=text> Hex</label>
-                      <label class="checkbox"><input class="span1" name=mscomp_HexNAc type=text> HexNAc</label>
-                      <label class="checkbox"><input class="span1" name=mscomp_deoxyHexose type=text> dHex</label>
-                      <label class="checkbox"><input class="span1" name=mscomp_pentose type=text> Pent</label>
-                    </div>
-
-                    <div class="span4">
-                      <label class="checkbox"><input class="span1" name=mscomp_NeuAc type=text> NeuAc</label>
-                      <label class="checkbox"><input class="span1" name=mscomp_NeuGc type=text> NeuGc</label>
-                      <label class="checkbox"><input class="span1" name=mscomp_KDN type=text> KDN</label>
-                      <label class="checkbox"><input class="span1" name=mscomp_HexA type=text> HexA</label>
-                    </div>
-
-                    <div class="span4">
-                      <label class="checkbox"><input class="span1" name=mscomp_phosphate type=text> P</label>
-                      <label class="checkbox"><input class="span1" name=mscomp_sulfate type=text> S</label>
-                      <label class="checkbox"><input class="span1" name=mscomp_methyl type=text> Methyl</label>
-                      <label class="checkbox"><input class="span1" name=mscomp_acetyl type=text> Acetyl</label>
-                    </div>
+            <div id="eurocarbdbLocalisation" class="controls">
+              <label class="checkbox">
+                <form class="form-search">
+                  <!--<h4>Localisation</h4>-->
+                  <div id="selection" class="row-fluid">
+                    <select  name=tissue MULTIPLE id="e2" id="listBox" class="span10"></select>
+                    <button type="submit" class="btn">Search</button>
                   </div>
+                </form>
+              </label>
+            </div>
+
+            <div id="eurocarbdbAssociation" class="controls">
+              <label class="checkbox">
+                <form class="form-search">
+                  <!--<h4>Protein Association</h4>-->
+                  <div id="selection" class="row-fluid">
+                    <select  name=protein MULTIPLE id="e3" id="listBox" class="span10"></select>
+                    <button type="submit" class="btn">Search</button>
+                  </div>
+                </form>
+              </label>
+            </div>
+
+            <div class="controls">
+              <label class="checkbox">
+                <input id="querycheck" type="checkbox"> Linkage 
+                <div class="control-group">
+                  <select class="" name="mydropdown">
+                    <option value="">Select a Protine database to search:</option>
+                    <option value="Milk">Fresh Milk</option>
+                    <option value="Cheese">Old Cheese</option>
+                    <option value="Bread">Hot Bread</option>
+                  </select>
+                  <input type="text" placeholder="Text input">
                 </div>
-              </div>
+              </label>
+            </div>
 
-              <div class="controls">
-                <h3>Publications</h3>
-                <p>Lookup all publications</p>
-                <a class="btn btn-primary" href="/references">Publications</a>
-              </div>
+            <!--<div class="controls">-->
+              <!--<p>Find structures by composition and mass or build your glycan structure:</p>-->
+              <!--<a class="btn btn-primary" href="/builder">Glycan Builder</a>-->
+            <!--</div>-->
 
-            </div> @* end of second span *@
-
-          </div> @* end of filter2 *@
-
-          <div id="filter3" class="tab-pane control-group nextprot">
-            <div class="row-fluid">
-              <div class="span7" id="tab1">
-
-                <div class="controls">
-                  <label class="checkbox">
-                    <form class="form-search">
-                      <h4>Taxonomy</h4>
-                      <div id="selection">
-                        <select  name=taxonomy MULTIPLE id="e5" style="width:350px"  id="listBox"></select>
-                        <button type="submit" class="btn">Search</button>
-                      </div>
-                    </form>
-                  </label>
-                </div>
-
-                <div class="controls">
-                  <label class="checkbox">
-                    <form class="form-search">
-                      <h4>Localisation</h4>
-                      <div id="selection">
-                        <select  name=tissue MULTIPLE id="e10" style="width:350px"  id="listBox"></select>
-                        <button type="submit" class="btn">Search</button>
-                      </div>
-                    </form>
-                  </label>
-                </div>
-
-                <div class="controls">
-                  <label class="checkbox">
-                    <form class="form-search">
-                      <h4>Protein Association</h4>
-                      <div id="selection">
-                        <select  name=protein MULTIPLE id="e11" style="width:350px"  id="listBox"></select>
-                        <button type="submit" class="btn">Search</button>
-                      </div>
-                    </form>
-                  </label>
-                </div>
-
-              </div> @* end of first span *@
-
-              <div class="span5 composition" id="tab1">
-                <h4>Query by Composition</h4>
-                <form class="form-search row-fluid">
-                  <div class="span6">
+            <div class="controls">
+              <input id="querycompositioncheck" type="checkbox"> Query by Composition
+              <div id="querycompositionhide" class="control-group">
+                <input type="text"><br>
+                <span>Enter a composition, or a composition range.</span>
+                <div class="row-fluid">
+                  <div class="span4">
                     <label class="checkbox"><input class="span1" name=mscomp_Hexose type=text> Hex</label>
                     <label class="checkbox"><input class="span1" name=mscomp_HexNAc type=text> HexNAc</label>
                     <label class="checkbox"><input class="span1" name=mscomp_deoxyHexose type=text> dHex</label>
                     <label class="checkbox"><input class="span1" name=mscomp_pentose type=text> Pent</label>
                   </div>
 
-                  <div class="span6">
+                  <div class="span4">
                     <label class="checkbox"><input class="span1" name=mscomp_NeuAc type=text> NeuAc</label>
                     <label class="checkbox"><input class="span1" name=mscomp_NeuGc type=text> NeuGc</label>
-                    <label class="checkbox"><input class="span1" name=mscomp_KDN   type=text> KDN</label>
+                    <label class="checkbox"><input class="span1" name=mscomp_KDN type=text> KDN</label>
                     <label class="checkbox"><input class="span1" name=mscomp_HexA type=text> HexA</label>
+                  </div>
+
+                  <div class="span4">
+                    <label class="checkbox"><input class="span1" name=mscomp_phosphate type=text> P</label>
+                    <label class="checkbox"><input class="span1" name=mscomp_sulfate type=text> S</label>
+                    <label class="checkbox"><input class="span1" name=mscomp_methyl type=text> Methyl</label>
+                    <label class="checkbox"><input class="span1" name=mscomp_acetyl type=text> Acetyl</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="controls">
+              <h3>Publications</h3>
+              <p>Lookup all publications</p>
+              <a class="btn btn-primary" href="/references">Publications</a>
+            </div>
+
+          </div> @* end of filter2 *@
+
+          <div id="filter3" class="tab-pane control-group nextprot">
+            <div class="row-fluid">
+
+                <div class="multi-option clearfix">
+                  <span class="pull-left label">Search by: </span>
+                  <label class="radio">
+                    <input type="radio" name="glycobaseSearch" value="Taxonomy" checked> <h4>Taxonomy</h4>
+                  </label>
+                  <label class="radio">
+                    <input type="radio" name="glycobaseSearch" value="Localisation"> <h4>Localisation</h4>
+                  </label>
+                  <label class="radio">
+                    <input type="radio" name="glycobaseSearch" value="ProteinLocalisation"> <h4>Protein Localisation</h4>
+                  </label>
+                  <label class="radio">
+                    <input type="radio" name="glycobaseSearch" value="Composition"> <h4>Composition</h4>
+                  </label>
+                </div>
+
+                <div id="glycobaseTaxonomy" class="controls">
+                  <label class="checkbox">
+                    <form class="form-search">
+                      <!--<h4>Taxonomy</h4>-->
+                      <div id="selection" class="row-fluid">
+                        <select  name=taxonomy MULTIPLE id="e5" id="listBox" class="span10"></select>
+                        <button type="submit" class="btn">Search</button>
+                      </div>
+                    </form>
+                  </label>
+                </div>
+
+                <div id="glycobaseLocalisation" class="controls">
+                  <label class="checkbox">
+                    <form class="form-search">
+                      <!--<h4>Localisation</h4>-->
+                      <div id="selection" class="row-fluid">
+                        <select  name=tissue MULTIPLE id="e10" id="listBox" class="span10"></select>
+                        <button type="submit" class="btn">Search</button>
+                      </div>
+                    </form>
+                  </label>
+                </div>
+
+                <div id="glycobaseAssociation" class="controls">
+                  <label class="checkbox">
+                    <form class="form-search">
+                      <!--<h4>Protein Association</h4>-->
+                      <div id="selection" class="row-fluid">
+                        <select  name=protein MULTIPLE id="e11" id="listBox" class="span10"></select>
+                        <button type="submit" class="btn">Search</button>
+                      </div>
+                    </form>
+                  </label>
+                </div>
+
+
+                <!--<h4>Query by Composition</h4>-->
+                <form id="glycobaseComposition" class="form-search row-fluid controls">
+                  <div class="span4">
+                    <label class="checkbox"><input class="span2" name=mscomp_Hexose type=text> Hex</label>
+                    <label class="checkbox"><input class="span2" name=mscomp_HexNAc type=text> HexNAc</label>
+                    <label class="checkbox"><input class="span2" name=mscomp_deoxyHexose type=text> dHex</label>
+                  </div>
+
+                  <div class="span4">
+                    <label class="checkbox"><input class="span2" name=mscomp_pentose type=text> Pent</label>
+                    <label class="checkbox"><input class="span2" name=mscomp_NeuAc type=text> NeuAc</label>
+                    <label class="checkbox"><input class="span2" name=mscomp_NeuGc type=text> NeuGc</label>
+                  </div>
+
+                  <div class="span4">
+                    <label class="checkbox"><input class="span2" name=mscomp_KDN   type=text> KDN</label>
+                    <label class="checkbox"><input class="span2" name=mscomp_HexA type=text> HexA</label>
                   </div>
                   <button type="submit" class="btn btn-primary"> Composition Search</button>
                 </form>
-              </div>
 
             </div> @* end of filter3 *@
 
@@ -461,9 +503,6 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
         </div> @* end of tab1 *@
 
       <div class="tab-pane" id="tab2">
-
-        <h2>Search Results</h2>
-
 
     @if(output != null && count != 0) {
     <div class="row-fluid glycobase">
@@ -654,12 +693,13 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
 
     @if(taxon !=null) {
     @if(taxon.size() >=1 ){	
-    <div class="row-fluid glycosuiteResult">
-      <h3>Taxonomy Search </h3>
+    <div class="row-fluid searchagain">
+      <!--<h3>Taxonomy Search </h3>-->
       <div class="controls">
         <label class="checkbox">
           <form class="form-search">
             <div id="selection">
+              <h3>Search again: </h3>
               <select  name=taxonomy MULTIPLE id="e9" style="width:350px"  id="listBox"></select>
               <button type="submit" class="btn">Search</button>
             </div>
