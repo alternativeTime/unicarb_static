@@ -22,6 +22,8 @@ public class Taxprotein extends Model {
    
     public String protein;
 
+    public String swiss_prot;
+
 	@ManyToOne
 	public Taxonomy taxonomy;
 

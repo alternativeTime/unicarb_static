@@ -1,4 +1,4 @@
-@(biol: ArrayList[Biolsource], protein: List[Proteins])
+@(proteinName: String, accession: String, biol: ArrayList[Biolsource], protein: List[Proteins], uniprot: List[String], sites: List[Sites], gssites: List[GsProteinSite], source: ArrayList[SqlRow])
 
 @main { <ul class="breadcrumb"> <li><i class="icon-folder-open" ></i><a href="#"> UniCarbKB Database</a> <span class="divider">></span></li>    <li><i class="icon-hdd" ></i><a href="/browse"> Browse</a> <span class="divider">></span></li> <li><i class="icon-hdd" ></i><a href="/browse"> Protein Summary</a> <span class="divider">></span></li>
     <li class="active" > You are here</li>
@@ -10,31 +10,34 @@
     <div class="span6">
 
       <div class="page-header">
-        <h1>TK2 <span class="pull-right"><span class="label success">Gene: 1</span> <span class="label notice">Ref: 29</span> <span class="label info">ISO: 3</span></span></h1>
-        <h4 class="subheader">Gene Name: DCK/DGK year, journal.name</h4>
+        <h1>@proteinName @*<span class="pull-right"><span class="label success">Gene: 1</span> <span class="label notice">Ref: 29</span> <span class="label info">ISO: 3</span></span>*@</h1>
+        <h4 class="subheader">Accession: @accession</h4>
       </div>
 
       <h3>PROTEIN</h3>
       <div class="control-group">
-        <label>Recommended name:</label> <div class="controls"><p>Thymidine kinase 2, mitochondrial</p></div>
+	@for((protein,i) <- protein.zipWithIndex; if (i < 1)) {
+        <label>Recommended name:</label> <div class="controls"><p>@protein.name</p></div>
+	}
       </div>
       <div class="control-group">
-        <label>Alternative name:</label> <div class="controls"><p>Mt-TK Spliced into the following 3 isoforms</p></div>
+        <label>Alternative name:</label> <div class="controls"><p>not available</p></div>
       </div>
 
-      <h3>GENE</h3>
+      @*<h3>GENE</h3>
       <div class="control-group">
         <label>Recommended name:</label> <div class="controls"><p>TK2</p>
       </div>
-
+      
       <h3>FAMILY</h3>
       <div class="control-group">
         <label>Family:</label> <div class="controls"><p>DCK/DGK</p></div>
       </div>
-       
+      
+	 
       <h3>HISTORY</h3>
       <div class="control-group">
-        <label>neXtProt:</label>
+        <label>UniCarbKB:</label>
         <div class="controls">
           <p>
             Integrated 2010-03-01
@@ -45,6 +48,22 @@
         </div>
         </div>
       </div>
+      *@
+      <h3>PTM Details</h3>
+	<p><i>connection to ebi services failing on request</i></p>
+      <h3>HISTORY</h3>
+	<div class="control-group">
+        <label>UniCarbKB:</label>
+        <div class="controls">
+          <p>
+            Integrated 2010-03-01
+            <br>
+            Last updated 2012-11-02
+            <br>
+          </p>
+        </div>
+        </div>
+
 
       <table>
         <thead>
@@ -58,6 +77,18 @@
         </thead>
 
         <tbody>
+	  @for(gs <- gssites) {
+	  <tr>
+	    <td>Confirmed</td>
+	    <td>@gs.amino_acid_position</td>
+	    <td>@gs.gsProteinSite.size()</td>
+	    <td>@for((gss, i) <- gs.gsProteinSite.zipWithIndex ; if (i <1)){ @gss.glycan_type } @*<span class="label notice">Ref: 1</span>*@</td>
+	    <td>GlycoSuite</td>
+	  </tr>
+	  }
+
+	
+	@*
           <tr>
             <td>Confirmed</td>
             <td>97</td>
@@ -86,6 +117,7 @@
             <td>N-linked (GlcNAc...) <span class="label notice">Ref: 4</span></td>
             <td>UniProtKB</td>
           </tr>
+	*@
         </tbody>
       </table>
 
@@ -94,7 +126,7 @@
     <div class="span6 details">
 
       <div class="info">
-        <h3>TK2 Sequence</h3>
+        <h3>Sequence (demo)</h3>
         <p>
           <span class="label warning">Isoform: <b>Long 256 aa</b></span>
           <span class="label warning">Mass: <b>31005 Da</b></span>
@@ -132,7 +164,23 @@
       </div>
 
       <div class="info">
-        <h3>References</h3>
+        <h3><span class="label notice" style="font-size:16px">@source.size()</span> References (@if(source.size() > 5) {showing top 5})</h3>
+	<ol>
+	@for((source,i) <- source.zipWithIndex; if (i < 5)) {
+	  <li class="references">
+	    <p class="title">@source("title")</p>
+ 	    <p class="author">@source("authors")</p>
+	    <p class="ref">PubMed: <a href='http://www.ncbi.nlm.nih.gov/pubmed/@source("pmid")'</a>@source("pmid")</p>
+	  </li>
+	}
+	</ol>
+	@*
+	@for(b <- biol) {
+	@b.sourceref
+
+	}
+	*@
+	@*
         <ol>
           <li class="references">
             <p class="title">"Molecular cloning, sequence, and specificity of expression of the gene encoding the low molecular weight human salivary mucin (MUC7)."</p>
@@ -164,6 +212,7 @@
             <p class="ref">J. Biol. Chem. 268:20563-20569(1993) [PubMed: 7690757</p>
           </li>
         </ol>
+	*@
       </div>
 
     </div><!-- /col -->

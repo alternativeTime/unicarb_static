@@ -39,19 +39,42 @@ public class Application extends Controller {
     };
 
     public static Result proteinsummary(String protein) {
-	
+		
+		List<SqlRow> listSql = null;
+		ArrayList<SqlRow> listSqlArray = new ArrayList<SqlRow>();
+		String proteinName = "";	
 		ArrayList<Biolsource> biolSourceProtein = new ArrayList<Biolsource>();
 		List<Biolsource> biolSourceProteins = Biolsource.findBiolSourceIds(protein);
+		//List<Double> biorefs = new ArrayList<Double>();
+		String accession = "";
 		for(Biolsource biol : biolSourceProteins){
+			System.out.println("test biolsource" + biol.id);
+			proteinName = biol.protein;
 			Biolsource objectBiolSource = Ebean.find(Biolsource.class, biol.id);
 				biolSourceProtein.add(objectBiolSource);
+
+			listSql = Sourceref.findReferenceSource(biol.id);
+			listSqlArray.addAll(listSql);
+				//biorefs.add(objectBiolSource.reference_id);
 		}
 		
 		List<Proteins> proteins = Proteins.findProteins(protein);
+		List<Sites> sites = Sites.findSites(protein);
+
+		//initial uniprot tesa
+		for(Proteins proteinLookup : proteins) {
+			accession = proteinLookup.swissProt;
+		}
+
+		List<String> uniprotDetails = Sites.EntryRetrievalExample(protein);
+
+		//might kill the above
+		System.out.println("the accession is " + protein);
+		List<GsProteinSite> gsProteinSite = GsProteinSite.ProteinRetrieval(protein);
 		
 		
 	return ok(
-		proteinsummary.render(biolSourceProtein, proteins)
+		proteinsummary.render(proteinName, protein, biolSourceProtein, proteins, uniprotDetails, sites, gsProteinSite, listSqlArray)
 	);
     }
 

@@ -27,6 +27,9 @@ public class Proteins extends Model {
     @ManyToOne
     public List<ProteinGlycosylationSites> proteinsites;
 
+    @OneToMany
+    public List<StructureToSites> stsite;
+
     public static Model.Finder<Long,Proteins> find = new Model.Finder<Long,Proteins>(Long.class, Proteins.class);
 
     public static List<Proteins> findProteins(String protein) {

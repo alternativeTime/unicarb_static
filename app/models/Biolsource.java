@@ -20,6 +20,7 @@ public class Biolsource extends Model {
     
     public String protein;
     public String taxonomy;
+    public String swiss_prot;
 
    	@OneToMany
    	public List<Sourceref> sourceref; 
@@ -98,7 +99,7 @@ public class Biolsource extends Model {
 	public static List<Biolsource> findBiolSourceIds(String protein) {
 		return
 			find.where()
-				.ilike("protein", protein)
+				.ilike("swiss_prot", protein)
 				.findList();
 	}
     

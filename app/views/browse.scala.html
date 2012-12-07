@@ -197,7 +197,7 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
     <div class="row-fluid">
       <div class="filterbar tabbable clearfix">
         <ul class="nav nav-tabs" id="myTabBar">
-          <li class="title">Select a Database to search: </li>
+          <li class="title">Select a Structure Database: </li>
           <li><a href="#filter1" data-toggle="tab">GlycoSuiteDB <span class="pull-right count">@if(taxon.size() != 0) {@taxon.size()} @if(proteinList.size() != 0) {@proteinList.size()} @if(tissueList.size() != 0) {@tissueList.size()}</span></a></li>
           <li class=""><a href="#filter2" data-toggle="tab">EUROCarbDB</a></li>
           <li><a href="#filter3" data-toggle="tab">GlycoBase <span class="pull-right count">@if(rawTissue.size() !=0) {@rawTissue.size()} @if(rawTissue.size() !=0) {@rawTax.size()} @if(count != 0) {@count} @if(counttissue != 0) {@counttissue}</span></a></li> </ul>
@@ -236,10 +236,10 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
                   <input type="radio" name="glycosuitedbSearch" value="Taxonomy" checked> <h4>Taxonomy</h4>
                 </label>
                 <label class="radio">
-                  <input type="radio" name="glycosuitedbSearch" value="Localisation"> <h4>Localisation</h4>
+                  <input type="radio" name="glycosuitedbSearch" value="Localisation"> <h4>Tissue</h4>
                 </label>
                 <label class="radio">
-                  <input type="radio" name="glycosuitedbSearch" value="ProteinLocalisation"> <h4>Protein Localisation</h4>
+                  <input type="radio" name="glycosuitedbSearch" value="ProteinLocalisation"> <h4>Protein</h4>
                 </label>
                 <label class="radio">
                   <input type="radio" name="glycosuitedbSearch" value="Composition"> <h4>Composition</h4>
@@ -647,7 +647,7 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
 
     @for(p <- proteinList) {
     <div class="row-fluid glycosuiteResult">
-      <h3><a href="#">@p.name</a></h3>
+      <h3><a href="@routes.Application.proteinsummary(p.swissProt)">@p.name</a></h3>
       <div class="details span9">
         <p class="">@p.stproteins.size() structures are associated with this protein</p>
       </div>
@@ -714,7 +714,7 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
     @for( (taxon, ii) <- taxon.zipWithIndex) {        <div class="row-fluid glycosuiteResult">
       <div class="details span9">
         <h3><a href="/taxonomysearch?taxonomy=@taxon.species">@taxon.species</a>@*<span class="pull-right"><span class="label success">Curated Entry</span> <span class="label notice">GlycoSuiteDB</span></span>*@</h3>
-        <p class="">@taxon.taxprotein.size() glycoproteins are associated with this taxonomy including: @for( (tax, i) <- taxon.taxprotein.zipWithIndex; if (i <= 6)) {  <a href="">@tax.protein, </a> }</p>
+        <p class="">@taxon.taxprotein.size() glycoproteins are associated with this taxonomy including: @for( (tax, i) <- taxon.taxprotein.zipWithIndex; if (i <= 6)) {  <a href="@routes.Application.proteinsummary(tax.swiss_prot)">@tax.protein, </a> }</p>
       </div>
       <div class="span3">
         <p class="pull-right structures"><a href="/taxonomysearch?taxonomy=@taxon.species">@taxon.strtaxonomy.size() structures </a></p>
