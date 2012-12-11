@@ -54,6 +54,21 @@ public class Tissue extends Model {
 		.ilike("div4", tissue)
 		.findList();
    }
+
+   //public static List<Stsource> tissueStructures(Tissue id) {
+	//Stsource stsource = Stsource.Tissue(id);
+	//List<Stsource> source = Stsource.find("FROM Stsource s where s.tissue_id = ?", id).findList();
+
+   //return sourceStructureUnique;
+   //}
+
+   public static List<Tissue> tissuehelp(Long id){
+
+	return find.join("stsource").join("stsource.structure")
+	   .where()
+		.eq("id", id)
+	   .findList();
+   }
     
 }
 

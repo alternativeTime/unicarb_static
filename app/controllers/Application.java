@@ -488,99 +488,20 @@ public class Application extends Controller {
 	);
     }
 
-    
-    /**
-     * Display the 'edit form' of a existing Computer.
-     *
-     * @param id Id of the computer to edit
-     */
-    /*public static Result edit(Long id) {
-        Form<Reference> computerForm = form(Reference.class).fill(
-            Reference.find.byId(id)
-        );
-        return ok(
-            editForm.render(id, computerForm)
-        );
-    }*/
-    
-    /**
-     * Handle the 'edit form' submission 
-     *
-     * @param id Id of the computer to edit
-     */
-    /*public static Result update(Long id) {
-        Form<Reference> computerForm = form(Reference.class).bindFromRequest();
-        if(computerForm.hasErrors()) {
-            return badRequest(editForm.render(id, computerForm));
-        }
-        computerForm.get().update(id);
-        flash("success", "Reference " + computerForm.get().name + " has been updated");
-        return GO_HOME;
-    }
-    */
-    /**
-     * Display the 'new computer form'.
-     */
-    /*public static Result create() {
-        Form<Reference> computerForm = form(Reference.class);
-        return ok(
-            createForm.render(computerForm)
-        );
-    }
-   */ 
-    /**
-     * Handle the 'new computer form' submission 
-     */
-    /*public static Result save() {
-        Form<Reference> computerForm = form(Reference.class).bindFromRequest();
-        if(computerForm.hasErrors()) {
-            return badRequest(createForm.render(computerForm));
-        }
-        computerForm.get().save();
-        flash("success", "Reference " + computerForm.get().name + " has been created");
-        return GO_HOME;
-    }
-    */
-    /**
-     * Handle computer deletion
-     */
-    /*public static Result delete(Long id) {
-        Reference.find.ref(id).delete();
-        flash("success", "Reference has been deleted");
-        return GO_HOME;
-    }
-    */
 
-/*    public static int AUTOCOMPLETE_MAX = 10;
-	public static void autocompletesearch(final String term) {
-   final List<autocompletesearch> response = new ArrayList<autocompletesearch>();
-   int index = 1;
-   for (String label : Taxonomy.species()) {
-      final String value = String.valueOf(index);
-      if (label.toLowerCase().startsWith(term.toLowerCase())) {
-         response.add(new autocompleteValue(value, label));
-      }
-      if (response.size() == AUTOCOMPLETE_MAX) {
-         break;
-      }
-      index++;
-   }
-   //renderJSON(response);
-ok(toJson(response));
-	}
-*/
+    public static Result tissueSummary(Long id) {
 
-/*    public static Result taxonsearch (String term) {
-	//public static void taxonsearch(final String term) {
-	//List<Taxonomy> taxonomy = Taxonomy.findList("upper(species) like upper(?)", term + "%").fetch();
-	final List<SqlRow> taxonomy = Taxonomy.findTaxonomy(term);
-	toJson(taxonomy);
-	// renderJSON(taxonomy);
-	 ok(toJson(taxonomy));
+	//	List<Stsource> stsourceTissue = Tissue.tissueStructures(tissueResult);
+		List<Tissue> tissueresult = Tissue.tissuehelp(id);
+		String databaseReference = "";
+		for(Tissue t : tissueresult) {
+			databaseReference = t.div1 + t.div2 + t.div3 + t.div4;
+		}
 
-	
-
+	return ok(
+		tissuesummary.render("Tissue Summary", databaseReference, tissueresult)
+	);
     } 
-*/
+    
 }
             

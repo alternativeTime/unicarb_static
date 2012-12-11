@@ -14,6 +14,7 @@ GET		/structure/:id	      controllers.Application.structureDetails(id:Long)
 GET		/taxonomy/:id      controllers.Application.taxonDetails(id:Long)
 
 GET	/taxonomy			controllers.Application.findAllSpecies()
+GET	/tissuesummary/:id				controllers.Application.tissueSummary(id:Long)
 
 GET	/unicarb		   controllers.Application.unicarb(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
 GET	/ms		   controllers.Application.ms()
