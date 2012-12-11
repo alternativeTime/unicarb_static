@@ -49,7 +49,7 @@
     </section>
 
     @* <h3>@message</h3> *@
-    <p style="margin:0 0 9px;font-family:helvetica neue">The GlycoSuite database is an annotated and curated relational database of glycan structures. For the taxonomy entry <b>@taxon.species</b> a number of glycan structures, glycoproteins and tissue source's have been curated.</p>
+    <p style='margin:0 0 9px;font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;'>The GlycoSuite database is an annotated and curated relational database of glycan structures. For the taxonomy entry <b>@taxon.species</b> a number of glycan structures, glycoproteins and tissue source's have been curated.</p>
     <p  style="font-weight: bold;"><a href=""  data-toggle="modal" data-id='@taxon' class="announceTaxStructures"><i class="icon-resize-full"></i> See more structures</a> <small>limited to six records below</small></p>
     <ul class="thumbnails RP">
       @for((s, i) <- taxon.strtaxonomy.zipWithIndex; if (i <=5) ){
