@@ -216,7 +216,7 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
     <div class="tabbable"> <!-- Only required for left/right tabs -->
 
       <ul class="nav nav-tabs" id="myTab">
-        <li class="active"><a href="#tab1" data-toggle="tab"><h2>Search Query</h2></a></li>
+        <li class="active"><a href="#tab1" data-toggle="tab"><h2>Construct a Query:</h2></a></li>
         <li><a href="#tab2" data-toggle="tab"><h2>Search returned 
               @if(taxon.size() != 0) {@taxon.size()} @if(proteinList.size() != 0) {@proteinList.size()} @if(tissueList.size() != 0) {@tissueList.size()} results...</h2></a></li>
         <li><a href="#tab3" data-toggle="tab">Related Results</a></li>
@@ -362,61 +362,61 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
               </label>
             </div>
 
-            <div class="controls">
-              <label class="checkbox">
-                <input id="querycheck" type="checkbox"> Linkage 
-                <div class="control-group">
-                  <select class="" name="mydropdown">
-                    <option value="">Select a Protine database to search:</option>
-                    <option value="Milk">Fresh Milk</option>
-                    <option value="Cheese">Old Cheese</option>
-                    <option value="Bread">Hot Bread</option>
-                  </select>
-                  <input type="text" placeholder="Text input">
-                </div>
-              </label>
-            </div>
+            <!--<div class="controls">-->
+              <!--<label class="checkbox">-->
+                <!--<input id="querycheck" type="checkbox"> Linkage -->
+                <!--<div class="control-group">-->
+                  <!--<select class="" name="mydropdown">-->
+                    <!--<option value="">Select a Protine database to search:</option>-->
+                    <!--<option value="Milk">Fresh Milk</option>-->
+                    <!--<option value="Cheese">Old Cheese</option>-->
+                    <!--<option value="Bread">Hot Bread</option>-->
+                  <!--</select>-->
+                  <!--<input type="text" placeholder="Text input">-->
+                <!--</div>-->
+              <!--</label>-->
+            <!--</div>-->
 
             <!--<div class="controls">-->
               <!--<p>Find structures by composition and mass or build your glycan structure:</p>-->
               <!--<a class="btn btn-primary" href="/builder">Glycan Builder</a>-->
             <!--</div>-->
 
-            <div class="controls">
-              <input id="querycompositioncheck" type="checkbox"> Query by Composition
-              <div id="querycompositionhide" class="control-group">
-                <input type="text"><br>
-                <span>Enter a composition, or a composition range.</span>
-                <div class="row-fluid">
-                  <div class="span4">
-                    <label class="checkbox"><input class="span1" name=mscomp_Hexose type=text> Hex</label>
-                    <label class="checkbox"><input class="span1" name=mscomp_HexNAc type=text> HexNAc</label>
-                    <label class="checkbox"><input class="span1" name=mscomp_deoxyHexose type=text> dHex</label>
-                    <label class="checkbox"><input class="span1" name=mscomp_pentose type=text> Pent</label>
-                  </div>
+            <!--<div class="controls">-->
+              <!--<input id="querycompositioncheck" type="checkbox"> Query by Composition-->
+              <!--<div id="querycompositionhide" class="control-group">-->
+                <!--<input type="text"><br>-->
+                <!--<span>Enter a composition, or a composition range.</span>-->
+                <!--<div class="row-fluid">-->
+                  <!--<div class="span4">-->
+                    <!--<label class="checkbox"><input class="span1" name=mscomp_Hexose type=text> Hex</label>-->
+                    <!--<label class="checkbox"><input class="span1" name=mscomp_HexNAc type=text> HexNAc</label>-->
+                    <!--<label class="checkbox"><input class="span1" name=mscomp_deoxyHexose type=text> dHex</label>-->
+                    <!--<label class="checkbox"><input class="span1" name=mscomp_pentose type=text> Pent</label>-->
+                  <!--</div>-->
 
-                  <div class="span4">
-                    <label class="checkbox"><input class="span1" name=mscomp_NeuAc type=text> NeuAc</label>
-                    <label class="checkbox"><input class="span1" name=mscomp_NeuGc type=text> NeuGc</label>
-                    <label class="checkbox"><input class="span1" name=mscomp_KDN type=text> KDN</label>
-                    <label class="checkbox"><input class="span1" name=mscomp_HexA type=text> HexA</label>
-                  </div>
+                  <!--<div class="span4">-->
+                    <!--<label class="checkbox"><input class="span1" name=mscomp_NeuAc type=text> NeuAc</label>-->
+                    <!--<label class="checkbox"><input class="span1" name=mscomp_NeuGc type=text> NeuGc</label>-->
+                    <!--<label class="checkbox"><input class="span1" name=mscomp_KDN type=text> KDN</label>-->
+                    <!--<label class="checkbox"><input class="span1" name=mscomp_HexA type=text> HexA</label>-->
+                  <!--</div>-->
 
-                  <div class="span4">
-                    <label class="checkbox"><input class="span1" name=mscomp_phosphate type=text> P</label>
-                    <label class="checkbox"><input class="span1" name=mscomp_sulfate type=text> S</label>
-                    <label class="checkbox"><input class="span1" name=mscomp_methyl type=text> Methyl</label>
-                    <label class="checkbox"><input class="span1" name=mscomp_acetyl type=text> Acetyl</label>
-                  </div>
-                </div>
-              </div>
-            </div>
+                  <!--<div class="span4">-->
+                    <!--<label class="checkbox"><input class="span1" name=mscomp_phosphate type=text> P</label>-->
+                    <!--<label class="checkbox"><input class="span1" name=mscomp_sulfate type=text> S</label>-->
+                    <!--<label class="checkbox"><input class="span1" name=mscomp_methyl type=text> Methyl</label>-->
+                    <!--<label class="checkbox"><input class="span1" name=mscomp_acetyl type=text> Acetyl</label>-->
+                  <!--</div>-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
 
-            <div class="controls">
-              <h3>Publications</h3>
-              <p>Lookup all publications</p>
-              <a class="btn btn-primary" href="/references">Publications</a>
-            </div>
+            <!--<div class="controls">-->
+              <!--<h3>Publications</h3>-->
+              <!--<p>Lookup all publications</p>-->
+              <!--<a class="btn btn-primary" href="/references">Publications</a>-->
+            <!--</div>-->
 
           </div> @* end of filter2 *@
 
@@ -733,6 +733,16 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
   </div><!-- /col -->
 </div><!-- /row -->
 </section>
+<div class="footer row-fluid">
+<div class="span12">
+  <p class="pull-left">UniCarbKB</p>
+  <p class="pull-right">Supported by 
+    <a href="http://www.nectar.org.au">NeCTAR</a> &nbsp;|&nbsp; 
+    <a href="http://www.ands.org.au">ANDS</a> &nbsp;|&nbsp;
+    <a href="http://www.stint.se"> STINT</a>
+  </p>
+</div>
+</div>
 
 @if(taxon.size() != 0 ) {
 <script>
