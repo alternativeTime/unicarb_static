@@ -786,20 +786,28 @@ label.radio { padding-left: 20px; width: auto; }
     position: relative;
 }
 
-#tab2 .searchagain {
+#myTab .span12 {
+    margin-left: 0px;
+  }
+
+.searchagain {
   margin: 0;
     display: inline-block;
     width: auto;
     float: right;
   }
 
-#tab2 .searchagain #selection h3 {
-  margin-right: 20px;
+.searchagain #selection h3 {
+  margin: 0 20px 0 0;
   width: auto;
   display: inline-block;
 }
 
-#tab2 .searchagain label {
+.searchagain #selection button {
+  vertical-align: top;
+}
+
+.searchagain label {
   padding-top: 0;
 }
 
