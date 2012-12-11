@@ -160,6 +160,18 @@ hr {
 .breadcrumb li {
 }
 
+.thumbnail {
+  background: #FFF;
+  -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px;
+  -webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  -o-box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  position: relative;
+  border: 0px solid #000;
+}
+}
+
 .thumbnails {
   margin: 0;
 }
@@ -196,7 +208,8 @@ hr {
 }
 
 .topbar a {
-  color: #A2E0FF;
+  color: #FFF;
+  font-size: 13px;
   text-shadow: none;
 }
 
@@ -204,69 +217,21 @@ hr {
   background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABGdBTUEAALGPC/xhBQAAAANQTFRFAAAAp3o92gAAAAF0Uk5TM/82uXAAAAAKSURBVAjXY2AAAAACAAHiIbwzAAAAAElFTkSuQmCC);
   background:rgba(0, 0, 0, 0.35);
   color: #FFF;
-
-
-
-
-
-
-
-
 }
-
-
-
-
-
-
-
-
 
 .topbar div > ul .active > a {
   background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABGdBTUEAALGPC/xhBQAAAANQTFRFAAAAp3o92gAAAAF0Uk5TM/82uXAAAAAKSURBVAjXY2AAAAACAAHiIbwzAAAAAElFTkSuQmCC);
   color: #FFF;
-
-
-
-
-
-
-
-
 }
-
-
-
-
-
-
-
-
 
 .topbar div > ul .active > a:hover, {
   background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABGdBTUEAALGPC/xhBQAAAANQTFRFAAAAp3o92gAAAAF0Uk5TM/82uXAAAAAKSURBVAjXY2AAAAACAAHiIbwzAAAAAElFTkSuQmCC);
   background:rgba(0, 0, 0, 0.45);
-
-
-
-
-
-
-
-
 }
 
 /* !LAYOUT - HOME //////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////*/
-
-
-
-
-
-
-
-
 
 #main {
   background: url(../images/UniCarbKB_Logo.png) top right no-repeat;
@@ -275,7 +240,7 @@ hr {
 .home .container-fluid.content{ 
   background: url(../images/UniCarbKB_Logo_150.png) top center no-repeat;
 }
-h2.subheader { margin-top: 170px; text-align: center; }
+h3.subheader { margin-top: 170px; text-align: center; }
 
 .container-fluid { margin: 0 auto; width: 80%; min-width: 940px; overflow: visible; }
 .content { margin-top: 100px; }
@@ -451,6 +416,20 @@ h2.lead { margin: 30px 0; font-size: 25px; }
   margin-bottom: 0;
 }
 
+.start {
+  margin: 0 auto;
+  padding: 5px 20px;
+  background: #BF1E2E; color: #FFF; text-align: center;
+  font-weight: 300;
+  display: inline-block;
+  -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px;
+}
+
+.start small {
+    color: rgba(255, 255, 255, 0.500);
+  }
+
+
 /* !LAYOUT - REFERENCE LISTING /////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////*/
@@ -472,7 +451,26 @@ table th + th {
     vertical-align: middle;
     border-left: 0px solid #DDD;
     border-bottom: 1px solid #DDD;
-  }
+}
+
+th.header { 
+  padding: 0 10px 5px 10px;
+}
+
+th.header a {
+  line-height: 18px;
+}
+
+table .header::after {
+  content: "";
+  float: right;
+  margin-top: 7px;
+  border-width: 0;
+  border-style: solid;
+  border-color: black transparent;
+  visibility: none;
+  display: none;
+}
 
 .pagination ul {
   float: left;
@@ -534,7 +532,7 @@ th[class*="span"] {
 }
 
 .fA {
-  background-color: white;
+  background-color: transparent;
   border: 1px solid #EEE;
   cursor: pointer;
   margin: 0px 20px 20px 0px;
