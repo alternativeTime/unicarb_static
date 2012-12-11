@@ -51,7 +51,7 @@
     @* <h3>@message</h3> *@
     <p style="margin:0 0 9px;font-family:helvetica neue">The GlycoSuite database is an annotated and curated relational database of glycan structures. For the taxonomy entry <b>@taxon.species</b> a number of glycan structures, glycoproteins and tissue source's have been curated.</p>
     <p  style="font-weight: bold;"><a href=""  data-toggle="modal" data-id='@taxon' class="announceTaxStructures"><i class="icon-resize-full"></i> See more structures</a> <small>limited to six records below</small></p>
-    <ul class="thumbnails">
+    <ul class="thumbnails RP">
       @for((s, i) <- taxon.strtaxonomy.zipWithIndex; if (i <=5) ){
       <li class="span5">
         <a href="@routes.Application.structureDetails(s.structure.id)" class="thumbnail">
@@ -87,6 +87,17 @@
       <img class="sugar_image" src="http://glycosuitedb.expasy.org/glycosuite-structures//_@{s.id}.png">
       } **@
     </div>
+  </div>
+</div>
+
+<div class="footer row-fluid">
+  <div class="span12">
+    <p class="pull-left">UniCarbKB</p>
+    <p class="pull-right">Supported by 
+      <a href="http://www.nectar.org.au">NeCTAR</a> &nbsp;|&nbsp; 
+      <a href="http://www.ands.org.au">ANDS</a> &nbsp;|&nbsp;
+      <a href="http://www.stint.se"> STINT</a>
+    </p>
   </div>
 </div>
 
