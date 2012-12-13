@@ -65,6 +65,8 @@
           var replace = replace.replace("]","");
           var replace = replace.replace(",","");
           var replace = replace.replace("null","");
+	  var replace = replace.replace("> null ", "");
+	  var replace = replace.replace(" null", "" );
           var replace = replace.replace(" >  > ","");
 
           $('p').html(replace).appendTo(document.myDiv);
@@ -154,9 +156,9 @@
             @* <li class="dropdown" id="menu1">
               <a class="dropdown-toggle" data-toggle="dropdown" href="/browse">Browse <b class="caret"></b></a> 
             </li> *@
-	    <li><a href="/browse">Browse</a></li>
-	    <li><a href="/builder">Glycan Builder</a></li>
+	    <li><a href="/browse">Search</a></li>
 	    <li><a href="/references">References</a></li>
+	    <li><a href="/builder">Glycan Builder</a></li>
           </ul>
           @*<p class="pull-right">Logged in as <a href="#">username</a></p> *@
           <div id="headersearch" class="pull-right">
@@ -192,6 +194,5 @@
     <section id="main" class="container-fluid content">
     @content
     </section>
-
   </body>
 </html>

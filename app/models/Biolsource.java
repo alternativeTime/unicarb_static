@@ -98,8 +98,9 @@ public class Biolsource extends Model {
 
 	public static List<Biolsource> findBiolSourceIds(String protein) {
 		return
-			find.where()
+			find.where().disjunction()
 				.ilike("swiss_prot", protein)
+				.ilike("protein", protein)
 				.findList();
 	}
     

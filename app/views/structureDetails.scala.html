@@ -26,17 +26,7 @@
   <div class="modal-body">
     <h2 class="fullname">This structure has been associated with various records:</h2>
 
-    <div id="myDiv"><p>testthis</p></div>
-    @**
-    @for(protein <- proteinNames){
-    <p class="proteinName"><a href="@routes.Application.taxonDetails">@protein</a></p>}
-    <p class="fullname">The following taxonomic details have been curated:</p>
-    @for(tax <- taxNames) {
-    <p class="proteinName">@tax</p>}
-    <p class="fullname">The following taxonomic details have been curated:</p>
-    @for(source <- sourceNames) {
-    <p class="proteinName">@source</p>}
-    **@
+    <div id="myDiv"><p></p></div>
   </div>
   <div class="modal-footer">
     <a href="#" class="btn primary" onclick="okClicked ();">OK</a>
@@ -53,7 +43,7 @@
 
     <div class="row-fluid">
       <div class="span12">
-        <img class="sugar_image"  src="http://glycosuitedb.expasy.org/glycosuite-structures//_@{structureId}.png"> 
+        <img class="sugar_image"  src="../images/_@{structureId}.png"> 
       </div>
     </div>
     </section>	

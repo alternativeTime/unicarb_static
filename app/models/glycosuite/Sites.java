@@ -66,12 +66,12 @@ public class Sites extends Model {
 	String acc = accession;
 	List<String> uniprotDetails = new ArrayList<String>(); 
 	//UniProtEntry entry = new UniProtEntry();
-        UniProtEntry entry = (UniProtEntry) entryRetrievalService.getUniProtEntry("P00634");
+        //UniProtEntry entry = (UniProtEntry) entryRetrievalService.getUniProtEntry("P00634");
 
         //System.out.println("entry = " + entry);
 
         //If entry with a given accession number is not found, entry will be equal null
-        if (entry != null) {
+        /*if (entry != null) {
             System.out.println("entry = " + entry.getUniProtId().getValue());
             System.out.println("entry recomended names = " + entry.getProteinDescription().getRecommendedName().getFields());
             System.out.println("entry ec numbers = " + entry.getProteinDescription().getEcNumbers());
@@ -80,7 +80,7 @@ public class Sites extends Model {
 	    //uniprotDetails.addAll(entry.getProteinDescription().getRecommendedName().getFields() );
 	    //uniprotDetails.add(entry.getProteinDescription().getEcNumbers());
 
-        }
+        }*/
 
 
 	/*ProteinDataQueryService queryService = UniProtJAPI.factory.getProteinDataQueryService();

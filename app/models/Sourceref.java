@@ -39,7 +39,7 @@ public class Sourceref extends Model {
 
     public static List<SqlRow> findReferenceSource(Long term)  {
 
-    String sql = "SELECT r.title, r.authors, r.pmid FROM reference as r, sourceref as s where s.reference_id = r.id and s.biolsource_id = " + term;  
+    String sql = "SELECT r.id, r.title, r.authors, r.pmid FROM reference as r, sourceref as s where s.reference_id = r.id and s.biolsource_id = " + term;  
 
     SqlQuery sqlQuery = Ebean.createSqlQuery(sql);
     List<SqlRow> listSql = sqlQuery.findList();

@@ -70,11 +70,13 @@ public class Application extends Controller {
 
 		//might kill the above
 		System.out.println("the accession is " + protein);
-		List<GsProteinSite> gsProteinSite = GsProteinSite.ProteinRetrieval(protein);
-		
+		//List<GsProteinSite> gsProteinSite = GsProteinSite.ProteinRetrieval(protein);
+		List<GsProteinStr2> gsProteinSite = GsProteinStr2.ProteinRetrieval(protein);
+		//List<SitesReferences2> description = SitesReferences2.findSitesReferences(protein);
+		List<SitesReferences> description = SitesReferences.findSites(protein);
 		
 	return ok(
-		proteinsummary.render(proteinName, protein, biolSourceProtein, proteins, uniprotDetails, sites, gsProteinSite, listSqlArray)
+		proteinsummary.render(proteinName, protein, biolSourceProtein, proteins, uniprotDetails, sites, gsProteinSite, listSqlArray, description)
 	);
     }
 
@@ -282,13 +284,13 @@ public class Application extends Controller {
     		if (!stToProtein.isEmpty()) {
     			for (Stproteins stProteinEntry : stToProtein){
     				String proteinName = stProteinEntry.proteins.name;
-    				proteinNamesUnique.add(proteinName);
-				uniprotUnique.add(uniprot); //dead
+    				//proteinNamesUnique.add(proteinName);
+				String divprotein = "<a href=\"../proteinsummary/" + stProteinEntry.proteins.name +  "\">" + proteinName + "</a>";
+				//uniprotUnique.add(uniprot);
+				proteinNamesUnique.add(divprotein); 
     			}
     			proteinNames.addAll(proteinNamesUnique);
 			uniprot.addAll(uniprotUnique);
-			rowList.add(new String[] {"hello", "test"});
-			 rowList.add(new String[] {"hlo", "tt"});
     		}
 
 		if (!stToTax.isEmpty()){

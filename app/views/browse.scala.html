@@ -44,6 +44,7 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
         $("#e2").select2({
           placeholder: "Select multiple tissues... ",
           allowClear: true,
+	  minimumInputLength: 1,
         });
         });
 </script>
@@ -52,6 +53,7 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
         $("#e3").select2({
           placeholder: "Select multiple proteins...",
           allowClear: true,
+	  minimumInputLength: 1,
         });
         });
 </script>
@@ -61,6 +63,7 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
         $("#e4").select2({
           placeholder: "Select multiple tissues...",
           allowClear: true,
+	  minimumInputLength: 1,
         });
         });
 </script>
@@ -70,6 +73,7 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
         $("#e5").select2({
           placeholder: "Select multiple species...",
           allowClear: true,
+	  minimumInputLength: 1,
         });
         });
 </script>
@@ -79,6 +83,7 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
         $("#e6").select2({
           placeholder: "Select multiple proteins...",
           allowClear: true,
+	  minimumInputLength: 1,
         });
         });
 </script>
@@ -88,6 +93,7 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
         $("#e7").select2({
           placeholder: "Select multiple species...",
           allowClear: true,
+	  minimumInputLength: 1,
         });
         });
 </script>
@@ -97,6 +103,7 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
         $("#e8").select2({
           placeholder: "Select multiple tissues...",
           allowClear: true,
+	  minimumInputLength: 1,
         });
         });
 </script>
@@ -106,6 +113,7 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
         $("#e9").select2({
           placeholder: "Select multiple species...",
           allowClear: true,
+	  minimumInputLength: 1,
         });
         });
 </script>
@@ -115,6 +123,7 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
         $("#e10").select2({
           placeholder: "Select multiple tissues...",
           allowClear: true,
+          minimumInputLength: 1,
         });
         });
 </script>
@@ -124,6 +133,7 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
         $("#e11").select2({
           placeholder: "Select multiple proteins...",
           allowClear: true,
+	  minimumInputLength: 1,
         });
         });
 </script>
@@ -331,7 +341,9 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
 
           <div id="filter2" class="tab-pane control-group row-fluid eurocarb">
 
+	    <p>Support for EUROCarbDB will be available in the next release</p>
 
+	    @*
             <div class="multi-option clearfix">
               <span class="pull-left label">Search by: </span>
               <label class="radio">
@@ -380,7 +392,7 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
                 </form>
               </label>
             </div>
-
+	    *@
             <!--<div class="controls">-->
               <!--<label class="checkbox">-->
                 <!--<input id="querycheck" type="checkbox"> Linkage -->
@@ -451,7 +463,7 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
                     <input type="radio" name="glycobaseSearch" value="Localisation"> <h4>Localisation</h4>
                   </label>
                   <label class="radio">
-                    <input type="radio" name="glycobaseSearch" value="ProteinLocalisation"> <h4>Protein Localisation</h4>
+                    <input type="radio" name="glycobaseSearch" value="ProteinLocalisation"> <h4>Protein</h4>
                   </label>
                   <label class="radio">
                     <input type="radio" name="glycobaseSearch" value="Composition"> <h4>Composition</h4>
@@ -522,6 +534,7 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
         </div> @* end of tab1 *@
 
       <div class="tab-pane" id="tab2">
+
 
     @if(output != null && count != 0) {
     <div class="row-fluid glycobase">

@@ -17,20 +17,18 @@ import com.avaje.ebean.*;
  */
 @SuppressWarnings("serial")
 @Entity 
-@Table(name="sites_references", schema="glycosuite")
-public class SitesReferences extends Model {
+@Table(name="sites_references2", schema="glycosuite")
+public class SitesReferences2 extends Model {
 
     @Id
     public Long id;
     public String protein_name;
     public String swiss_prot;
-    public String glyco_aa;
-    public String glyco_aa_site;
+    public String description;
 
-    
-    public static Finder<Long,SitesReferences> find = new Finder<Long,SitesReferences>(Long.class, SitesReferences.class);
+    public static Finder<Long,SitesReferences2> find = new Finder<Long,SitesReferences2>(Long.class, SitesReferences2.class);
 
-    public static List<SitesReferences> findSites(String protein) {
+    public static List<SitesReferences2> findSitesReferences(String protein) {
         return
            find.where().ilike("swiss_prot", protein).findList();
     }

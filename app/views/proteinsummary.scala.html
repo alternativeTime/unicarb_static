@@ -1,4 +1,4 @@
-@(proteinName: String, accession: String, biol: ArrayList[Biolsource], protein: List[Proteins], uniprot: List[String], sites: List[Sites], gssites: List[GsProteinSite], source: ArrayList[SqlRow])
+@(proteinName: String, accession: String, biol: ArrayList[Biolsource], protein: List[Proteins], uniprot: List[String], sites: List[Sites], gssites: List[GsProteinStr2], source: ArrayList[SqlRow], description: List[SitesReferences])
 
 @main { <ul class="breadcrumb"> <li><i class="icon-folder-open" ></i><a href="#"> UniCarbKB Database</a> <span class="divider">></span></li>    <li><i class="icon-hdd" ></i><a href="/browse"> Browse</a> <span class="divider">></span></li> <li><i class="icon-hdd" ></i><a href="/browse"> Protein Summary</a> <span class="divider">></span></li>
     <li class="active" > You are here</li>
@@ -75,52 +75,36 @@
             <th>Evidence</th>
           </tr>
         </thead>
-
-        <tbody>
-	  @for(gs <- gssites) {
-	  <tr>
-	    <td>Confirmed</td>
-	    <td>@gs.amino_acid_position</td>
-	    <td>@gs.gsProteinSite.size()</td>
-	    <td>@for((gss, i) <- gs.gsProteinSite.zipWithIndex ; if (i <1)){ @gss.glycan_type } @*<span class="label notice">Ref: 1</span>*@</td>
-	    <td>GlycoSuite</td>
-	  </tr>
-	  }
-
-	
-	@*
-          <tr>
-            <td>Confirmed</td>
-            <td>97</td>
-            <td>33</td>
-            <td>N-linked (GlcNAc...) <span class="label notice">Ref: 1</span></td>
-            <td>UniProtKB</td>
-          </tr>
-          <tr>
-            <td>Confirmed</td>
-            <td>128</td>
-            <td>33</td>
-            <td>N-linked (GlcNAc...) <span class="label notice">Ref: 2</span></td>
-            <td>UniProtKB</td>
-          </tr>
-          <tr>
-            <td>Confirmed</td>
-            <td>135</td>
-            <td>33</td>
-            <td>N-linked (GlcNAc...) <span class="label notice">Ref: 3</span></td>
-            <td>UniProtKB</td>
-          </tr>
-          <tr>
-            <td>Confirmed</td>
-            <td>146</td>
-            <td>33</td>
-            <td>N-linked (GlcNAc...) <span class="label notice">Ref: 4</span></td>
-            <td>UniProtKB</td>
-          </tr>
-	*@
-        </tbody>
+		  <tbody>
+		  @for(gs <- gssites) {   
+			@for(gss <- gs.gsProteinSiteStr2) {
+				<tr>
+				<td>Confirmed</td>
+				<td>@gss.glyco_aa_site</td>
+				<td>@gss.gsProteinSiteStructureAssociation.size() <br/><span class="label notice">Structures:<br/>
+					@for(association <- gss.gsProteinSiteStructureAssociation) {
+						<a href="/structure/@association.structure_id">@association.structure_id</a>
+					}</span>
+				</td>
+				<td></td> 
+				<td>GlycoSuite</td>
+				@* @for(association <- gss.gsProteinSiteStructureAssociation) {
+					<td></td>		
+				} *@
+				</tr>
+			}  
+		  }
+	   	</tbody>
       </table>
 
+		<h3>Notes</h3>
+			<p>Accompanying GlycoSuite information</p>
+			@for(d <- description){
+				<ol>
+				<li>@d.glyco_aa_site</li>
+				</ol>
+			}
+	
     </div><!-- /col -->
 
     <div class="span6 details">
@@ -164,11 +148,11 @@
       </div>
 
       <div class="info">
-        <h3><span class="label notice" style="font-size:16px">@source.size()</span> References (@if(source.size() > 5) {showing top 5})</h3>
+        <h3><span class="label notice" style="font-size:16px">@source.size()</span> Reference @if(source.size() > 5) {showing top 5}</h3>
 	<ol>
 	@for((source,i) <- source.zipWithIndex; if (i < 5)) {
 	  <li class="references">
-	    <p class="title">@source("title")</p>
+	    <p class="title"><a href='/references/@source("id")'>@source("title")</a></p>
  	    <p class="author">@source("authors")</p>
 	    <p class="ref">PubMed: <a href='http://www.ncbi.nlm.nih.gov/pubmed/@source("pmid")'</a>@source("pmid")</p>
 	  </li>
@@ -220,5 +204,16 @@
 
   
 </section>
+
+<div class="footer row-fluid">
+    <div class="span12">
+      <p class="pull-left">UniCarbKB</p>
+      <p class="pull-right">Supported by 
+        <a href="http://www.nectar.org.au">NeCTAR</a> &nbsp;|&nbsp; 
+        <a href="http://www.ands.org.au">ANDS</a> &nbsp;|&nbsp;
+        <a href="http://www.stint.se"> STINT</a>
+      </p>
+    </div>
+</div>
 
 }
