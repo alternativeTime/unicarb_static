@@ -67,6 +67,7 @@ public class Application extends Controller {
 		}
 
 		List<String> uniprotDetails = Sites.EntryRetrievalExample(protein);
+		String sequenceRetrieval = Sites.EntryRetrievalSequence(protein);
 
 		//might kill the above
 		System.out.println("the accession is " + protein);
@@ -76,7 +77,7 @@ public class Application extends Controller {
 		List<SitesReferences> description = SitesReferences.findSites(protein);
 		
 	return ok(
-		proteinsummary.render(proteinName, protein, biolSourceProtein, proteins, uniprotDetails, sites, gsProteinSite, listSqlArray, description)
+		proteinsummary.render(proteinName, protein, biolSourceProtein, proteins, uniprotDetails, sites, gsProteinSite, listSqlArray, description, sequenceRetrieval)
 	);
     }
 
