@@ -53,8 +53,8 @@ Seq(format.raw/*1.18*/("""
 }
                 /*
                     -- GENERATED --
-                    DATE: Fri Oct 12 14:39:33 EST 2012
-                    SOURCE: /home/matthew/Documents/play-app/tmp/glycomics/app/views/stref.scala.html
+                    DATE: Tue Dec 18 08:54:51 EST 2012
+                    SOURCE: /home/matthew/Documents/play-app/office/glycomics/app/views/stref.scala.html
                     HASH: 7769f0d8d125a8d905ad786ea79e7ffa3db6d38e
                     MATRIX: 760->1|864->17|891->35|923->38|934->42|967->44|1018->65|1027->66|1061->79|1120->107
                     LINES: 27->1|31->1|32->3|34->5|34->5|34->5|36->7|36->7|36->7|41->12

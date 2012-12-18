@@ -3,43 +3,36 @@
 # ~~~~
 
 # Default path will just redirect to the computer list
-GET     /                           controllers.Application.index()
+GET     /                           	controllers.Application.index()
 
-# Computers list (look at the default values for pagination parameters)
-GET     /references                  controllers.Application.list2(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
-GET		/references/:id				 controllers.Application.refdisplay(id:Long)
+GET     /references                  	controllers.Application.list2(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "", protein ?= "")
+GET	/references/:id	 	controllers.Application.refdisplay(id:Long)
 
-GET		/streference/:id		     controllers.Application.stref(id:Long)
-GET		/structure/:id	      controllers.Application.structureDetails(id:Long)
+GET	/streference/:id	controllers.Application.stref(id:Long)
+GET	/structure/:id	      	controllers.Application.structureDetails(id:Long)
 
-GET		/taxonomy/:id      controllers.Application.taxonDetails(id:Long)
+GET	/taxonomy/:id      	controllers.Application.taxonDetails(id:Long)
 
 GET	/taxonomy			controllers.Application.findAllSpecies()
+GET	/tissuesummary/:id		controllers.Application.tissueSummary(id:Long)
 
-GET	/unicarb		   controllers.Application.unicarb(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
-GET	/ms		   controllers.Application.ms()
+GET	/unicarb		  	controllers.Application.unicarb(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
+GET	/ms		   		controllers.Application.ms()
 
-GET	/search			controllers.Application.search()
+GET	/builder			controllers.Application.builder()
 GET	/saySearch/:s			controllers.Search.saySearch(s: String)
 
 
-#GET	/unicarb/:id		   controllers.Application.unicarbdisplay(id:Long)
+GET	/browse				controllers.Application.browse()
 
-#GET	/taxonomysearch/:species		controllers.Application.taxonsearch(species:String)
-GET	/taxonomysearch	controllers.Application.taxonsearch(taxonomy ?= "")
+GET	/proteinsummary/:s		controllers.Application.proteinsummary(s: String)
+GET	/proteinsummary			controllers.Application.browse()
+GET	/proteinsite			controllers.UniprotConnection.proteinsite()
+GET	/taxonomysearch			controllers.Application.taxonsearch(taxonomy ?= "")
 
+GET	/compositions			controllers.Application.compositions()
 
-# Add computer
-# GET     /computers/new              controllers.Application.create()
-# POST    /computers                  controllers.Application.save()
-
-# Edit existing computer
-# GET     /computers/:id              controllers.Application.edit(id:Long)
-# POST    /computers/:id              controllers.Application.update(id:Long)
-
-# Delete a computer
-# POST    /computers/:id/delete       controllers.Application.delete(id:Long)
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.at(path="/public", file)
-GET	/images/*file	    controllers.Assets.at(path="/public/images", file)
+GET     /assets/*file               	controllers.Assets.at(path="/public", file)
+GET	/images/*file			controllers.Assets.at(path="/public/images", file)

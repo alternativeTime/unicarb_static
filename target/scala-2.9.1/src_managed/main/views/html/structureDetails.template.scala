@@ -41,92 +41,102 @@ Seq(format.raw/*1.226*/("""
 
 """),_display_(Seq(/*13.2*/main/*13.6*/ {_display_(Seq(format.raw/*13.8*/("""
 
-	<div class="modal hide fade" id="windowDescription">
-				<div class="modal-header">
-					<a href="#" class="close" data-dismiss="modal">&times;</a>
-					<h3>Protein and Taxonomy Information <span class="label success">Curated Entry</span> <span class="label notice">GlycoSuiteDB</span></h3>
-				</div>
-				<div class="modal-body">
-					<h2 class="fullname">This structure has been associated with various records:</h2>
-					
-					<div id="myDiv"><p>testthis</p></div>
-"""),format.raw/*33.4*/("""
-					</div>
-				<div class="modal-footer">
-					<a href="#" class="btn primary" onclick="okClicked ();">OK</a>
-					</div>
-				</div>
-			</div>
+<ul class="breadcrumb">
+  <li><i class="icon-home" ></i><a href="/"> UniCarbKB</a> <span class="divider">></span></li>
+  <li class="active"><i class="icon-th" ></i> Structure<span class="divider"></span></li>
+  <!--<li class="active" > You are here</li>-->
+</ul>
 
- 
-    <div class="container">
-	<section id="structureLayout">
-  	<div class="page-header">
-    	<h1>Structure <small>Details for structure</small></h1>
-  	</div>
+<div class="modal hide fade" id="windowDescription">
+  <div class="modal-header">
+    <a href="#" class="close" data-dismiss="modal">&times;</a>
+    <h3>Protein and Taxonomy Information <span class="label success">Curated Entry</span> <span class="label notice">GlycoSuiteDB</span></h3>
+  </div>
+  <div class="modal-body">
+    <h2 class="fullname">This structure has been associated with various records:</h2>
 
-	<div class="row">
-	 <div class="span16">
-		 <div style="float:left; width:100% ">
-		<img class="sugar_image"  src="http://glycosuitedb.expasy.org/glycosuite-structures//_"""),_display_(Seq(/*51.90*/{structureId})),format.raw/*51.103*/(""".png"> 
-			<div style="float:right; margin-right:20px"><h4 class="stats">Information</h4>
-                                <ul class="stats">
-                                        <li>Proteins</li>
-                                        <li>Taxonomy</li>
-                                        <li>Source</li>
-                                </ul>
-                        </div>
-
-		</div>
-	 </div>
-	</div>
-	</section>	
-	
-	<section id="layouts">	
-	 <div class="row">
-	    <br />   """),format.raw/*67.36*/("""
-	    <div class="span16">
-
-		<div class="row-fluid"><h4 class="pull-left">Available Descriptions :&nbsp;</h4><ul class="nav nav-pills pull-left"><li><a href="" style="color: #1F7099;" data-toggle="modal" data-id='"""),_display_(Seq(/*70.188*/taxDiv)),format.raw/*70.194*/("""' class="announce2" data-id2='100'><i class="icon-search"></i> Taxonomy</a></li><li><a style="color: #1F7099;" data-toggle="modal" data-id=""""),_display_(Seq(/*70.335*/proteinNames)),format.raw/*70.347*/("""" class="announce"><i class="icon-th-list"></i> Protein</a></li><li><a style="color: #1F7099;" data-toggle="modal" data-id=""""),_display_(Seq(/*70.472*/sourceNames)),format.raw/*70.483*/("""" class="announce" ><i class="icon-th-list"></i> Source</a></li></div>
+    <div id="myDiv"><p></p></div>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn primary" onclick="okClicked ();">OK</a>
+  </div>
+</div>
+      </div>
 
 
+      <section id="structureLayout">
+      <div class="page-header">
+        <h1>Structure</h1>
+        <h4 class="subheader">Details for structure</h4>
+    </div>
 
-		<h4>References associated to structure</h4>
+    <div class="row-fluid">
+      <div class="span12">
+        <img class="sugar_image"  src="../images/_"""),_display_(Seq(/*46.52*/{structureId})),format.raw/*46.65*/(""".png"> 
+      </div>
+    </div>
+    </section>	
+
+    <section id="layouts">	
+    <div class="row-fluid">
+      <div class="span12">
+
+        <div class="row-fluid">
+          <h4 class="pull-left">Available Descriptions :&nbsp;</h4>
+          <ul class="nav nav-pills pull-left">
+            <li><a href="" style="color: #1F7099;" data-toggle="modal" data-id='"""),_display_(Seq(/*58.82*/taxDiv)),format.raw/*58.88*/("""' class="announce2" data-id2='100'><i class="icon-search"></i> Taxonomy</a></li>
+            <li><a style="color: #1F7099;" data-toggle="modal" data-id=""""),_display_(Seq(/*59.74*/proteinNames)),format.raw/*59.86*/("""" class="announce"><i class="icon-th-list"></i> Protein</a></li>
+            <li><a style="color: #1F7099;" data-toggle="modal" data-id=""""),_display_(Seq(/*60.74*/sourceNames)),format.raw/*60.85*/("""" class="announce" ><i class="icon-th-list"></i> Source</a></li>
+          </ul>
+        </div>
+
+        <h2>References associated to structure</h2>
 
 
-	    	<table class="computers zebra-striped">
-	            <thead>
-        	        <tr>
-                	"""),_display_(Seq(/*80.19*/header("title", "Title"))),format.raw/*80.43*/("""
-			"""),_display_(Seq(/*81.5*/header("year", "Year"))),format.raw/*81.27*/("""
-                    	"""),_display_(Seq(/*82.23*/header("authors", "Authors"))),format.raw/*82.51*/("""
-                	</tr>
-            	    </thead>
-            	<tbody>
+          <table class="computers zebra-striped">
+            <thead>
+              <tr>
+                """),_display_(Seq(/*70.18*/header("title", "Title"))),format.raw/*70.42*/("""
+                """),_display_(Seq(/*71.18*/header("year", "Year"))),format.raw/*71.40*/("""
+                """),_display_(Seq(/*72.18*/header("authors", "Authors"))),format.raw/*72.46*/("""
+              </tr>
+            </thead>
+            <tbody>
 
 
-    		"""),_display_(Seq(/*88.8*/for(stref <- references) yield /*88.32*/{_display_(Seq(format.raw/*88.33*/("""
+              """),_display_(Seq(/*78.16*/for(stref <- references) yield /*78.40*/{_display_(Seq(format.raw/*78.41*/("""
 
 
-        		"""),_display_(Seq(/*91.12*/for(reference <- stref.references) yield /*91.46*/{_display_(Seq(format.raw/*91.47*/("""
-                	"""),format.raw/*92.89*/("""
-                	<tr><td><a href="../references/"""),_display_(Seq(/*93.50*/reference/*93.59*/.reference.id)),format.raw/*93.72*/("""">"""),_display_(Seq(/*93.75*/reference/*93.84*/.reference.title)),format.raw/*93.100*/("""</a></td><td>"""),_display_(Seq(/*93.114*/reference/*93.123*/.reference.year)),format.raw/*93.138*/("""</td><td>"""),_display_(Seq(/*93.148*/reference/*93.157*/.reference.authors)),format.raw/*93.175*/("""</td></tr>
-        		""")))})),format.raw/*94.12*/("""
-    		""")))})),format.raw/*95.8*/("""
-		</tbody>
-    		</table>
+              """),_display_(Seq(/*81.16*/for(reference <- stref.references) yield /*81.50*/{_display_(Seq(format.raw/*81.51*/("""
+              """),format.raw/*82.86*/("""
+              <tr><td><a href="../references/"""),_display_(Seq(/*83.47*/reference/*83.56*/.reference.id)),format.raw/*83.69*/("""">"""),_display_(Seq(/*83.72*/reference/*83.81*/.reference.title)),format.raw/*83.97*/("""</a></td><td>"""),_display_(Seq(/*83.111*/reference/*83.120*/.reference.year)),format.raw/*83.135*/("""</td><td>"""),_display_(Seq(/*83.145*/reference/*83.154*/.reference.authors)),format.raw/*83.172*/("""</td></tr>
+              """)))})),format.raw/*84.16*/("""
+              """)))})),format.raw/*85.16*/("""
+            </tbody>
+          </table>
 
 
 
-	     </div>
+        </div>
 
-	</div>
+      </div>
 
     </div>
 
+    </section>
 
-      
-""")))})),format.raw/*109.2*/("""
+    <div class="footer row-fluid">
+      <div class="span12">
+        <p class="pull-left">UniCarbKB</p>
+        <p class="pull-right">Supported by 
+          <a href="http://www.nectar.org.au">NeCTAR</a> &nbsp;|&nbsp; 
+          <a href="http://www.ands.org.au">ANDS</a> &nbsp;|&nbsp;
+          <a href="http://www.stint.se"> STINT</a>
+        </p>
+      </div>
+    </div>
+
+    """)))})),format.raw/*110.6*/("""
 """))}
     }
     
@@ -139,11 +149,11 @@ Seq(format.raw/*1.226*/("""
 }
                 /*
                     -- GENERATED --
-                    DATE: Fri Oct 12 14:39:33 EST 2012
-                    SOURCE: /home/matthew/Documents/play-app/tmp/glycomics/app/views/structureDetails.scala.html
-                    HASH: 978cb9e3250621f1dcf239b63068e77850056521
-                    MATRIX: 890->1|1190->354|1203->360|1291->390|1360->429|1386->434|1437->225|1464->243|1492->352|1520->450|1553->453|1565->457|1599->459|2097->1422|2609->1903|2645->1916|3156->2420|3403->2635|3432->2641|3605->2782|3640->2794|3797->2919|3831->2930|4091->3159|4137->3183|4172->3188|4216->3210|4270->3233|4320->3261|4430->3341|4470->3365|4504->3366|4549->3380|4599->3414|4633->3415|4679->3504|4760->3554|4778->3563|4813->3576|4847->3579|4865->3588|4904->3604|4950->3618|4969->3627|5007->3642|5049->3652|5068->3661|5109->3679|5163->3701|5202->3709|5308->3783
-                    LINES: 27->1|30->7|30->7|32->7|34->9|34->9|37->1|38->3|39->6|40->11|42->13|42->13|42->13|53->33|71->51|71->51|87->67|90->70|90->70|90->70|90->70|90->70|90->70|100->80|100->80|101->81|101->81|102->82|102->82|108->88|108->88|108->88|111->91|111->91|111->91|112->92|113->93|113->93|113->93|113->93|113->93|113->93|113->93|113->93|113->93|113->93|113->93|113->93|114->94|115->95|129->109
+                    DATE: Tue Dec 18 08:54:51 EST 2012
+                    SOURCE: /home/matthew/Documents/play-app/office/glycomics/app/views/structureDetails.scala.html
+                    HASH: 707a7b869827662c4cdff99e3e487f5294e40301
+                    MATRIX: 890->1|1190->354|1203->360|1291->390|1360->429|1386->434|1437->225|1464->243|1492->352|1520->450|1553->453|1565->457|1599->459|2748->1577|2783->1590|3175->1951|3203->1957|3388->2111|3422->2123|3591->2261|3624->2272|3912->2529|3958->2553|4007->2571|4051->2593|4100->2611|4150->2639|4260->2718|4300->2742|4334->2743|4383->2761|4433->2795|4467->2796|4510->2882|4588->2929|4606->2938|4641->2951|4675->2954|4693->2963|4731->2979|4777->2993|4796->3002|4834->3017|4876->3027|4895->3036|4936->3054|4994->3080|5042->3096|5556->3578
+                    LINES: 27->1|30->7|30->7|32->7|34->9|34->9|37->1|38->3|39->6|40->11|42->13|42->13|42->13|75->46|75->46|87->58|87->58|88->59|88->59|89->60|89->60|99->70|99->70|100->71|100->71|101->72|101->72|107->78|107->78|107->78|110->81|110->81|110->81|111->82|112->83|112->83|112->83|112->83|112->83|112->83|112->83|112->83|112->83|112->83|112->83|112->83|113->84|114->85|139->110
                     -- GENERATED --
                 */
             

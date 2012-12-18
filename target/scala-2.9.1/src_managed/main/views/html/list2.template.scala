@@ -21,10 +21,10 @@ import com.avaje.ebean._
 import play.mvc.Http.Context.Implicit._
 import views.html._
 /**/
-object list2 extends BaseScalaTemplate[play.api.templates.Html,Format[play.api.templates.Html]](play.api.templates.HtmlFormat) with play.api.templates.Template4[Page[Reference],String,String,String,play.api.templates.Html] {
+object list2 extends BaseScalaTemplate[play.api.templates.Html,Format[play.api.templates.Html]](play.api.templates.HtmlFormat) with play.api.templates.Template5[Page[Reference],String,String,String,String,play.api.templates.Html] {
 
     /**/
-    def apply/*1.2*/(currentPage: Page[Reference], currentSortBy: String, currentOrder: String, currentFilter: String):play.api.templates.Html = {
+    def apply/*1.2*/(currentPage: Page[Reference], currentSortBy: String, currentOrder: String, currentFilter: String, proteinFilter: String):play.api.templates.Html = {
         _display_ {
 def /*32.2*/header/*32.8*/(key:String, title:String):play.api.templates.Html = {_display_(
 
@@ -54,7 +54,7 @@ Seq(format.raw/*32.38*/("""
     routes.Application.list2(newPage, sortBy, order, currentFilter)
     
 }};
-Seq(format.raw/*1.100*/("""
+Seq(format.raw/*1.123*/("""
 
 """),format.raw/*5.42*/("""
 """),format.raw/*27.2*/("""
@@ -166,19 +166,19 @@ Seq(format.raw/*1.100*/("""
 """))}
     }
     
-    def render(currentPage:Page[Reference],currentSortBy:String,currentOrder:String,currentFilter:String) = apply(currentPage,currentSortBy,currentOrder,currentFilter)
+    def render(currentPage:Page[Reference],currentSortBy:String,currentOrder:String,currentFilter:String,proteinFilter:String) = apply(currentPage,currentSortBy,currentOrder,currentFilter,proteinFilter)
     
-    def f:((Page[Reference],String,String,String) => play.api.templates.Html) = (currentPage,currentSortBy,currentOrder,currentFilter) => apply(currentPage,currentSortBy,currentOrder,currentFilter)
+    def f:((Page[Reference],String,String,String,String) => play.api.templates.Html) = (currentPage,currentSortBy,currentOrder,currentFilter,proteinFilter) => apply(currentPage,currentSortBy,currentOrder,currentFilter,proteinFilter)
     
     def ref = this
 
 }
                 /*
                     -- GENERATED --
-                    DATE: Fri Oct 12 14:39:33 EST 2012
-                    SOURCE: /home/matthew/Documents/play-app/tmp/glycomics/app/views/list2.scala.html
-                    HASH: a7209bd454833864162d5ad3173c690ef0554080
-                    MATRIX: 785->1|944->846|958->852|1047->882|1095->899|1107->902|1146->919|1186->928|1220->954|1308->1018|1360->1039|1394->1051|1428->1054|1455->1059|1493->228|1504->232|2032->99|2061->226|2089->734|2119->844|2147->1075|2180->1078|2192->1082|2226->1084|2287->1114|2372->1177|2414->1189|2455->1221|2490->1223|2602->1304|2616->1309|2653->1324|2705->1345|2785->1394|2822->1409|2934->1490|2969->1503|3220->1723|3235->1729|3277->1749|3365->1807|3411->1844|3446->1846|3570->1953|3583->1958|3617->1959|3768->2079|3814->2103|3867->2125|3911->2147|3964->2169|4014->2197|4067->2219|4124->2254|4162->2262|4222->2300|4335->2382|4388->2419|4423->2421|4520->2487|4538->2496|4566->2502|4665->2570|4700->2596|4735->2598|4827->2672|4840->2677|4874->2678|4939->2712|4957->2721|4984->2726|5046->2756|5166->2845|5204->2874|5239->2876|5331->2950|5344->2955|5378->2956|5443->2990|5461->2999|5491->3007|5553->3037|5673->3126|5711->3155|5746->3157|5838->3231|5851->3236|5885->3237|5950->3271|5968->3280|6003->3293|6066->3323|6173->3397|6329->3521|6362->3544|6398->3546|6503->3619|6566->3659|6651->3725|6665->3730|6700->3731|6871->3869|6976->3942|6997->3953|7053->3986|7129->4030|7162->4053|7198->4055|7303->4128|7366->4168|7447->4230|7461->4235|7496->4236|7663->4370|7743->4418|7786->4429
+                    DATE: Tue Dec 18 17:18:55 EST 2012
+                    SOURCE: /home/matthew/Documents/play-app/office/glycomics/app/views/list2.scala.html
+                    HASH: ffb651f7096bc6f798f7926f0b593ce0754b52bb
+                    MATRIX: 792->1|974->869|988->875|1077->905|1125->922|1137->925|1176->942|1216->951|1250->977|1338->1041|1390->1062|1424->1074|1458->1077|1485->1082|1523->251|1534->255|2062->122|2091->249|2119->757|2149->867|2177->1098|2210->1101|2222->1105|2256->1107|2317->1137|2402->1200|2444->1212|2485->1244|2520->1246|2632->1327|2646->1332|2683->1347|2735->1368|2815->1417|2852->1432|2964->1513|2999->1526|3250->1746|3265->1752|3307->1772|3395->1830|3441->1867|3476->1869|3600->1976|3613->1981|3647->1982|3798->2102|3844->2126|3897->2148|3941->2170|3994->2192|4044->2220|4097->2242|4154->2277|4192->2285|4252->2323|4365->2405|4418->2442|4453->2444|4550->2510|4568->2519|4596->2525|4695->2593|4730->2619|4765->2621|4857->2695|4870->2700|4904->2701|4969->2735|4987->2744|5014->2749|5076->2779|5196->2868|5234->2897|5269->2899|5361->2973|5374->2978|5408->2979|5473->3013|5491->3022|5521->3030|5583->3060|5703->3149|5741->3178|5776->3180|5868->3254|5881->3259|5915->3260|5980->3294|5998->3303|6033->3316|6096->3346|6203->3420|6359->3544|6392->3567|6428->3569|6533->3642|6596->3682|6681->3748|6695->3753|6730->3754|6901->3892|7006->3965|7027->3976|7083->4009|7159->4053|7192->4076|7228->4078|7333->4151|7396->4191|7477->4253|7491->4258|7526->4259|7693->4393|7773->4441|7816->4452
                     LINES: 27->1|29->32|29->32|31->32|32->33|32->33|32->33|32->33|32->33|32->33|33->34|33->34|33->34|33->34|35->6|35->6|57->1|59->5|60->27|62->31|63->36|65->38|65->38|65->38|67->40|67->40|69->42|69->42|69->42|71->44|71->44|71->44|73->46|76->49|76->49|77->50|77->50|81->54|81->54|81->54|85->58|85->58|85->58|91->64|91->64|91->64|96->69|96->69|97->70|97->70|98->71|98->71|99->72|99->72|100->73|100->73|105->78|105->78|105->78|107->80|107->80|107->80|109->82|109->82|109->82|111->84|111->84|111->84|112->85|112->85|112->85|113->86|116->89|116->89|116->89|118->91|118->91|118->91|119->92|119->92|119->92|120->93|123->96|123->96|123->96|125->98|125->98|125->98|126->99|126->99|126->99|127->100|130->103|137->110|137->110|137->110|139->112|139->112|141->114|141->114|141->114|145->118|147->120|147->120|147->120|149->122|149->122|149->122|151->124|151->124|153->126|153->126|153->126|157->130|161->134|163->136
                     -- GENERATED --
                 */
