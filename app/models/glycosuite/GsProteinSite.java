@@ -62,5 +62,14 @@ public class GsProteinSite extends Model {
 
     }
 
+    public static String ProteinRetrievalName(String accession) {
+	List<GsProteinSite> gsProteinSite = GsProteinSite.ProteinRetrieval(accession);
+	String proteinName = "";
+	for(GsProteinSite g : gsProteinSite) {
+		proteinName = g.protein_name;
+	}
+    return proteinName;
+    }
+
 
 }

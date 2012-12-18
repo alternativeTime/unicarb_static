@@ -1,45 +1,45 @@
-package controllers;
+	package controllers;
 
-import java.util.*;
+	import java.util.*;
 
-import play.mvc.*;
-import play.data.*;
-import play.*;
+	import play.mvc.*;
+	import play.data.*;
+	import play.*;
 
-import views.html.*;
+	import views.html.*;
 
-import models.*;
+	import models.*;
 
-import com.avaje.ebean.*; //dont think this should be here due to SqlRow
-import static play.libs.Json.toJson;
-import static play.libs.Json.*;
-import java.net.URLDecoder;
-import java.io.UnsupportedEncodingException;
+	import com.avaje.ebean.*; //dont think this should be here due to SqlRow
+	import static play.libs.Json.toJson;
+	import static play.libs.Json.*;
+	import java.net.URLDecoder;
+	import java.io.UnsupportedEncodingException;
 
-/**
- * Manage a database of computers
- */
-public class Application extends Controller {
-    
-    /**
-     * This result directly redirect to application home.
-     */
-    public static Result GO_HOME = redirect(
-        routes.Application.list2(0, "name", "asc", "")
-    );
-	
-    public static Result stref(Long id) {
-    	System.out.println("testing params value " + id);
-    	Streference display = Streference.find.byId(id);
-
-    	return ok( 
-    			//render(id, display)t
-    			stref.ref().render(display)
-    			); 
-    };
-
-    public static Result proteinsummary(String protein) {
+	/**
+	 * Manage a database of computers
+	 */
+	public class Application extends Controller {
+	    
+	    /**
+	     * This result directly redirect to application home.
+	     */
+	    public static Result GO_HOME = redirect(
+		routes.Application.list2(0, "name", "asc", "", "")
+	    );
 		
+	    public static Result stref(Long id) {
+		System.out.println("testing params value " + id);
+		Streference display = Streference.find.byId(id);
+
+		return ok( 
+				//render(id, display)t
+				stref.ref().render(display)
+				); 
+	    };
+
+	    public static Result proteinsummary(String protein) {
+			
 		List<SqlRow> listSql = null;
 		ArrayList<SqlRow> listSqlArray = new ArrayList<SqlRow>();
 		String proteinName = "";	
@@ -57,17 +57,12 @@ public class Application extends Controller {
 			listSqlArray.addAll(listSql);
 				//biorefs.add(objectBiolSource.reference_id);
 		}
-		
+
 		List<Proteins> proteins = Proteins.findProteins(protein);
 		List<Sites> sites = Sites.findSites(protein);
-
-		//initial uniprot tesa
-		for(Proteins proteinLookup : proteins) {
-			accession = proteinLookup.swissProt;
-		}
-
-		List<String> uniprotDetails = Sites.EntryRetrievalExample(protein);
-		String sequenceRetrieval = Sites.EntryRetrievalSequence(protein);
+		
+		List<String> uniprotDetails = UniprotConnection.EntryRetrievalExample(protein);
+		String sequenceRetrieval = UniprotConnection.EntryRetrievalSequence(protein);
 
 		//might kill the above
 		System.out.println("the accession is " + protein);
@@ -446,9 +441,9 @@ public class Application extends Controller {
      * @param page Current page number (starts from 0)
      * @param sortBy Column to be sorted
      * @param order Sort order (either asc or desc)
-     * @param filter Filter applied on computer names
+     * @param filter Filter applied 
      */
-    public static Result list2(int page, String sortBy, String order, String filter) {
+    public static Result list2(int page, String sortBy, String order, String filter, String protein) {
         return ok(
             list.render(
                 Reference.page(page, 10, sortBy, order, filter),

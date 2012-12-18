@@ -103,6 +103,24 @@ public class Biolsource extends Model {
 				.ilike("protein", protein)
 				.findList();
 	}
+
+	public static ArrayList<SqlRow> findBiolsourceRefs(String protein) {
+	List<SqlRow> listSql = null;
+                ArrayList<SqlRow> listSqlArray = new ArrayList<SqlRow>();
+                String proteinName = "";
+                ArrayList<Biolsource> biolSourceProtein = new ArrayList<Biolsource>();
+                List<Biolsource> biolSourceProteins = Biolsource.findBiolSourceIds(protein);
+                for(Biolsource biol : biolSourceProteins){
+                        proteinName = biol.protein;
+                        Biolsource objectBiolSource = Ebean.find(Biolsource.class, biol.id);
+                                biolSourceProtein.add(objectBiolSource);
+
+                        listSql = Sourceref.findReferenceSource(biol.id);
+                        listSqlArray.addAll(listSql);
+                                
+                }
+	return listSqlArray;
+	}
     
 }
 

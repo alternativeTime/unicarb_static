@@ -229,24 +229,7 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
         <li class="active"><a href="#tab1" data-toggle="tab"><h2>Construct a Query:</h2></a></li>
         <li class="span12"><a href="#tab2" data-toggle="tab">
             <h2>Search returned 
-              @if(taxon.size() != 0) {@taxon.size()} @if(proteinList.size() != 0) {@proteinList.size()} @if(tissueList.size() != 0) {@tissueList.size()} results...
-              @if(taxon !=null) {
-              @if(taxon.size() >=1 ){	
-              <div class="searchagain clearfix">
-                <!--<h3>Taxonomy Search </h3>-->
-                <div class="controls">
-                  <label class="checkbox">
-                    <form class="form-search">
-                      <div id="selection">
-                        <h3>Search again: </h3>
-                        <select  name=taxonomy MULTIPLE id="e9" style="width:350px"  id="listBox"></select>
-                        <button type="submit" class="btn">Search</button>
-                      </div>
-                    </form>
-                  </label>
-                </div>
-              </div>
-              }
+             
         </h2></a></li>
         <li><a href="#tab3" data-toggle="tab">Related Results</a></li>
       </ul>
@@ -535,7 +518,6 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
 
       <div class="tab-pane" id="tab2">
 
-
     @if(output != null && count != 0) {
     <div class="row-fluid glycobase">
       <div class="controls">
@@ -723,7 +705,23 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
 
 
 
-
+    @if(taxon !=null) {
+    @if(taxon.size() >=1 ){	
+    <div class="row-fluid searchagain">
+      <!--<h3>Taxonomy Search </h3>-->
+      <div class="controls">
+        <label class="checkbox">
+          <form class="form-search">
+            <div id="selection">
+              <h3>Search again: </h3>
+              <select  name=taxonomy MULTIPLE id="e9" style="width:350px"  id="listBox"></select>
+              <button type="submit" class="btn">Search</button>
+            </div>
+          </form>
+        </label>
+      </div>
+    </div>
+    }
 
 
     @for( (taxon, ii) <- taxon.zipWithIndex) {        <div class="row-fluid glycosuiteResult">

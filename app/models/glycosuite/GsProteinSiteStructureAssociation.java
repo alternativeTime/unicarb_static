@@ -31,13 +31,17 @@ public class GsProteinSiteStructureAssociation extends Model {
     //public String glycan_type;
     public int source_id; //make this a relationship
 
-	@ManyToOne
-	public GsProteinSiteStr2 gsProteinSiteStr2;
+    @ManyToOne
+    public GsProteinSiteStr2 gsProteinSiteStr2;
     
     
     public static Finder<Long,GsProteinSiteStructureAssociation> find = new Finder<Long,GsProteinSiteStructureAssociation>(Long.class, GsProteinSiteStructureAssociation.class);
 
-
+    public static List<GsProteinSiteStructureAssociation> findStructuresSites(String protein, String site) {
+	return
+	 find.where().ilike("swiss_prot", protein).ilike("glyco_aa_site", site).findList();
+	
+    } 
 
 
 }

@@ -2,30 +2,9 @@
 
 @main {
 
-<script type="text/javascript">
-
-function splitNChars(txt, num) {
-    var result = [];
-    for (var i = 0; i < txt.length; i += num) {
-        result.push(txt.substr(i, num));
-    }
-    return result;
-}
-
-var test = splitNChars("foofaafoofaafoofaafoofaafoofaa", 3);
-var div = document.getElementById("testDiv");
-for (var i = 0; i < test.length; i++) {
-    div.innerHTML += test[i] + "<br/>";
-}
-
-</script>
-
-<div id="testDiv">
-</div>
-
 
  <ul class="breadcrumb"> <li><i class="icon-folder-open" ></i><a href="#"> UniCarbKB Database</a> <span class="divider">></span></li>    <li><i class="icon-hdd" ></i><a href="/browse"> Browse</a> <span class="divider">></span></li> <li><i class="icon-hdd" ></i><a href="/browse"> Protein Summary</a> <span class="divider">></span></li>
-    <li class="active" > You are here</li>
+    <li class="active" > @accession</li>
   </ul>
 
   <section id="layouts" class="proteinsummary">
@@ -35,10 +14,10 @@ for (var i = 0; i < test.length; i++) {
 
       <div class="page-header">
         <h1>@proteinName @*<span class="pull-right"><span class="label success">Gene: 1</span> <span class="label notice">Ref: 29</span> <span class="label info">ISO: 3</span></span>*@</h1>
-        <h4 class="subheader">Accession: @accession</h4>
+        <h4 class="subheader">Accession: @accession <span class="pull-right"><a href="http://uniprot.org/uniprot/@accession"><span class="label success">UniProt Entry</span></a></span></h4>
       </div>
 
-      <h3>PROTEIN</h3>
+      @*<h3>PROTEIN</h3> <span class="pull-right"><a href="http://uniprot.org/uniprot/@accession"><span class="label success">UniProt Entry</span></a></span>*@
       <div class="control-group">
 	@for((protein,i) <- protein.zipWithIndex; if (i < 1)) {
         <label>Recommended name:</label> <div class="controls"><p>@protein.name</p></div>
@@ -77,21 +56,10 @@ for (var i = 0; i < test.length; i++) {
 	@for(uniprot <- uniprot) {
 	  <p>@uniprot</p> 
 	}
-      <h3>HISTORY</h3>
-	<div class="control-group">
-        <label>UniCarbKB:</label>
-        <div class="controls">
-          <p>
-            Integrated 2010-03-01
-            <br>
-            Last updated 2012-11-02
-            <br>
-          </p>
-        </div>
-        </div>
+      <h3>GLYCOSYLATION SITES</h3>
 
 
-      <table>
+      <table class="computers zebra-striped">
         <thead>
           <tr>
             <th>Name</th>
@@ -108,10 +76,10 @@ for (var i = 0; i < test.length; i++) {
 				<tr>
 				<td>Confirmed</td>
 				<td>@gss.glyco_aa_site</td>
-				<td>@gss.gsProteinSiteStructureAssociation.size() <br/><span class="label notice">Structures:<br/>
+				<td>@gss.gsProteinSiteStructureAssociation.size() <br/><a href="/proteinsite?position=@gss.glyco_aa_site&protein=@accession"><span class="label notice">Structures:<br/>
 				@*	@for(association <- gss.gsProteinSiteStructureAssociation) {
 						<a href="/structure/@association.structure_id">@association.structure_id</a>
-					}*@</span>
+					}*@</span></a>
 				</td>
 				<td></td> 
 				<td>GlycoSuite</td>
@@ -122,16 +90,29 @@ for (var i = 0; i < test.length; i++) {
 			}  
 		  }
 	   	</tbody>
-		  
+	  
       </table>
 
-		<h3>Notes</h3>
-			<p>Accompanying GlycoSuite information</p>
-			@for(d <- description){
-				<ol>
-				<li>@d.glyco_aa_site</li>
-				</ol>
-			}
+	<h3>Notes</h3>
+	<p>Accompanying GlycoSuite information</p>
+	@for(d <- description){
+	<ol>
+	<li>@d.glyco_aa_site</li>
+	</ol>
+	}
+
+	<h3>HISTORY</h3>
+        <div class="control-group">
+        <label>UniCarbKB:</label>
+        <div class="controls">
+          <p>
+            Integrated 2010-03-01
+            <br>
+            Last updated 2012-11-02
+            <br>
+          </p>
+        </div>
+        </div>
 	
     </div><!-- /col -->
 
