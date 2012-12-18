@@ -228,26 +228,10 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
       <ul class="nav nav-tabs row-fluid" id="myTab">
         <li class="active"><a href="#tab1" data-toggle="tab"><h2>Construct a Query:</h2></a></li>
         <li class="span12"><a href="#tab2" data-toggle="tab">
-            <h2>Search returned 
-              @if(taxon.size() != 0) {@taxon.size()} @if(proteinList.size() != 0) {@proteinList.size()} @if(tissueList.size() != 0) {@tissueList.size()} results...
-              @if(taxon !=null) {
-              @if(taxon.size() >=1 ){	
-              <div class="searchagain clearfix">
-                <!--<h3>Taxonomy Search </h3>-->
-                <div class="controls">
-                  <label class="checkbox">
-                    <form class="form-search">
-                      <div id="selection">
-                        <h3>Search again: </h3>
-                        <select  name=taxonomy MULTIPLE id="e9" style="width:350px"  id="listBox"></select>
-                        <button type="submit" class="btn">Search</button>
-                      </div>
-                    </form>
-                  </label>
-                </div>
-              </div>
-              }
-        </h2></a></li>
+          <h2>Search returned @if(taxon.size() != 0) {@taxon.size()} @if(proteinList.size() != 0) {@proteinList.size()} @if(tissueList.size() != 0) {@tissueList.size()} results...
+          </h2>
+          <a href="/browse"><input type="button" value="Search Again" href="/browse" class="btn pull-right"></a>
+        </a></li>
         <li><a href="#tab3" data-toggle="tab">Related Results</a></li>
       </ul>
 
@@ -393,61 +377,6 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
               </label>
             </div>
 	    *@
-            <!--<div class="controls">-->
-              <!--<label class="checkbox">-->
-                <!--<input id="querycheck" type="checkbox"> Linkage -->
-                <!--<div class="control-group">-->
-                  <!--<select class="" name="mydropdown">-->
-                    <!--<option value="">Select a Protine database to search:</option>-->
-                    <!--<option value="Milk">Fresh Milk</option>-->
-                    <!--<option value="Cheese">Old Cheese</option>-->
-                    <!--<option value="Bread">Hot Bread</option>-->
-                  <!--</select>-->
-                  <!--<input type="text" placeholder="Text input">-->
-                <!--</div>-->
-              <!--</label>-->
-            <!--</div>-->
-
-            <!--<div class="controls">-->
-              <!--<p>Find structures by composition and mass or build your glycan structure:</p>-->
-              <!--<a class="btn btn-primary" href="/builder">Glycan Builder</a>-->
-            <!--</div>-->
-
-            <!--<div class="controls">-->
-              <!--<input id="querycompositioncheck" type="checkbox"> Query by Composition-->
-              <!--<div id="querycompositionhide" class="control-group">-->
-                <!--<input type="text"><br>-->
-                <!--<span>Enter a composition, or a composition range.</span>-->
-                <!--<div class="row-fluid">-->
-                  <!--<div class="span4">-->
-                    <!--<label class="checkbox"><input class="span1" name=mscomp_Hexose type=text> Hex</label>-->
-                    <!--<label class="checkbox"><input class="span1" name=mscomp_HexNAc type=text> HexNAc</label>-->
-                    <!--<label class="checkbox"><input class="span1" name=mscomp_deoxyHexose type=text> dHex</label>-->
-                    <!--<label class="checkbox"><input class="span1" name=mscomp_pentose type=text> Pent</label>-->
-                  <!--</div>-->
-
-                  <!--<div class="span4">-->
-                    <!--<label class="checkbox"><input class="span1" name=mscomp_NeuAc type=text> NeuAc</label>-->
-                    <!--<label class="checkbox"><input class="span1" name=mscomp_NeuGc type=text> NeuGc</label>-->
-                    <!--<label class="checkbox"><input class="span1" name=mscomp_KDN type=text> KDN</label>-->
-                    <!--<label class="checkbox"><input class="span1" name=mscomp_HexA type=text> HexA</label>-->
-                  <!--</div>-->
-
-                  <!--<div class="span4">-->
-                    <!--<label class="checkbox"><input class="span1" name=mscomp_phosphate type=text> P</label>-->
-                    <!--<label class="checkbox"><input class="span1" name=mscomp_sulfate type=text> S</label>-->
-                    <!--<label class="checkbox"><input class="span1" name=mscomp_methyl type=text> Methyl</label>-->
-                    <!--<label class="checkbox"><input class="span1" name=mscomp_acetyl type=text> Acetyl</label>-->
-                  <!--</div>-->
-                <!--</div>-->
-              <!--</div>-->
-            <!--</div>-->
-
-            <!--<div class="controls">-->
-              <!--<h3>Publications</h3>-->
-              <!--<p>Lookup all publications</p>-->
-              <!--<a class="btn btn-primary" href="/references">Publications</a>-->
-            <!--</div>-->
 
           </div> @* end of filter2 *@
 
@@ -535,129 +464,26 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
 
       <div class="tab-pane" id="tab2">
 
-
-    @if(output != null && count != 0) {
-    <div class="row-fluid glycobase">
-      <div class="controls">
-        <label class="checkbox">
-          <form class="form-search">
-            <div id="selection">
-              <select  name=taxonomy MULTIPLE id="e7" style="width:350px"  id="listBox"></select>
-              <button type="submit" class="btn">Search</button>
-            </div>
-          </form>
-        </label>
-      </div>
-    </div>
-
+        <hr />
 
     @for(out <- output) {
     <div class="row-fluid glycobase">
       @Html(out)
     </div>
     }
-    }
-
-
-
-    @if(outputtissue != null && counttissue !=0) {
-    <div class="row-fluid glycobase">
-      <div class="controls">
-        <label class="checkbox">
-          <form class="form-search">
-            <div id="selection">
-              <select  name=tissue MULTIPLE id="e8" style="width:350px"  id="listBox"></select>
-              <button type="submit" class="btn">Search</button>
-            </div>
-          </form>
-        </label>
-      </div>
-    </div>
 
     @for(out <- outputtissue) {
     <div class="row-fluid glycobase">
       @Html(out)
     </div>
     }
-    }
-
-
-    @if(outputprotein != null && countprotein !=0) {
-    <div class="row-fluid glycobase">
-      <div class="controls">
-        <label class="checkbox">
-          <form class="form-search">
-            <div id="selection">
-              <select  name=protein MULTIPLE id="e8" style="width:350px"  id="listBox"></select>
-              <button type="submit" class="btn">Search</button>
-            </div>
-          </form>
-        </label>
-      </div>
-    </div>
 
     @for(out <- outputprotein) {
     <div class="row-fluid glycobase">
       @Html(out)
     </div>
     }
-    }
 
-
-
-
-    @*
-    @if(rawTissue.size() > 0   ) {
-    <div class="row-fluid glycobase">
-      <div class="controls">
-        <label class="checkbox">
-          <form class="form-search">
-            <div id="selection">
-              <select  name=tissue MULTIPLE id="e8" style="width:350px"  id="listBox"></select>
-              <button type="submit" class="btn">Search</button>
-            </div>
-          </form>
-        </label>
-      </div>
-    </div> 
-
-    <div class="row-fluid glycobase">
-      @for( (r, countraw) <- rawTissue.zipWithIndex; if (countraw <1)) {
-      <h3 style="text-transform:uppercase" ><a href="#">@r("tissue")</a></h3>
-      <div class="details span9">
-        <p class="">
-          @for((rdetail, countdetail) <- rawTax.zipWithIndex; if (countdetail < 6)){
-          @rdetail("tax_species")        
-          }
-        </p>
-      </div>
-      }
-    </div>
-    }
-    *@
-
-
-
-
-
-    @* @if(glycobasePerturbation != null ) {
-    <div class="row-fluid glycobase">
-      @for((glyco, count) <- glycobasePerturbation.zipWithIndex; if (count < 1)) {
-      <h3>@glyco.tax_species<span class="pull-right"><span class="label success">Curated Entry</span> <span class="label notice">GlycoBase</span></span></h3>
-      <div class="details span9">
-        <p class=""> structures are associated with this protein
-          @for((g, countprotein) <- glycobasePerturbation.zipWithIndex; if (countprotein < 10)) {
-          @g.perturbation,
-          }
-        </p>
-      </div>
-      <div class="span3">
-        <p class="pull-right structures"><a href="#">@glycobasePerturbation.size() structures </a></p>
-      </div>
-      }
-
-    </div>
-    }*@
 
     @if(proteinList != null) {
 
@@ -721,11 +547,6 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
     }
     }
 
-
-
-
-
-
     @for( (taxon, ii) <- taxon.zipWithIndex) {        <div class="row-fluid glycosuiteResult">
       <div class="details span9">
         <h3><a href="/taxonomysearch?taxonomy=@taxon.species">@taxon.species</a>@*<span class="pull-right"><span class="label success">Curated Entry</span> <span class="label notice">GlycoSuiteDB</span></span>*@</h3>
@@ -747,17 +568,17 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
     </div>
   </div><!-- /col -->
 </div><!-- /row -->
-</section>
 <div class="footer row-fluid">
-<div class="span12">
-  <p class="pull-left">UniCarbKB</p>
-  <p class="pull-right">Supported by 
-    <a href="http://www.nectar.org.au">NeCTAR</a> &nbsp;|&nbsp; 
-    <a href="http://www.ands.org.au">ANDS</a> &nbsp;|&nbsp;
-    <a href="http://www.stint.se"> STINT</a>
-  </p>
+  <div class="span12">
+    <p class="pull-left">UniCarbKB</p>
+    <p class="pull-right">Supported by 
+      <a href="http://www.nectar.org.au">NeCTAR</a> &nbsp;|&nbsp; 
+      <a href="http://www.ands.org.au">ANDS</a> &nbsp;|&nbsp;
+      <a href="http://www.stint.se"> STINT</a>
+    </p>
+  </div>
 </div>
-</div>
+</section>
 
 @if(taxon.size() != 0 ) {
 <script>
@@ -800,4 +621,3 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
 }
 
 
-}
