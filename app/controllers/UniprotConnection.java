@@ -53,9 +53,10 @@ public class UniprotConnection extends Controller {
 
         //Retrieve UniProt entry by its accession number
 	String acc = accession;
+	String accessionPTMInfo = "";
 	List<String> uniprotDetails = new ArrayList<String>(); 
 	//UniProtEntry entry = new UniProtEntry();
-        UniProtEntry entry = (UniProtEntry) entryRetrievalService.getUniProtEntry(acc);	
+        /* UniProtEntry entry = (UniProtEntry) entryRetrievalService.getUniProtEntry(acc);	
 	ProteinDataQueryService queryService = UniProtJAPI.factory.getProteinDataQueryService();
 
                 
@@ -92,7 +93,17 @@ public class UniprotConnection extends Controller {
 					uniprotDetails.add(com.toString());
                                 }
                         }
-	}
+	}*/
+
+
+	Object accessionPTM = UniProtJAPI.factory.getEntryRetrievalService().getUniProtAttribute(accession,  "ognl:getComments(@uk.ac.ebi.kraken.interfaces.uniprot.comments.CommentType@PTM).{value}" );
+
+	accessionPTMInfo = accessionPTM.toString();
+	accessionPTMInfo = accessionPTMInfo.replaceAll("^\\[", "");
+	accessionPTMInfo = accessionPTMInfo.replaceAll("]$", "");
+
+	uniprotDetails.add(accessionPTMInfo);
+	
 
 	return uniprotDetails;
 	}
@@ -120,6 +131,7 @@ public class UniprotConnection extends Controller {
                 i = i + 10;
                 }
         }
+
 
         return sequenceCat;
 	}
