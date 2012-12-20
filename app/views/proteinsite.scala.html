@@ -1,0 +1,98 @@
+@(siteStructure: List[GsProteinSiteStructureAssociation], sequence: String, description: List[SitesReferences], proteinSite: List[GsProteinStr2], accession: String, source: ArrayList[SqlRow], proteinName: String, site: String)
+
+@main {
+
+ <ul class="breadcrumb"> <li><i class="icon-folder-open" ></i><a href="#"> UniCarbKB Database</a> <span class="divider">></span></li>    <li><i class="icon-hdd" ></i><a href="/browse"> Browse</a> <span class="divider">></span></li> <li><i class="icon-hdd" ></i><a href="/browse"> Protein Summary</a> <span class="divider">></span></li>
+    <li class="active" > @accession</li> 
+  </ul>
+
+  <section id="layouts" class="proteinsummary">
+
+  <div class="row-fluid">
+    <div class="span6">
+
+      <div class="page-header">
+        <h1>@proteinName @*<span class="pull-right"><span class="label success">Gene: 1</span> <span class="label notice">Ref: 29</span> <span class="label info">ISO: 3</span></span>*@</h1>
+         <h4 class="subheader">Accession: @accession</h4>
+      </div>
+	<h3>Structures reported on @site <a href="/proteinsummary/@accession"><span class="pull-right" style="text-transform:uppercase;text-transform:uppercase;font-size:12px;text-align:center;color:#21b5fd;margin:0 0 5px;font-weight:600">Discover more sites</span></a></h3>
+      <ul class="thumbnails">
+    	@for(s <- siteStructure) {
+        <li class="span4">
+        <a href="@routes.Application.structureDetails(s.structure_id)" class="thumbnail">
+          <img src="../images/_@{s.structure_id}.png" alt="">
+        </a>
+        </li>
+        }
+      </ul>
+
+
+	
+    </div><!-- /col -->
+
+    <div class="span6 details">
+
+      <div class="info">
+        <h3>Sequence</h3>
+        <div class="sequence">
+	  @sequence 
+        </div>
+      </div>
+
+
+      <div class="info">
+        <h3>Confirmed Glycosylation Sites</h3>
+      </div>
+      <table class="computers zebra-striped">
+        <thead>
+          <tr>
+            <th>Position</th>
+            <th>Structures</th>
+          </tr>
+        </thead>
+         <tbody>
+                  @for(gs <- proteinSite) {   
+                        @for(gss <- gs.gsProteinSiteStr2) {
+                                <tr>
+                                <td>@gss.glyco_aa_site</td>
+                                <td>@gss.gsProteinSiteStructureAssociation.size() <br/><a href="/proteinsite?position=@gss.glyco_aa_site&protein=@accession"><span class="label notice">Structures:<br/>
+                                @*      @for(association <- gss.gsProteinSiteStructureAssociation) {
+                                                <a href="/structure/@association.structure_id">@association.structure_id</a>
+                                        }*@</span></a>
+                                </td>
+                        }
+                  }
+                </tbody>
+      </table>
+
+      <div class="info">
+        <h3><span class="label notice" style="font-size:16px">@source.size()</span> Reference @if(source.size() > 5) {showing top 5}</h3>
+        <ol>
+        @for((source,i) <- source.zipWithIndex; if (i < 5)) {
+          <li class="references">
+            <p class="title"><a href='/references/@source("id")'>@source("title")</a></p>
+            <p class="author">@source("authors")</p>
+            <p class="ref">PubMed: <a href='http://www.ncbi.nlm.nih.gov/pubmed/@source("pmid")'</a>@source("pmid")</p>
+          </li>
+        }
+        </ol>
+      </div>
+
+    </div><!-- /col -->
+  </div><!-- /row -->
+
+
+<div class="footer row-fluid">
+    <div class="span12">
+      <p class="pull-left">UniCarbKB</p>
+      <p class="pull-right">Supported by 
+        <a href="http://www.nectar.org.au">NeCTAR</a> &nbsp;|&nbsp; 
+        <a href="http://www.ands.org.au">ANDS</a> &nbsp;|&nbsp;
+        <a href="http://www.stint.se"> STINT</a>
+      </p>
+    </div>
+</div>
+
+</section>
+
+}
