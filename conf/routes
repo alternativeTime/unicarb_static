@@ -5,7 +5,7 @@
 # Default path will just redirect to the computer list
 GET     /                           controllers.Application.index()
 
-GET     /references                  controllers.Application.list2(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
+GET     /references                  controllers.Application.list2(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "", protein ?= "")
 GET		/references/:id				 controllers.Application.refdisplay(id:Long)
 
 GET		/streference/:id		     controllers.Application.stref(id:Long)
@@ -25,13 +25,11 @@ GET	/saySearch/:s			controllers.Search.saySearch(s: String)
 GET	/browse			controllers.Application.browse()
 
 GET	/proteinsummary/:s		controllers.Application.proteinsummary(s: String)
-#taxonomy:String ?= "")
-
-
-#GET	/unicarb/:id		   controllers.Application.unicarbdisplay(id:Long)
-
-#GET	/taxonomysearch/:species		controllers.Application.taxonsearch(species:String)
+GET  	/proteinsummary/:s    controllers.Application.proteinsummary(s: String)
+GET  	/proteinsummary      controllers.Application.browse()
+GET  	/proteinsite      controllers.UniprotConnection.proteinsite()
 GET	/taxonomysearch	controllers.Application.taxonsearch(taxonomy ?= "")
+GET  /compositions      controllers.Application.compositions()
 
 
 # Map static resources from the /public folder to the /assets URL path
