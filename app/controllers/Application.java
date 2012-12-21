@@ -42,7 +42,8 @@
 			
 		List<SqlRow> listSql = null;
 		ArrayList<SqlRow> listSqlArray = new ArrayList<SqlRow>();
-		String proteinName = "";	
+		String proteinName = "";
+		String swissProtName = "";	
 		ArrayList<Biolsource> biolSourceProtein = new ArrayList<Biolsource>();
 		List<Biolsource> biolSourceProteins = Biolsource.findBiolSourceIds(protein);
 		//List<Double> biorefs = new ArrayList<Double>();
@@ -50,6 +51,7 @@
 		for(Biolsource biol : biolSourceProteins){
 			System.out.println("test biolsource" + biol.id);
 			proteinName = biol.protein;
+			swissProtName = biol.swiss_prot;
 			Biolsource objectBiolSource = Ebean.find(Biolsource.class, biol.id);
 				biolSourceProtein.add(objectBiolSource);
 
@@ -335,14 +337,17 @@
 	
 	ArrayList taxsources = new ArrayList();
 	ArrayList proteinsources = new ArrayList();
+	ArrayList protsources = new ArrayList();
 	HashSet hs = new HashSet();
 	HashSet proteinHs = new HashSet();
+	HashSet swissHs = new HashSet();
 	
 	for (Reference taxfind : u){
 		List<Sourceref> source = taxfind.sourceref;
 		for (Sourceref tax : source){
 			hs.add(tax.biolsource.taxonomy);
 			proteinHs.add(tax.biolsource.protein);
+			swissHs.add(tax.biolsource.swiss_prot);
 			//String taxsource = tax.biolsource.taxonomy;
 			//taxsources.add(taxsource); 
 		}
@@ -350,6 +355,8 @@
 	
 	taxsources.addAll(hs);
 	proteinsources.addAll(proteinHs);
+	protsources.addAll(swissHs);
+	
 	
     	//List<Reference> sourcered = Reference.findSourceref(id);	
 	System.out.println("testing value: " + t.size() ) ;
@@ -357,7 +364,7 @@
     			//refdisplay.render(displayReference)
     			//list2.
     			//refdisplay.ref().render(displayReferencce)
-			refdisplay.render("View selected reference", t, u, taxsources, proteinsources)
+			refdisplay.render("View selected reference", t, u, taxsources, proteinsources, protsources)
     			); 
     };
     
