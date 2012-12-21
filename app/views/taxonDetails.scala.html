@@ -74,7 +74,7 @@
       <h3>Glycoproteins</h3>
       <p><i class="icon-chevron-right"></i><b>@groupTax.size() </b> glycoproteins curated</p>
       @for( (sql,i) <- groupTax.zipWithIndex; if (i <= 6)) {
-      <p class="short">@sql("protein")</p>
+      <p class="short"><a href='/proteinsummary/@sql("swiss_prot")'>@sql("protein") (@sql("swiss_prot"))</a></p>
       }
       <p><i class="icon-th-large"></i> See more details</p>
     </div>

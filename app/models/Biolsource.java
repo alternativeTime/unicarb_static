@@ -36,9 +36,9 @@ public class Biolsource extends Model {
     
 	public static List<SqlRow> findTaxonomyProteinSQL(String taxon) {
 
-	String sql = "SELECT biolsource.protein, proteins.name FROM public.biolsource, public.proteins WHERE biolsource.protein = proteins.name and biolsource.taxonomy ilike '" + taxon +  "' group by  biolsource.protein, proteins.name";
+	String sql = "SELECT biolsource.protein, biolsource.swiss_prot, proteins.name FROM public.biolsource, public.proteins WHERE biolsource.protein = proteins.name and biolsource.taxonomy ilike '" + taxon +  "' group by biolsource.swiss_prot,  biolsource.protein, proteins.name";
 
-	RawSql rawSql = RawSqlBuilder.parse(sql).columnMapping("proteins.name", "proteins.name").columnMapping("biolsource.protein", "biolsource.protein").create();
+	RawSql rawSql = RawSqlBuilder.parse(sql).columnMapping("proteins.name", "proteins.name").columnMapping("biolsource.protein", "biolsource.protein").columnMapping("biolsource.swiss_prot", "biolsource.swiss_prot").create();
    
 	SqlQuery sqlQuery = Ebean.createSqlQuery(sql);
 	List<SqlRow> listSql = sqlQuery.findList();
