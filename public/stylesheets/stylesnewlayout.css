@@ -56,6 +56,8 @@ h3.builder {
   text-rendering: optimizelegibility;
 }
 
+#layouts h4.subheader, #main h4.subheader { margin-left: 0; }
+
 p.builder {
  line-height: 22px;
  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
@@ -323,7 +325,7 @@ h2.lead { margin: 30px 0; font-size: 25px; }
 }
 
 #layouts .sidebar, #main .sidebar {
-  margin-top: 100px;
+  /* margin-top: 104px; */
   background: #FFF;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -335,8 +337,14 @@ h2.lead { margin: 30px 0; font-size: 25px; }
   position: relative;
 }
 
+#main .sidebar {
+    /* border-top: 1px solid #DDD; */
+  }
+.home .sidebar .info { padding: 20px; }
+.home .sidebar .nav { padding: 20px 0; }
+
 .sidebar {
-  margin-top: 120px;
+  /* margin-top: 120px; */
   background: whitesmoke;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -350,7 +358,7 @@ h2.lead { margin: 30px 0; font-size: 25px; }
 
 .sidebar .nav {
   margin: 0 0 0 0;
-  padding: 20px 0;
+  padding: 20px;
   background: whiteSmoke;
   -moz-border-radius: 5px 5px 0 0;
   -webkit-border-radius: 5px 5px 0 0;
@@ -369,19 +377,19 @@ h2.lead { margin: 30px 0; font-size: 25px; }
 }
 
 .sidebar .info {
-  padding: 20px;
+  padding: 20px 0;
   border-bottom: 1px solid #DDD;
 }
 
 .proteinsummary .details .info {
-  margin-top: 20px;
-  padding-top: 20px;
-  border-top: 1px solid #DDD;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #DDD;
 }
 
 .proteinsummary .details {
   position: relative;
-  margin-top: 93px;
+  /* margin-top: 93px; */
   background: #FFF;
   -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px;
   -webkit-box-shadow: none; -moz-box-shadow: none -o-box-shadow: none; box-shadow: none;
@@ -472,6 +480,12 @@ table .header::after {
   display: none;
 }
 
+#pagination { text-align: center; }
+
+#pagination ul {
+  float: none;
+  display: inline-block;
+}
 .pagination ul {
   float: left;
   margin: 0;
@@ -830,7 +844,8 @@ p.structures a, p.publications a, p.biological a { padding-left: 30px; height: 2
 
 .sequence { font-size: 12px;
   font-family: monospace;
-  padding-left: 35px;
+  /* padding-left: 35px; */
+  word-break: break-word;
 }
 .num { border-right: #DDD 1px solid; text-align: right; float: left; }
 
