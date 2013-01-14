@@ -32,7 +32,6 @@
     <a href="#" class="btn primary" onclick="okClicked ();">OK</a>
   </div>
 </div>
-</div>
 
 
 <section id="structureLayout">
@@ -60,8 +59,6 @@
   <div class="row-fluid">
 
     <h2>References associated to structure</h2>
-
-
     <table class="computers zebra-striped">
       <thead>
         <tr>
@@ -71,39 +68,30 @@
         </tr>
       </thead>
       <tbody>
-
-
         @for(stref <- references){
-
-
-        @for(reference <- stref.references){
-        @**<p>@stref.id --> @reference.id --> @reference.reference.title</p>**@
-        <tr><td><a href="../references/@reference.reference.id">@reference.reference.title</a></td><td>@reference.reference.year</td><td>@reference.reference.authors</td></tr>
-        }
+          @for(reference <- stref.references){
+          <tr>
+            <td><a href="../references/@reference.reference.id">@reference.reference.title</a></td>
+            <td>@reference.reference.year</td>
+            <td>@reference.reference.authors</td>
+          </tr>
+          }
         }
       </tbody>
     </table>
-
-
-
   </div>
+</section>
 
+<div class="footer row-fluid">
+  <div class="span12">
+    <p class="pull-left">UniCarbKB</p>
+    <p class="pull-right">Supported by 
+      <a href="http://www.nectar.org.au">NeCTAR</a> &nbsp;|&nbsp;
+      <a href="http://www.ands.org.au">ANDS</a> &nbsp;|&nbsp;
+      <a href="http://www.stint.se"> STINT</a> &nbsp;|&nbsp;
+      <a href="http://expasy.org/"> SIB ExPASy</a>
+    </p>
+  </div>
 </div>
 
-</div>
-
-    </section>
-
-    <div class="footer row-fluid">
-      <div class="span12">
-        <p class="pull-left">UniCarbKB</p>
-        <p class="pull-right">Supported by 
-          <a href="http://www.nectar.org.au">NeCTAR</a> &nbsp;|&nbsp;
-          <a href="http://www.ands.org.au">ANDS</a> &nbsp;|&nbsp;
-          <a href="http://www.stint.se"> STINT</a> &nbsp;|&nbsp;
-          <a href="http://expasy.org/"> SIB ExPASy</a>
-        </p>
-      </div>
-    </div>
-
-    }
+}
