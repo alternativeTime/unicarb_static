@@ -6,7 +6,7 @@
 @for(r <- references) {
 <ul class="breadcrumb">
   <li><i class="icon-home" ></i><a href="/"> UniCarbKB</a> <span class="divider">></span></li>
-  <li><i class="icon-search" ></i><a href="/references"> Reference Search</a> <span class="divider">></span></li>
+  <li><i class="icon-book" ></i><a href="/references"> References</a> <span class="divider">></span></li>
   <li class="active"><i class="icon-file" ></i> @r.authors, @r.year, @r.journal.name<span class="divider"></span></li>
 </ul>
 }
@@ -46,10 +46,10 @@
       <div class="info">
         <h3>Biological Associations</h3>
         @for(tax <- taxsources){
-          <p><span class="label important">Taxonomy</span><a href="../taxonomysearch?taxonomy=@tax"> @tax</a></p> 
+          <p><span class="label important">Taxonomy:</span><a href="../taxonomysearch?taxonomy=@tax"> @tax</a></p> 
         }
         @for(protein <- proteinsources){
-          <p><span class="label warning">Protein</span>
+          <p><span class="label warning">Protein:</span>
 		@for(prot <- prot) { <a href="/proteinsummary/@prot">}
 	 @protein</a></p> 
         }

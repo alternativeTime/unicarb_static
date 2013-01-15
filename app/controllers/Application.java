@@ -384,6 +384,10 @@
 	return ok ( index.render() );
     }
 
+    public static Result about() {
+      return ok ( about.render() );
+    }
+
     public static Result builder() {
 	return ok (builder.render() );
     }

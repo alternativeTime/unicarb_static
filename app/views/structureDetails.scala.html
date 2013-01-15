@@ -42,14 +42,18 @@
 
   <div class="row-fluid">
     <div class="span8"><img class="sugar_image"  src="../images/_@{structureId}.png"></div>
-    <div class="span4">
+    <div class="span4 sidebar">
       <div class='info'>
         <h3>Available Descriptions:</h4>
-        <ul class="nav nav-pills">
-          <li><a href="" style="color: #1F7099;" data-toggle="modal" data-id='@taxDiv' class="announce2" data-id2='100'><i class="icon-search"></i> Taxonomy</a></li>
-          <li><a style="color: #1F7099;" data-toggle="modal" data-id="@proteinNames" class="announce"><i class="icon-th-list"></i> Protein</a></li>
-          <li><a style="color: #1F7099;" data-toggle="modal" data-id="@sourceNames" class="announce" ><i class="icon-th-list"></i> Source</a></li>
-        </ul>
+        <p>
+          <span class='label important'>Taxonomy:</span><a href="" style="color: #1F7099;" data-toggle="modal" data-id='@taxDiv' class="announce2" data-id2='100'><i class="icon-search"></i> Taxonomy</a>
+        </p>
+        <p>
+          <span class='label warning'>Protein:</span><a style="color: #1F7099;" data-toggle="modal" data-id="@proteinNames" class="announce"><i class="icon-th-list"></i> Protein</a>
+        </p>
+        <p>
+          <span class='label inverse'>Source:</span><a style="color: #1F7099;" data-toggle="modal" data-id="@sourceNames" class="announce" ><i class="icon-th-list"></i> Source</a>
+        </p>
       </div>
     </div>
   </div>
@@ -58,7 +62,7 @@
 <section id="layouts">	
   <div class="row-fluid">
 
-    <h2>References associated to structure</h2>
+    <h3>References associated to structure</h3>
     <table class="computers zebra-striped">
       <thead>
         <tr>
