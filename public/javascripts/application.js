@@ -51,4 +51,10 @@ $(document).ready(function(){
     if ($(this).val() === "ProteinLocalisation") { $("#glycobaseAssociation").show(); } else { $("#glycobaseAssociation").hide(); }
     if ($(this).val() === "Composition") { $("#glycobaseComposition").show(); } else { $("#glycobaseComposition").hide(); }
   });
+  
+  $("#show-structures").click(function() {
+    $("#more-thumbnails").toggle();
+  });
+
+
 });

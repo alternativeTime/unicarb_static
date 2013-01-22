@@ -3,7 +3,9 @@
 @main {
 
 
- <ul class="breadcrumb"> <li><i class="icon-folder-open" ></i><a href="#"> UniCarbKB Database</a> <span class="divider">></span></li> <li><i class="icon-hdd" ></i><a href="/browse"> Protein Summary</a> <span class="divider">></span></li>
+  <ul class="breadcrumb">
+    <li><i class="icon-home" ></i><a href="#"> UniCarbKB</a> <span class="divider">></span></li>
+    <li><i class="icon-map-marker" ></i><a href="/browse"> Protein</a> <span class="divider">></span></li>
     <li class="active" > @accession</li>
   </ul>
 
@@ -15,205 +17,161 @@
     </div>
 
 
-  <div class="row-fluid">
-    <div class="span8">
+    <div class="row-fluid">
+      <div class="span8">
 
-      @*<h3>PROTEIN</h3> <span class="pull-right"><a href="http://uniprot.org/uniprot/@accession"><span class="label success">UniProt Entry</span></a></span>*@
-      <div class="control-group">
-	@for((protein,i) <- protein.zipWithIndex; if (i < 1)) {
-        <label>Recommended name:</label> <div class="controls"><p>@protein.name</p></div>
-	}
-      </div>
-      <div class="control-group">
-        <label>Alternative name:</label> <div class="controls"><p>not available</p></div>
-      </div>
-
-      @*<h3>GENE</h3>
-      <div class="control-group">
-        <label>Recommended name:</label> <div class="controls"><p>TK2</p>
-      </div>
-      
-      <h3>FAMILY</h3>
-      <div class="control-group">
-        <label>Family:</label> <div class="controls"><p>DCK/DGK</p></div>
-      </div>
-      
-	 
-      <h3>HISTORY</h3>
-      <div class="control-group">
-        <label>UniCarbKB:</label>
-        <div class="controls">
-          <p>
-            Integrated 2010-03-01
-            <br>
-            Last updated 2012-11-02
-            <br>
-          </p>
+        <div class='name'>
+          <div class="control-group">
+            @for((protein,i) <- protein.zipWithIndex; if (i < 1)) {
+            <label>Recommended name:</label> <div class="controls">@protein.name</div>
+            }
+          </div>
+          <div class="control-group">
+            <label>Alternative name:</label> <div class="controls">not available</div>
+          </div>
         </div>
+
+        <div class='ptm-details'>
+          <h3>PTM Details</h3>
+          @for(uniprot <- uniprot) {
+            <p>@uniprot</p>
+          }
         </div>
-      </div>
-      *@
-      <h3>PTM Details</h3>
-      @for(uniprot <- uniprot) {
-        <p>@uniprot</p> 
-      }
-      <h3>GLYCOSYLATION SITES</h3>
 
+        <div class='glycosylation-sites'>
+          <h3>Glycosylation Sites</h3>
 
-      <table class="computers zebra-striped">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Position</th>
-            <th>Structures</th>
-            <th>Description</th>
-            <th>Evidence</th>
-          </tr>
-        </thead>
+          <table class="computers zebra-striped">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Structures</th>
+                <th>Description</th>
+                <th>Evidence</th>
+              </tr>
+            </thead>
 
-	 <tbody>
-		  @for(gs <- gssites) {   
-			@for(gss <- gs.gsProteinSiteStr2) {
-				<tr>
-				<td>Confirmed</td>
-				<td>@gss.glyco_aa_site</td>
-        <td>
-          <a href="/proteinsite?position=@gss.glyco_aa_site&protein=@accession">
-            @gss.gsProteinSiteStructureAssociation.size()
-          </a>
-				</td>
-				<td></td> 
-				<td>GlycoSuite</td>
-				@* @for(association <- gss.gsProteinSiteStructureAssociation) {
-					<td></td>		
-				} *@
-				</tr>
-			}  
-		  }
-	   	</tbody>
-	  
-      </table>
-
-	<h3>Notes</h3>
-	<p>Accompanying GlycoSuite information</p>
-	@for(d <- description){
-	<ol>
-	<li>@d.glyco_aa_site</li>
-	</ol>
-	}
-
-	<h3>HISTORY</h3>
-        <div class="control-group">
-        <label>UniCarbKB:</label>
-        <div class="controls">
-          <p>
-            Integrated 2010-03-01
-            <br>
-            Last updated 2012-11-02
-            <br>
-          </p>
+            <tbody>
+              @for(gs <- gssites) {   
+              @for(gss <- gs.gsProteinSiteStr2) {
+              <tr>
+                <td>Confirmed</td>
+                <td>@gss.glyco_aa_site</td>
+                <td>
+                  <a href="/proteinsite?position=@gss.glyco_aa_site&protein=@accession">
+                    @gss.gsProteinSiteStructureAssociation.size()
+                  </a>
+                </td>
+                <td></td> 
+                <td>GlycoSuite</td>
+                @* @for(association <- gss.gsProteinSiteStructureAssociation) {
+                <td></td>		
+                } *@
+              </tr>
+              }  
+              }
+            </tbody>
+          </table>
         </div>
+
+        <div class='notes'>
+          <h3>Notes</h3>
+          <p>Accompanying GlycoSuite information</p>
+          @for(d <- description){
+          <ol>
+            <li>@d.glyco_aa_site</li>
+          </ol>
+          }
         </div>
-	
-    </div><!-- /col -->
 
-    <div class="span4 details">
+        <div class='history'>
+          <h3>History</h3>
+          <label>Integrated:</label>
+          <div class="controls">2010-03-01</div>
+          <label>Last updated:</label>
+          <div class="controls">2012-11-02</div>
+        </div>
 
-      <div class="info">
-        <h3>Sequence</h3>
-        @*<p>
-          <span class="label warning">Isoform: <b>Long 256 aa</b></span>
-          <span class="label warning">Mass: <b>31005 Da</b></span>
-          <span class="label warning">pI: <b>8.71</b></span>
+      </div><!-- /col -->
+
+      <div class="span4 details">
+
+        <div class="info">
+          <h3>Sequence</h3>
+          <div class="sequence">
+            @sequence
+          </div>
+        </div>
+
+        <div class="info">
+          <h3><span class="label notice" style="font-size:16px">@source.size()</span> References @if(source.size() > 5) {showing top 5}</h3>
+          <ol>
+            @for((source,i) <- source.zipWithIndex; if (i < 5)) {
+            <li class="references">
+              <p class="title"><a href='/references/@source("id")'>@source("title")</a></p>
+              <p class="author">@source("authors")</p>
+              <p class="ref">PubMed: <a href='http://www.ncbi.nlm.nih.gov/pubmed/@source("pmid")'>@source("pmid")</a></p>
+            </li>
+            }
+          </ol>
+          @*
+          @for(b <- biol) {
+          @b.sourceref
+
+          }
+          *@
+          @*
+          <ol>
+            <li class="references">
+              <p class="title">"Molecular cloning, sequence, and specificity of expression of the gene encoding the low molecular weight human salivary mucin (MUC7)."</p>
+              <p class="author"><a>Bobek L.A.</a>, <a>Tsai H.</a>, <a>Biesbrock A.R.</a>, <a>Levine M.J.</a></p>
+              <p class="ref">J. Biol. Chem. 268:20563-20569(1993) [PubMed: 7690757]</p>
+            </li>
+
+            <li class="references">
+              <p class="title">"Low-molecular-mass human salivary mucin, MG2: structure and binding of Pseudomonas aeruginosa."</p>
+              <p class="author"><a>Reddy M.S.</a>, <a>Levine M.J.</a>, <a>Paranchych W.</a></p>
+              <p class="ref">Crit. Rev. Oral Biol. Med. 4:315-323(1993) [PubMed: 8104046]</p>
+            </li>
+
+            <li class="references">
+              <p class="title">"The status, quality, and expansion of the NIH full-length cDNA project: the Mammalian Gene Collection (MGC)."</p>
+              <p class="author"><a>The MGC Project Team</a></p>
+              <p class="ref">Genome Res. 14:2121-2127(2004) [PubMed: 15489334]</p>
+            </li>
+
+            <li class="references">
+              <p class="title">"Generation and annotation of the DNA sequences of human chromosomes 2 and 4."</p>
+              <p class="author"><a>Hillier L.W.</a>, <a>Graves T.A.</a>, <a>Fulton R.S.</a>, <a>Fulton L.A.</a>, <a>Pepin K.H.</a>, <a>Minx P.</a>, <a>Wagner-McPherson C.</a>, <a>Layman D.</a>, <a>Wylie K.</a>, <a>Sekhon M.</a>, <a>Becker M.C.</a>, <a>Fewell G.A.</a>, <a>Delehaunty K.D.</a>, <a>Miner T.L.</a>, <a>Nash W.E.</a>, <a>Kremitzki C.</a>, <a>Oddy L.</a>, <a>Du H.  Wilson R.K.</a></p>
+              <p class="ref">Nature 434:724-731(2005) [PubMed: 15815621]</p>
+            </li>
+
+            <li class="references">
+              <p class="title">"Molecular cloning, sequence, and specificity of expression of the gene encoding the low molecular weight human salivary mucin (MUC7)."</p>
+              <p class="author"><a>Bobek L.A.</a>, <a>Tsai H.</a>, <a>Biesbrock A.R.</a>, <a>Levine M.J.</a></p>
+              <p class="ref">J. Biol. Chem. 268:20563-20569(1993) [PubMed: 7690757</p>
+            </li>
+          </ol>
+          *@
+        </div>
+
+      </div><!-- /col -->
+    </div><!-- /row -->
+
+    <div class="footer row-fluid">
+      <div class="span12">
+        <p class="pull-left">UniCarbKB</p>
+        <p class="pull-right">
+          Supported by 
+          <a href="http://www.nectar.org.au">NeCTAR </a> |
+          <a href="http://www.ands.org.au">ANDS </a> | 
+          <a href="http://www.stint.se">STINT </a> | 
+          <a href="http://expasy.org/">SIB ExPASy </a>
         </p>
-	*@
-        @* <div class="num">
-          1
-          <br>
-          51
-          <br>
-          101
-          <br>
-          151
-          <br>
-          201
-          <br>
-          251
-          <br>
-        </div> *@
-        <div class="sequence">
-	  @sequence
-        </div>
       </div>
-
-      <div class="info">
-        <h3><span class="label notice" style="font-size:16px">@source.size()</span> Reference @if(source.size() > 5) {showing top 5}</h3>
-	<ol>
-	@for((source,i) <- source.zipWithIndex; if (i < 5)) {
-	  <li class="references">
-	    <p class="title"><a href='/references/@source("id")'>@source("title")</a></p>
- 	    <p class="author">@source("authors")</p>
-      <p class="ref">PubMed: <a href='http://www.ncbi.nlm.nih.gov/pubmed/@source("pmid")'>@source("pmid")</a></p>
-	  </li>
-	}
-	</ol>
-	@*
-	@for(b <- biol) {
-	@b.sourceref
-
-	}
-	*@
-	@*
-        <ol>
-          <li class="references">
-            <p class="title">"Molecular cloning, sequence, and specificity of expression of the gene encoding the low molecular weight human salivary mucin (MUC7)."</p>
-            <p class="author"><a>Bobek L.A.</a>, <a>Tsai H.</a>, <a>Biesbrock A.R.</a>, <a>Levine M.J.</a></p>
-            <p class="ref">J. Biol. Chem. 268:20563-20569(1993) [PubMed: 7690757]</p>
-          </li>
-
-          <li class="references">
-            <p class="title">"Low-molecular-mass human salivary mucin, MG2: structure and binding of Pseudomonas aeruginosa."</p>
-            <p class="author"><a>Reddy M.S.</a>, <a>Levine M.J.</a>, <a>Paranchych W.</a></p>
-            <p class="ref">Crit. Rev. Oral Biol. Med. 4:315-323(1993) [PubMed: 8104046]</p>
-          </li>
-
-          <li class="references">
-            <p class="title">"The status, quality, and expansion of the NIH full-length cDNA project: the Mammalian Gene Collection (MGC)."</p>
-            <p class="author"><a>The MGC Project Team</a></p>
-            <p class="ref">Genome Res. 14:2121-2127(2004) [PubMed: 15489334]</p>
-          </li>
-
-          <li class="references">
-            <p class="title">"Generation and annotation of the DNA sequences of human chromosomes 2 and 4."</p>
-            <p class="author"><a>Hillier L.W.</a>, <a>Graves T.A.</a>, <a>Fulton R.S.</a>, <a>Fulton L.A.</a>, <a>Pepin K.H.</a>, <a>Minx P.</a>, <a>Wagner-McPherson C.</a>, <a>Layman D.</a>, <a>Wylie K.</a>, <a>Sekhon M.</a>, <a>Becker M.C.</a>, <a>Fewell G.A.</a>, <a>Delehaunty K.D.</a>, <a>Miner T.L.</a>, <a>Nash W.E.</a>, <a>Kremitzki C.</a>, <a>Oddy L.</a>, <a>Du H.  Wilson R.K.</a></p>
-            <p class="ref">Nature 434:724-731(2005) [PubMed: 15815621]</p>
-          </li>
-
-          <li class="references">
-            <p class="title">"Molecular cloning, sequence, and specificity of expression of the gene encoding the low molecular weight human salivary mucin (MUC7)."</p>
-            <p class="author"><a>Bobek L.A.</a>, <a>Tsai H.</a>, <a>Biesbrock A.R.</a>, <a>Levine M.J.</a></p>
-            <p class="ref">J. Biol. Chem. 268:20563-20569(1993) [PubMed: 7690757</p>
-          </li>
-        </ol>
-	*@
-      </div>
-
-    </div><!-- /col -->
-  </div><!-- /row -->
-
-  <div class="footer row-fluid">
-    <div class="span12">
-      <p class="pull-left">UniCarbKB</p>
-      <p class="pull-right">
-        Supported by 
-        <a href="http://www.nectar.org.au">NeCTAR </a> |
-        <a href="http://www.ands.org.au">ANDS </a> | 
-        <a href="http://www.stint.se">STINT </a> | 
-        <a href="http://expasy.org/">SIB ExPASy </a>
-      </p>
     </div>
-</div>
 
-</section>
+  </section>
 
-}
+  }

@@ -19,8 +19,6 @@
     <h3>Taxonomy Structures</h3>
   </div>
   <div class="modal-body">
-    @** <h2 class="fullname">Structure's associated with taxonomy:</h2> **@
-
     <ul class="thumbnails">
       @for(s <- taxon.strtaxonomy ){
 
@@ -38,6 +36,14 @@
 
 </div>	
 
+<ul class="breadcrumb">
+  <li><i class="icon-home" ></i><a href="/"> UniCarbKB</a> <span class="divider">></span></li>
+  <li><i class="icon-tags" ></i><a href="/references"> Taxonomy</a> <span class="divider">></span></li>
+  <li><i class="icon-tag" ></i> @taxon.species</li>
+</ul>
+
+<section id="layouts">
+
 <div class="page-header row-fluid">
   <h1>@taxon.species</h1> 
   <h4 class="subheader span8">@message <span class="pull-right"><span class="label success">Curated Entry</span> <span class="label notice">GlycoSuiteDB</span></span></h4>
@@ -49,8 +55,8 @@
     </section>
 
     @* <h3>@message</h3> *@
-    <p style='margin:0 0 9px;font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;'>The GlycoSuite database is an annotated and curated relational database of glycan structures. For the taxonomy entry <b>@taxon.species</b> a number of glycan structures, glycoproteins and tissue source's have been curated.</p>
-    <p  style="font-weight: bold;"><a href=""  data-toggle="modal" data-id='@taxon' class="announceTaxStructures"><i class="icon-resize-full"></i> See more structures</a> <small>limited to six records below</small></p>
+    <p>The GlycoSuite database is an annotated and curated relational database of glycan structures. For the taxonomy entry <b>@taxon.species</b> a number of glycan structures, glycoproteins and tissue source's have been curated.</p>
+    <p><a href=""  data-toggle="modal" data-id='@taxon' class="announceTaxStructures"><i class="icon-resize-full"></i> See more structures</a> <small>limited to six records below</small></p>
     <ul class="thumbnails RP">
       @for((s, i) <- taxon.strtaxonomy.zipWithIndex; if (i <=5) ){
       <li class="span5">
@@ -60,7 +66,16 @@
       </li>
       }
     </ul>
-    <p  style="font-weight: bold;"><a href=""  data-toggle="modal" data-id='@taxon' class="announceTaxStructures"><i class="icon-resize-full"></i> See more structures</a></p>
+    <ul id='more-thumbnails' class='thumbnails RP'>
+      @for(s <- taxon.strtaxonomy ){
+        <li class="span5">
+          <a href="@routes.Application.structureDetails(s.structure.id)" class="thumbnail">
+            <img src="../images/_@{s.structure.id}.png" alt="">
+          </a>
+      </li>
+      }
+    </ul>
+    <p><a href="#" id='show-structures'><i class="icon-resize-full"></i> See more structures</a></p>
   </div>
 
   <div class="span4 sidebar">
@@ -76,10 +91,15 @@
       @for( (sql,i) <- groupTax.zipWithIndex; if (i <= 6)) {
       <p class="short"><a href='/proteinsummary/@sql("swiss_prot")'>@sql("protein") (@sql("swiss_prot"))</a></p>
       }
+
+      <div class='more'>
+      </div>
+
     </div>
 
   </div>
 </div>
+</section>
 
 
      @* <script type="text/javascript">
