@@ -56,5 +56,24 @@ $(document).ready(function(){
     $("#more-thumbnails").toggle();
   });
 
+  // Structure Associated Descriptions
+  $("#toggle-taxonomy").click(function() {
+    $("#more-taxonomy").toggle();
+    $("#more-protein").hide();
+  });
+
+  $("#less-taxonomy").click(function() {
+    $("#more-taxonomy").toggle();
+  });
+
+  $("#toggle-protein").click(function() {
+    $("#more-protein").toggle();
+    $("#more-taxonomy").hide();
+  });
+
+  $("#less-protein").click(function() {
+    $("#more-protein").toggle();
+  });
+
 
 });

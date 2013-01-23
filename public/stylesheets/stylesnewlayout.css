@@ -890,6 +890,36 @@ label.radio { padding-left: 20px; width: auto; }
 
 .tabbable .details { margin-left: 0px; }
 
+
+/* !LAYOUT - STRUCTURES ////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+.taxonomy, .protein, .source { margin: 0 0 10px 0; }
+
+#toggle-taxonomy, #toggle-protein { cursor: pointer; }
+
+#more-taxonomy, #more-protein { 
+  margin: 0; padding: 20px;
+  display: none;
+  -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px;
+}
+
+#more-taxonomy { background: #BF1E2E; }
+#more-protein { background: #f89406; }
+
+#more-taxonomy h3, #more-protein h3 { color: #FFF; cursor: pointer; }
+#more-taxonomy h3 span, #more-protein h3 span { margin: 8px 0 0 0; }
+
+#more-taxonomy li, #more-protein li {
+  list-style: none;
+  line-height: 20px;
+}
+#more-taxonomy li span { }
+#more-taxonomy li a, #more-protein li a { color: rgba(255, 255, 255, 0.7500) }
+#more-taxonomy li a:hover, #more-protein li a:hover { color: #FFF; }
+
+
 p.structures, p.publications, p.biological {
   padding: 10px; background: #008FD5; 
   -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px;

@@ -256,10 +256,11 @@
 	//Structure strDisplay = Structure.find.byId(id);
     List<Structure> strDisplay = Structure.findStructureRef(id);
     ArrayList proteinNames = new ArrayList();
+    ArrayList proteinIds = new ArrayList();
+    ArrayList proteinItems = new ArrayList();
     HashSet proteinNamesUnique = new HashSet();
     ArrayList taxNames = new ArrayList();
-    ArrayList taxDivs = new ArrayList();
-    HashSet taxNamesUnique = new HashSet();
+    ArrayList taxItems = new ArrayList();
     ArrayList sourceNames = new ArrayList();
     HashSet sourceNamesUnique = new HashSet();
     ArrayList uniprot = new ArrayList();
@@ -276,34 +277,24 @@
 	
     if (strDisplay !=null){
     	for (Structure entries : strDisplay){
-    		List<Stproteins> stToProtein = entries.stproteins;
-		List<Strtaxonomy> stToTax = entries.strtaxonomy;
-		List<Stsource> stToSource = entries.stsource;
-    		if (!stToProtein.isEmpty()) {
-    			for (Stproteins stProteinEntry : stToProtein){
-    				String proteinName = stProteinEntry.proteins.name;
-    				//proteinNamesUnique.add(proteinName);
-				String divprotein = "<a href=\"../proteinsummary/" + stProteinEntry.proteins.name +  "\">" + proteinName + "</a>";
-				//uniprotUnique.add(uniprot);
-				proteinNamesUnique.add(divprotein); 
-    			}
-    			proteinNames.addAll(proteinNamesUnique);
-			uniprot.addAll(uniprotUnique);
-    		}
+        List<Stproteins> stToProtein = entries.stproteins;
+        List<Strtaxonomy> stToTax = entries.strtaxonomy;
+        List<Stsource> stToSource = entries.stsource;
 
-		if (!stToTax.isEmpty()){
-			for (Strtaxonomy stTaxEntry : stToTax){
-				String taxName = stTaxEntry.taxonomy.species;
-				Long taxId = stTaxEntry.taxonomy.id;
-				taxNamesUnique.add(taxName);
-				taxIdsUnique.add(taxId);
-				String divtax = "<a href=\"../taxonomy/" + stTaxEntry.taxonomy.id + "\">" + taxName + "</a>";
-				taxDivsUnique.add(divtax);
-			}
-			taxNames.addAll(taxNamesUnique);
-			taxIds.addAll(taxIdsUnique);
-			taxDivs.addAll(taxDivsUnique);
-		}
+        if (!stToProtein.isEmpty()) {
+          for (Stproteins stProteinEntry : stToProtein){
+            proteinNames.add(stProteinEntry.proteins.name);
+            proteinIds.add(stProteinEntry.proteins.id);
+            proteinItems.add(stProteinEntry.proteins);
+          }
+        }
+
+        if (!stToTax.isEmpty()){
+          for (Strtaxonomy stTaxEntry : stToTax){
+            taxNames.add(stTaxEntry.taxonomy.species);
+            taxItems.add(stTaxEntry.taxonomy);
+          }
+        }
 
 		if (!stToSource.isEmpty()){
 			for (Stsource stSourceEntry : stToSource) {
@@ -315,10 +306,10 @@
 		}
     	}
     }
-    
+
 	//Application str;
 	return ok(
-			structureDetails.render(strDisplay, id, proteinNames, taxNames, sourceNames, rowList, uniprot, taxDivs)
+			structureDetails.render(strDisplay, id, proteinNames, proteinItems, proteinIds, sourceNames, rowList, uniprot, taxItems, taxNames)
 			
 	);
     };
