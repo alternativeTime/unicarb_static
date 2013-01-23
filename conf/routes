@@ -4,6 +4,7 @@
 
 # Default path will just redirect to the computer list
 GET     /                           	controllers.Application.index()
+GET	/about			controllers.Admin.about()
 
 GET     /references                  controllers.Application.list2(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "", protein ?= "")
 GET		/references/:id				 controllers.Application.refdisplay(id:Long)
