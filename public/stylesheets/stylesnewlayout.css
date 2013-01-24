@@ -211,6 +211,7 @@ hr {
   font-weight: 200;
   line-height: 1;
   background: url(../img/UniCarbKB_Logo_white.png) top left no-repeat;
+  text-decoration: none;
 }
 
 .topbar a {
