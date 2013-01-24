@@ -84,7 +84,8 @@ public class Structure extends Model {
     }
 
     public static List<Structure> findComposition(String composition) {
-	return find.where().ilike("composition_id", "%" + composition).findList();
+	//return find.where().ilike("composition_id", "%" + composition).findList();
+	return find.where().ilike("composition_id",  composition).findList();
     }
 
      public static Content render(Structure strDisplay) {
