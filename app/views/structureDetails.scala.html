@@ -1,4 +1,4 @@
-@(references: List[Structure], structureId: Long, proteinNames: ArrayList[String], proteinItems: ArrayList[Proteins], proteinIds: ArrayList[String], sourceNames: ArrayList[String], test: List[Array[String]], uniprot: ArrayList[String], taxItems: ArrayList[Taxonomy], taxNames: ArrayList[String])
+@(references: List[Structure], structureId: Long, proteinNames: ArrayList[String], proteinItems: ArrayList[Proteins], sourceNames: ArrayList[String], sourceItems: ArrayList[Tissue], test: List[Array[String]], uniprot: ArrayList[String], taxItems: ArrayList[Taxonomy], taxNames: ArrayList[String])
 @import helper._
 
 @**********************************
@@ -76,6 +76,7 @@
         <div class='taxonomy'>
           <a id='toggle-taxonomy'><span class='label important'><span class='icon-tags icon-white'></span> Taxonomy (@taxItems.size())</span></a>
           <a id='toggle-protein'><span class='label warning'><span class='icon-map-marker icon-white'></span> Protein (@proteinItems.size())</span></a>
+          <a id='toggle-source'><span class='label success'><span class='icon-leaf icon-white'></span> Source (@sourceItems.size())</span></a>
         </div>
         <div>
           <ul id='more-taxonomy'>
@@ -88,6 +89,12 @@
             <h3 id='less-protein'><span class='icon-map-marker icon-white'></span> Protein</h3>
             @for(protein <- proteinItems){
             <li><span class='icon-map-marker icon-white'></span> <a href='../proteinsummary/@protein.swissProt'>@protein.name</a></li>
+            }
+          </ul>
+          <ul id='more-source'>
+            <h3 id='less-source'><span class='icon-leaf icon-white'></span> Source</h3>
+            @for(source <- sourceItems){
+            <li><span class='icon-leaf icon-white'></span> <a href='../taxonomy/@source.id'>@source.div1 > @source.div2 @source.div3 > @source.div4</a></li>
             }
           </ul>
         </div>

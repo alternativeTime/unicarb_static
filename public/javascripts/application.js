@@ -60,6 +60,7 @@ $(document).ready(function(){
   $("#toggle-taxonomy").click(function() {
     $("#more-taxonomy").toggle();
     $("#more-protein").hide();
+    $("#more-source").hide();
   });
 
   $("#less-taxonomy").click(function() {
@@ -69,11 +70,23 @@ $(document).ready(function(){
   $("#toggle-protein").click(function() {
     $("#more-protein").toggle();
     $("#more-taxonomy").hide();
+    $("#more-source").hide();
   });
 
   $("#less-protein").click(function() {
     $("#more-protein").toggle();
   });
+
+  $("#toggle-source").click(function() {
+    $("#more-source").toggle();
+    $("#more-taxonomy").hide();
+    $("#more-protein").hide();
+  });
+
+  $("#less-source").click(function() {
+    $("#more-source").toggle();
+  });
+
 
 
 });

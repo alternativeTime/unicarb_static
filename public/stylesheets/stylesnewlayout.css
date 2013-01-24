@@ -903,9 +903,9 @@ label.radio { padding-left: 20px; width: auto; }
 
 .taxonomy, .protein, .source { margin: 0 0 10px 0; }
 
-#toggle-taxonomy, #toggle-protein { cursor: pointer; }
+#toggle-taxonomy, #toggle-protein, #toggle-source { cursor: pointer; }
 
-#more-taxonomy, #more-protein { 
+#more-taxonomy, #more-protein, #more-source { 
   margin: 0; padding: 20px;
   display: none;
   -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px;
@@ -913,17 +913,20 @@ label.radio { padding-left: 20px; width: auto; }
 
 #more-taxonomy { background: #BF1E2E; }
 #more-protein { background: #f89406; }
+#more-source { background: #419926; }
 
-#more-taxonomy h3, #more-protein h3 { color: #FFF; cursor: pointer; }
-#more-taxonomy h3 span, #more-protein h3 span { margin: 8px 0 0 0; }
+#more-taxonomy h3, #more-protein h3, #more-source h3 { color: #FFF; cursor: pointer; }
+#more-taxonomy h3 span,
+#more-protein h3 span,
+#more-source h3 span { margin: 8px 0 0 0; }
 
-#more-taxonomy li, #more-protein li {
+#more-taxonomy li, #more-protein li, #more-source li {
   list-style: none;
   line-height: 20px;
 }
 #more-taxonomy li span { }
-#more-taxonomy li a, #more-protein li a { color: rgba(255, 255, 255, 0.7500) }
-#more-taxonomy li a:hover, #more-protein li a:hover { color: #FFF; }
+#more-taxonomy li a, #more-protein li a, #more-source li a { color: rgba(255, 255, 255, 0.7500) }
+#more-taxonomy li a:hover, #more-protein li a:hover, #more-source li a:hover { color: #FFF; }
 
 
 p.structures, p.publications, p.biological {

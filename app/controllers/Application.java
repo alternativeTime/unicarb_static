@@ -262,6 +262,7 @@
     ArrayList taxNames = new ArrayList();
     ArrayList taxItems = new ArrayList();
     ArrayList sourceNames = new ArrayList();
+    ArrayList sourceItems = new ArrayList();
     HashSet sourceNamesUnique = new HashSet();
     ArrayList uniprot = new ArrayList();
     HashSet uniprotUnique = new HashSet();
@@ -284,7 +285,6 @@
         if (!stToProtein.isEmpty()) {
           for (Stproteins stProteinEntry : stToProtein){
             proteinNames.add(stProteinEntry.proteins.name);
-            proteinIds.add(stProteinEntry.proteins.id);
             proteinItems.add(stProteinEntry.proteins);
           }
         }
@@ -296,20 +296,21 @@
           }
         }
 
-		if (!stToSource.isEmpty()){
-			for (Stsource stSourceEntry : stToSource) {
-				String div = "<a href=\"../taxonomy/" +  stSourceEntry.tissue.id + "\"> > " + stSourceEntry.tissue.div1 + " > " + stSourceEntry.tissue.div2 + " > " + stSourceEntry.tissue.div3 + " > " + stSourceEntry.tissue.div4 + "</a> <br />";
-				sourceNamesUnique.add(div);
-			}
-			
-			sourceNames.addAll(sourceNamesUnique);
-		}
-    	}
+        if (!stToSource.isEmpty()){
+          for (Stsource stSourceEntry : stToSource) {
+            String div = "<a href=\"../taxonomy/" +  stSourceEntry.tissue.id + "\"> > " + stSourceEntry.tissue.div1 + " > " + stSourceEntry.tissue.div2 + " > " + stSourceEntry.tissue.div3 + " > " + stSourceEntry.tissue.div4 + "</a> <br />";
+            sourceNamesUnique.add(div);
+
+            sourceNames.add(stSourceEntry.tissue.id);
+            sourceItems.add(stSourceEntry.tissue);
+          }
+        }
+      }
     }
 
 	//Application str;
 	return ok(
-			structureDetails.render(strDisplay, id, proteinNames, proteinItems, proteinIds, sourceNames, rowList, uniprot, taxItems, taxNames)
+			structureDetails.render(strDisplay, id, proteinNames, proteinItems, sourceNames, sourceItems, rowList, uniprot, taxItems, taxNames)
 			
 	);
     };
