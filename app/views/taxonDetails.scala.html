@@ -51,12 +51,11 @@
 
 <div class="row-fluid">
   <div class="span8">
-    <section>
-    </section>
 
-    @* <h3>@message</h3> *@
     <p>The GlycoSuite database is an annotated and curated relational database of glycan structures. For the taxonomy entry <b>@taxon.species</b> a number of glycan structures, glycoproteins and tissue source's have been curated.</p>
-    <p><a href=""  data-toggle="modal" data-id='@taxon' class="announceTaxStructures"><i class="icon-resize-full"></i> See more structures</a> <small>limited to six records below</small></p>
+
+    @* <p><a href=""  data-toggle="modal" data-id='@taxon' class="announceTaxStructures"><i class="icon-resize-full"></i> See more structures</a> <small>limited to six records below</small></p> *@
+
     <ul class="thumbnails RP">
       @for((s, i) <- taxon.strtaxonomy.zipWithIndex; if (i <=5) ){
       <li class="span5">
@@ -72,17 +71,30 @@
           <a href="@routes.Application.structureDetails(s.structure.id)" class="thumbnail">
             <img src="../images/_@{s.structure.id}.png" alt="">
           </a>
-      </li>
+        </li>
       }
     </ul>
-    <p><a href="#" id='show-structures'><i class="icon-resize-full"></i> See more structures</a></p>
+    <a id='show-structures' class='more-structures' href='#'>
+      See more structures
+      <br />
+      <span>&#9679; &#9679; &#9679;</span>
+    </a>
   </div>
 
   <div class="span4 sidebar">
     <div class="info">
       <h3>Glycan Structures</h3>
-      <p><i class="icon-chevron-right"></i> <b>@taxon.strtaxonomy.size() </b> structures reported</p>
-      <p  style="font-weight: bold;"><a href=""  data-toggle="modal" data-id='@taxon' class="announceTaxStructures"><i class="icon-th-large"></i> See more structures</a></p>
+      <p>
+        <span class='label'>
+          <i class="icon-th icon-white"></i> Structures <b>(@taxon.strtaxonomy.size())</b>
+        </span>
+      </p>
+      <a id='more-structures' class='more-structures' href='#'>
+        Show all structures
+        <br />
+        <span>&#9679; &#9679; &#9679;</span>
+      </a>
+
     </div>
 
     <div class="info">
@@ -99,6 +111,20 @@
 
   </div>
 </div>
+
+<div class="footer row-fluid">
+  <div class="span12">
+    <p class="pull-left">UniCarbKB</p>
+    <p class="pull-right">
+      Supported by 
+      <a href="http://www.nectar.org.au">NeCTAR </a> |
+      <a href="http://www.ands.org.au">ANDS </a> | 
+      <a href="http://www.stint.se">STINT </a> | 
+      <a href="http://expasy.org/">SIB ExPASy </a>
+    </p>
+  </div>
+</div>
+
 </section>
 
 

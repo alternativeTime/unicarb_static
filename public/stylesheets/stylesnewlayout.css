@@ -355,7 +355,7 @@ h2.lead { margin: 30px 0; font-size: 25px; }
     /* border-top: 1px solid #DDD; */
   }
 .home .sidebar .info { padding: 20px; }
-.home .sidebar .nav { padding: 20px 0; }
+.home .sidebar .nav { padding: 0 0 20px 0; }
 
 .sidebar {
   /* margin-top: 120px; */
@@ -573,6 +573,34 @@ table .header::after {
     display: none;
   }
 
+#show-structures {
+  text-align: center;
+}
+
+.more-structures {
+  text-align: center;
+  margin: 0;
+  padding: 10px 0;
+  /* width: 100%; */
+  background: #008FD5;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  color: #FFF;
+  display: block;
+}
+
+a.more-structures { color: #FFF; }
+a.more-structures span { color: rgba(255, 255, 255, 0.500); }
+
+.sidebar .more-structures span { 
+  color: rgba(255, 255, 255, 0.15);
+  font-size: 52px; 
+  float: left;
+  width: 100%;
+  margin: -20px 0 0 0;
+}
+
 
 /* !LAYOUT - PROTEIN SUMMARY ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -597,7 +625,7 @@ th[class*="span"] {
 
 .RP {
   background-color: whitesmoke;
-  margin: 0 0 60px 0;
+  margin: 0 0 20px 0;
   padding: 20px;
   display: block;
 }

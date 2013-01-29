@@ -52,7 +52,8 @@ $(document).ready(function(){
     if ($(this).val() === "Composition") { $("#glycobaseComposition").show(); } else { $("#glycobaseComposition").hide(); }
   });
   
-  $("#show-structures").click(function() {
+  // TAXONOMY - Show all structures
+  $('#show-structures, #more-structures').click(function() {
     $("#more-thumbnails").toggle();
   });
 
