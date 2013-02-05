@@ -13,7 +13,7 @@
 
     <div class="page-header row-fluid">
       <h1>Associated Structures</h1>
-      <h4 class="subheader span8">Accession: <a href="http://uniprot.org/uniprot/@accession">@accession </a><span class="pull-right"><a href="http://uniprot.org/uniprot/@accession"><span class="label success">UniProt Entry</span></a></span></h4>
+      <h4 class="subheader span8">Accession: <a href="http://uniprot.org/uniprot/@accession">@accession </a><span class="pull-right"><a href="http://uniprot.org/uniprot/@accession"><span class="label label-success">UniProt Entry</span></a></span></h4>
     </div>
 
 
@@ -41,7 +41,7 @@
         <div class='glycosylation-sites'>
           <h3>Glycosylation Sites</h3>
 
-          <table class="computers zebra-striped">
+          <table class="computers table table-striped">
             <thead>
               <tr>
                 <th>Name</th>
@@ -105,7 +105,7 @@
         </div>
 
         <div class="info">
-          <h3><span class="label notice" style="font-size:16px">@source.size()</span> References @if(source.size() > 5) {showing top 5}</h3>
+          <h3><span class="label label-notice" style="font-size:16px">@source.size()</span> References @if(source.size() > 5) {showing top 5}</h3>
           <ol>
             @for((source,i) <- source.zipWithIndex; if (i < 5)) {
             <li class="references">

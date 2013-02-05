@@ -2,16 +2,15 @@
 <html class="about">
   <head>
     <title>UnICarbKB</title>
-    <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("/public", "stylesheets/bootstrapnewlayout.css")">
-    <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("/public", "stylesheets/stylesnewlayout.css")">
-    <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("/public", "stylesheets/bootstrap-responsive.css")">
+    <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("/public", "stylesheets/bootstrap.min.css")">
+    <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("/public", "stylesheets/unicarbkb.css")">
     <link rel="icon" href="@routes.Assets.at("/public", "favicon.ico")" type="image/x-icon">
     <link rel="icon" href="@routes.Assets.at("/public", "favicon.ico")" type="image/x-icon">
   </head>
 
   <header>
-    <div class="topbar">
-      <div class="topbar-inner">
+    <div class="navbar">
+      <div class="navbar-inner">
         <div class="container-fluid">
           <a class="brand" href="/">UniCarbKB</a>
           <ul class="nav">
@@ -21,9 +20,9 @@
             <li><a href="/builder">Glycan Builder</a></li>
           </ul>
           <div id="headersearch" class="pull-right">
-            <ul>
-              <li class='about'><a href="/about">About</a></li>
-              <li><a href="/about">Contact</a></li>
+            <ul class='nav'>
+              <li class='active'><a href="/about">About</a></li>
+              <li class='active'><a href="/about">Contact</a></li>
             </ul>
           </div>
         </div>

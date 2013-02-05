@@ -4,16 +4,14 @@
 <html>
   <head>
     <title>UniCarbKB</title>
-    <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("/public", "stylesheets/bootstrap.ori.min.css")"> 
+    <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("/public", "stylesheets/bootstrap.min.css")"> 
     <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("/public", "stylesheets/customMarkdown.css")">
     <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("/public", "stylesheets/select2.css")">
     <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("/public", "stylesheets/unicarbkb.css")">
 
     <link rel="icon" href="@routes.Assets.at("/public", "favicon.ico")" type="image/x-icon">
 
-    @** <script src="http://static.scripting.com/github/bootstrap2/js/jquery.js"></script> *@
     <script src="@routes.Assets.at("/public","javascripts/jquery.js")"></script>
-    @**	<script src="http://static.scripting.com/github/bootstrap2/js/bootstrap-modal.js"></script> **@
     <script src="@routes.Assets.at("/public","javascripts/jquery.ae.image.resize.min.js")"></script>
     <script src="@routes.Assets.at("/public","javascripts/bootstrap.min.js")"></script>
     <script src="@routes.Assets.at("/public","javascripts/jquery.tablesorter.min.js")"></script>
@@ -144,22 +142,18 @@
     </h1>
     </header>*@
     <header>
-    <div class="topbar">
-      <div class="topbar-inner">
+    <div class="navbar">
+      <div class="navbar-inner">
         <div class="container-fluid">
           <a class="brand" href="/">UniCarbKB</a>
           <ul class="nav">
             <li class=""><a href="/">Home</a></li>
-            @* <li class="dropdown" id="menu1">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="/browse">Browse <b class="caret"></b></a> 
-            </li> *@
-	    <li><a href="/browse">Search</a></li>
-	    <li><a href="/references">References</a></li>
-	    <li><a href="/builder">Glycan Builder</a></li>
+            <li><a href="/browse">Search</a></li>
+            <li><a href="/references">References</a></li>
+            <li><a href="/builder">Glycan Builder</a></li>
           </ul>
-          @*<p class="pull-right">Logged in as <a href="#">username</a></p> *@
           <div id="headersearch" class="pull-right">
-	    <ul>
+            <ul class='nav'>
        	    <li><a href="/about">About</a></li>
             <li><a href="/about">Contact</a></li>
 	    </ul>

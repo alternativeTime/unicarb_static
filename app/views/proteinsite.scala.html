@@ -11,9 +11,9 @@
 
   <section id="layouts" class="proteinsummary">
 
-    <div class="page-header">
+    <div class="page-header row-fluid">
       <h1>Associated Structures</h1>
-      <h4 class="subheader">Accession: @accession</h4>
+      <h4 class="subheader span8">Accession: @accession</h4>
     </div>
 
   <div class="row-fluid">
@@ -31,6 +31,29 @@
       </ul>
 
 
+        <h3>Confirmed Glycosylation Sites</h3>
+      <table class="computers table table-striped">
+        <thead>
+          <tr>
+            <th>Position</th>
+            <th>Structures</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for(gs <- proteinSite) {   
+          @for(gss <- gs.gsProteinSiteStr2) {
+          <tr>
+            <td>@gss.glyco_aa_site</td>
+            <td>@gss.gsProteinSiteStructureAssociation.size() <br/><a href="/proteinsite?position=@gss.glyco_aa_site&protein=@accession"><span class="label label-notice">Structures:<br/>
+                  @*      @for(association <- gss.gsProteinSiteStructureAssociation) {
+                  <a href="/structure/@association.structure_id">@association.structure_id</a>
+                  }*@</span></a>
+            </td>
+            }
+            }
+          </tbody>
+        </table>
+
 	
     </div><!-- /col -->
 
@@ -45,32 +68,7 @@
 
 
       <div class="info">
-        <h3>Confirmed Glycosylation Sites</h3>
-      </div>
-      <table class="computers zebra-striped">
-        <thead>
-          <tr>
-            <th>Position</th>
-            <th>Structures</th>
-          </tr>
-        </thead>
-         <tbody>
-                  @for(gs <- proteinSite) {   
-                        @for(gss <- gs.gsProteinSiteStr2) {
-                                <tr>
-                                <td>@gss.glyco_aa_site</td>
-                                <td>@gss.gsProteinSiteStructureAssociation.size() <br/><a href="/proteinsite?position=@gss.glyco_aa_site&protein=@accession"><span class="label notice">Structures:<br/>
-                                @*      @for(association <- gss.gsProteinSiteStructureAssociation) {
-                                                <a href="/structure/@association.structure_id">@association.structure_id</a>
-                                        }*@</span></a>
-                                </td>
-                        }
-                  }
-                </tbody>
-      </table>
-
-      <div class="info">
-        <h3><span class="label notice" style="font-size:16px">@source.size()</span> Reference @if(source.size() > 5) {showing top 5}</h3>
+        <h3><span class="label label-notice" style="font-size:16px">@source.size()</span> Reference @if(source.size() > 5) {showing top 5}</h3>
         <ol>
         @for((source,i) <- source.zipWithIndex; if (i < 5)) {
           <li class="references">
