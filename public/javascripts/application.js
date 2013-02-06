@@ -54,7 +54,7 @@ $(document).ready(function(){
   
   // TAXONOMY - Show all structures
   $('#show-structures, #more-structures').click(function() {
-    $("#more-thumbnails").toggle();
+    $("#more-thumbnails").slideToggle('slow');
   });
 
   // Structure Associated Descriptions

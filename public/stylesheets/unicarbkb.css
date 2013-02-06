@@ -125,7 +125,7 @@ hr {
 
 .label {
   padding: 3px 5px;
-  /* background-color: #BFBFBF; */
+  background-color: #4B5C66;
   font-size: 9.75px;
   line-height: 18px;
   font-weight: 300;
@@ -138,10 +138,16 @@ hr {
   border-radius: 3px;
 }
 
-.label-notice { background-color: #62cffc; }
+a .label:hover { background: #2E3A43; }
+
+.label-notice { background-color: #018FD5; }
+a .label-notice:hover, #more-structures:hover { background-color: #006FA9; }
 .label-success { background-color: #46a546; }
-.label-important { background-color: #c43c35; }
+a .label-success:hover { background-color: #369133; }
+.label-important { background-color: #DF2E30; }
+a .label-important:hover { background-color: #CA2A2C; }
 .label-warning { background-color: #f89406; }
+a .label-warning:hover { background-color: #F07F26; }
 
 .pull-center { text-align: center; }
 
@@ -684,6 +690,7 @@ table .header::after {
 
 #show-structures {
   text-align: center;
+  cursor: pointer;
 }
 
 .more-structures {
@@ -699,8 +706,12 @@ table .header::after {
   display: block;
 }
 
+.more-structures:hover { background-color: #006FA9; }
+
 a.more-structures { color: #FFF; }
 a.more-structures span { color: rgba(255, 255, 255, 0.500); }
+
+span#more-structures { cursor: pointer; }
 
 .sidebar .more-structures span { 
   color: rgba(255, 255, 255, 0.15);
@@ -1050,10 +1061,10 @@ label.radio { padding-left: 20px; width: auto; display: inline-block; }
 #more-taxonomy, #more-protein, #more-source { 
   margin: 0; padding: 20px;
   display: none;
-  -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px;
+  -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px
 }
 
-#more-taxonomy { background: #BF1E2E; }
+#more-taxonomy { background: #DF2E30; }
 #more-protein { background: #f89406; }
 #more-source { background: #419926; }
 
@@ -1094,6 +1105,29 @@ p.structures a, p.publications a, p.biological a { padding-left: 30px; height: 2
   -moz-binding: url('xbl.xml#wordwrap'); /* Firefox (using XBL) */
 }
 .num { border-right: #DDD 1px solid; text-align: right; float: left; }
+
+
+/* !MISC - ICONS ///////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+span .icon-th {
+  margin: -1px 0 0 0;
+}
+
+span .icon-tag {
+  margin: -1px 0 0 0;
+}
+
+span .icon-map-marker {
+  margin: -1px 0 0 0;
+}
+
+span .icon-leaf {
+  margin: -1px 0 0 0;
+}
+
+
 
 
 /*******************************************************************************************************
