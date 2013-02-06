@@ -46,6 +46,7 @@
 		String swissProtName = "";	
 		ArrayList<Biolsource> biolSourceProtein = new ArrayList<Biolsource>();
 		List<Biolsource> biolSourceProteins = Biolsource.findBiolSourceIds(protein);
+		System.out.println("temp check process");
 		//List<Double> biorefs = new ArrayList<Double>();
 		String accession = "";
 		for(Biolsource biol : biolSourceProteins){
@@ -62,19 +63,34 @@
 
 		List<Proteins> proteins = Proteins.findProteins(protein);
 		List<Sites> sites = Sites.findSites(protein);
-		
-		List<String> uniprotDetails = UniprotConnection.EntryRetrievalExample(protein);
-		String sequenceRetrieval = UniprotConnection.EntryRetrievalSequence(protein);
+	
+		//problems with legacy feature of and in the swiss prot names
+		String [] splitProtein = protein.split("\\s*[and]+\\s*");
 
+		List<Proteins> proteinMultiple = Proteins.findProteinsSwissProt(protein);
+
+		List<String> uniprotDetails = null;
+		List<SitesReferences> description = null ;
+		List<GsProteinStr2> gsProteinSite = null;
+		String sequenceRetrieval = "";
+
+		for(String partProtein : splitProtein) {
+
+			System.out.println("protein parts " + partProtein);
+	
+		uniprotDetails = UniprotConnection.EntryRetrievalExample(partProtein);
+		sequenceRetrieval = UniprotConnection.EntryRetrievalSequence(partProtein);
+		}
 		//might kill the above
 		System.out.println("the accession is " + protein);
 		//List<GsProteinSite> gsProteinSite = GsProteinSite.ProteinRetrieval(protein);
-		List<GsProteinStr2> gsProteinSite = GsProteinStr2.ProteinRetrieval(protein);
+		gsProteinSite = GsProteinStr2.ProteinRetrieval(protein);
 		//List<SitesReferences2> description = SitesReferences2.findSitesReferences(protein);
-		List<SitesReferences> description = SitesReferences.findSites(protein);
+		description = SitesReferences.findSites(protein);
+
 		
 	return ok(
-		proteinsummary.render(proteinName, protein, biolSourceProtein, proteins, uniprotDetails, sites, gsProteinSite, listSqlArray, description, sequenceRetrieval)
+		proteinsummary.render(proteinName, protein, biolSourceProtein, proteins, uniprotDetails, sites, gsProteinSite, listSqlArray, description, sequenceRetrieval, proteinMultiple)
 	);
     }
 

@@ -37,6 +37,14 @@ public class Proteins extends Model {
            find.where().ilike("name", protein).findList();
    }
 
+   public static List<Proteins> findProteinsSwissProt(String protein) {
+        return
+           find.where().ilike("swiss_prot", protein).findList();
+   }
+
+
+  
+
    /* public static Map<String,String> options() {
         LinkedHashMap<String,String> options = new LinkedHashMap<String,String>();
         for(Proteins c: Proteins.find.orderBy("name").findList()) {

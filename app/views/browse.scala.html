@@ -230,7 +230,7 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
         <li class="span12"><a href="#tab2" data-toggle="tab">
           <h2>Search returned @if(taxon.size() != 0) {@taxon.size()} @if(proteinList.size() != 0) {@proteinList.size()} @if(tissueList.size() != 0) {@tissueList.size()} results...
           </h2>
-          <a href="/browse"><input type="button" value="Search Again" href="/browse" class="btn btn-small pull-right"></a>
+          <a href="/browse"><input type="button" value="Search Again" href="/browse" class="btn btn-primary pull-right"></a>
         </a></li>
         <li><a href="#tab3" data-toggle="tab">Related Results</a></li>
       </ul>
@@ -265,7 +265,7 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
                     <!--<h4>Taxonomy</h4>-->
                     <div id="selection" class="row-fluid">
                       <select  name=taxonomy MULTIPLE id="e1" id="listBox" class="span10"></select>
-                      <button type="submit" class="btn btn-small">Search</button>
+                      <button type="submit" class="btn btn-primary">Search</button>
                     </div>
                   </form>
                 </label>
@@ -276,7 +276,7 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
                     <!--<h4>Localisation</h4>-->
                     <div id="selection" class="row-fluid">
                       <select  name=tissue MULTIPLE id="e2" id="listBox" class="span10"></select>
-                      <button type="submit" class="btn btn-small">Search</button>
+                      <button type="submit" class="btn btn-primary">Search</button>
                     </div>
                   </form>
                 </label>
@@ -287,7 +287,7 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
                     <!--<h4>Protein Association</h4>-->
                     <div id="selection" class="row-fluid">
                       <select  name=protein MULTIPLE id="e3" id="listBox" class="span10"></select>
-                      <button type="submit" class="btn btn-small">Search</button>
+                      <button type="submit" class="btn btn-primary">Search</button>
                     </div>
                   </form>
                 </label>
@@ -317,7 +317,7 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
                   <label class="checkbox"><input class="span2" name=comp type=text> Other</label>
                 </div>
 
-                <button type="submit" class="btn btn-small btn-primary"> Composition Search</button>
+                <button type="submit" class="btn btn-primary btn-primary"> Composition Search</button>
               </form>
             </div> @* end of second spand *@
 
@@ -347,7 +347,7 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
                   <!--<h4>Taxonomy</h4>-->
                   <div id="selection" class="row-fluid">
                     <select  name=taxonomy MULTIPLE id="e1" id="listBox" class="span10"></select>
-                    <button type="submit" class="btn btn-small">Search</button>
+                    <button type="submit" class="btn btn-primary">Search</button>
                   </div>
                 </form>
               </label>
@@ -359,7 +359,7 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
                   <!--<h4>Localisation</h4>-->
                   <div id="selection" class="row-fluid">
                     <select  name=tissue MULTIPLE id="e2" id="listBox" class="span10"></select>
-                    <button type="submit" class="btn btn-small">Search</button>
+                    <button type="submit" class="btn btn-primary">Search</button>
                   </div>
                 </form>
               </label>
@@ -371,7 +371,7 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
                   <!--<h4>Protein Association</h4>-->
                   <div id="selection" class="row-fluid">
                     <select  name=protein MULTIPLE id="e3" id="listBox" class="span10"></select>
-                    <button type="submit" class="btn btn-small">Search</button>
+                    <button type="submit" class="btn btn-primary">Search</button>
                   </div>
                 </form>
               </label>
@@ -405,7 +405,7 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
                       <!--<h4>Taxonomy</h4>-->
                       <div id="selection" class="row-fluid">
                         <select  name=taxonomy MULTIPLE id="e5" id="listBox" class="span10"></select>
-                        <button type="submit" class="btn btn-small">Search</button>
+                        <button type="submit" class="btn btn-primary">Search</button>
                       </div>
                     </form>
                   </label>
@@ -417,7 +417,7 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
                       <!--<h4>Localisation</h4>-->
                       <div id="selection" class="row-fluid">
                         <select  name=tissue MULTIPLE id="e10" id="listBox" class="span10"></select>
-                        <button type="submit" class="btn btn-small">Search</button>
+                        <button type="submit" class="btn btn-primary">Search</button>
                       </div>
                     </form>
                   </label>
@@ -429,7 +429,7 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
                       <!--<h4>Protein Association</h4>-->
                       <div id="selection" class="row-fluid">
                         <select  name=protein MULTIPLE id="e11" id="listBox" class="span10"></select>
-                        <button type="submit" class="btn btn-small">Search</button>
+                        <button type="submit" class="btn btn-primary">Search</button>
                       </div>
                     </form>
                   </label>
@@ -454,7 +454,7 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
                     <label class="checkbox"><input class="span2" name=mscomp_KDN   type=text> KDN</label>
                     <label class="checkbox"><input class="span2" name=mscomp_HexA type=text> HexA</label>
                   </div>
-                  <button type="submit" class="btn btn-small btn-primary"> Composition Search</button>
+                  <button type="submit" class="btn btn-primary btn-primary"> Composition Search</button>
                 </form>
 
             </div> @* end of filter3 *@
@@ -494,7 +494,7 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
           <form class="form-search">
             <div id="selection">
               <select  name=protein MULTIPLE id="e6" style="width:350px"  id="listBox"></select>
-              <button type="submit" class="btn btn-small">Search</button>
+              <button type="submit" class="btn btn-primary">Search</button>
             </div>
           </form>
         </label>
@@ -526,7 +526,7 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
           <form class="form-search">
             <div id="selection">
               <select  name=tissue MULTIPLE id="e4" style="width:350px"  id="listBox"></select>
-              <button type="submit" class="btn btn-small">Search</button>
+              <button type="submit" class="btn btn-primary">Search</button>
             </div>
           </form>
         </label>
