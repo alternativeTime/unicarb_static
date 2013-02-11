@@ -124,7 +124,7 @@ public class UniprotConnection extends Controller {
         for(String s : thisCombo2) {
                 if (i == 50 ) {
                 sequenceCat += s;
-                sequenceCat += "\n";
+                //sequenceCat += "\n";
                 i = 0;
                 } else {
                 sequenceCat += s;
