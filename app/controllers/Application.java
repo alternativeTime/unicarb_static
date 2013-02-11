@@ -1,4 +1,3 @@
-	package controllers;
 
 	import java.util.*;
 
@@ -29,7 +28,6 @@
 	    );
 		
 	    public static Result stref(Long id) {
-		System.out.println("testing params value " + id);
 		Streference display = Streference.find.byId(id);
 
 		return ok( 
@@ -46,11 +44,9 @@
 		String swissProtName = "";	
 		ArrayList<Biolsource> biolSourceProtein = new ArrayList<Biolsource>();
 		List<Biolsource> biolSourceProteins = Biolsource.findBiolSourceIds(protein);
-		System.out.println("temp check process");
 		//List<Double> biorefs = new ArrayList<Double>();
 		String accession = "";
 		for(Biolsource biol : biolSourceProteins){
-			System.out.println("test biolsource" + biol.id);
 			proteinName = biol.protein;
 			swissProtName = biol.swiss_prot;
 			Biolsource objectBiolSource = Ebean.find(Biolsource.class, biol.id);
@@ -62,7 +58,12 @@
 		}
 
 		List<Proteins> proteins = Proteins.findProteins(protein);
-		List<Sites> sites = Sites.findSites(protein);
+		//List<Sites> sites = Sites.findSites(protein);
+
+		List<GeneralSites> generalSites = null;
+		List<DefinedSites> definedSites = null;
+	        generalSites = GeneralSites.findProteinsGeneral(protein);
+		definedSites = DefinedSites.findProteinsDefined(protein);
 	
 		//problems with legacy feature of and in the swiss prot names
 		String [] splitProtein = protein.split("\\s*[and]+\\s*");
@@ -75,14 +76,9 @@
 		String sequenceRetrieval = "";
 
 		for(String partProtein : splitProtein) {
-
-			System.out.println("protein parts " + partProtein);
-	
-		uniprotDetails = UniprotConnection.EntryRetrievalExample(partProtein);
-		sequenceRetrieval = UniprotConnection.EntryRetrievalSequence(partProtein);
+			uniprotDetails = UniprotConnection.EntryRetrievalExample(partProtein);
+			sequenceRetrieval = UniprotConnection.EntryRetrievalSequence(partProtein);
 		}
-		//might kill the above
-		System.out.println("the accession is " + protein);
 		//List<GsProteinSite> gsProteinSite = GsProteinSite.ProteinRetrieval(protein);
 		gsProteinSite = GsProteinStr2.ProteinRetrieval(protein);
 		//List<SitesReferences2> description = SitesReferences2.findSitesReferences(protein);
@@ -90,7 +86,7 @@
 
 		
 	return ok(
-		proteinsummary.render(proteinName, protein, biolSourceProtein, proteins, uniprotDetails, sites, gsProteinSite, listSqlArray, description, sequenceRetrieval, proteinMultiple)
+		proteinsummary.render(proteinName, protein, biolSourceProtein, proteins, uniprotDetails, gsProteinSite, listSqlArray, description, sequenceRetrieval, proteinMultiple, generalSites, definedSites)
 	);
     }
 
@@ -106,7 +102,6 @@
                 }
                 if(key.contains("comp")) {
                         String out =  Structure.buildComposition(searchTerms);
-                        System.out.println("output is " + out);
                         compositionResult = Structure.findComposition(out);
                 }
     	
@@ -215,7 +210,6 @@
 			Long protId = null;
 			for (Proteins protein : foundProteins){
 				protId = protein.id;
-				System.out.println("found protein " + protein);
 			//}
 			//if (protId > 0 && protId != null ) {
 				proteinId = Proteins.find.byId(protId);	
@@ -332,7 +326,6 @@
     };
 
     public static Result refdisplay(Long id) {
-    	System.out.println("testingssss params value for reference " + id);
     	//Reference displayReference = null;
     	Reference displayReferencce = Reference.find.byId(id);
 	List<Reference> t = Reference.findJournal(id);
@@ -367,7 +360,6 @@
 	
 	
     	//List<Reference> sourcered = Reference.findSourceref(id);	
-	System.out.println("testing value: " + t.size() ) ;
     	return ok( 
     			//refdisplay.render(displayReference)
     			//list2.
@@ -438,7 +430,6 @@
 	Long taxId = null;
 	for (Taxonomy tax : foundTaxonomy) {
 		taxId = tax.id;
-		System.out.println("this is the id: " + taxId);
 	};
 	if (taxId > 0) {
 	Taxonomy taxonomy  = Taxonomy.find.byId(taxId);
@@ -499,7 +490,6 @@
 	}
 	String endTarget = ""; // " ]";
 	String finalTarget = target.concat(endTarget).toString();
-	System.out.println("final string: " + finalTarget);
 	return ok(
 		species.render("Display Species", speciesCollection, finalTarget)
 	);

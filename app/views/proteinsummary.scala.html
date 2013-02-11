@@ -1,4 +1,4 @@
-@(proteinName: String, accession: String, biol: ArrayList[Biolsource], protein: List[Proteins], uniprot: List[String], sites: List[Sites], gssites: List[GsProteinStr2], source: ArrayList[SqlRow], description: List[SitesReferences], sequence: String, proteinMultiple: List[Proteins])
+@(proteinName: String, accession: String, biol: ArrayList[Biolsource], protein: List[Proteins], uniprot: List[String], gssites: List[GsProteinStr2], source: ArrayList[SqlRow], description: List[SitesReferences], sequence: String, proteinMultiple: List[Proteins], generalSites: List[GeneralSites], definedSites: List[DefinedSites])
 
 @main {
 
@@ -40,7 +40,40 @@
 
         <div class='glycosylation-sites'>
           <h3>Glycosylation Sites</h3>
+	  @if(generalSites.size() > 0 ) {
+	  @for(generalSites <- generalSites) {
+	  @if(generalSites.strSiteGeneral.size() > 0 ) {
+	  <h4>Sites with structures not specifically assigned</h4>
+	  <table class="computers table table-striped">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Structures</th>
+                <th>Description</th>
+                <th>Evidence</th>
+              </tr>
+            </thead>
 
+            <tbody>
+	    <tr>
+                <td>Confirmed</td>
+                <td>@generalSites.glyco_aa_site</td>
+		<td>
+		  <span class="label label-notice"><i class='icon-th icon-white'></i> 
+                      Associated Structures: <b>@generalSites.strSiteGeneral.size()</b></span>
+		</td>
+		<td></td>
+                <td>GlycoSuite</td>
+	    </tr>
+	    </tbody>
+   	  </table>
+	  }}}
+        </div>
+
+	<div class='glycosylation-sites'>
+          @if(definedSites.size() > 0 ) {
+	  <h4>Sites with defined structures</h4>
           <table class="computers table table-striped">
             <thead>
               <tr>
@@ -53,75 +86,52 @@
             </thead>
 
             <tbody>
-              @for(gs <- gssites) {   
-              @for(gss <- gs.gsProteinSiteStr2) {
-              <tr>
+            @for(definedSites <- definedSites) {
+            <tr>
                 <td>Confirmed</td>
-                <td>@gss.glyco_aa_site</td>
+                <td>@definedSites.amino_acid_position</td>
                 <td>
-                  <a href='/proteinsite?position=@gss.glyco_aa_site&protein=@accession'>
-                    <span class="label label-notice"><i class='icon-th icon-white'></i> 
-                      Associated Structures: <b>@gss.gsProteinSiteStructureAssociation.size()</b></span>
-                  </a>
+                  <span class="label label-notice"><i class='icon-th icon-white'></i>
+                      Associated Structures: <b>@definedSites.strSiteDefined.size()</b></span>
                 </td>
-                <td></td> 
+                <td></td>
                 <td>GlycoSuite</td>
-                @* @for(association <- gss.gsProteinSiteStructureAssociation) {
-                <td></td>		
-                } *@
-              </tr>
-              }  
-              }
+            </tr>
+            }
             </tbody>
           </table>
+	  }
         </div>
 
 
 	<div class='glycosylation-sites'>
           <h3>Total Glycans</h3>
-	
-	<ul class="structures clearfix">
-      @for(s <- proteinMultiple) {
-      @for((s, i) <- s.stproteins.zipWithIndex; if (i <=5) ){
-      <li class="span5">
-        <a href="@routes.Application.structureDetails(s.structure.id)">
-          <img src="../images/_@{s.structure.id}.png" alt="">
-        </a>
-      </li>
-      }}
-    </ul>
-    <ul id='more-thumbnails' class='structures clearfix'>
-      @for(s <- proteinMultiple) {
-      @for(s <- s.stproteins ){
-        <li class="span5">
-          <a href="@routes.Application.structureDetails(s.structure.id)"
+          <ul class="thumbnails RP">
+      	  @for(s <- proteinMultiple) {
+          @for((s, i) <- s.stproteins.zipWithIndex; if (i <=5) ){
+          <li class="span5">
+          <a href="@routes.Application.structureDetails(s.structure.id)" class="thumbnail">
+             <img src="../images/_@{s.structure.id}.png" alt="">
+          </a>
+          </li>
+          }}
+          </ul>
+          <ul id='more-thumbnails' class='thumbnails RP'>
+          @for(s <- proteinMultiple) { 
+          @for(s <- s.stproteins ){
+          <li class="span5">
+          <a href="@routes.Application.structureDetails(s.structure.id)" class="thumbnail">
             <img src="../images/_@{s.structure.id}.png" alt="">
           </a>
-        </li>
-      }}
-    </ul>
-    <div id='show-structures' class='more-structures' href='#'>
-      See more structures
-      <br />
-      <span>&#9679; &#9679; &#9679;</span>
-    </div>
-    </div>
-
-
-
-	@* 
-	<div id="31" class="RP">
-	@for(s <- proteinMultiple) {
-	@for(str <- s.stproteins) {
-        <div class="fA a-l-k" style="margin-right: 16px">
-          <div class="OR YP aQ"></div>
-          <div class="ZP">
-            <a href="@routes.Application.structureDetails(str.structure.id)"><img class="thumbnail" style="max-height: 300px; max-width: 300px";  src="../images/_@{str.structure.id}.png"></a>
-        </div></div>
-        }}
-	</div> *@
-
-
+          </li>
+          }}
+          </ul>
+         <div id='show-structures' class='more-structures' href='#'>
+       		See more structures
+          <br />
+          <span>&#9679; &#9679; &#9679;</span>
+         </div>
+        </div>
 
 
 
