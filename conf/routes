@@ -33,6 +33,9 @@ GET	/taxonomysearch	controllers.Application.taxonsearch(taxonomy ?= "")
 GET  /compositions      controllers.Application.compositions()
 
 
+GET /workflows controllers.Application.workflows()
+
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               	controllers.Assets.at(path="/public", file)
 GET	/images/*file			controllers.Assets.at(path="/public/images", file)

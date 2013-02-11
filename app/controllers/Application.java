@@ -400,6 +400,10 @@
 	return ok (builder.render() );
     }
 
+    public static Result workflows() {
+      return ok ( workflows.render() );
+    }
+
     /*public static Result saySearch(String structure) {
 	try{
 		String result = URLDecoder.decode(structure, "UTF-8");

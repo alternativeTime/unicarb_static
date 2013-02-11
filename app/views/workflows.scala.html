@@ -1,0 +1,348 @@
+
+@main{
+
+<ul class="breadcrumb">
+  <li><i class="icon-home" ></i><a href="/"> UniCarbKB</a> <span class="divider">></span></li>
+  <li class="active"><i class="icon-briefcase" ></i> Workflows<span class="divider"></span></li>
+</ul>
+
+<section id="layouts" class="browse">
+  <h1>Workflows</h1>
+  <h4 class="subheader">UnicarbKB Workflows</h4>
+
+  <div class="row-fluid">
+    <div class="span3 search">
+      <div class="row-fluid">
+        <div class="filterbar tabbable clearfix">
+          <ul class="nav nav-tabs" id="myTabBar">
+            <li class="title">Fill out the following sections: </li>
+            <li class="active"><a href="#workflow1" data-toggle="tab">Mass Spec Details <span class="pull-right count"></span></a></li>
+            <li><a href="#workflow2" data-toggle="tab">LC Column Details </a></li>
+            <li><a href="#workflow3" data-toggle="tab">Preparation 1 <span class="pull-right count"></span></a></li>
+            <li><a href="#workflow4" data-toggle="tab">Preparation 2 <span class="pull-right count"></span></a></li>
+          </ul>
+        </div>
+
+        <div class="info">
+          <h4>Other Options:</h4>
+          <p><b>Glycan Builder:</b> Build and search a glycan structure<a href="/search"> using the new interface</a>.</p>
+          <p><b>Curated Publications:</b> Search the <a href="/references">growing list of publications, associated structures, and metadata</a>.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="span9 rightpanel">
+
+        <form id='workflowform' class="tab-content form-horizontal">
+
+          <div id="workflow1" class="tab-pane active control-group glycosuitedb">
+
+            <h2>1. Mass Spec Details</h2>
+            <div class="control-group">
+              <label class='control-label' for="name">Instrument:</label>
+              <div class='controls'>
+                <select name="manu">
+                  <option value="16">Agilent - XCT Ultra</option> 
+                  <option value="1">Agilent - XCT</option> 
+                  <option value="15">Agilent - 6500 Series Accurate-Mass Quadrupole Time-of-Flight (Q-TOF)</option> 
+                  <option value="6">Bruker Daltonik - MicrOTOF</option> 
+                  <option value="7">Bruker Daltonik - MicrOTOF-Q</option> 
+                  <option value="8">Bruker Daltonik - Apex IV</option> 
+                  <option value="3">Bruker Daltonik - Ultraflex II</option> 
+                  <option value="2">Bruker Daltonik - Ultraflex I</option> 
+                  <option value="4">Bruker Daltonik - Esquire3000</option> 
+                  <option value="5">Bruker Daltonik - HCT ultra</option> 
+                  <option value="18">Bruker Daltonik - Amazon ETD</option>
+                  <option value="9">Applied Biosystem - Voyager</option> 
+                  <option value="10">Applied Biosystem - 4800 TOF/TOF</option> 
+                  <option value="11">Applied Biosystem - Q-Star</option> 
+                  <option value="13">Waters - Q-TOF premiere</option> 
+                  <option value="12">Waters - Q-TOF</option> 
+                  <option value="14">Thermo Finnigan - LCQ Deca XP</option> 
+                  <option value="17">Thermo Finnigan - LTQ Linear Ion Trap</option> 
+                </select>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class='control-label' for="email">Mode:</label>
+              <div class='controls'>
+                <select name="mode">
+                  <option value="type">Negative</option>
+                  <option value="type">Positive</option>
+                  <option value="type">Alternating</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class='control-label' or="ionization">Ionization Method:</label>
+              <div class='controls'>
+                <select name="ionizationMethod"> direct injection
+                  <option value="capillary lc">capillary lc</option>
+                  <option value="nano lc">nano lc</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class='control-label' or="analyser">Analyser:</label>
+              <div class='controls'>
+                <select name="analyser">
+                  <option value="ion trap">ion trap</option>
+                  <option value="FTMS">FTMS</option>
+                  <option value="Orbitrap">Orbitrap</option>
+                  <option value="Q-TOF">Q-TOF</option>
+                  <option value="TOF">TOF</option>
+                  <option value="LCQ">LCQ</option>
+                  <option value="Triple Quad">Triple Quad</option>
+                </select>
+              </div>
+            </div>
+
+            <div class='control-group'>
+              <label class='control-label' or='reducing'>Reducing End:</label>
+              <div class='controls'>
+                <select name="reducing">
+                  <option value="2">reduced</option>
+                  <option value="1">free</option>
+                  <option value="3">PA</option>
+                  <option value="4">2AP</option>
+                  <option value="5">2AB</option>
+                  <option value="6">AA</option>
+                </select>
+              </div>
+            </div>
+
+            <div class='control-group'>
+              <label class='control-label' or="derivatization">Derivatization</label>      
+              <div class='controls'>
+                <select name="derivatization">
+                  <option value="1">Und</option>
+                  <option value="2">perMe</option>
+                  <option value="3">perDMe</option>
+                  <option value="4">perAc</option>
+                  <option value="5">perDAc</option>
+                </select>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-small btn-primary"> Composition Search</button>
+
+          </div> @* end filter1 *@
+
+          <div id="workflow2" class="tab-pane control-group row-fluid eurocarb">
+
+            <h2>2. LC Column Details</h2>
+            <div class='control-group'>
+              <label class='control-label' for="column">Column:</label>
+              <div class='controls'>
+                <select name="col">
+                  <option value="1">TSKgel Amide 80 - Amide</option>
+                  <option value="7">ProteoCol - Graphitized Carbon</option>
+                  <option value="6">Hypercarb - Porous Graphitic Carbon</option>
+                  <option value="5">ProteoCol - Carbon Clad Zirkonium</option>
+                </select>
+              </div>
+            </div>
+
+            <div class='control-group'>
+              <label class='control-label' for="phase">LC Phase:</label>
+              <div class='controls'>
+                <select name="phase">
+                  <option value="normal">normal phase</option>
+                  <option value="reverse">reverse phase</option>
+                </select>
+              </div>
+            </div>
+
+            <p><b>The following are example entries - please change these examples.</b></p>
+
+            <div class='control-group'>
+              <label class='control-label' for="mobilea">Mobile Phase A:</label>
+              <div class='controls'>
+                <input type="text" class="tcrap" value="10mM Ammonium Bicarbonate" name="solventA" title="A brief description of the solvent used" required="required">
+              </div>
+            </div>
+
+            <div class='control-group'>
+              <label class='control-label' for="mobileb">Mobile Phase B:</label>
+              <div class='controls'>
+                <input type="text" class="tcrap" value="45% Acetonitrile in 10mM Ammonium Bicarbonate " name="solventB" title="A brief description of the solvent used" required="required">
+              </div>
+            </div>
+
+            <div class='control-group'>
+              <label class='control-label' for="runtime">Run Time:</label>
+              <div class='controls'>
+                <input type="text" class="tcrap" value="2" name="runTime" title="Add LC run time in minutes" required="required">min
+              </div>
+            </div>
+
+            <div class='control-group'>
+              <label class='control-label' for="flow">Flow Rate:</label>
+                <div class='controls'>
+                  <input type="text" class="tcrap" value="85" name="flowRate" title="Add flow rate in ul/min units" required="required">ul/min
+                </div>
+            </div>
+
+          </div> @* end of filter2 *@
+
+          <div id="workflow3" class="tab-pane control-group nextprot">
+
+            <h2>3. Preperation 1</h2>
+
+            <div class='control-group'>
+              <label class='control-label'>Select muliple Release Method by holding down ctrl:</label>
+              <div class='controls'>
+                <select multiple="" name="releaseForm" size="5"> </select>
+              </div>
+            </div>
+
+            <div class='control-group'>
+              <label class='control-label'>Select multiple protein preparation steps by holding down ctrl:</label>
+              <div class='controls'>
+                <select multiple="" name="proteinprep" size="5">
+                  <option selected="" value="1">AG-PAGE composite gel 
+                  </option><option value="2">anion exchange chromatography
+                  </option><option value="3">antibody staining
+                  </option><option value="4">lectin staining
+                  </option><option value="5">coomassie blue staining
+                  </option><option value="6">direct blue staining
+                  </option><option value="7">alcian blue staining
+                  </option><option value="8">electroblotting
+                  </option><option value="9">PVDF blotting
+                  </option><option value="10">isopycnic centrifugation
+                  </option><option value="11">anion exchange
+                  </option><option value="12">gel filtration
+                  </option>
+                </select>
+              </div>
+            </div>
+
+          </div> @* end of filter3 *@
+
+          <div id="workflow4" class="tab-pane control-group nextprot">
+
+            <h2>4. Preperation 2</h2>
+
+            <p>Please ensure you select at least one option from the below</p>
+
+            <div class='control-group'>
+              <label class='control-label'>HPLC Approach for Intact Glycoproteins</label>
+              <div class='controls'>
+                <select multiple="" name="hplcIntactForm" size="5">
+                  <option value="1">2D-HPLC </option>
+                  <option value="2">AMINE HPLC-SIZE ANALYSIS </option>
+                  <option value="3">ION-EXCHANGE HPLC-CHARGE ANALYSIS </option>
+                  <option value="4">NORMAL PHASE HPLC - SIZE ANALYSIS </option>
+                  <option value="5">SEC - SIZE ANALYSIS </option>
+                  <option value="6">SEC WITH STANDARD </option>
+                  <option value="7">PAPER CHROMATOGRAPHY WITH STANDARD </option>
+                  <option value="8">NORMAL PHASE HPLC WITH STANDARD </option>
+                  <option value="9">HPAEC WITH STANDARD </option>
+                  <option value="10">REVERSE PHASE HPLC WITH STANDARD </option>
+                  <option selected value="11">None</option>
+                </select>
+              </div>
+            </div>
+
+            <div class='control-group'>
+              <label class='control-label'>Standard Strategy</label>
+              <div class='controls'>
+                <select multiple="" name="standardForm" size="5"> </select>
+              </div>
+            </div>
+
+            <div class='control-group'>
+              <label class='control-group'>Chemical Methods</label>
+              <div class='controls'>
+                <select multiple="" name="chemicalForm">
+                  <option value="1">ACETOLYSIS </option>
+                  <option value="2">ACID LABILITY </option>
+                  <option value="3">ALKALINE LABILITY </option>
+                  <option value="4">TRIMETHYLSILYLATION </option>
+                  <option value="5">PARTIAL ACID HYDROLYSIS </option>
+                  <option value="6">PERIODATE OXIDATION </option>
+                  <option value="7">DEAMINATION ANALYSIS </option>
+                  <option value="8">EDMAN SEQUENCING </option>
+                  <option value="9">GALACTOTRANSFERASE LABELLING </option>
+                  <option value="10">HF TREATMENT </option>
+                  <option value="11">METABOLIC LABELING </option>
+                  <option value="12">METHANOLYSIS </option>
+                  <option selected value="13">None</option>
+                </select>
+              </div>
+            </div>
+
+            <div class='control-group'>
+              <label>Glycosidase treatment</label>
+              <div class='controls'>
+                <select multiple="" name="glycosidaseForm">
+                  <option value="1">PNGASE-F</option>
+                  <option value="2">PNGASE-A </option>
+                  <option value="3">SIALIDASE </option>
+                  <option value="5">B-GLUCOSIDASE</option>
+                  <option value="6">B-GLUCORONIDASE</option>
+                  <option value="9">A-MANNOSIDASE</option>
+                  <option value="4">B-GALACTOSIDASE (3 and 4 linked)</option>
+                  <option value="7">B-GALACTOSIDASE (4 linked only)</option>
+                  <option value="19">Endo S</option>
+                  <option value="18">Endo F3</option>
+                  <option value="17">Endo F2</option>
+                  <option value="16">Endo F1</option>
+                  <option value="15">Endo F</option>
+                  <option value="14">Endo H</option>
+                  <option value="13">Endo D</option>
+                  <option value="8">Beta-N-acetyl-hexosaminidase</option>
+                  <option value="10">A-MANNOSIDASE </option>
+                  <option value="11">A-FUCOSIDASE</option>
+                  <option value="12">A-GALACTOSIDASE</option>
+                  <option selected value="20">None</option>
+                </select>
+              </div>
+            </div>
+
+            <div class='control-group'>
+              <label>Glycan labeling</label>
+              <div class='controls'>
+                <select name="labelForm">
+                  <option value="1">2-Aminobenzoic acid </option>
+                  <option value="2">2-Aminobenzamide </option>
+                  <option value="3">2-Aminopyridine </option>
+                  <option value="4">8-Aminonaphthalene-1,3,6-trisulfonic acid </option>
+                  <option value="5">2-Aminoacridone </option>
+                  <option value="6">9-Aminopyrene-1,3,6-trisulfonic acid </option>
+                  <option selected value="7">None</option>
+                </select>
+              </div>
+            </div>
+
+            <div class='control-group'>
+              <div class='controls'>
+                <input type="submit" value="Submit" name="submit" class="submit">
+              </div>
+            </div>
+
+          </div> @* end of filter4 *@
+
+        </form>
+
+      </div>
+    </div>
+  </div><!-- /col -->
+</div><!-- /row -->
+<div class="footer row-fluid">
+  <div class="span12">
+    <p class="pull-left">UniCarbKB</p>
+    <p class="pull-right">Supported by 
+      <a href="http://www.nectar.org.au">NeCTAR</a> &nbsp;|&nbsp; 
+      <a href="http://www.ands.org.au">ANDS</a> &nbsp;|&nbsp;
+      <a href="http://www.stint.se"> STINT</a> &nbsp;|&nbsp;
+      <a href="http://expasy.org/"> SIB ExPASy</a>
+    </p>
+  </div>
+</div>
+</section>
+
+}
