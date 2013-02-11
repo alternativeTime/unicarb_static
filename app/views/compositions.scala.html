@@ -3,9 +3,9 @@
 @main{
 
 <ul class="breadcrumb">
-  <li><i class="icon-folder-open"></i><a href="#"> UniCarbKB Database</a> <span class="divider">&gt;</span></li>
-  <li><i class="icon-hdd"></i><a href="/browse"> Search</a> <span class="divider">&gt;</span></li>
-  <li class="active"> You are here</li>
+  <li><i class="icon-home"></i><a href="/"> UniCarbKB</a> <span class="divider">&gt;</span></li>
+  <li><i class="icon-search"></i><a href="/browse"> Search</a> <span class="divider">&gt;</span></li>
+  <li class="active"> Composition Search</li>
 </ul>
 
 <section id="layout" class="browse">
@@ -23,24 +23,20 @@
           </div>
 
           <div class="info">
-           <h4>GLYCAN BUILDER</h4>
-            <p>Build and search a glycan structure<a href="/search"> using the new interface</a>.</p>
-          </div>
-
-          <div class="info">
-           <h4>CURATED PUBLICATIONS</h4>
-           <p>Search the <a href="/references">growing list publications and associated structures and metadata</a>.</p>
+            <h4>Other Options:</h4>
+            <p><b>Glycan Builder:</b> Build and search a glycan structure<a href="/search"> using the new interface</a>.</p>
+            <p><b>Curated Publications:</b> Search the <a href="/references">growing list of publications, associated structures, and metadata</a>.</p>
           </div>
         </div>
   	</div>
 
 	<div class="span9 rightpanel">
 	  @if(structure.size() >1 ) {
-	  <ul class="media-grid">
-	  @for(structure <- structure) {
-	   <li><a href="#"><img style="max-height: 150px; max-width: 200px" src="../images/_@{structure.id}.png" alt=""></a></li>
-	  }
-	    		</ul>
+      <ul class="structures media-grid">
+        @for(structure <- structure) {
+        <li><a href="/structure/@structure.id"><img class="thumbnail" src="../images/_@{structure.id}.png" alt=""></a></li>
+        }
+      </ul>
 	  }
 	  @if(structure.size() <1 ) {
 	  <div class="row-fluid">

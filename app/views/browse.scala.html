@@ -216,7 +216,6 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
       <div class="info">
         <h4>Other Options:</h4>
         <p><b>Glycan Builder:</b> Build and search a glycan structure<a href="/search"> using the new interface</a>.</p>
-        
         <p><b>Curated Publications:</b> Search the <a href="/references">growing list of publications, associated structures, and metadata</a>.</p>
       </div>
     </div>
@@ -227,7 +226,7 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
 
       <ul class="nav nav-tabs row-fluid" id="myTab">
         <li class="active"><a href="#tab1" data-toggle="tab"><h2>Construct a Query:</h2></a></li>
-        <li class="span12"><a href="#tab2" data-toggle="tab">
+        <li class="span12"><a class="returnedresults" href="#tab2" data-toggle="tab">
           <h2>Search returned @if(taxon.size() != 0) {@taxon.size()} @if(proteinList.size() != 0) {@proteinList.size()} @if(tissueList.size() != 0) {@tissueList.size()} results...
           </h2>
           <a href="/browse"><input type="button" value="Search Again" href="/browse" class="btn btn-primary pull-right"></a>
@@ -505,8 +504,8 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
 
     @for(p <- proteinList) {
     <div class="row-fluid glycosuiteResult">
-      <h3><a href="@routes.Application.proteinsummary(p.swissProt)">@p.name</a></h3>
       <div class="details span9">
+        <h3><a href="@routes.Application.proteinsummary(p.swissProt)">@p.name</a></h3>
         <p class="">@p.stproteins.size() structures are associated with this protein</p>
       </div>
       <div class="span3">

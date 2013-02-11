@@ -56,19 +56,19 @@
 
     @* <p><a href=""  data-toggle="modal" data-id='@taxon' class="announceTaxStructures"><i class="icon-resize-full"></i> See more structures</a> <small>limited to six records below</small></p> *@
 
-    <ul class="thumbnails RP">
+    <ul class="structures clearfix">
       @for((s, i) <- taxon.strtaxonomy.zipWithIndex; if (i <=5) ){
-      <li class="span5">
-        <a href="@routes.Application.structureDetails(s.structure.id)" class="thumbnail">
-          <img src="../images/_@{s.structure.id}.png" alt="">
-        </a>
-      </li>
+        <li class="span5">
+          <a href="@routes.Application.structureDetails(s.structure.id)">
+            <img src="../images/_@{s.structure.id}.png" alt="">
+          </a>
+        </li>
       }
     </ul>
-    <ul id='more-thumbnails' class='thumbnails RP'>
+    <ul id='more-thumbnails' class='structures clearfix'>
       @for(s <- taxon.strtaxonomy ){
         <li class="span5">
-          <a href="@routes.Application.structureDetails(s.structure.id)" class="thumbnail">
+          <a href="@routes.Application.structureDetails(s.structure.id)">
             <img src="../images/_@{s.structure.id}.png" alt="">
           </a>
         </li>

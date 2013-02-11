@@ -80,21 +80,21 @@
 	<div class='glycosylation-sites'>
           <h3>Total Glycans</h3>
 	
-	<ul class="thumbnails RP">
+	<ul class="structures clearfix">
       @for(s <- proteinMultiple) {
       @for((s, i) <- s.stproteins.zipWithIndex; if (i <=5) ){
       <li class="span5">
-        <a href="@routes.Application.structureDetails(s.structure.id)" class="thumbnail">
+        <a href="@routes.Application.structureDetails(s.structure.id)">
           <img src="../images/_@{s.structure.id}.png" alt="">
         </a>
       </li>
       }}
     </ul>
-    <ul id='more-thumbnails' class='thumbnails RP'>
-      @for(s <- proteinMultiple) { 
+    <ul id='more-thumbnails' class='structures clearfix'>
+      @for(s <- proteinMultiple) {
       @for(s <- s.stproteins ){
         <li class="span5">
-          <a href="@routes.Application.structureDetails(s.structure.id)" class="thumbnail">
+          <a href="@routes.Application.structureDetails(s.structure.id)"
             <img src="../images/_@{s.structure.id}.png" alt="">
           </a>
         </li>
