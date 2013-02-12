@@ -55,4 +55,9 @@ public class StructureToSiteDefined extends Model {
     
     public static Finder<Long,StructureToSiteDefined> find = new Finder<Long,StructureToSiteDefined>(Long.class, StructureToSiteDefined.class);
 
+    public static List<StructureToSiteDefined> findStructuresDefined(String protein, String site) {
+        return
+           find.where().ilike("swiss_prot", protein).ilike("amino_acid_position", site).findList();
+   }
+
 }
