@@ -52,8 +52,10 @@
 	    <tr>
                 <td>@generalSites.glyco_aa_site</td>
 		<td>
+		  <a href="/proteinsite?position=@generalSites.glyco_aa_site&protein=@accession&type=general">
 		  <span class="label label-notice"><i class='icon-th icon-white'></i> 
                       Associated Structures: <b>@generalSites.strSiteGeneral.size()</b></span>
+		  </a>
 		</td>
 		<td><span class="label">global</span></td>
                 <td>GlycoSuite</td>
@@ -82,8 +84,10 @@
             <tr>
                 <td>@definedSites.amino_acid_position</td>
                 <td>
+		  <a href="/proteinsite?position=@definedSites.amino_acid_position&protein=@accession&type=defined">
                   <span class="label label-notice"><i class='icon-th icon-white'></i>
                       Associated Structures: <b>@definedSites.strSiteDefined.size()</b></span>
+		  </a>
                 </td>
                 <td><span class="label">Site specific</span></td>
                 <td>GlycoSuite</td>
@@ -97,21 +101,21 @@
 
 	<div class='glycosylation-sites'>
           <h3>Glycan Structures</h3>
-          <ul class="thumbnails RP">
+          <ul class="structures clearfix">
       	  @for(s <- proteinMultiple) {
           @for((s, i) <- s.stproteins.zipWithIndex; if (i <=5) ){
-          <li class="span5">
-          <a href="@routes.Application.structureDetails(s.structure.id)" class="thumbnail">
+          <li>
+          <a href="@routes.Application.structureDetails(s.structure.id)">
              <img src="../images/_@{s.structure.id}.png" alt="">
           </a>
           </li>
           }}
           </ul>
-          <ul id='more-thumbnails' class='thumbnails RP'>
+          <ul id='more-thumbnails' class="structures clearfix">
           @for(s <- proteinMultiple) { 
           @for(s <- s.stproteins ){
           <li class="span5">
-          <a href="@routes.Application.structureDetails(s.structure.id)" class="thumbnail">
+          <a href="@routes.Application.structureDetails(s.structure.id)">
             <img src="../images/_@{s.structure.id}.png" alt="">
           </a>
           </li>
