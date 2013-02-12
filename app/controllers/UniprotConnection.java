@@ -147,6 +147,11 @@ public class UniprotConnection extends Controller {
 	ArrayList<SqlRow> biolRefs  = null;
 	String proteinNameFull = "";
 	String site = "";	
+	String type = "";
+	List<StructureToSiteDefined> definedStructures = null;
+	List<GeneralSites> generalStructures = null;
+	ArrayList<Long> structuresShow = new ArrayList(); 
+
 		
         if (request().queryString().size() > 0  ) {
                 Map<String, String[]> params = request().queryString();
@@ -168,27 +173,59 @@ public class UniprotConnection extends Controller {
 			for(String p : searchTerms) {
 			protein = p;
                         System.out.println("output is 2 " + protein);
-			proteinNameFull = GsProteinSite.ProteinRetrievalName(protein);
+			//proteinNameFull = GsProteinSite.ProteinRetrievalName(protein);
 			/* for(GsProteinSite g : proteinSummary) {
 				String proteinNameFu2ll = g.protein_name;
 			}*/
 				
 			}
                 }
+
+		if(key.equals("type")){
+			for(String t : searchTerms) {
+			type = t;
+			}
 		}
-		
+
+		}
+
+		if(type.equals("defined")) {
+			definedStructures = StructureToSiteDefined.findStructuresDefined(protein, site);
+			int svalue;
+			int x;
+			for(StructureToSiteDefined s : definedStructures) {
+				x = s.structure_id;
+				Long value = Long.valueOf(x);
+				structuresShow.add(value);
+			}
+		}
+		else if (type.equals("general")) {
+			int gvalue;
+			int x;
+			generalStructures = GeneralSites.findStructuresGeneral(protein, site);
+			for(GeneralSites str : generalStructures) {
+				List<StructureToSiteGeneral> general = str.strSiteGeneral;
+				for(StructureToSiteGeneral g : general) {
+					if(g.structure_id  > 0){
+					System.out.println("value: " + g.structure_id);
+					gvalue = g.structure_id;
+					Long value = Long.valueOf(gvalue);
+					structuresShow.add(value);
+					}
+				}
+			}
+		}	
 		
 		biolRefs = Biolsource.findBiolsourceRefs(protein);
 		
-		System.out.println("test areas" );
-		siteStructures = GsProteinSiteStructureAssociation.findStructuresSites(protein, site);
+		//siteStructures = GsProteinSiteStructureAssociation.findStructuresSites(protein, site);
 		sequenceRetrieval = UniprotConnection.EntryRetrievalSequence(protein);
-		description = SitesReferences.findSites(protein);
-		gsProteinSite = GsProteinStr2.ProteinRetrieval(protein);
+		//description = SitesReferences.findSites(protein);
+		//gsProteinSite = GsProteinStr2.ProteinRetrieval(protein);
 
         }
         return ok(
-                proteinsite.render(siteStructures, sequenceRetrieval, description, gsProteinSite, protein, biolRefs, proteinNameFull, site)
+                proteinsite.render(sequenceRetrieval,  protein, biolRefs, site, structuresShow)
                 );
     	}
 

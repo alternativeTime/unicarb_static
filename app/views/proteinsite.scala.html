@@ -1,4 +1,4 @@
-@(siteStructure: List[GsProteinSiteStructureAssociation], sequence: String, description: List[SitesReferences], proteinSite: List[GsProteinStr2], accession: String, source: ArrayList[SqlRow], proteinName: String, site: String)
+@(sequence: String, accession: String, source: ArrayList[SqlRow], site: String, structures: ArrayList[Long]) 
 
 @main {
 
@@ -20,18 +20,19 @@
     <div class="span8">
 
 	<h3>Structures reported on @site <a href="/proteinsummary/@accession"><span class="pull-right" style="text-transform:uppercase;text-transform:uppercase;font-size:12px;text-align:center;color:#21b5fd;margin:0 0 5px;font-weight:600">Discover more sites</span></a></h3>
-      <ul class="thumbnails RP">
-    	@for(s <- siteStructure) {
-        <li class="span4">
-        <a href="@routes.Application.structureDetails(s.structure_id)" class="thumbnail">
-          <img src="../images/_@{s.structure_id}.png" alt="">
+      <ul class="structures clearfix">
+    	
+	@for(s <- structures) {
+        <li>
+        <a href="@routes.Application.structureDetails(s)">
+          <img src="../images/_@{s}.png" alt="">
         </a>
         </li>
-        }
+	}
       </ul>
 
 
-        <h3>Confirmed Glycosylation Sites</h3>
+        @*<h3>Confirmed Glycosylation Sites</h3>
       <table class="computers table table-striped">
         <thead>
           <tr>
@@ -54,7 +55,7 @@
           }
           }
           </tbody>
-        </table>
+        </table> *@
 
 	
     </div><!-- /col -->
