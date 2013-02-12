@@ -44,12 +44,12 @@ public class StructureToSiteGeneral extends Model {
     public String protein_name;
     public String swiss_prot;
     //public String amino_acid_position;
-    public String glyco_aa;
-    public String glyco_aa_site;
+    //public String glyco_aa;
+    //public String glyco_aa_site;
     //public String note;
     public int structure_id;
     //public String glycan_type;
-    public int source_id; //make this a relationship
+    //public int source_id; //make this a relationship
 
     @ManyToOne
     public GeneralSites generalSites; 
