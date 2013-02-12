@@ -6,7 +6,7 @@
   <ul class="breadcrumb">
     <li><i class="icon-home" ></i><a href="#"> UniCarbKB</a> <span class="divider">></span></li>
     <li><i class="icon-map-marker" ></i><a href="/browse"> Protein</a> <span class="divider">></span></li>
-    <li class="active" > @accession</li>
+    <li class="active" > @proteinName</li>
   </ul>
 
   <section id="layouts" class="proteinsummary">
@@ -19,35 +19,28 @@
 
     <div class="row-fluid">
       <div class="span8">
-
-        <div class='name'>
-          <div class="control-group">
-            @for((protein,i) <- protein.zipWithIndex; if (i < 1)) {
-            <label>Recommended name:</label> <div class="controls">@protein.name</div>
-            }
+	<div class='name'>
+          @* <div class="control-group">
+            <label>Name:</label> <div class="controls">@proteinName</div>
           </div>
-          <div class="control-group">
-            <label>Alternative name:</label> <div class="controls">not available</div>
-          </div>
-        </div>
+	  *@
+        </div> 
 
         <div class='ptm-details'>
-          <h3>PTM Details</h3>
-          @for(uniprot <- uniprot) {
-            <p>@uniprot</p>
-          }
+	  <h3>PTM Details</h3>
+	    @for(uniprot <- uniprot) {
+              <p>@uniprot</p>
+	    }
         </div>
 
         <div class='glycosylation-sites'>
-          <h3>Glycosylation Sites</h3>
 	  @if(generalSites.size() > 0 ) {
+	  <h3>Glycosylation Sites</h3>
 	  @for(generalSites <- generalSites) {
 	  @if(generalSites.strSiteGeneral.size() > 0 ) {
-	  <h4>Sites with structures not specifically assigned</h4>
 	  <table class="computers table table-striped">
             <thead>
               <tr>
-                <th>Name</th>
                 <th>Position</th>
                 <th>Structures</th>
                 <th>Description</th>
@@ -57,13 +50,12 @@
 
             <tbody>
 	    <tr>
-                <td>Confirmed</td>
                 <td>@generalSites.glyco_aa_site</td>
 		<td>
 		  <span class="label label-notice"><i class='icon-th icon-white'></i> 
                       Associated Structures: <b>@generalSites.strSiteGeneral.size()</b></span>
 		</td>
-		<td></td>
+		<td><span class="label">global</span></td>
                 <td>GlycoSuite</td>
 	    </tr>
 	    </tbody>
@@ -73,11 +65,9 @@
 
 	<div class='glycosylation-sites'>
           @if(definedSites.size() > 0 ) {
-	  <h4>Sites with defined structures</h4>
           <table class="computers table table-striped">
             <thead>
               <tr>
-                <th>Name</th>
                 <th>Position</th>
                 <th>Structures</th>
                 <th>Description</th>
@@ -88,13 +78,12 @@
             <tbody>
             @for(definedSites <- definedSites) {
             <tr>
-                <td>Confirmed</td>
                 <td>@definedSites.amino_acid_position</td>
                 <td>
                   <span class="label label-notice"><i class='icon-th icon-white'></i>
                       Associated Structures: <b>@definedSites.strSiteDefined.size()</b></span>
                 </td>
-                <td></td>
+                <td><span class="label">Site specific</span></td>
                 <td>GlycoSuite</td>
             </tr>
             }
@@ -105,7 +94,7 @@
 
 
 	<div class='glycosylation-sites'>
-          <h3>Total Glycans</h3>
+          <h3>Glycan Structures</h3>
           <ul class="thumbnails RP">
       	  @for(s <- proteinMultiple) {
           @for((s, i) <- s.stproteins.zipWithIndex; if (i <=5) ){
