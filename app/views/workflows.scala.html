@@ -8,7 +8,7 @@
 
 <section id="layouts" class="browse">
   <h1>Workflows</h1>
-  <h4 class="subheader">UnicarbKB Workflows</h4>
+  <h4 class="subheader">UnicarbKB Workflow form. Fill out each section.</h4>
 
   <div class="row-fluid">
     <div class="span3 search">
@@ -16,17 +16,16 @@
         <div class="filterbar tabbable clearfix">
           <ul class="nav nav-tabs" id="myTabBar">
             <li class="title">Fill out the following sections: </li>
-            <li class="active"><a href="#workflow1" data-toggle="tab">Mass Spec Details <span class="pull-right count"></span></a></li>
-            <li><a href="#workflow2" data-toggle="tab">LC Column Details </a></li>
-            <li><a href="#workflow3" data-toggle="tab">Preparation 1 <span class="pull-right count"></span></a></li>
-            <li><a href="#workflow4" data-toggle="tab">Preparation 2 <span class="pull-right count"></span></a></li>
+            <li id='workflow1-toggle' class='active'><a href='#workflow1' data-toggle="tab">Mass Spec Details <span class="pull-right count"></span></a></li>
+            <li id='workflow2-toggle'><a href='#workflow2' data-toggle="tab">LC Column Details </a></li>
+            <li id='workflow3-toggle'><a href='#workflow3' data-toggle="tab">Preparation 1 <span class="pull-right count"></span></a></li>
+            <li id='workflow4-toggle'><a href='#workflow4' data-toggle="tab">Preparation 2 <span class="pull-right count"></span></a></li>
           </ul>
         </div>
 
         <div class="info">
-          <h4>Other Options:</h4>
-          <p><b>Glycan Builder:</b> Build and search a glycan structure<a href="/search"> using the new interface</a>.</p>
-          <p><b>Curated Publications:</b> Search the <a href="/references">growing list of publications, associated structures, and metadata</a>.</p>
+          <h4>About Workflows:</h4>
+          <p>The first release of a data submission workflow is now available for invited users. To develop a simple workflow we have adopted <a href='www.glycoworkbench.org'>GlycoWorkBench</a> as the tool of choice for processing and preparing data into a suitable format for upload to UniCarb-DB, that extends the principles of EUROCarbDB.</p>
         </div>
       </div>
     </div>
@@ -37,7 +36,15 @@
 
           <div id="workflow1" class="tab-pane active control-group glycosuitedb">
 
-            <h2>1. Mass Spec Details</h2>
+            <div class="control-group">
+              <div class='pre'>
+                <h2>01.</h2>
+              </div>
+              <div class='controls'>
+                <h2>Mass Spec Details</h2>
+              </div>
+            </div>
+
             <div class="control-group">
               <label class='control-label' for="name">Instrument:</label>
               <div class='controls'>
@@ -127,13 +134,25 @@
               </div>
             </div>
 
-            <button type="submit" class="btn btn-small btn-primary"> Composition Search</button>
+            <div class='control-group'>
+              <div class='controls'>
+                <button id='next1' class="btn" type="button">Next Section</button>
+              </div>
+            </div>
 
           </div> @* end filter1 *@
 
           <div id="workflow2" class="tab-pane control-group row-fluid eurocarb">
 
-            <h2>2. LC Column Details</h2>
+            <div class="control-group">
+              <div class='pre'>
+                <h2>02.</h2>
+              </div>
+              <div class='controls'>
+                <h2>LC Column Details</h2>
+              </div>
+            </div>
+
             <div class='control-group'>
               <label class='control-label' for="column">Column:</label>
               <div class='controls'>
@@ -181,16 +200,32 @@
 
             <div class='control-group'>
               <label class='control-label' for="flow">Flow Rate:</label>
-                <div class='controls'>
-                  <input type="text" class="tcrap" value="85" name="flowRate" title="Add flow rate in ul/min units" required="required">ul/min
-                </div>
+              <div class='controls'>
+                <input type="text" class="tcrap" value="85" name="flowRate" title="Add flow rate in ul/min units" required="required">ul/min
+              </div>
+            </div>
+
+            <div class='control-group'>
+              <div class='pre'>
+                <button id='previous2' class='btn' type="button">Previous</button>
+              </div>
+              <div class='controls'>
+                <button id='next2' class='btn' type="button">Next Section</button>
+              </div>
             </div>
 
           </div> @* end of filter2 *@
 
           <div id="workflow3" class="tab-pane control-group nextprot">
 
-            <h2>3. Preperation 1</h2>
+            <div class="control-group">
+              <div class='pre'>
+                <h2>03.</h2>
+              </div>
+              <div class='controls'>
+                <h2>Preperation 1</h2>
+              </div>
+            </div>
 
             <div class='control-group'>
               <label class='control-label'>Select muliple Release Method by holding down ctrl:</label>
@@ -220,11 +255,27 @@
               </div>
             </div>
 
+            <div class='control-group'>
+              <div class='pre'>
+                <button id='previous3' class='btn' type='button'>Previous</button>
+              </div>
+              <div class='controls'>
+                <button id='next3' class='btn' type='button'>Next Section</button>
+              </div>
+            </div>
+
           </div> @* end of filter3 *@
 
           <div id="workflow4" class="tab-pane control-group nextprot">
 
-            <h2>4. Preperation 2</h2>
+            <div class="control-group">
+              <div class='pre'>
+                <h2>04.</h2>
+              </div>
+              <div class='controls'>
+                <h2>Preperation 2</h2>
+              </div>
+            </div>
 
             <p>Please ensure you select at least one option from the below</p>
 
@@ -255,7 +306,7 @@
             </div>
 
             <div class='control-group'>
-              <label class='control-group'>Chemical Methods</label>
+              <label class='control-label'>Chemical Methods</label>
               <div class='controls'>
                 <select multiple="" name="chemicalForm">
                   <option value="1">ACETOLYSIS </option>
@@ -276,7 +327,7 @@
             </div>
 
             <div class='control-group'>
-              <label>Glycosidase treatment</label>
+              <label class='control-label'>Glycosidase treatment</label>
               <div class='controls'>
                 <select multiple="" name="glycosidaseForm">
                   <option value="1">PNGASE-F</option>
@@ -304,7 +355,7 @@
             </div>
 
             <div class='control-group'>
-              <label>Glycan labeling</label>
+              <label class='control-label'>Glycan labeling</label>
               <div class='controls'>
                 <select name="labelForm">
                   <option value="1">2-Aminobenzoic acid </option>
@@ -320,7 +371,15 @@
 
             <div class='control-group'>
               <div class='controls'>
-                <input type="submit" value="Submit" name="submit" class="submit">
+              </div>
+            </div>
+
+            <div class='control-group'>
+              <div class='pre'>
+                <button id='previous4' class='btn' type='button'>Previous</button>
+              </div>
+              <div class='controls'>
+                <input id='previous4' class='btn btn-primary' type='submit' value='Submit' name="submit">
               </div>
             </div>
 
