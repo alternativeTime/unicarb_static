@@ -373,23 +373,25 @@ public class Application extends Controller {
     	return null;
 	} */
 	
-	/**
-	* Handle default path requests, redirect to computers list
-	*/
-	public static Result index() {
-		//return GO_HOME;
-		return ok ( index.render() );
-	}
-	
-	public static Result about() {
-		return ok ( about.render() );
-	}
-	
-	public static Result builder() {
-		return ok (builder.render() );
-	}
-	
-	/*public static Result saySearch(String structure) {
+	/** * Handle default path requests, redirect to computers list */
+    public static Result index() {
+      //return GO_HOME;
+      return ok ( index.render() );
+    }
+
+    public static Result about() {
+      return ok ( about.render() );
+    }
+
+    public static Result builder() {
+      return ok (builder.render() );
+    }
+
+    public static Result workflows() {
+      return ok ( workflows.render() );
+    }
+
+    /*public static Result saySearch(String structure) {
 	try{
 	String result = URLDecoder.decode(structure, "UTF-8");
 	System.out.println("string test; " + result);
