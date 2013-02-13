@@ -139,19 +139,24 @@ public class UniprotConnection extends Controller {
 
 	public static Result proteinsite() {
 
-	List<GsProteinSiteStructureAssociation> siteStructures = null;
-   	String sequenceRetrieval = "";
- 	List<SitesReferences> description = null;
-	List<GsProteinStr2> gsProteinSite = null;
-	String protein = "";
-	ArrayList<SqlRow> biolRefs  = null;
+        String proteinName = "";
+        String swissProtName = "";
 	String proteinNameFull = "";
-	String site = "";	
-	String type = "";
-	List<StructureToSiteDefined> definedStructures = null;
-	List<GeneralSites> generalStructures = null;
-	ArrayList<Long> structuresShow = new ArrayList(); 
+        String site = "";
+        String type = "";
+	String sequenceRetrieval = "";
+        String protein = "";
 
+	ArrayList<SqlRow> biolRefs  = null;
+        List<StructureToSiteDefined> definedStructures = null;
+        List<GeneralSites> generalStructures = null;
+        ArrayList<Long> structuresShow = new ArrayList();
+        List<SqlRow> listSql = null;
+        ArrayList<SqlRow> listSqlArray = new ArrayList<SqlRow>();
+        ArrayList<Biolsource> biolSourceProtein = new ArrayList<Biolsource>();
+        List<Biolsource> biolSourceProteins = Biolsource.findBiolSourceIds(protein);
+        HashSet taxsources = new HashSet();
+        ArrayList taxsourcesUnique = new ArrayList();
 		
         if (request().queryString().size() > 0  ) {
                 Map<String, String[]> params = request().queryString();
@@ -196,7 +201,10 @@ public class UniprotConnection extends Controller {
 			for(StructureToSiteDefined s : definedStructures) {
 				x = s.structure_id;
 				Long value = Long.valueOf(x);
-				structuresShow.add(value);
+					//this check should not be required but for safety
+					if(!structuresShow.contains(value)) {
+                                        	structuresShow.add(value);
+                                      	}
 			}
 		}
 		else if (type.equals("general")) {
@@ -207,14 +215,31 @@ public class UniprotConnection extends Controller {
 				List<StructureToSiteGeneral> general = str.strSiteGeneral;
 				for(StructureToSiteGeneral g : general) {
 					if(g.structure_id  > 0){
-					System.out.println("value: " + g.structure_id);
 					gvalue = g.structure_id;
 					Long value = Long.valueOf(gvalue);
-					structuresShow.add(value);
+						//this check should not be required but for safety
+						if(!structuresShow.contains(value)) {
+						structuresShow.add(value);
+						}
 					}
 				}
 			}
-		}	
+			for(Long s : structuresShow) {
+			System.out.println("check values" + s );
+			}
+		}
+
+                for(Biolsource biol : biolSourceProteins){
+                        proteinName = biol.protein;
+                        swissProtName = biol.swiss_prot;
+                        Biolsource objectBiolSource = Ebean.find(Biolsource.class, biol.id);
+			taxsources.add(objectBiolSource.taxonomy);
+                        biolSourceProtein.add(objectBiolSource);
+                        listSql = Sourceref.findReferenceSource(biol.id);
+                        listSqlArray.addAll(listSql);
+                }
+		
+		taxsourcesUnique.addAll(taxsources);	
 		
 		biolRefs = Biolsource.findBiolsourceRefs(protein);
 		
@@ -225,7 +250,7 @@ public class UniprotConnection extends Controller {
 
         }
         return ok(
-                proteinsite.render(sequenceRetrieval,  protein, biolRefs, site, structuresShow)
+                proteinsite.render(sequenceRetrieval,  protein, biolRefs, site, structuresShow,  taxsourcesUnique )
                 );
     	}
 
