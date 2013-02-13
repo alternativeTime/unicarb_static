@@ -32,6 +32,7 @@ GET  	/proteinsite      controllers.UniprotConnection.proteinsite()
 GET	/taxonomysearch	controllers.Application.taxonsearch(taxonomy ?= "")
 GET  /compositions      controllers.Application.compositions()
 
+GET /workflows controllers.Application.login()
 
 GET /workflows controllers.Application.workflows()
 

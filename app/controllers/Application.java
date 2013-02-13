@@ -387,6 +387,10 @@ public class Application extends Controller {
       return ok (builder.render() );
     }
 
+    public static Result login() {
+      return ok ( login.render() );
+    }
+
     public static Result workflows() {
       return ok ( workflows.render() );
     }
