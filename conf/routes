@@ -34,7 +34,7 @@ GET  	/compositions      controllers.Application.compositions()
 
 GET	/proteinlist		controllers.ProteinDetails.proteinlist(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "", protein ?= "")
 
-GET /workflows controllers.Application.login()
+GET /login controllers.Application.login()
 
 GET /workflows controllers.Application.workflows()
 
