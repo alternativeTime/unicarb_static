@@ -43,16 +43,6 @@ public class Proteins extends Model {
    }
 
 
-  
-
-   /* public static Map<String,String> options() {
-        LinkedHashMap<String,String> options = new LinkedHashMap<String,String>();
-        for(Proteins c: Proteins.find.orderBy("name").findList()) {
-            options.put(c.id.toString(), c.name);
-        }
-        return options;
-    }*/
-
     public static HashSet proteinSummary() {
 
         HashSet proteinUnique = new HashSet();
@@ -60,14 +50,22 @@ public class Proteins extends Model {
 
         for (Proteins protein : proteins) {
                 proteinUnique.add(protein.name);
-
         }
 
     return proteinUnique;
     }
 
-	
-
+    public static Page<Proteins> proteinpage(int page, int pageSize, String sortBy, String order, String filter) {
+        return
+            find.where().disjunction()
+                .ilike("swissProt", "%" + filter + "%")
+                .ilike("name", "%" + filter + "%")
+                .endJunction()
+                //.join("journal")
+		.orderBy("name asc")
+                .findPagingList(pageSize)
+                .getPage(page);
+    }
 
     
 }

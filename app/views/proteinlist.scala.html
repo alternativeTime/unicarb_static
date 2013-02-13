@@ -1,0 +1,124 @@
+@(currentPage: Page[Proteins], currentSortBy: String, currentOrder: String, currentFilter: String)
+
+@****************************************
+* Helper generating navigation links    *
+****************************************@
+@link(newPage:Int, newSortBy:String) = @{
+    
+    var sortBy = currentSortBy
+    var order = currentOrder
+    
+    if(newSortBy != null) {
+        sortBy = newSortBy
+        if(currentSortBy == newSortBy) {
+            if(currentOrder == "asc") {
+                order = "desc"
+            } else {
+                order = "asc"
+            }
+        } else {
+            order = "asc"
+        }
+    }
+    
+    // Generate the link
+    routes.ProteinDetails.proteinlist(newPage, sortBy, order, currentFilter)
+    
+}
+
+@**********************************
+* Helper generating table headers *
+***********************************@
+@header(key:String, title:String) = {
+    <th class="@key.replace(".","_") header @if(currentSortBy == key) @{if(currentOrder == "asc") "headerSortDown" else "headerSortUp"}">
+        <a href="@link(0, key)">@title</a>
+    </th>
+}
+
+@main {
+
+  <ul class="breadcrumb">
+    <li><i class="icon-home" ></i><a href="/"> UniCarbKB</a> <span class="divider">></span></li>
+    <li class="active"><i class="icon-book" ></i> References<span class="divider"></span></li>
+    <!--<li class="active" > You are here</li>-->
+  </ul>
+    
+    <h1 id="homeTitle">@Messages(" Reference Search ", currentPage.getTotalRowCount)</h1>
+    <h4 class="subheader">Search the curated collection of publication data by author or title descriptions</h4>
+    @if(flash.containsKey("success")) {
+        <div class="alert-message warning">
+            <strong>Done!</strong> @flash.get("success")
+        </div>
+    } 
+
+    <div id="actions">
+ 
+        <form class='input-append' action="@link(0, "name")" method="GET">
+            <input type="search" id="searchbox" class='input-xxlarge' name="f" value="@currentFilter" placeholder="Protein name or Swiss Prot identifier...">
+            <input type="submit" id="searchsubmit" value="Filter" class="btn btn-primary">
+            <a class="btn" id="add" href="/references">Show All References</a>
+        </form>
+        
+    </div>
+    
+    <div class="row-fluid">
+    @if(currentPage.getTotalRowCount == 0) {
+        
+        <div class="well">
+            <em>Nothing to display</em>
+        </div>
+        
+    } else {
+        
+        <table class="computers table table-striped">
+            <thead>
+                <tr>
+                    @header("name", "Name")
+                    @header("swissProt", "Swiss Prot")
+                </tr>
+            </thead>
+            <tbody>
+
+                @for(protein <- currentPage.getList) {
+                    <tr>
+			<td><a href="proteins/@protein.id" style="text-decoration : none, font-color: #404040; ">@protein.name</a></td>
+                        <td><a href="proteins/@protein.id" style="text-decoration : none, font-color: #404040; ">@protein.swissProt</a></td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+
+        <div id="pagination" class="pagination">
+            <ul class="clearfix">
+              @if(currentPage.hasPrev) {
+                <li class="prev"><a href="@link(currentPage.getPageIndex - 1, null)">&larr; Previous</a></li>
+              } else {
+                <li class="prev disabled"><a>&larr; Previous</a></li>
+              }
+                <li class="current"><a>Displaying @currentPage.getDisplayXtoYofZ(" to "," of ")</a></li>
+              @if(currentPage.hasNext) {
+                <li class="next"><a href="@link(currentPage.getPageIndex + 1, null)">Next &rarr;</a></li>
+              } else {
+                <li class="next disabled"><a>Next &rarr;</a></li>
+              }
+            </ul>
+        </div>
+      </div>
+        
+      <div class="footer row-fluid">
+        <div class="span12">
+          <p class="pull-left">UniCarbKB</p>
+          <p class="pull-right">Supported by 
+	   <a href="http://www.nectar.org.au">NeCTAR</a> &nbsp;|&nbsp;
+      	   <a href="http://www.ands.org.au">ANDS</a> &nbsp;|&nbsp;
+      	   <a href="http://www.stint.se"> STINT</a> &nbsp;|&nbsp;
+      	   <a href="http://expasy.org/"> SIB ExPASy</a>
+          </p>
+        </div>
+      </div>
+    }
+        
+}
+
+            
