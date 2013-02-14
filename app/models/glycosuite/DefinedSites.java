@@ -50,6 +50,9 @@ public class DefinedSites extends Model {
     @OneToMany
     public List<StructureToSiteDefined> strSiteDefined;
 
+    @ManyToOne
+    public Proteins proteins; 
+
     
     public static Finder<Long,DefinedSites> find = new Finder<Long,DefinedSites>(Long.class, DefinedSites.class);
 

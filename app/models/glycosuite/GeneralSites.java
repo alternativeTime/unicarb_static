@@ -30,6 +30,9 @@ public class GeneralSites extends Model {
     @OneToMany
     public List<StructureToSiteGeneral> strSiteGeneral;
 
+    @ManyToOne
+    public Proteins proteins;
+
     
     public static Finder<Long,GeneralSites> find = new Finder<Long,GeneralSites>(Long.class, GeneralSites.class);
 

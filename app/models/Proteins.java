@@ -30,6 +30,12 @@ public class Proteins extends Model {
     @OneToMany
     public List<StructureToSites> stsite;
 
+    @OneToMany
+    public List<GeneralSites> proteinGeneralSites;
+
+    @OneToMany
+    public List<DefinedSites> proteinDefinedSites;
+
     public static Model.Finder<Long,Proteins> find = new Model.Finder<Long,Proteins>(Long.class, Proteins.class);
 
     public static List<Proteins> findProteins(String protein) {

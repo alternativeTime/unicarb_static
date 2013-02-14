@@ -74,6 +74,8 @@
                 <tr>
                     @header("name", "Name")
                     @header("swissProt", "Swiss Prot")
+		    @header("stproteins", "Glycan Structures")
+		    @header("proteinGeneralSites", "General")
                 </tr>
             </thead>
             <tbody>
@@ -82,6 +84,8 @@
                     <tr>
 			<td><a href="proteins/@protein.id" style="text-decoration : none, font-color: #404040; ">@protein.name</a></td>
                         <td><a href="proteins/@protein.id" style="text-decoration : none, font-color: #404040; ">@protein.swissProt</a></td>
+			<td><a href="proteins/@protein.id" style="text-decoration : none, font-color: #404040; ">@protein.stproteins.size()</a></td>	
+			<td><a href="proteins/@protein.id" style="text-decoration : none, font-color: #404040; ">@protein.proteinGeneralSites.size()  --> @protein.proteinDefinedSites.size()</a></td>
                     </tr>
                 }
 
