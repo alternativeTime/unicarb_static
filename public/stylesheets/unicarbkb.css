@@ -263,6 +263,14 @@ input[type="checkbox"], input[type="radio"] {
   text-align: right;
 }
 
+textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="date"]:focus, input[type="month"]:focus, input[type="time"]:focus, input[type="week"]:focus, input[type="number"]:focus, input[type="email"]:focus, input[type="url"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="color"]:focus, .uneditable-input:focus {
+    border-color: #018FD5;
+    outline: 0;
+    outline: thin dotted 9;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+  }
 
 
 
@@ -1172,7 +1180,52 @@ span .icon-leaf {
 }
 
 
+/* !MISC - BUTTONS /////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////*/
 
+/* !MISC - BUTTONS - DEFAULT /////////////////////////////////////////////////////////////////////*/
+
+.btn {
+    /* color: #333; */
+    text-shadow: 0 1px 1px rgba(255,255,255,0.75);
+    background-color: whiteSmoke;
+    background-image: none;
+    border: 1px solid #bbb;
+    border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+    border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
+    border-bottom-color: #a2a2a2;
+    -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+    -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+  }
+
+/* !MISC - BUTTONS - PRIMARY /////////////////////////////////////////////////////////////////////*/
+
+.btn-primary {
+    text-shadow: none;
+    background-color: #018FD5;
+    background-image: none;
+    border-color: #04c #04c #002a80;
+    border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc',endColorstr='#ff0044cc',GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+  }
+
+.btn-primary:hover, .btn-primary:active, .btn-primary.active, .btn-primary.disabled, .btn-primary[disabled] {
+    background-color: #006FA9;
+}
+
+/* !MISC - BUTTONS - WARNING /////////////////////////////////////////////////////////////////////*/
+
+.btn-warning {
+    text-shadow: none;
+    background-color: #FFA91B;
+    background-image: none;
+    border-color: #f89406 #f89406 #ad6704;
+    border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
+  }
 
 /*******************************************************************************************************
 => Home + Common

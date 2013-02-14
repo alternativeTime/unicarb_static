@@ -39,12 +39,11 @@
 
   <ul class="breadcrumb">
     <li><i class="icon-home" ></i><a href="/"> UniCarbKB</a> <span class="divider">></span></li>
-    <li class="active"><i class="icon-book" ></i> References<span class="divider"></span></li>
-    <!--<li class="active" > You are here</li>-->
+    <li class="active"><i class="icon-map-marker" ></i> Proteins<span class="divider"></span></li>
   </ul>
     
-    <h1 id="homeTitle">@Messages(" Reference Search ", currentPage.getTotalRowCount)</h1>
-    <h4 class="subheader">Search the curated collection of publication data by author or title descriptions</h4>
+    <h1 id="homeTitle">@Messages(" Protein Search ", currentPage.getTotalRowCount)</h1>
+    <h4 class="subheader">Search the curated collection of Protein data by name.</h4>
     @if(flash.containsKey("success")) {
         <div class="alert-message warning">
             <strong>Done!</strong> @flash.get("success")
