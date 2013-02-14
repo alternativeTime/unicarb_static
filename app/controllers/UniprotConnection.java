@@ -15,13 +15,12 @@ import static play.libs.Json.toJson;
 import static play.libs.Json.*;
 import java.net.URLDecoder;
 import java.io.UnsupportedEncodingException;
-
+import java.io.IOException;
 
 import uk.ac.ebi.kraken.interfaces.uniprot.UniProtEntry;
 import uk.ac.ebi.kraken.uuw.services.remoting.EntryRetrievalService;
 import uk.ac.ebi.kraken.uuw.services.remoting.UniProtJAPI;
 import uk.ac.ebi.kraken.interfaces.uniprot.*;
-
 
 import uk.ac.ebi.kraken.interfaces.ProteinData;
 import uk.ac.ebi.kraken.interfaces.uniprot.DatabaseCrossReference;
@@ -37,7 +36,7 @@ import uk.ac.ebi.kraken.uuw.services.remoting.UniProtJAPI;
 import uk.ac.ebi.kraken.uuw.services.remoting.UniProtQueryBuilder;
 import uk.ac.ebi.kraken.uuw.services.remoting.AttributeIterator;
 import uk.ac.ebi.kraken.uuw.services.remoting.Attribute;
-
+import uk.ac.ebi.kraken.uuw.services.remoting.RemoteDataAccessException;
 
 
 public class UniprotConnection extends Controller {
@@ -95,14 +94,15 @@ public class UniprotConnection extends Controller {
                         }
 	}*/
 
-
-	Object accessionPTM = UniProtJAPI.factory.getEntryRetrievalService().getUniProtAttribute(accession,  "ognl:getComments(@uk.ac.ebi.kraken.interfaces.uniprot.comments.CommentType@PTM).{value}" );
-
-	accessionPTMInfo = accessionPTM.toString();
-	accessionPTMInfo = accessionPTMInfo.replaceAll("^\\[", "");
-	accessionPTMInfo = accessionPTMInfo.replaceAll("]$", "");
-
-	uniprotDetails.add(accessionPTMInfo);
+	try {
+		Object accessionPTM = UniProtJAPI.factory.getEntryRetrievalService().getUniProtAttribute(accession,  "ognl:getComments(@uk.ac.ebi.kraken.interfaces.uniprot.comments.CommentType@PTM).{value}" );
+		accessionPTMInfo = accessionPTM.toString();
+		accessionPTMInfo = accessionPTMInfo.replaceAll("^\\[", "");
+		accessionPTMInfo = accessionPTMInfo.replaceAll("]$", "");
+		uniprotDetails.add(accessionPTMInfo); 
+	} catch (RemoteDataAccessException e) {
+    		System.err.println("Caught IOException: " + e.getMessage());
+	}
 	
 
 	return uniprotDetails;
@@ -113,13 +113,15 @@ public class UniprotConnection extends Controller {
 	public static String EntryRetrievalSequence(String accession) {
 
         EntryRetrievalService entryRetrievalService = UniProtJAPI.factory.getEntryRetrievalService();
+	String sequenceCat = "";
 
+	try {
         Object attribute = UniProtJAPI.factory.getEntryRetrievalService().getUniProtAttribute(accession ,  "ognl:sequence.value");
+
         String sequence = attribute.toString();
 
         String []thisCombo2 = sequence.split("(?<=\\G..........)");
         String asString = Arrays.toString(thisCombo2);
-        String sequenceCat = "";
         int i = 0;
         for(String s : thisCombo2) {
                 if (i == 50 ) {
@@ -130,6 +132,10 @@ public class UniprotConnection extends Controller {
                 sequenceCat += s;
                 i = i + 10;
                 }
+        }
+
+	} catch (RemoteDataAccessException e) {
+                System.err.println("Caught IOException: " + e.getMessage());
         }
 
 

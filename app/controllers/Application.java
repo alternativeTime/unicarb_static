@@ -40,9 +40,21 @@ public class Application extends Controller {
 		String proteinName = "";
 		String swissProtName = "";	
 		ArrayList<Biolsource> biolSourceProtein = new ArrayList<Biolsource>();
-		List<Biolsource> biolSourceProteins = Biolsource.findBiolSourceIds(protein);
-		//List<Double> biorefs = new ArrayList<Double>();
 		String accession = "";
+		List<Proteins> proteins = null;
+		//List<String> uniprotDetails = null;
+		List<String> uniprotDetails = new ArrayList<String>();
+		List<SitesReferences> description = null ;
+		List<GsProteinStr2> gsProteinSite = null;
+		String sequenceRetrieval = "";
+		List<Proteins> proteinMultiple = null;
+		//List<Proteins> proteinMultiple = new ArrayList<Proteins>();
+		List<GeneralSites> generalSites = null;
+		List<DefinedSites> definedSites = null;
+		
+		List<Biolsource> biolSourceProteins = Biolsource.findBiolSourceIds(protein);
+		
+		
 		for(Biolsource biol : biolSourceProteins){
 			proteinName = biol.protein;
 			swissProtName = biol.swiss_prot;
@@ -54,23 +66,19 @@ public class Application extends Controller {
 			//biorefs.add(objectBiolSource.reference_id);
 		}
 		
-		List<Proteins> proteins = Proteins.findProteins(protein);
+		proteins = Proteins.findProteins(protein);
 		//List<Sites> sites = Sites.findSites(protein);
-		
-		List<GeneralSites> generalSites = null;
-		List<DefinedSites> definedSites = null;
-	        generalSites = GeneralSites.findProteinsGeneral(protein);
+
+		generalSites = GeneralSites.findProteinsGeneral(protein);
 		definedSites = DefinedSites.findProteinsDefined(protein);
 		
 		//problems with legacy feature of and in the swiss prot names
+		if(protein.matches("[A-Z][0-9].*")) {
+			
 		String [] splitProtein = protein.split("\\s*[and]+\\s*");
 		
-		List<Proteins> proteinMultiple = Proteins.findProteinsSwissProt(protein);
+		proteinMultiple = Proteins.findProteinsSwissProt(protein);
 		
-		List<String> uniprotDetails = null;
-		List<SitesReferences> description = null ;
-		List<GsProteinStr2> gsProteinSite = null;
-		String sequenceRetrieval = "";
 		
 		for(String partProtein : splitProtein) {
 			uniprotDetails = UniprotConnection.EntryRetrievalExample(partProtein);
@@ -81,10 +89,18 @@ public class Application extends Controller {
 		//List<SitesReferences2> description = SitesReferences2.findSitesReferences(protein);
 		description = SitesReferences.findSites(protein);
 		
+		}
+	
+		if (uniprotDetails.isEmpty()) {
+			uniprotDetails.add("No info");
+		}
+		
+	
 		
 		return ok(
 			proteinsummary.render(proteinName, protein, biolSourceProtein, proteins, uniprotDetails, gsProteinSite, listSqlArray, description, sequenceRetrieval, proteinMultiple, generalSites, definedSites)
 			);
+		
 	}
 	
 	public static Result compositions() {

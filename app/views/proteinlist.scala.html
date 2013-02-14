@@ -73,7 +73,7 @@
             <thead>
                 <tr>
                     @header("name", "Name")
-                    @header("swissProt", "Swiss Prot")
+                    @* @header("swissProt", "Swiss Prot") *@
 		    @header("stproteins", "Glycan Structures")
 		    @header("proteinGeneralSites", "General")
                 </tr>
@@ -82,10 +82,10 @@
 
                 @for(protein <- currentPage.getList) {
                     <tr>
-			<td><a href="proteins/@protein.id" style="text-decoration : none, font-color: #404040; ">@protein.name</a></td>
-                        <td><a href="proteins/@protein.id" style="text-decoration : none, font-color: #404040; ">@protein.swissProt</a></td>
-			<td><a href="proteins/@protein.id" style="text-decoration : none, font-color: #404040; ">@protein.stproteins.size()</a></td>	
-			<td><a href="proteins/@protein.id" style="text-decoration : none, font-color: #404040; ">@protein.proteinGeneralSites.size()  --> @protein.proteinDefinedSites.size()</a></td>
+			<td><a href="proteinsummary/@protein.name" style="text-decoration : none, font-color: #404040; ">@protein.name</a></td>
+                        @* <td><a href="proteinsummary/@protein.name" style="text-decoration : none, font-color: #404040; ">@protein.swissProt</a></td> *@
+			<td><a href="proteinsummary/@protein.name" style="text-decoration : none, font-color: #404040; ">@protein.stproteins.size()</a></td>	
+			<td><a href="proteinsummary/@protein.name" style="text-decoration : none, font-color: #404040; ">@* @if(protein.proteinGeneralSites.size() > 0) {<span class="label">Global</span> } *@ @if(protein.proteinDefinedSites.size() > 0 ) { <span class="label">Site Specific</span>}</a></td>
                     </tr>
                 }
 
