@@ -42,9 +42,14 @@
     <li class="active"><i class="icon-book" ></i> References<span class="divider"></span></li>
     <!--<li class="active" > You are here</li>-->
   </ul>
-    
-    <h1 id="homeTitle">@Messages(" Reference Search ", currentPage.getTotalRowCount)</h1>
-    <h4 class="subheader">Search the curated collection of publication data by author or title descriptions</h4>
+
+  <section id="layouts">
+
+    <div class="page-header row-fluid">
+      <h1 id="homeTitle">@Messages(" Reference Search ", currentPage.getTotalRowCount)</h1>
+      <h4 class="subheader">Search the curated collection of publication data by author or title descriptions</h4>
+    </div>
+
     @if(flash.containsKey("success")) {
         <div class="alert-message warning">
             <strong>Done!</strong> @flash.get("success")
@@ -144,6 +149,8 @@
         </div>
       </div>
     }
+
+  </section>
         
 }
 
