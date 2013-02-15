@@ -44,11 +44,12 @@ public class Application extends Controller {
 		List<Proteins> proteins = null;
 		//List<String> uniprotDetails = null;
 		List<String> uniprotDetails = new ArrayList<String>();
-		List<SitesReferences> description = null ;
+		//List<SitesReferences> description = null ;
+		List<SitesReferences> description = new ArrayList<SitesReferences>();
 		List<GsProteinStr2> gsProteinSite = null;
 		String sequenceRetrieval = "";
-		List<Proteins> proteinMultiple = null;
-		//List<Proteins> proteinMultiple = new ArrayList<Proteins>();
+		//List<Proteins> proteinMultiple = null;
+		List<Proteins> proteinMultiple = new ArrayList<Proteins>();
 		List<GeneralSites> generalSites = null;
 		List<DefinedSites> definedSites = null;
 		
@@ -69,11 +70,14 @@ public class Application extends Controller {
 		proteins = Proteins.findProteins(protein);
 		//List<Sites> sites = Sites.findSites(protein);
 
-		generalSites = GeneralSites.findProteinsGeneral(protein);
-		definedSites = DefinedSites.findProteinsDefined(protein);
+			//generalSites = GeneralSites.findProteinsGeneralName(protein);
+			//definedSites = DefinedSites.findProteinsDefinedName(protein);
 		
 		//problems with legacy feature of and in the swiss prot names
 		if(protein.matches("[A-Z][0-9].*")) {
+			
+			generalSites = GeneralSites.findProteinsGeneral(protein);
+			definedSites = DefinedSites.findProteinsDefined(protein);
 			
 		String [] splitProtein = protein.split("\\s*[and]+\\s*");
 		
@@ -90,11 +94,21 @@ public class Application extends Controller {
 		description = SitesReferences.findSites(protein);
 		
 		}
+		
+		if(!protein.matches("[A-Z][0-9].*")) {
+			generalSites = GeneralSites.findProteinsGeneralName(protein);
+			definedSites = DefinedSites.findProteinsDefinedName(protein);
+			proteinMultiple = Proteins.findProteinsName(protein);
+		}
+		
+		
 	
 		if (uniprotDetails.isEmpty()) {
 			uniprotDetails.add("No info");
 		}
 		
+		
+			
 	
 		
 		return ok(

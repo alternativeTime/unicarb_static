@@ -47,6 +47,11 @@ public class Proteins extends Model {
         return
            find.where().ilike("swiss_prot", protein).findList();
    }
+   
+   public static List<Proteins> findProteinsName(String protein) {
+        return
+           find.where().ilike("name", protein).findList();
+   }
 
 
     public static HashSet proteinSummary() {

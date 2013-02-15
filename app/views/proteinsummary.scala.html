@@ -102,6 +102,7 @@
 	<div class='glycosylation-sites'>
           <h3>Glycan Structures</h3>
           <ul class="structures clearfix">
+          
       	  @for(s <- proteinMultiple) {
           @for((s, i) <- s.stproteins.zipWithIndex; if (i <=5) ){
           <li>
@@ -133,11 +134,12 @@
         <div class='notes'>
           <h3>Notes</h3>
           <p>Accompanying GlycoSuite information</p>
+          @if(!description.isEmpty() ) {
           @for(d <- description){
           <ol>
             <li>@d.glyco_aa_site</li>
           </ol>
-          }
+          }}
         </div>
 
         <div class='history'>
