@@ -1,6 +1,6 @@
 /* !UNICARBKB STYLESHEET ///////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////*/
+/ Web Design developed by Intersect in conjunction with Macquarie University ///////////////////*/
 
 html, body, hr {
   margin:0; padding:0;	
@@ -177,6 +177,11 @@ p.builder {
 }
 a .label:hover { background: #2E3A43; }
 
+.sidebar .label { margin-bottom: 10px; }
+
+.label-light { background-color: whiteSmoke; color: #4B5C66; font-weight: 600; }
+a .label-light:hover { background-color: whiteSmoke; }
+
 .label-notice { background-color: #018FD5; }
 a .label-notice:hover, #more-structures:hover { background-color: #006FA9; }
 
@@ -189,6 +194,12 @@ a .label-important:hover { background-color: #CA2A2C; }
 .label-warning { background-color: #f89406; }
 a .label-warning:hover { background-color: #F07F26; }
 
+
+[class*="label"] .caret {
+  margin: 0px;
+    border-top: 4px solid #FFF;
+    vertical-align: middle;
+  }
 
 
 /* !ELEMENTS - STRUCTURES //////////////////////////////////////////////////////////////////////////
