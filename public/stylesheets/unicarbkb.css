@@ -171,6 +171,7 @@ p.builder {
   padding: 3px 5px;
   background-color: #4B5C66;
   color: white;
+  font-family: "OpenSans", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
   font-size: 9.75px; line-height: 18px; font-weight: 300;
   text-transform: uppercase; text-shadow: none; white-space: nowrap;
   -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px;
