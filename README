@@ -1,7 +1,3 @@
-This is a classic CRUD application, backed by a JDBC database. It demonstrates:
+UniCarbKB is an initiative that aims to promote the creation of an online information storage and search platform for glycomics and glycobiology research. The knowledgebase will offer a freely accessible and information rich resource supported by querying interfaces, annotation technologies and the adoption of common standards to integrate structural, experimental and functional data. Through cross-referencing existing databases and information resources, the UniCarbKB framework endeavours to support the growth of glycobioinformatics and the dissemination of knowledge through the provision of an open and unified portal to encourage the sharing of data.
 
-- Accessing a JDBC database, using Ebean.
-- Achieving, table pagination and CRUD forms.
-- Integrating with a CSS framework (Twitter Bootstrap ).
-
-Twitter Bootstrap requires a different form layout to the default one that the Play 2.0 form helper generates, so this application also provides an example of integrating a custom form input constructor.
+Supported by NeCTAR Australia: http://www.nectar.org.au/tools-glycomics
