@@ -89,8 +89,13 @@
           <ul id='more-protein'>
             <h3 id='less-protein'><span class='icon-map-marker icon-white'></span> Protein</h3>
             @for(protein <- proteinItems){
+	    @if(protein.swissProt == null ) {
+	    <li><span class='icon-map-marker icon-white'></span> <a href='../proteinsummary/@protein.name'>@protein.name</a></li>
+	    }
+	    @if(protein.swissProt != null  ) {
             <li><span class='icon-map-marker icon-white'></span> <a href='../proteinsummary/@protein.swissProt'>@protein.name</a></li>
             }
+	    }
           </ul>
           <ul id='more-source'>
             <h3 id='less-source'><span class='icon-leaf icon-white'></span> Source</h3>
