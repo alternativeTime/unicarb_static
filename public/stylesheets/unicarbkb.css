@@ -1138,7 +1138,7 @@ p.structures, p.publications, p.biological {
 p.structures:hover, p.publications:hover, p.biological:hover {
   background: #0071A9;
 }
-p.structures a, p.publications a, p.biological a { padding-left: 30px; height: 22px; display: block; color: #FFF; }
+p.structures a, p.publications a, p.biological a { padding-left: 30px; height: 22px; display: block; color: #FFF; background: transparent url("/images/glyphicons_326_share.png") no-repeat center left; }
 
 .sequence { font-size: 12px;
   font-family: monospace;
