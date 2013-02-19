@@ -519,8 +519,15 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
     @for(p <- proteinList) {
     <div class="row-fluid glycosuiteResult">
       <div class="details span9">
-        <h3><a href="@routes.Application.proteinsummary(p.swissProt)">@p.name</a></h3>
-        <p class="">@p.stproteins.size() structures are associated with this protein</p>
+        <h3>
+	@if(p.swissProt == null ) {<a href="@routes.Application.proteinsummary(p.name)">@p.name</a>}
+	@if(p.swissProt != null  ) {<a href="@routes.Application.proteinsummary(p.swissProt)">@p.name (@p.swissProt)</a>}
+	</h3>
+        @*<p class="">@p.stproteins.size() structures are associated with this protein</p> *@
+        @*
+	will add this when happy with db associations
+	<p><span class="label">@p.proteinGeneralSites.size() Global</span>  <span class="label">@p.proteinDefinedSites.size() Global</span></p>
+        *@
       </div>
       <div class="span3">
         <p class="pull-right structures"><a href="@routes.Application.proteinsummary(p.swissProt)">@p.stproteins.size() structures </a></p>
