@@ -104,6 +104,21 @@ public class Biolsource extends Model {
 				.findList();
 	}
 
+	public static List<Biolsource> findBiolSourceIdsUniProt(String protein) {
+                return
+                        find.where().disjunction()
+                                .ilike("swiss_prot", protein)
+                                .findList();
+        }
+
+	public static List<Biolsource> findBiolSourceIdsName(String protein) {
+                return
+                        find.where().disjunction()
+                                .ilike("protein", protein)
+                                .findList();
+        } 
+
+
 	public static ArrayList<SqlRow> findBiolsourceRefs(String protein) {
 	List<SqlRow> listSql = null;
                 ArrayList<SqlRow> listSqlArray = new ArrayList<SqlRow>();
