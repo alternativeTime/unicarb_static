@@ -53,8 +53,15 @@ public class Application extends Controller {
 		List<GeneralSites> generalSites = null;
 		List<DefinedSites> definedSites = null;
 		
-		List<Biolsource> biolSourceProteins = Biolsource.findBiolSourceIds(protein);
+		List<Biolsource> biolSourceProteins = null;
 		
+		if(protein.matches("[A-Z][0-9].*")) {
+			System.out.println("------>");
+			biolSourceProteins = Biolsource.findBiolSourceIdsUniProt(protein);
+		}
+		else{
+			biolSourceProteins = Biolsource.findBiolSourceIdsName(protein);
+		}
 		
 		for(Biolsource biol : biolSourceProteins){
 			proteinName = biol.protein;
@@ -99,6 +106,8 @@ public class Application extends Controller {
 			generalSites = GeneralSites.findProteinsGeneralName(protein);
 			definedSites = DefinedSites.findProteinsDefinedName(protein);
 			proteinMultiple = Proteins.findProteinsName(protein);
+			
+			
 		}
 		
 		
