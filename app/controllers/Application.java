@@ -330,8 +330,15 @@ public class Application extends Controller {
 				
 				if (!stToProtein.isEmpty()) {
 					for (Stproteins stProteinEntry : stToProtein){
+						System.out.println("check " + stProteinEntry.proteins);	
+						
+						if (stProteinEntry.proteins != null) { 
 						proteinNames.add(stProteinEntry.proteins.name);
 						proteinItems.add(stProteinEntry.proteins);
+						}
+						if (stProteinEntry.proteins == null) {
+						
+						}
 					}
 				}
 				
