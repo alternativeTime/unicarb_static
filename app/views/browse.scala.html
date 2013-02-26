@@ -528,6 +528,11 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
 	will add this when happy with db associations
 	<p><span class="label">@p.proteinGeneralSites.size() Global</span>  <span class="label">@p.proteinDefinedSites.size() Global</span></p>
         *@
+         <p>
+	@for(ptax <- p.proteinsTax) {
+	 <span class="label label-light">@ptax.species</span>
+	}</p>
+
       </div>
       <div class="span3">
         <p class="pull-right structures"><a href="@routes.Application.proteinsummary(p.swissProt)">@p.stproteins.size() structures </a></p>
