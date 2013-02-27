@@ -39,6 +39,7 @@ public class Application extends Controller {
 		ArrayList<SqlRow> listSqlArray = new ArrayList<SqlRow>();
 		String proteinName = "";
 		String swissProtName = "";	
+		String typeProteinEntry = "";
 		ArrayList<Biolsource> biolSourceProtein = new ArrayList<Biolsource>();
 		String accession = "";
 		List<Proteins> proteins = null;
@@ -106,8 +107,7 @@ public class Application extends Controller {
 			generalSites = GeneralSites.findProteinsGeneralName(protein);
 			definedSites = DefinedSites.findProteinsDefinedName(protein);
 			proteinMultiple = Proteins.findProteinsName(protein);
-			
-			
+			typeProteinEntry = "not swiss prot";	
 		}
 		
 		
@@ -121,7 +121,7 @@ public class Application extends Controller {
 	
 		
 		return ok(
-			proteinsummary.render(proteinName, protein, biolSourceProtein, proteins, uniprotDetails, gsProteinSite, listSqlArray, description, sequenceRetrieval, proteinMultiple, generalSites, definedSites)
+			proteinsummary.render(proteinName, protein, biolSourceProtein, proteins, uniprotDetails, gsProteinSite, listSqlArray, description, sequenceRetrieval, proteinMultiple, generalSites, definedSites, typeProteinEntry)
 			);
 		
 	}
@@ -330,8 +330,15 @@ public class Application extends Controller {
 				
 				if (!stToProtein.isEmpty()) {
 					for (Stproteins stProteinEntry : stToProtein){
+						System.out.println("check " + stProteinEntry.proteins);	
+						
+						if (stProteinEntry.proteins != null) { 
 						proteinNames.add(stProteinEntry.proteins.name);
 						proteinItems.add(stProteinEntry.proteins);
+						}
+						if (stProteinEntry.proteins == null) {
+						
+						}
 					}
 				}
 				
