@@ -434,6 +434,10 @@ public class Application extends Controller {
       return ok ( workflows.render() );
     }
 
+    public static Result massspec() {
+      return ok ( mass_spec.render() );
+    }
+
     /*public static Result saySearch(String structure) {
 	try{
 	String result = URLDecoder.decode(structure, "UTF-8");
