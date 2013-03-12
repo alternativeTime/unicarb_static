@@ -1,6 +1,8 @@
 
 @main{
 
+<script src="@routes.Assets.at("/public","javascripts/massspec.js")"></script>
+
 <ul class="breadcrumb">
   <li><i class="icon-home" ></i><a href="/"> UniCarbKB</a> <span class="divider">></span></li>
   <li class="active"><i class="icon-briefcase" ></i> Mass Spec<span class="divider"></span></li>
@@ -13,11 +15,10 @@
   </div>
 
   <div class="row-fluid">
-    <div class="span3 search">
+    <div class="span4 search">
       <div class="row-fluid">
         <div class="filterbar tabbable clearfix">
           <ul class="nav nav-tabs" id="myTabBar">
-            <li class="title">Mass Spec details</li>
             <li id='workflow1-toggle' class='active'><a href='#workflow1' data-toggle="tab">Sample Summary<span class="pull-right count"></span></a></li>
             <li id='workflow2-toggle'><a href='#workflow2' data-toggle="tab">MS/MS Spectra</a></li>
             <li id='workflow3-toggle'><a href='#workflow3' data-toggle="tab">Peak List<span class="pull-right count"></span></a></li>
@@ -25,18 +26,49 @@
             <li id='workflow5-toggle'><a href='#workflow5' data-toggle="tab">HPLC Details<span class="pull-right count"></span></a></li>
           </ul>
         </div>
-
-        <div class="info">
-          <h4>About Workflows:</h4>
-          <p>The first release of a data submission workflow is now available for invited users. To develop a simple workflow we have adopted <a href='www.glycoworkbench.org'>GlycoWorkBench</a> as the tool of choice for processing and preparing data into a suitable format for upload to UniCarb-DB, that extends the principles of EUROCarbDB.</p>
+        <div class='info'>
+          <h3>Mass Spec Details</h3>
+          <div class="control-group">
+            <label class='control-label' for="name">Ion:</label>
+            <div class='controls record'>[M-H]</div>
+          </div>
+          <div class="control-group">
+            <label class='control-label'>Base Peak m/z:</label>
+            <div class='controls record'>587.25</div>
+          </div>
+          <div class="control-group">
+            <label class='control-label'>Calculated mass and m/z:</label>
+            <div class='controls record'>588.238 - 587.231</div>
+          </div>
+          <div class="control-group">
+            <label class='control-label'>Intensity:</label>
+            <div class='controls record'>100</div>
+          </div>
+          <div class="control-group">
+            <label class='control-label'>Persubstitution:</label>
+            <div class='controls record'>Underivatised</div>
+          </div>
+          <div class="control-group">
+            <label class='control-label'>Reducing End:</label>
+            <div class='controls record'>Reduced reducing end</div>
+          </div>
+          <div class="control-group">
+            <label class='control-label'>Retention Time:</label>
+            <div class='controls record'>13.65 minutes (see HPLC details)</div>
+          </div>
+          <div class="control-group">
+            <label class='control-label'>Annotated Fragments:</label>
+            <div class='controls record'>17 (more details)</div>
+          </div>
         </div>
+
       </div>
     </div>
 
-    <div class="span9 rightpanel">
+    <div class="span8 rightpanel">
 
 
-        <div class='tab-content span8'>
+        <div class='tab-content span12'>
 
           <div id="workflow1" class="tab-pane active control-group glycosuitedb">
 
@@ -57,7 +89,9 @@
 
           <div id="workflow2" class="tab-pane control-group row-fluid eurocarb">
 
+            <h2>MS/MS Spectra Graph</h2>
             <div id='peaklist'></div>
+            <div id='columnchart'></div>
 
           </div> @* end of filter2 *@
 
@@ -91,6 +125,7 @@
 
           <div id="workflow4" class="tab-pane control-group nextprot">
 
+            <h2>Ion Mode</h2>
 
             <div class="control-group">
               <label class='control-label'>MS Mode:</label>
@@ -111,6 +146,7 @@
 
           <div id="workflow5" class="tab-pane control-group nextprot">
 
+            <h2>HPLC Details</h2>
             <p>Sample material was separated using a Thermo Scientific - Hypercarb column and the glycan eluted at 13.65 minutes</p>
 
             <div class="control-group">
@@ -153,42 +189,6 @@
           </div> @* end of filter5 *@
 
         </div>
-        <div class='span4 sidebar'>
-          <h3>Mass Spec Details</h3>
-          <div class="control-group">
-            <label class='control-label' for="name">Ion:</label>
-            <div class='controls record'>[M-H]</div>
-          </div>
-          <div class="control-group">
-            <label class='control-label'>Base Peak m/z:</label>
-            <div class='controls record'>587.25</div>
-          </div>
-          <div class="control-group">
-            <label class='control-label'>Calculated mass and m/z:</label>
-            <div class='controls record'>588.238 - 587.231</div>
-          </div>
-          <div class="control-group">
-            <label class='control-label'>Intensity:</label>
-            <div class='controls record'>100</div>
-          </div>
-          <div class="control-group">
-            <label class='control-label'>Persubstitution:</label>
-            <div class='controls record'>Underivatised</div>
-          </div>
-          <div class="control-group">
-            <label class='control-label'>Reducing End:</label>
-            <div class='controls record'>Reduced reducing end</div>
-          </div>
-          <div class="control-group">
-            <label class='control-label'>Retention Time:</label>
-            <div class='controls record'>13.65 minutes (see HPLC details)</div>
-          </div>
-          <div class="control-group">
-            <label class='control-label'>Annotated Fragments:</label>
-            <div class='controls record'>17 (more details)</div>
-          </div>
-        </div>
-
 
       </div>
     </div>
