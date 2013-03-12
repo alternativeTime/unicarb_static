@@ -58,7 +58,7 @@ public class Structure extends Model {
      
      public static List<Structure> findStructureRef(Long id) {
 	System.out.println("tmp message");
-    	 return find.join("references").join("references.reference").join("stproteins").join("stproteins.proteins").join("strtaxonomy").join("stsource")
+    	 return find.fetch("references").fetch("references.reference").fetch("stproteins").fetch("stproteins.proteins").fetch("strtaxonomy").fetch("stsource")
     	 .where()
     	 .eq("structure_id", id)
 	 .orderBy("references.reference.year desc")

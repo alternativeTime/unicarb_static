@@ -1,4 +1,4 @@
-@(sequence: String, accession: String, source: ArrayList[SqlRow], site: String, structures: ArrayList[Long], taxsources: ArrayList[String]) 
+@(sequence: String, accession: String, source: ArrayList[com.avaje.ebean.SqlRow], site: String, structures: ArrayList[Long], taxsources: ArrayList[String]) 
 
 @main {
 
@@ -86,13 +86,16 @@
       <div class="info">
         <h3>Reference @if(source.size() > 5) {showing top 5} <span class="label" style="font-size:16px">@source.size()</span></h3>
         <ol>
-        @for((source,i) <- source.zipWithIndex; if (i < 5)) {
-          <li class="references">
-            <p class="title"><a href='/references/@source("id")'>@source("title")</a></p>
-            <p class="author">@source("authors")</p>
-            <p class="ref">PubMed: <a href='http://www.ncbi.nlm.nih.gov/pubmed/@source("pmid")'></a>@source("pmid")</p>
-          </li>
-        }
+@*	{source().list.map { source => <tr><td> {source.id}</td></tr> }} *@
+
+	<li class="references">
+	    {source().list.map { source =>
+		<p class="title"><a href='/references/{source.id}'>{source.title}</a></p>
+		<p class="author">{source.authors}</p>
+		<p class="ref">PubMed: <a href='http://www.ncbi.nlm.nih.gov/pubmed/{source.pmid}'></a>{source.pmid}</p>
+	    }}
+        </li>
+
         </ol>
       </div>
 

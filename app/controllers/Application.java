@@ -9,6 +9,11 @@ import views.html.*;
 
 import models.*;
 
+import play.db.ebean.*;
+import play.data.format.*;
+import play.data.validation.*;
+
+
 import com.avaje.ebean.*; //dont think this should be here due to SqlRow
 import static play.libs.Json.toJson;
 import static play.libs.Json.*;
@@ -35,8 +40,9 @@ public class Application extends Controller {
 	};
 	
 	public static Result proteinsummary(String protein) {	
-		List<SqlRow> listSql = null;
-		ArrayList<SqlRow> listSqlArray = new ArrayList<SqlRow>();
+		List<com.avaje.ebean.SqlRow> listSql = null;
+		List<com.avaje.ebean.SqlRow> listSqlArray = null ; // new List<com.avaje.ebean.SqlRow>();
+		//List<anorm.SqlRow> listSqlArray = null;
 		String proteinName = "";
 		String swissProtName = "";	
 		String typeProteinEntry = "";
@@ -69,9 +75,9 @@ public class Application extends Controller {
 			swissProtName = biol.swiss_prot;
 			Biolsource objectBiolSource = Ebean.find(Biolsource.class, biol.id);
 			biolSourceProtein.add(objectBiolSource);
-			
-			listSql = Sourceref.findReferenceSource(biol.id);
-			listSqlArray.addAll(listSql);
+		 	System.out.println("------> ------>" + proteinName);	
+			listSqlArray = Sourceref.findReferenceSource(biol.id);
+			//listSqlArray.addAll(listSql);
 			//biorefs.add(objectBiolSource.reference_id);
 		}
 		
@@ -290,10 +296,10 @@ public class Application extends Controller {
 			
 			
 			
-			return ok(browse.render(taxonomy, taxonomyList, biolsource, listSql2, sourceUnique, proteinUnique, proteinList, tissueList, foundTissue, glycobaseFindPerturbation, glycobaseSqlArray, glycobaseSqlArrayTissue, outputlist, countGlycobase, outputtissuelist, countTissueGlycobase, outputproteinlist, countProteinGlycobase));
+			return ok(browse.render(taxonomy, taxonomyList, biolsource, listSql2, sourceUnique, proteinUnique, proteinList, tissueList, foundTissue, glycobaseFindPerturbation, /*glycobaseSqlArray, glycobaseSqlArrayTissue,*/ outputlist, countGlycobase, outputtissuelist, countTissueGlycobase, outputproteinlist, countProteinGlycobase));
 		}
 		
-		return ok(browse.render(taxonomy, taxonomyList, biolsource, listSql2, sourceUnique, proteinUnique, proteinList, tissueList, foundTissue, glycobaseFindPerturbation, glycobaseSqlArray, glycobaseSqlArrayTissue, outputlist, countGlycobase, outputtissuelist, countTissueGlycobase, outputproteinlist, countProteinGlycobase));
+		return ok(browse.render(taxonomy, taxonomyList, biolsource, listSql2, sourceUnique, proteinUnique, proteinList, tissueList, foundTissue, glycobaseFindPerturbation, /* glycobaseSqlArray, glycobaseSqlArrayTissue,*/ outputlist, countGlycobase, outputtissuelist, countTissueGlycobase, outputproteinlist, countProteinGlycobase));
 	}
 	
 	
@@ -460,7 +466,7 @@ public class Application extends Controller {
 	
 	public static Result ms() {
 		List<SqlRow> results = Lcmucin.groupLcGlycans();
-		return ok ( ms.render(results) );
+		return ok ( ms.render() );
 	}
 	
 	/**
@@ -471,7 +477,7 @@ public class Application extends Controller {
 		Taxonomy taxonomy  = Taxonomy.find.byId(id);
 		String taxon = taxonomy.species;
 		List<Biolsource> biolsource = Biolsource.findTaxonomyProtein(taxon);
-		List<SqlRow> listSql = Biolsource.findTaxonomyProteinSQL(taxon);
+		List<com.avaje.ebean.SqlRow> listSql = Biolsource.findTaxonomyProteinSQL(taxon);
 		//return TODO;
 		return ok(
 			taxonDetails.render("Taxonomy Description", taxonomy, biolsource, listSql)

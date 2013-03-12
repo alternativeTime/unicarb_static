@@ -37,12 +37,12 @@ public class Sourceref extends Model {
      */
     public static Finder<Long,Sourceref> find = new Finder<Long,Sourceref>(Long.class, Sourceref.class); 
 
-    public static List<SqlRow> findReferenceSource(Long term)  {
+    public static List<com.avaje.ebean.SqlRow> findReferenceSource(Long term)  {
 
     String sql = "SELECT r.id, r.title, r.authors, r.pmid FROM reference as r, sourceref as s where s.reference_id = r.id and s.biolsource_id = " + term;  
 
     SqlQuery sqlQuery = Ebean.createSqlQuery(sql);
-    List<SqlRow> listSql = sqlQuery.findList();
+    List<com.avaje.ebean.SqlRow> listSql = sqlQuery.findList();
 
     return listSql;
 

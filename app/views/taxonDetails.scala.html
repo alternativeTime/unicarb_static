@@ -1,4 +1,4 @@
-@(message: String, taxon: Taxonomy, biolsource: List[Biolsource], groupTax: List[SqlRow] )
+@(message: String, taxon: Taxonomy, biolsource: List[Biolsource], groupTax: List[com.avaje.ebean.SqlRow] )
 @import helper._
 
 @**********************************
@@ -97,7 +97,6 @@
       <h3>Glycoproteins</h3>
       <p><i class="icon-chevron-right"></i><b>@groupTax.size() </b> glycoproteins curated</p>
       @for( (sql,i) <- groupTax.zipWithIndex; if (i <= 6)) {
-      <p class="short"><a href='/proteinsummary/@sql("swiss_prot")'>@sql("protein") (@sql("swiss_prot"))</a></p>
       }
 
       <div class='more'>

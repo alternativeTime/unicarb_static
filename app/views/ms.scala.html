@@ -1,4 +1,3 @@
-@(groupStructures: List[SqlRow] )
 @import helper._
 
 @**********************************
@@ -299,10 +298,11 @@ div#content2.author p { width: 590px; position: relative; }
         
         <!-- item container -->
         <ul id="itemContainer" >
+		@*
 		@for(s <- groupStructures){
 		<li><img src="http://unicarb-db.biomedicine.gu.se/unicarbdb/get_sugar_image.action?download=true&scale=0.5&outputType=png&inputType=gws&tolerateUnknown=1&glycanSequenceId=@s("glycan_sequence_id")" alt="image"></li>
 		}
-
+		*@
 		</ul>
 
 	</div> <!--! end of #content -->

@@ -83,21 +83,21 @@ public class Reference extends Model {
 
 
   public static List<Reference> findJournal(Long id) {
-       return find.join("journal").join("sourceref").join("sourceref.biolsource")
+       return find.fetch("journal").fetch("sourceref").fetch("sourceref.biolsource")
            .where()
                 .eq("id", id)
            .findList();
     }
   
   public static List<Reference> findRefMethods(Long id) {
-      return find.join("refmethod.method")
+      return find.fetch("refmethod.method")
           .where()
                .eq("id", id)
           .findList();
    }
 
    public static List<Reference> findSourceref(Long id) {
-	return find.join("sourceref").join("method")
+	return find.fetch("sourceref").fetch("method")
 	   .where()
 		.eq("reference_id", id)
 	   .findList();

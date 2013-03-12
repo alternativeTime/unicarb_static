@@ -1,4 +1,4 @@
-@(taxonomy: List[String], taxon: ArrayList[Taxonomy],  biolsource: List[Biolsource], groupTax: List[List[String]], sources: HashSet[String], proteins: HashSet[String], proteinList: ArrayList[Proteins], tissueList: ArrayList[Tissue], tissueTerms: List[Tissue], glycobasePerturbation: List[GlycobaseSource], rawTax: ArrayList[SqlRow], rawTissue: ArrayList[SqlRow], output: List[String], count: Integer, outputtissue: List[String], counttissue: Integer, outputprotein: List[String], countprotein: Integer  )
+@(taxonomy: List[String], taxon: ArrayList[Taxonomy],  biolsource: List[Biolsource], groupTax: List[List[String]], sources: HashSet[String], proteins: HashSet[String], proteinList: ArrayList[Proteins], tissueList: ArrayList[Tissue], tissueTerms: List[Tissue], glycobasePerturbation: List[GlycobaseSource], output: List[String], count: Integer, outputtissue: List[String], counttissue: Integer, outputprotein: List[String], countprotein: Integer  )
 
 @main{
 
@@ -213,12 +213,12 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
           <li class="title">Select a Structure Database: </li>
           <li><a href="#filter1" data-toggle="tab">GlycoSuiteDB <span class="pull-right count">@if(taxon.size() != 0) {@taxon.size()} @if(proteinList.size() != 0) {@proteinList.size()} @if(tissueList.size() != 0) {@tissueList.size()}</span></a></li>
           <li class=""><a href="#filter2" data-toggle="tab">EUROCarbDB</a></li>
-          <li><a href="#filter3" data-toggle="tab">GlycoBase <span class="pull-right count">@if(rawTissue.size() !=0) {@rawTissue.size()} @if(rawTissue.size() !=0) {@rawTax.size()} @if(count != 0) {@count} @if(counttissue != 0) {@counttissue}</span></a></li> </ul>
+          <li><a href="#filter3" data-toggle="tab">GlycoBase <span class="pull-right count"> @if(count != 0) {@count} @if(counttissue != 0) {@counttissue}</span></a></li> </ul>
       </div>
 
       <div class="info">
         <h4>Other Options:</h4>
-        <p><b>Glycan Builder:</b> Build and search a glycan structure<a href="/builder"> using the new interface</a>.</p>
+        <p><b>Glycan Builder:</b> Build and search a glycan structure<a href="/search"> using the new interface</a>.</p>
         <p><b>Curated Publications:</b> Search the <a href="/references">growing list of publications, associated structures, and metadata</a>.</p>
       </div>
     </div>
@@ -246,7 +246,7 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
             <div id="tab1" class="span12" >
 
               <div class="multi-option clearfix">
-                <span class="pull-left label label-light">Search by: </span>
+                <span class="pull-left label">Search by: </span>
                 <label class="radio">
                   <input type="radio" name="glycosuitedbSearch" value="Taxonomy" checked> <h4>Taxonomy</h4>
                 </label>
@@ -340,7 +340,7 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
 
 	    @*
             <div class="multi-option clearfix">
-              <span class="pull-left label label-light">Search by: </span>
+              <span class="pull-left label">Search by: </span>
               <label class="radio">
                 <input type="radio" name="eurocarbdbSearch" value="Taxonomy" checked> <h4>Taxonomy</h4>
               </label>
@@ -395,7 +395,7 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
             <div class="row-fluid">
 
                 <div class="multi-option clearfix">
-                  <span class="pull-left label label-light">Search by: </span>
+                  <span class="pull-left label">Search by: </span>
                   <label class="radio">
                     <input type="radio" name="glycobaseSearch" value="Taxonomy" checked> <h4>Taxonomy</h4>
                   </label>
@@ -519,20 +519,8 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
     @for(p <- proteinList) {
     <div class="row-fluid glycosuiteResult">
       <div class="details span9">
-        <h3>
-	@if(p.swissProt == null ) {<a href="@routes.Application.proteinsummary(p.name)">@p.name</a>}
-	@if(p.swissProt != null  ) {<a href="@routes.Application.proteinsummary(p.swissProt)">@p.name (@p.swissProt)</a>}
-	</h3>
-        @*<p class="">@p.stproteins.size() structures are associated with this protein</p> *@
-        @*
-	will add this when happy with db associations
-	<p><span class="label">@p.proteinGeneralSites.size() Global</span>  <span class="label">@p.proteinDefinedSites.size() Global</span></p>
-        *@
-         <p>
-	@for(ptax <- p.proteinsTax) {
-	 <span class="label label-light">@ptax.species</span>
-	}</p>
-
+        <h3><a href="@routes.Application.proteinsummary(p.swissProt)">@p.name</a></h3>
+        <p class="">@p.stproteins.size() structures are associated with this protein</p>
       </div>
       <div class="span3">
         <p class="pull-right structures"><a href="@routes.Application.proteinsummary(p.swissProt)">@p.stproteins.size() structures </a></p>

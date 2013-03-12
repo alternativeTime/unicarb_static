@@ -78,7 +78,7 @@ public class Unicarbdbreference extends Model {
 
 
   public static List<Unicarbdbreference> findJournal(Long id) {
-       return find.join("journal")
+       return find.fetch("journal")
            .where()
                 .eq("id", id)
            .findList();

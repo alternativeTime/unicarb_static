@@ -64,7 +64,7 @@ public class Tissue extends Model {
 
    public static List<Tissue> tissuehelp(Long id){
 
-	return find.join("stsource").join("stsource.structure")
+	return find.fetch("stsource").fetch("stsource.structure")
 	   .where()
 		.eq("id", id)
 	   .findList();

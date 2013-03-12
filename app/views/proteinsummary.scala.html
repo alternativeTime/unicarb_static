@@ -1,4 +1,4 @@
-@(proteinName: String, accession: String, biol: ArrayList[Biolsource], protein: List[Proteins], uniprot: List[String], gssites: List[GsProteinStr2], source: ArrayList[SqlRow], description: List[SitesReferences], sequence: String, proteinMultiple: List[Proteins], generalSites: List[GeneralSites], definedSites: List[DefinedSites], typeEntry: String)
+@(proteinName: String, accession: String, biol: ArrayList[Biolsource], protein: List[Proteins], uniprot: List[String], gssites: List[GsProteinStr2], source: List[com.avaje.ebean.SqlRow], description: List[SitesReferences], sequence: String, proteinMultiple: List[Proteins], generalSites: List[GeneralSites], definedSites: List[DefinedSites], typeEntry: String)
 
 @main {
 
@@ -168,7 +168,7 @@
           <h3>References @if(source.size() > 5) {showing top 5} <span class="label label-notice" style="font-size:16px">@source.size()</span> </h3>
           <ol>
             @for((source,i) <- source.zipWithIndex; if (i < 5)) {
-            <li class="references">
+	    <li class="references">
               <p class="title"><a href='/references/@source("id")'>@source("title")</a></p>
               <p class="author">@source("authors")</p>
               <p class="ref">PubMed: <a href='http://www.ncbi.nlm.nih.gov/pubmed/@source("pmid")'>@source("pmid")</a></p>
