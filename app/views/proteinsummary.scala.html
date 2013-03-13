@@ -1,4 +1,4 @@
-@(proteinName: String, accession: String, biol: ArrayList[Biolsource], protein: List[Proteins], uniprot: List[String], gssites: List[GsProteinStr2], source: List[com.avaje.ebean.SqlRow], description: List[SitesReferences], sequence: String, proteinMultiple: List[Proteins], generalSites: List[GeneralSites], definedSites: List[DefinedSites], typeEntry: String)
+@(proteinName: String, accession: String, biol: ArrayList[Biolsource], protein: List[Proteins], uniprot: List[String], gssites: List[GsProteinStr2], source: List[com.avaje.ebean.SqlRow], description: List[SitesReferences], sequence: String, proteinMultiple: List[Proteins], generalSites: List[GeneralSites], definedSites: List[DefinedSites], typeEntry: String, swissProtName: String)
 
 @main {
 
@@ -15,7 +15,7 @@
       <h1>Associated Structures</h1>
       <h4 class="subheader span8">Accession: 
 	@if(typeEntry.matches("not swiss prot")) {<a href="http://uniprot.org/uniprot/?query=@accession+AND+reviewed%3Ayes&sort=score">@accession </a><span class="pull-right"><a href="http://uniprot.org/uniprot/?query=@accession+AND+reviewed%3Ayes&sort=score"><span class='label label-light'>UniProt Entry</span></a></span> }
-     	@if(!typeEntry.matches("not swiss prot")) {<a href="http://uniprot.org/uniprot/@accession">@accession </a><span class="pull-right"><a href="http://uniprot.org/uniprot/@accession"><span class='label label-light'>UniProt Entry</span></a></span> }
+     	@if(!typeEntry.matches("not swiss prot")) {<a href="http://uniprot.org/uniprot/@swissProtName">@accession </a><span class="pull-right"><a href="http://uniprot.org/uniprot/@accession"><span class='label label-light'>UniProt Entry</span></a></span> }
       </h4>
     </div>
 

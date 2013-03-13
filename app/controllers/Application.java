@@ -44,7 +44,7 @@ public class Application extends Controller {
 		List<com.avaje.ebean.SqlRow> listSqlArray = null ; // new List<com.avaje.ebean.SqlRow>();
 		//List<anorm.SqlRow> listSqlArray = null;
 		String proteinName = "";
-		String swissProtName = "";	
+		String swissProtName = null;	
 		String typeProteinEntry = "";
 		ArrayList<Biolsource> biolSourceProtein = new ArrayList<Biolsource>();
 		String accession = "";
@@ -93,6 +93,8 @@ public class Application extends Controller {
 			generalSites = GeneralSites.findProteinsGeneral(protein);
 			definedSites = DefinedSites.findProteinsDefined(protein);
 			
+			System.out.println("check match statment ---->: " + protein);
+			
 		String [] splitProtein = protein.split("\\s*[and]+\\s*");
 		
 		proteinMultiple = Proteins.findProteinsSwissProt(protein);
@@ -113,10 +115,12 @@ public class Application extends Controller {
 			generalSites = GeneralSites.findProteinsGeneralName(protein);
 			definedSites = DefinedSites.findProteinsDefinedName(protein);
 			proteinMultiple = Proteins.findProteinsName(protein);
-			typeProteinEntry = "not swiss prot";	
+			//typeProteinEntry = "not swiss prot";	
 		}
 		
-		
+		if (swissProtName == null) {
+			typeProteinEntry = "not swiss prot";
+		}	
 	
 		if (uniprotDetails.isEmpty()) {
 			uniprotDetails.add("No info");
@@ -127,7 +131,7 @@ public class Application extends Controller {
 	
 		
 		return ok(
-			proteinsummary.render(proteinName, protein, biolSourceProtein, proteins, uniprotDetails, gsProteinSite, listSqlArray, description, sequenceRetrieval, proteinMultiple, generalSites, definedSites, typeProteinEntry)
+			proteinsummary.render(proteinName, protein, biolSourceProtein, proteins, uniprotDetails, gsProteinSite, listSqlArray, description, sequenceRetrieval, proteinMultiple, generalSites, definedSites, typeProteinEntry, swissProtName)
 			);
 		
 	}
