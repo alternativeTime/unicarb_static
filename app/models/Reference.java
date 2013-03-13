@@ -62,7 +62,7 @@ public class Reference extends Model {
     public static Finder<Long,Reference> find = new Finder<Long,Reference>(Long.class, Reference.class); 
     
     /**
-     * Return a page of computer
+     * Return a page of references 
      *
      * @param page Page to display
      * @param pageSize Number of computers per page
@@ -74,9 +74,10 @@ public class Reference extends Model {
         return 
             find.where().disjunction()
 		.ilike("title", "%" + filter + "%") 
-		.ilike("authors", "%" + filter + "%") 
+		.ilike("authors", "%" + filter + "%")
 		.endJunction()
-		.join("journal")
+	       	.orderBy(sortBy + " " + order) 
+		.fetch("journal")
                 .findPagingList(pageSize)
                 .getPage(page);
     }
