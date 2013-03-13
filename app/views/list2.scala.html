@@ -79,7 +79,7 @@
                     <tr>
                         <td><a href="">@reference.title</a></td>
                         <td>
-                            @if(reference.year == null) {
+                            @if(reference.year < 1) {
                                 <em>-</em>
                             } else {
                                 @reference.year

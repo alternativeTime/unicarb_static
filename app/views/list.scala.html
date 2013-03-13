@@ -91,7 +91,7 @@
                     <tr>
                         <td><a href="references/@reference.id" style="text-decoration : none, font-color: #404040; ">@reference.title</a></td>
                         <td>
-                            @if(reference.year == null) {
+                            @if(reference.year < 1) {
                                 <em>-</em>
                             } else {
                                 @reference.year
