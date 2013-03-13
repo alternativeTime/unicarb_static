@@ -159,9 +159,15 @@
 
         <div class="info">
           <h3>Sequence</h3>
-          <div class="sequence">
+	  @if(sequence.length<1) {
+	  <div class="alert alert-error">
+  		<h4>No sequence available</h4>
+		<p>Go to UniProt for further details</p>
+	  </div>}
+	  @if(sequence.length > 1) {
+	  <div class="sequence">
             @sequence
-          </div>
+          </div>}
         </div>
 
         <div class="info">
