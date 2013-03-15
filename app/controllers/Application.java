@@ -41,8 +41,8 @@ public class Application extends Controller {
 	
 	public static Result proteinsummary(String protein) {	
 		List<com.avaje.ebean.SqlRow> listSql = null;
-		List<com.avaje.ebean.SqlRow> listSqlArray = null ; // new List<com.avaje.ebean.SqlRow>();
-		//List<anorm.SqlRow> listSqlArray = null;
+		List<com.avaje.ebean.SqlRow> listSqlArray = null; // = new List<com.avaje.ebean.SqlRow>();
+	        
 		String proteinName = "";
 		String swissProtName = null;	
 		String typeProteinEntry = "";
@@ -70,22 +70,25 @@ public class Application extends Controller {
 			biolSourceProteins = Biolsource.findBiolSourceIdsName(protein);
 		}
 		
+		List<Reference> referencesFound = new ArrayList<Reference>();
+		HashSet referencesU = new HashSet();
+
 		for(Biolsource biol : biolSourceProteins){
 			proteinName = biol.protein;
 			swissProtName = biol.swiss_prot;
+			System.out.println("what is broken here " + biol.id);
 			Biolsource objectBiolSource = Ebean.find(Biolsource.class, biol.id);
 			biolSourceProtein.add(objectBiolSource);
 		 	System.out.println("------> ------>" + proteinName);	
 			listSqlArray = Sourceref.findReferenceSource(biol.id);
-			//listSqlArray.addAll(listSql);
-			//biorefs.add(objectBiolSource.reference_id);
+			for (com.avaje.ebean.SqlRow r : listSqlArray) {
+				Reference reference = Ebean.find(Reference.class, r.get("id").toString() );
+			 	referencesFound.add(reference);	
+			}
+			referencesU.addAll(referencesFound);
 		}
 		
 		proteins = Proteins.findProteins(protein);
-		//List<Sites> sites = Sites.findSites(protein);
-
-			//generalSites = GeneralSites.findProteinsGeneralName(protein);
-			//definedSites = DefinedSites.findProteinsDefinedName(protein);
 		
 		//problems with legacy feature of and in the swiss prot names
 		if(protein.matches("[A-Z][0-9].*")) {
@@ -131,7 +134,7 @@ public class Application extends Controller {
 	
 		
 		return ok(
-			proteinsummary.render(proteinName, protein, biolSourceProtein, proteins, uniprotDetails, gsProteinSite, listSqlArray, description, sequenceRetrieval, proteinMultiple, generalSites, definedSites, typeProteinEntry, swissProtName)
+			proteinsummary.render(proteinName, protein, biolSourceProtein, proteins, uniprotDetails, gsProteinSite, referencesU, description, sequenceRetrieval, proteinMultiple, generalSites, definedSites, typeProteinEntry, swissProtName)
 			);
 		
 	}
