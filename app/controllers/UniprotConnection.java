@@ -213,6 +213,7 @@ public class UniprotConnection extends Controller {
                                       	}
 			}
 		}
+
 		else if (type.equals("general")) {
 			int gvalue;
 			int x;
@@ -241,8 +242,8 @@ public class UniprotConnection extends Controller {
                         Biolsource objectBiolSource = Ebean.find(Biolsource.class, biol.id);
 			taxsources.add(objectBiolSource.taxonomy);
                         biolSourceProtein.add(objectBiolSource);
-                        listSql = Sourceref.findReferenceSource(biol.id);
-                        listSqlArray.addAll(listSql);
+                        //listSql = Sourceref.findReferenceSource(biol.id);
+                        //listSqlArray.addAll(listSql);
                 }
 		
 		taxsourcesUnique.addAll(taxsources);	
