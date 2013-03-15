@@ -173,7 +173,7 @@
         <div class="info">
           <h3>References @if(source.size() > 5) {showing top 5} <span class="label label-notice" style="font-size:16px">@source.size()</span> </h3>
           <ol>
-	    @for(source <- source) {
+	    @for((source,i) <- source.zipWithIndex; if (i < 5)) {
 	    <li class="references">
 		<p class="title"><a href='/references/@source.id'>@source.title</a></p>
                 <p class="author">@source.authors</p>
