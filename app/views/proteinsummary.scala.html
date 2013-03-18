@@ -30,9 +30,11 @@
         </div> 
 
         <div class='ptm-details'>
-	  <h3>PTM Details</h3>
+	  <h3>UniProt PTM Description</h3>
 	    @for(uniprot <- uniprot) {
-              <p>@uniprot</p>
+		@if(uniprot.matches("No info")) {  <div class="alert alert-error">No UniProt PTM information available for this protein entry </div> }
+		@if(!uniprot.matches("No info")) {    
+              	<p>@uniprot</p>}
 	    }
         </div>
 
@@ -157,18 +159,13 @@
 
       <div class="span4 details">
 
+	@if(sequence.length > 1) {
         <div class="info">
           <h3>Sequence</h3>
-	  @if(sequence.length<1) {
-	  <div class="alert alert-error">
-  		<h4>No sequence available</h4>
-		<p>Go to UniProt for further details</p>
-	  </div>}
-	  @if(sequence.length > 1) {
 	  <div class="sequence">
             @sequence
-          </div>}
-        </div>
+          </div>
+        </div>}
 
         <div class="info">
           <h3>References @if(source.size() > 5) {showing top 5} <span class="label label-notice" style="font-size:16px">@source.size()</span> </h3>
