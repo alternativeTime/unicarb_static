@@ -1011,8 +1011,6 @@ p.structures a, p.publications a, p.biological a { padding-left: 30px; height: 2
 
 #peaklist { margin: 20px 0 0 0; padding: 20px; background: whiteSmoke; }
 #peaklist text { fill: #333; }
-#peaklist text.rule { fill: #333; }
-#peaklist line.five { stroke: #999; }
 
 #peaklist line { stroke: #DDD; stroke-width: 1; fill: none; }
 
