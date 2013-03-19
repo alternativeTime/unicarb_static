@@ -1009,74 +1009,44 @@ p.structures a, p.publications a, p.biological a { padding-left: 30px; height: 2
 
 .control-group .record { margin: 0 0 0 140px; padding: 6px 0 0 0; }
 
-/* #peaklist { margin: 20px 0 0 0; padding: 20px; background: whiteSmoke; } */
-/* #peaklist text { fill: #333; } */
-/* #peaklist text.rule { fill: #333; } */
-/* #peaklist line.five { stroke: #999; } */
+#peaklist { margin: 20px 0 0 0; padding: 20px; background: whiteSmoke; }
+#peaklist text { fill: #333; }
+#peaklist text.rule { fill: #333; }
+#peaklist line.five { stroke: #999; }
 
-/* #peaklist line { stroke: #DDD; stroke-width: 1; fill: none; } */
+#peaklist line { stroke: #DDD; stroke-width: 1; fill: none; }
 
-/* #peaklist rect { */
-/*   stroke: white; */
-/*   fill: #008FD5; */
-/*      } */
+#peaklist rect {
+  stroke: white;
+  fill: #008FD5;
+     }
 
 
-/* path { stroke: #008FD5; stroke-width: 1; fill: none; } */
-
-/* g.xaxis path.domain { stroke: #333; stroke-width: 0px; fill: none; } */
-/* g.yaxis path.domain { stroke: #333; stroke-width: 0px; fill: none; } */
-
-/* .axis { shape-rendering: crispEdges; } */
-
-/* .tick.major line { stroke: #DEDEDE; } */
-/* .x.axis .minor { stroke: #DFDFDF; } */
-
-/* .x.axis path { display: none; } */
-/* .x.axis text { padding: 10px 0 0 0; } */
-
-/* .y.axis line, .y.axis path { */
-/*   fill: none; */
-/*   stroke: #000; */
-/* } */
-
-svg {
-  font: 10px sans-serif;
-}
-
-.axis {
-  shape-rendering: crispEdges;
-}
-
-.axis path, .axis line {
+#peaklist rect.pane {
   fill: none;
-  stroke-width: .5px;
-}
-
-.x.axis path {
-  stroke: #000;
-}
-
-.x.axis line {
-  stroke: #fff;
-  stroke-opacity: .5;
-}
-
-.y.axis line {
-  stroke: #ddd;
-}
-
-path.line {
-  fill: none;
-  stroke: #000;
-  stroke-width: .5px;
-}
-
-rect.pane {
   cursor: move;
+    fill: none;
+      pointer-events: all;
+     }
+
+path { stroke: #008FD5; stroke-width: 1; fill: none; }
+
+g.xaxis path.domain { stroke: #333; stroke-width: 0px; fill: none; }
+g.yaxis path.domain { stroke: #333; stroke-width: 0px; fill: none; }
+
+.axis { shape-rendering: crispEdges; }
+
+.tick.major line { stroke: #DEDEDE; }
+.x.axis .minor { stroke: #DFDFDF; }
+
+.x.axis path { display: none; }
+.x.axis text { padding: 10px 0 0 0; }
+
+.y.axis line, .y.axis path {
   fill: none;
-  pointer-events: all;
+  stroke: #000;
 }
+
 
 /* !LAYOUT - !BUILDER //////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
