@@ -4,6 +4,8 @@ import java.util.*;
 import play.mvc.*;
 import play.data.*;
 import play.*;
+import play.cache.Cache;
+import play.cache.*;
 
 import views.html.*;
 
@@ -40,6 +42,9 @@ public class Application extends Controller {
 	};
 	
 	public static Result proteinsummary(String protein) {	
+
+			
+
 		List<com.avaje.ebean.SqlRow> listSql = null;
 		List<com.avaje.ebean.SqlRow> listSqlArray = null; // = new List<com.avaje.ebean.SqlRow>();
 	        
@@ -130,8 +135,9 @@ public class Application extends Controller {
 		}
 		
 		
-			
-	
+		Object news = Cache.get("item.key");	
+
+		System.out.println("cache testing " + news);	
 		
 		return ok(
 			proteinsummary.render(proteinName, protein, biolSourceProtein, proteins, uniprotDetails, gsProteinSite, referencesU, description, sequenceRetrieval, proteinMultiple, generalSites, definedSites, typeProteinEntry, swissProtName)
@@ -160,8 +166,10 @@ public class Application extends Controller {
 		}
 		return ok(compositions.render(compositionResult));
 	}
-	
+
+	@Cached(key = "browse", duration = 86400)
 	public static Result browse() {
+		Cache.set("item.key", "testing", 0);
 		List<String> taxonomy  = Taxonomy.findSpecies(); 
 		HashSet taxUnique = Taxonomy.findSpeciesUnique();
 		
@@ -426,13 +434,8 @@ public class Application extends Controller {
     	
     	
     	
-    	/*
-    	private static Content render(Reference displayReference) {
-    	// TODO Auto-generated method stub
-    	return null;
-	} */
 	
-	/** * Handle default path requests, redirect to computers list */
+	@Cached(key = "index", duration = 86400)
     public static Result index() {
       //return GO_HOME;
       return ok ( index.render() );
@@ -456,6 +459,10 @@ public class Application extends Controller {
 
     public static Result massspec() {
       return ok ( mass_spec.render() );
+    }
+
+    public static Result format(String s) {
+      return ok ( index.render() );
     }
 
     /*public static Result saySearch(String structure) {

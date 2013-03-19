@@ -1,4 +1,4 @@
-@(taxonomy: List[String], taxon: ArrayList[Taxonomy],  biolsource: List[Biolsource], groupTax: List[List[String]], sources: HashSet[String], proteins: HashSet[String], proteinList: ArrayList[Proteins], tissueList: ArrayList[Tissue], tissueTerms: List[Tissue], glycobasePerturbation: List[GlycobaseSource], output: List[String], count: Integer, outputtissue: List[String], counttissue: Integer, outputprotein: List[String], countprotein: Integer  )
+@(taxonomy: List[String], taxon: ArrayList[Taxonomy],  biolsource: List[Biolsource], groupTax: List[List[String]], sources: HashSet[String], proteins: HashSet[String], proteinList: ArrayList[Proteins], tissueList: ArrayList[Tissue], tissueTerms: List[Tissue], glycobasePerturbation: List[GlycobaseSource], output: List[String], count: Integer, outputtissue: List[String], counttissue: Integer, outputprotein: List[String], countprotein: Integer)
 
 @main{
 
@@ -519,7 +519,9 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
     @for(p <- proteinList) {
     <div class="row-fluid glycosuiteResult">
       <div class="details span9">
-        <h3><a href="@routes.Application.proteinsummary(p.swissProt)">@p.name</a></h3>
+        <h3>@if(p.swissProt != null) {<a href="@routes.Application.proteinsummary(p.swissProt)">}
+	    @if(p.swissProt == null) {<a href="@routes.Application.proteinsummary(p.name)">}
+	    @p.name</a></h3>
         <p class="">@p.stproteins.size() structures are associated with this protein</p>
       </div>
       <div class="span3">

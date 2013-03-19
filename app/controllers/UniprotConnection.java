@@ -177,7 +177,7 @@ public class UniprotConnection extends Controller {
                 if(key.equals("position")) {
 			for(String p : searchTerms) {
 			site = p;
-                        System.out.println("output is " + site);
+                        System.out.println(" -------> output is " + site);
 			}
                 }
                 if(key.equals("protein")) {
@@ -242,18 +242,13 @@ public class UniprotConnection extends Controller {
                         Biolsource objectBiolSource = Ebean.find(Biolsource.class, biol.id);
 			taxsources.add(objectBiolSource.taxonomy);
                         biolSourceProtein.add(objectBiolSource);
-                        //listSql = Sourceref.findReferenceSource(biol.id);
-                        //listSqlArray.addAll(listSql);
                 }
 		
 		taxsourcesUnique.addAll(taxsources);	
 		
 		biolRefs = Biolsource.findBiolsourceRefs(protein);
 		
-		//siteStructures = GsProteinSiteStructureAssociation.findStructuresSites(protein, site);
 		sequenceRetrieval = UniprotConnection.EntryRetrievalSequence(protein);
-		//description = SitesReferences.findSites(protein);
-		//gsProteinSite = GsProteinStr2.ProteinRetrieval(protein);
 
         }
         return ok(
