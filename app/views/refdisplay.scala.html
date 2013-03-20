@@ -1,4 +1,4 @@
-@(message: String, references: List[Reference], refmethods: List[Reference], taxsources: ArrayList[String], proteinsources: ArrayList[String], prot: ArrayList[String] )
+@(notation: String, message: String, references: List[Reference], refmethods: List[Reference], taxsources: ArrayList[String], proteinsources: ArrayList[String], prot: ArrayList[String] )
 @import helper._
 
 
@@ -38,10 +38,12 @@
     </div><!-- /col -->
     } 
     <div class="span4 sidebar">
-      @** Hello @{val name = t.biolsource.taxonomy; 
-      if(name.size > 0){<p>here</p>}else{<p>mmm</p>}
-      name}! **@
 
+      <div class="info">
+          <h3>Structure Format</h3>
+          <a href="/format/cfg"><span class='label label-light'>Essentials</span></a>
+          <a href="/format/gs"><span class='label label-light'>Traditional</span></a>
+      </div>
       <div class="info">
         <h3>Biological Associations</h3>
         @for(tax <- taxsources){

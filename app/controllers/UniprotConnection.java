@@ -3,8 +3,9 @@ package controllers;
 import java.util.*;
 
 import play.mvc.*;
-//import play.data.*;
 import play.*;
+import play.cache.Cache;
+import play.cache.*;
 
 import views.html.*;
 
@@ -251,8 +252,13 @@ public class UniprotConnection extends Controller {
 		sequenceRetrieval = UniprotConnection.EntryRetrievalSequence(protein);
 
         }
+
+	Object format = Cache.get("format");
+        String notation = "gs";
+        if(format != null) {notation = (String) format.toString();}
+
         return ok(
-                proteinsite.render(sequenceRetrieval,  protein, biolRefs, site, structuresShow,  taxsourcesUnique )
+                proteinsite.render(notation, sequenceRetrieval,  protein, biolRefs, site, structuresShow,  taxsourcesUnique )
                 );
     	}
 

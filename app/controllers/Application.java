@@ -137,7 +137,6 @@ public class Application extends Controller {
 		Object format = Cache.get("format");	
 		String notation = "gs";
 		if(format != null) {notation = (String) format.toString();}	
-		
 
 		
 		return ok(
@@ -382,10 +381,13 @@ public class Application extends Controller {
 				}
 			}
 		}
+
+		Object format = Cache.get("format");
+                String notation = "gs";
+                if(format != null) {notation = (String) format.toString();} 
 		
-		//Application str;
 		return ok(
-			structureDetails.render(strDisplay, id, proteinNames, proteinItems, sourceNames, sourceItems, rowList, uniprot, taxItems, taxNames)
+			structureDetails.render(notation, strDisplay, id, proteinNames, proteinItems, sourceNames, sourceItems, rowList, uniprot, taxItems, taxNames)
 			
 			);
 	};
@@ -422,14 +424,13 @@ public class Application extends Controller {
 		taxsources.addAll(hs);
 		proteinsources.addAll(proteinHs);
 		protsources.addAll(swissHs);
+	
+	        Object format = Cache.get("format");
+                String notation = "gs";
+                if(format != null) {notation = (String) format.toString();}
 		
-		
-		//List<Reference> sourcered = Reference.findSourceref(id);	
 		return ok( 
-    			//refdisplay.render(displayReference)
-    			//list2.
-    			//refdisplay.ref().render(displayReferencce)
-			refdisplay.render("View selected reference", t, u, taxsources, proteinsources, protsources)
+			refdisplay.render(notation, "View selected reference", t, u, taxsources, proteinsources, protsources)
     			); 
     	};
     	

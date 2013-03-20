@@ -1,4 +1,4 @@
-@(sequence: String, accession: String, source: ArrayList[com.avaje.ebean.SqlRow], site: String, structures: ArrayList[Long], taxsources: ArrayList[String]) 
+@(notation: String, sequence: String, accession: String, source: ArrayList[com.avaje.ebean.SqlRow], site: String, structures: ArrayList[Long], taxsources: ArrayList[String]) 
 
 @main {
 
@@ -62,6 +62,11 @@
 
     <div class="span4 details">
 
+      <div class="info">
+          <h3>Structure Format</h3>
+          <a href="/format/cfg"><span class='label label-light'>Essentials</span></a>
+          <a href="/format/gs"><span class='label label-light'>Traditional</span></a>
+      </div>
       <div class="info">
         <h3>Sequence</h3>
         <div class="sequence">
