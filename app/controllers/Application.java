@@ -134,13 +134,14 @@ public class Application extends Controller {
 			uniprotDetails.add("No info");
 		}
 		
+		Object format = Cache.get("format");	
+		String notation = "gs";
+		if(format != null) {notation = (String) format.toString();}	
 		
-		Object news = Cache.get("item.key");	
 
-		System.out.println("cache testing " + news);	
 		
 		return ok(
-			proteinsummary.render(proteinName, protein, biolSourceProtein, proteins, uniprotDetails, gsProteinSite, referencesU, description, sequenceRetrieval, proteinMultiple, generalSites, definedSites, typeProteinEntry, swissProtName)
+			proteinsummary.render(notation, proteinName, protein, biolSourceProtein, proteins, uniprotDetails, gsProteinSite, referencesU, description, sequenceRetrieval, proteinMultiple, generalSites, definedSites, typeProteinEntry, swissProtName)
 			);
 		
 	}
@@ -438,6 +439,7 @@ public class Application extends Controller {
 	@Cached(key = "index", duration = 86400)
     public static Result index() {
       //return GO_HOME;
+	Cache.set("format", "gs", 0);
       return ok ( index.render() );
     }
 
@@ -462,7 +464,13 @@ public class Application extends Controller {
     }
 
     public static Result format(String s) {
-      return ok ( index.render() );
+	String refererUrl = request().getHeader("referer");
+	System.out.println("referer " + refererUrl);
+	Cache.set("format", s, 0);
+
+	Object newss = Cache.get("format");
+        System.out.println("cache testing again format  " + newss);
+	return redirect(refererUrl);
     }
 
     /*public static Result saySearch(String structure) {
