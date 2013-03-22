@@ -24,9 +24,7 @@
     	
 	@for(s <- structures) {
         <li>
-        <a href="@routes.Application.structureDetails(s)">
-          <img src="../images/@notation/_@{s}.png" alt="">
-        </a>
+	@views.html.format.structure(notation, s.structure.id)
         </li>
 	}
       </ul>

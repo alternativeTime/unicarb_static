@@ -29,9 +29,7 @@
       <ul id="31" class="structures">
         @for(s <- r.streference) {
           <li>
-            <a href="@routes.Application.structureDetails(s.structure.id)">
-              <img src="../images/@notation/_@{s.structure.id}.png">
-            </a>
+	    @views.html.format.structure(notation, s.structure.id)
           </li>
         }
       </ul>
