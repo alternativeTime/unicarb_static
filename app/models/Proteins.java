@@ -76,7 +76,7 @@ public class Proteins extends Model {
                 .ilike("name", "%" + filter + "%")
                 .endJunction()
                 //.join("journal")
-		.orderBy("name asc")
+		.orderBy(sortBy + " " + order)
                 .findPagingList(pageSize)
                 .getPage(page);
     }
