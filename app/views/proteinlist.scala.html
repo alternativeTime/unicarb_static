@@ -82,7 +82,13 @@
 
                 @for(protein <- currentPage.getList) {
                     <tr>
-			<td><a href="proteinsummary/@protein.name" style="text-decoration : none, font-color: #404040; ">@protein.name</a></td>
+			<td>
+			@if(protein.swissProt == null) {
+			<a href="proteinsummary/@protein.name" style="text-decoration : none, font-color: #404040; ">@protein.name</a></td>
+			}
+			@if(protein.swissProt != null) {
+			<a href="proteinsummary/@protein.swissProt" style="text-decoration : none, font-color: #404040; ">@protein.name</a></td>
+			}
                         @* <td><a href="proteinsummary/@protein.name" style="text-decoration : none, font-color: #404040; ">@protein.swissProt</a></td> *@
 			<td><a href="proteinsummary/@protein.name" style="text-decoration : none, font-color: #404040; ">@protein.stproteins.size()</a></td>	
 			<td><a href="proteinsummary/@protein.name" style="text-decoration : none, font-color: #404040; ">@* @if(protein.proteinGeneralSites.size() > 0) {<span class="label">Global</span> } *@ @if(protein.proteinDefinedSites.size() > 0 ) { <span class="label">Site Specific</span>}</a></td>
