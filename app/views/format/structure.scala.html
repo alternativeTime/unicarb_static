@@ -1,0 +1,9 @@
+@(notation: String, structureId: Long)
+
+@if(notation.matches("gs")) {
+        <img class="sugar_image"  src="../images/@notation/_@{structureId}.png">
+}
+@if(!notation.matches("gs") ) {
+        <img class="sugar_image"  src="../images/@notation/@{structureId}.png">
+}
+
