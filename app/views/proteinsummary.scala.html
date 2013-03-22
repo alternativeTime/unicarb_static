@@ -112,7 +112,7 @@
           @for((s, i) <- s.stproteins.zipWithIndex; if (i <=5) ){
           <li>
           <a href="@routes.Application.structureDetails(s.structure.id)">
-             <img src="../images/_@{s.structure.id}.png" alt="">
+             <img src="../images/@notation/_@{s.structure.id}.png" alt="">
           </a>
           </li>
           }}
@@ -122,7 +122,7 @@
           @for(s <- s.stproteins ){
           <li class="span5">
           <a href="@routes.Application.structureDetails(s.structure.id)">
-            <img src="../images/_@{s.structure.id}.png" alt="">
+            <img src="../images/@notation/_@{s.structure.id}.png" alt="">
           </a>
           </li>
           }}
@@ -158,11 +158,9 @@
       </div><!-- /col -->
 
       <div class="span4 details">
-	<div class="info">
-	  <h3>Structure Format</h3>
-	  <a href="/format/cfg"><span class='label label-light'>Essentials</span></a>
-	  <a href="/format/gs"><span class='label label-light'>Traditional</span></a>
-	</div>
+	
+	@views.html.format.format()
+
 	@if(sequence.length > 1) {
         <div class="info">
           <h3>Sequence</h3>

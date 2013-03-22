@@ -30,7 +30,7 @@
         @for(s <- r.streference) {
           <li>
             <a href="@routes.Application.structureDetails(s.structure.id)">
-              <img src="../images/_@{s.structure.id}.png">
+              <img src="../images/@notation/_@{s.structure.id}.png">
             </a>
           </li>
         }
@@ -39,11 +39,8 @@
     } 
     <div class="span4 sidebar">
 
-      <div class="info">
-          <h3>Structure Format</h3>
-          <a href="/format/cfg"><span class='label label-light'>Essentials</span></a>
-          <a href="/format/gs"><span class='label label-light'>Traditional</span></a>
-      </div>
+      @views.html.format.format()
+
       <div class="info">
         <h3>Biological Associations</h3>
         @for(tax <- taxsources){
