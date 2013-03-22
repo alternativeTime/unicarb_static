@@ -469,8 +469,6 @@ public class Application extends Controller {
 	System.out.println("referer " + refererUrl);
 	Cache.set("format", s, 0);
 
-	Object newss = Cache.get("format");
-        System.out.println("cache testing again format  " + newss);
 	return redirect(refererUrl);
     }
 
