@@ -15,10 +15,10 @@ $(document).ready(function(){
   ];
 
   // Variables
-  var barWidth = 2;
+  var barWidth = 1;
   var width = 500;
   var height = 200;
-  var margin = {top: 20, right: 20, bottom: 30, left: 40};
+  var margin = {top: 20, right: 20, bottom: 30, left: 60};
   var padding = [20, 30];
 
   // Scales
@@ -54,7 +54,6 @@ $(document).ready(function(){
 
   var zoom = d3.behavior.zoom().on("zoom", draw);
 
-
   // Append Axese
   chart.append("g")
     .attr("class", "y axis")
@@ -64,50 +63,81 @@ $(document).ready(function(){
     .attr("class", "x axis")
     .attr("transform", "translate(0," + height + ")");
 
+  // x-axis label
+  chart.append("text")
+    .attr("class", "x label")
+    .attr("text-anchor", "end")
+    .attr("x", width / 2)
+    .attr("y", height + 30)
+    .text("Intensity");
+
+  // y-axis label
+  chart.append("text")
+    .attr("class", "y label")
+    .attr("text-anchor", "end")
+    .attr("x", (-height / 2) + 20)
+    .attr("y", -50)
+    .attr("dy", "12")
+    .attr("transform", "rotate(-90)")
+    .text("m/z");
+
+
   // Clipping path
-  chart.append("clipPath")
+  // chart.append("clipPath")
+  //   .attr("id", "clip")
+  //  .append("rect")
+  //   .attr("x", 0)
+  //   .attr("y", 0)
+  //   .attr("width", width)
+  //   .attr("height", height);
+
+  // chart.append("path")
+  //   .attr("class", "line")
+  //   .attr("clip-path", "url(#clip)");
+
+  // Clipping rectangle path
+  // chart.append("rect")
+  //   .attr("class", "pane")
+  //   .attr("width", width)
+  //   .attr("height", height)
+  //   .call(zoom);
+
+  var clip = chart.append("defs").append("svg:clipPath")
     .attr("id", "clip")
-   .append("rect")
-    .attr("x", 0)
-    .attr("y", 0)
+    .append("svg:rect")
+    .attr("id", "clip-rect")
+    .attr("x", "0")
+    .attr("y", "0")
     .attr("width", width)
     .attr("height", height);
 
-  chart.append("path")
-    .attr("class", "line")
-    .attr("clip-path", "url(#clip)");
+  var chartBody = chart.append("g")
+    .attr("clip-path", "url(#clip)")
+    // .call(zoom);
+    // .call(d3.behavior.zoom().scaleExtent([0.2, 5]).on("zoom", redraw));
 
-  // Clipping rectangle path
-  chart.append("rect")
-    .attr("class", "pane")
-    .attr("width", width)
-    .attr("height", height)
-    .call(zoom);
-
+  var rect = chartBody.append('svg:rect')
+    .attr('width', width)
+    .attr('height', height)
+    .attr('fill', 'none')
+    // .call(zoom);
 
   // Creat data columns
-  chart.selectAll('rect')
-    .data(data).enter().append('path:rect')
+  chartBody.selectAll('rect')
+    .data(data).enter().append('g:rect')
     .attr('class', 'column')
     .attr('x', function(datum, index) { return x(index); })
     .attr('y', function(datum) { return y(datum.gpa); })
     .attr('height', function(datum) { return height - y(datum.gpa); })
     .attr('width', barWidth)
     .attr('fill', '#2d578b')
-    .call(zoom);
+    // .call(zoom);
 
 
   // x.domain([0, d3.max(data, function(d) { return d.length; })]);
   // y.domain([d3.max(data, function(d) { return d.gpa; })]), 0;
   // zoom.x(x);
   // zoom.y(y);
-
-  // chart label
-  // chart.append('svg:text').
-  //     attr('class', 'label').
-  //     text('Peak List').
-  //     attr('x', 0).
-  //     attr('y', 15);
 
 
   function zoom() {
