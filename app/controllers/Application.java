@@ -499,9 +499,12 @@ public class Application extends Controller {
 		String taxon = taxonomy.species;
 		List<Biolsource> biolsource = Biolsource.findTaxonomyProtein(taxon);
 		List<com.avaje.ebean.SqlRow> listSql = Biolsource.findTaxonomyProteinSQL(taxon);
+		Object format = Cache.get("format");
+                String notation = "gs";
+                if(format != null) {notation = (String) format.toString();}
 		//return TODO;
 		return ok(
-			taxonDetails.render("Taxonomy Description", taxonomy, biolsource, listSql)
+			taxonDetails.render(notation, "Taxonomy Description", taxonomy, biolsource, listSql)
 			);
 	}
 	
@@ -516,10 +519,13 @@ public class Application extends Controller {
 			String taxon = taxonomy.species;
 			List<Biolsource> biolsource = Biolsource.findTaxonomyProtein(taxon);
 			List<SqlRow> listSql = Biolsource.findTaxonomyProteinSQL(taxon);
-			
+		
+			Object format = Cache.get("format");
+                	String notation = "gs";
+                	if(format != null) {notation = (String) format.toString();}	
 			//return TODO;
 			return ok(
-				taxonDetails.render("Taxonomy Description", taxonomy, biolsource, listSql));
+				taxonDetails.render(notation, "Taxonomy Description", taxonomy, biolsource, listSql));
 		}
 		else { return TODO;}
 	}
