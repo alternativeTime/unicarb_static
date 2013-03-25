@@ -1,4 +1,5 @@
 @(currentPage: com.avaje.ebean.Page[Proteins], currentSortBy: String, currentOrder: String, currentFilter: String)
+@import helper._
 
 @****************************************
 * Helper generating navigation links    *
@@ -86,7 +87,7 @@
                     <tr>
 			<td>
 			@if(protein.swissProt == null) {
-			<a href="proteinsummary/@protein.name" style="text-decoration : none, font-color: #404040; ">@protein.name</a></td>
+			<a href="proteinsummary/@urlEncode(protein.name)" style="text-decoration : none, font-color: #404040; ">@protein.name</a></td>
 			}
 			@if(protein.swissProt != null) {
 			<a href="proteinsummary/@protein.swissProt" style="text-decoration : none, font-color: #404040; ">@protein.name</a></td>
