@@ -1005,19 +1005,22 @@ p.structures a, p.publications a, p.biological a { padding-left: 30px; height: 2
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////*/
 
+#structure-massspec { width: 100%; height: 150px; }
+
 .massspec .control-group { clear: both; }
 
 .control-group .record { margin: 0 0 0 140px; padding: 6px 0 0 0; }
 
-#peaklist { margin: 20px 0 0 0; padding: 20px; background: whiteSmoke; }
+#peaklist { margin: 0 0 0 0; padding: 20px; background: whiteSmoke; }
 #peaklist text { fill: #333; }
 
-#peaklist line { stroke: #DDD; stroke-width: 1; fill: none; }
+#peaklist line { stroke: #E1E1E1; stroke-width: 1; fill: none; }
 
-#peaklist rect {
-  stroke: white;
-  fill: #008FD5;
-     }
+#peaklist rect { stroke: none; fill: #008FD5; }
+#peaklist g rect { fill: none; }
+#peaklist g rect.column { fill: #008FD5; }
+
+#peaklist .label { font-size: 11px; font-weight: 500; color: #DF2E30; }
 
 
 #peaklist rect.pane {
