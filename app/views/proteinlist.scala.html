@@ -1,4 +1,5 @@
 @(currentPage: com.avaje.ebean.Page[Proteins], currentSortBy: String, currentOrder: String, currentFilter: String)
+@import helper._
 
 @****************************************
 * Helper generating navigation links    *
@@ -75,7 +76,7 @@
             <thead>
                 <tr>
                     @header("name", "Name")
-                    @* @header("swissProt", "Swiss Prot") *@
+                    @header("", "Taxonomy") 
 		    @header("stproteins", "Glycan Structures")
 		    @header("proteinGeneralSites", "General")
                 </tr>
@@ -86,12 +87,15 @@
                     <tr>
 			<td>
 			@if(protein.swissProt == null) {
-			<a href="proteinsummary/@protein.name" style="text-decoration : none, font-color: #404040; ">@protein.name</a></td>
+			<a href="proteinsummary/@urlEncode(protein.name)" style="text-decoration : none, font-color: #404040; ">@protein.name</a></td>
 			}
 			@if(protein.swissProt != null) {
 			<a href="proteinsummary/@protein.swissProt" style="text-decoration : none, font-color: #404040; ">@protein.name</a></td>
 			}
-                        @* <td><a href="proteinsummary/@protein.name" style="text-decoration : none, font-color: #404040; ">@protein.swissProt</a></td> *@
+			<td>
+			@for(tax <- protein.proteinsTax) {
+                         <a href="taxonomysearch?taxonomy=@tax.species" style="text-decoration : none, font-color: #404040; ">@tax.species</a>
+			}</td> 
 			<td><a href="proteinsummary/@protein.name" style="text-decoration : none, font-color: #404040; ">@protein.stproteins.size()</a></td>	
 			<td><a href="proteinsummary/@protein.name" style="text-decoration : none, font-color: #404040; ">@* @if(protein.proteinGeneralSites.size() > 0) {<span class="label">Global</span> } *@ @if(protein.proteinDefinedSites.size() > 0 ) { <span class="label">Site Specific</span>}</a></td>
                     </tr>

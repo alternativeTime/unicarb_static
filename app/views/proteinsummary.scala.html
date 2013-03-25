@@ -14,7 +14,7 @@
     <div class="page-header row-fluid">
       <h1>Associated Structures</h1>
       <h4 class="subheader span8">Accession: 
-	@if(typeEntry.matches("not swiss prot")) {<a href="http://uniprot.org/uniprot/?query=@accession+AND+reviewed%3Ayes&sort=score">@accession </a><span class="pull-right"><a href="http://uniprot.org/uniprot/?query=@accession+AND+reviewed%3Ayes&sort=score"><span class='label label-light'>UniProt Entry</span></a></span> }
+	@if(typeEntry.matches("not swiss prot")) {<a href="http://uniprot.org/uniprot/?query=@accession+AND+reviewed%3Ayes&sort=score">@accession </a><span class="pull-right"><a href="http://uniprot.org/uniprot/?query=@accession+AND+reviewed%3Ayes&sort=score"><span class='label label-light'>UniProtKB/Swiss-Prot</span></a></span> }
      	@if(!typeEntry.matches("not swiss prot")) {<a href="http://uniprot.org/uniprot/@swissProtName">@accession </a><span class="pull-right"><a href="http://uniprot.org/uniprot/@accession"><span class='label label-light'>UniProt Entry</span></a></span> }
       </h4>
     </div>
@@ -30,7 +30,7 @@
         </div> 
 
         <div class='ptm-details'>
-	  <h3>UniProt PTM Description</h3>
+	  <h3>UniProtKB/Swiss-Prot PTM Description</h3>
 	    @for(uniprot <- uniprot) {
 		@if(uniprot.matches("No info")) {  <div class="alert alert-error">No UniProt PTM information available for this protein entry </div> }
 		@if(!uniprot.matches("No info")) {    
