@@ -68,7 +68,6 @@ public class Application extends Controller {
 		List<Biolsource> biolSourceProteins = null;
 		
 		if(protein.matches("[A-Z][0-9].*")) {
-			System.out.println("------>");
 			biolSourceProteins = Biolsource.findBiolSourceIdsUniProt(protein);
 		}
 		else{
@@ -81,10 +80,8 @@ public class Application extends Controller {
 		for(Biolsource biol : biolSourceProteins){
 			proteinName = biol.protein;
 			swissProtName = biol.swiss_prot;
-			System.out.println("what is broken here " + biol.id);
 			Biolsource objectBiolSource = Ebean.find(Biolsource.class, biol.id);
 			biolSourceProtein.add(objectBiolSource);
-		 	System.out.println("------> ------>" + proteinName);	
 			listSqlArray = Sourceref.findReferenceSource(biol.id);
 			for (com.avaje.ebean.SqlRow r : listSqlArray) {
 				Reference reference = Ebean.find(Reference.class, r.get("id").toString() );
@@ -499,9 +496,12 @@ public class Application extends Controller {
 		String taxon = taxonomy.species;
 		List<Biolsource> biolsource = Biolsource.findTaxonomyProtein(taxon);
 		List<com.avaje.ebean.SqlRow> listSql = Biolsource.findTaxonomyProteinSQL(taxon);
+		Object format = Cache.get("format");
+                String notation = "gs";
+                if(format != null) {notation = (String) format.toString();}
 		//return TODO;
 		return ok(
-			taxonDetails.render("Taxonomy Description", taxonomy, biolsource, listSql)
+			taxonDetails.render(notation, "Taxonomy Description", taxonomy, biolsource, listSql)
 			);
 	}
 	
@@ -516,10 +516,13 @@ public class Application extends Controller {
 			String taxon = taxonomy.species;
 			List<Biolsource> biolsource = Biolsource.findTaxonomyProtein(taxon);
 			List<SqlRow> listSql = Biolsource.findTaxonomyProteinSQL(taxon);
-			
+		
+			Object format = Cache.get("format");
+                	String notation = "gs";
+                	if(format != null) {notation = (String) format.toString();}	
 			//return TODO;
 			return ok(
-				taxonDetails.render("Taxonomy Description", taxonomy, biolsource, listSql));
+				taxonDetails.render(notation, "Taxonomy Description", taxonomy, biolsource, listSql));
 		}
 		else { return TODO;}
 	}

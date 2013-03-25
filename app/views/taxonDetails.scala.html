@@ -1,4 +1,4 @@
-@(message: String, taxon: Taxonomy, biolsource: List[Biolsource], groupTax: List[com.avaje.ebean.SqlRow] )
+@(notation: String, message: String, taxon: Taxonomy, biolsource: List[Biolsource], groupTax: List[com.avaje.ebean.SqlRow] )
 @import helper._
 
 @**********************************
@@ -23,9 +23,7 @@
       @for(s <- taxon.strtaxonomy ){
 
       <li class="span4">
-        <a href="@routes.Application.structureDetails(s.structure.id)" class="thumbnail">
-          <img src="../images/_@{s.structure.id}.png" alt="">
-        </a>
+	@views.html.format.structure(notation, s.structure.id)
       </li>
       }
     </ul>
@@ -59,18 +57,14 @@
     <ul class="structures clearfix">
       @for((s, i) <- taxon.strtaxonomy.zipWithIndex; if (i <=5) ){
         <li class="span5">
-          <a href="@routes.Application.structureDetails(s.structure.id)">
-            <img src="../images/_@{s.structure.id}.png" alt="">
-          </a>
+	  @views.html.format.structure(notation, s.structure.id)  
         </li>
       }
     </ul>
     <ul id='more-thumbnails' class='structures clearfix'>
       @for(s <- taxon.strtaxonomy ){
         <li class="span5">
-          <a href="@routes.Application.structureDetails(s.structure.id)">
-            <img src="../images/_@{s.structure.id}.png" alt="">
-          </a>
+ 	  @views.html.format.structure(notation, s.structure.id)
         </li>
       }
     </ul>
@@ -82,6 +76,9 @@
   </div>
 
   <div class="span4 sidebar">
+
+    @views.html.format.format()
+
     <div class="info">
       <h3>Glycan Structures</h3>
       <p>
