@@ -1011,7 +1011,7 @@ p.structures a, p.publications a, p.biological a { padding-left: 30px; height: 2
 
 .control-group .record { margin: 0 0 0 140px; padding: 6px 0 0 0; }
 
-#peaklist { margin: 0 0 0 0; padding: 20px; background: whiteSmoke; }
+#spectragraph { margin: 0 0 0 0; padding: 20px; background: whiteSmoke; }
 #peaklist text { fill: #333; }
 
 #peaklist line { stroke: #E1E1E1; stroke-width: 1; fill: none; }
