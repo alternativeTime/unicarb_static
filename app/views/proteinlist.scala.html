@@ -1,5 +1,6 @@
-@(currentPage: com.avaje.ebean.Page[Proteins], currentSortBy: String, currentOrder: String, currentFilter: String, proteins: List[Proteins])
+@(currentPage: com.avaje.ebean.Page[Proteins], currentSortBy: String, currentOrder: String, currentFilter: String, proteins: List[Proteins], filterYesNo: String)
 @import helper._
+
 
 @****************************************
 * Helper generating navigation links    *
@@ -72,7 +73,6 @@
     <div class="page-header row-fluid"> 
       <h1 id="homeTitle">@Messages(" Protein Search ", currentPage.getTotalRowCount)</h1>
       <h4 class="subheader">Search the curated collection of Protein data by name.</h4>
-	<p>@currentFilter</p>
     </div>
     @if(flash.containsKey("success")) {
         <div class="alert-message warning">
@@ -93,8 +93,9 @@
                   <form class="form-search" action="@link(0, "name")" method="GET">
                     <!--<h4>Protein Association</h4>-->
                     <div id="selection" class="row-fluid">
-                      <select  name="m" MULTIPLE id="e3" id="listBox" class="span10"></select>
-                      <button type="submit" class="btn btn-primary">Search</button>
+                      <select  name="m" MULTIPLE id="e3" id="listBox" class="span8"></select>
+			<input type="submit" id="searchsubmit" value="Filter" class="btn btn-primary">
+			<a class="btn success" id="add" href="/proteins">Show All Glycoproteins</a>
                     </div>
                   </form>
                 </label>
@@ -144,6 +145,7 @@
             </tbody>
         </table>
 
+	@if(filterYesNo.matches("no")) {
         <div id="pagination" class="pagination">
             <ul class="clearfix">
               @if(currentPage.hasPrev) {
@@ -151,7 +153,8 @@
               } else {
                 <li class="prev disabled"><a>&larr; Previous</a></li>
               }
-                <li class="current"><a>Displaying @currentPage.getDisplayXtoYofZ(" to "," of ")</a></li>
+                @* <li class="current"><a>Displaying @currentPage.getDisplayXtoYofZ(" to "," of ")</a></li> *@
+		<li class="current"><a>Displaying @(currentPage.getPageIndex()+1) of @currentPage.getTotalPageCount() Pages</a></li>
               @if(currentPage.hasNext) {
                 <li class="next"><a href="@link(currentPage.getPageIndex + 1, null)">Next &rarr;</a></li>
               } else {
@@ -159,6 +162,15 @@
               }
             </ul>
         </div>
+	}
+	@if(filterYesNo.matches("yes")){
+	<div id="pagination" class="pagination">
+            <ul class="clearfix">
+		<li class="disabled"><a href="">Displaying All Results</a></li>
+	    </ul>
+        </div>
+	}
+
       </div>
     
       @views.html.footerunicarb.footerunicarb()    

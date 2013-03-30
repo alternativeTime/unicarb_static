@@ -83,10 +83,8 @@ public class Proteins extends Model {
 
     public static Page<Proteins> proteinpagerefine(int page, int pageSize, String sortBy, String order, String filter) {
 
-	String sql = "select id, name, swiss_prot, description from proteins where (lower(swiss_prot) like '%testing this%'  or lower(name) like '%%' ) order by name"; // limit 11 offset 530";
-
 	RawSql rawsql = RawSqlBuilder.parse(filter).create();
-
+	System.out.println("fiter" + filter);
         com.avaje.ebean.Query<Proteins> query = Ebean.find(Proteins.class);
 	query.setRawSql(rawsql); 
 
@@ -95,21 +93,8 @@ public class Proteins extends Model {
 
 	Page<Proteins> page2 = pagingList.getPage(page);
 
-	System.out.println("come on ---- ++++ " );
-	//List<Proteins> list2 = page2.getList();
-
 	return page2;
 
-	//SqlQuery sqlQuery = Ebean.createSqlQuery(sql);
-	//Page<Proteins> pagex = sqlQuery.findPagingList(11);
-
-        /*return
-            find.where()
-                .ilike("swissProt", "%" + filter + "%")
-                filter 
-                .orderBy(sortBy + " " + order)
-                .findPagingList(pageSize)
-                .getPage(page); */
     }
 
     public static List proteinList() {
