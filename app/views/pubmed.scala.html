@@ -1,0 +1,176 @@
+@(p: String, method: List[Method], tissue: List[TissueTaxonomy], disease: List[Disease])
+@main{
+
+<script src="@routes.Assets.at("/public","javascripts/Biojs.js")"></script>
+<script src="@routes.Assets.at("/public","javascripts/Biojs.Sequence.js")"></script>
+<script src="@routes.Assets.at("/public","javascripts/Biojs.EbiGlobalSearch.js")"></script>
+
+<link rel="stylesheet" href="//www.ebi.ac.uk/web_guidelines/css/compliance/develop/ebi-visual.css" type="text/css" />
+<link rel="stylesheet" href="http://www.ebi.ac.uk/Tools/biojs/css/Biojs.EbiGlobalSearch.css" type="text/css">
+
+<script>
+      $(document).ready(function(){
+        $("#e1").select2({
+          placeholder: "Select multiple tissues...",
+          allowClear: true,
+        minimumInputLength: 1,
+        });
+        });
+</script>
+<script>
+      $(document).ready(function(){
+        $("#e2").select2({
+          placeholder: "Select multiple disease states... ",
+          allowClear: true,
+          minimumInputLength: 1,
+        });
+        });
+</script>
+
+<script>
+        $(function() {
+        var myArray = new Array();
+        @for(a <- tissue){
+                myArray.push("@a.tissue_taxon");
+        }
+        myArray.sort();
+        options = '';
+        for (var i = 0; i < myArray.length; i++) {
+                options += '<option value="' + myArray[i] + '">' + myArray[i] + '</option>';
+        }
+        $('#e1').html(options);
+        });
+</script>
+
+<script>
+        $(function() {
+        var myArray = new Array();
+        @for(a <- disease){
+                myArray.push("@a.disease_name");
+        }
+        myArray.sort();
+        options = '';
+        for (var i = 0; i < myArray.length; i++) {
+                options += '<option value="' + myArray[i] + '">' + myArray[i] + '</option>';
+        }
+        $('#e2').html(options);
+        });
+</script>
+
+
+<script>
+	var textfront = "front-";
+
+    var textend = "-back";
+    var pubmedid = "";
+
+	
+
+    $(document).ready(function() {
+
+        $('.update').click(
+            function (){pubmed(); }
+        );
+        $('.clear').click(
+              function (){clear(); }
+        );
+        
+    });
+
+    function update()
+    {
+        //$('div.update-here').html(textfront+$('.update-it input').val()+textend);
+	console.log("hello" + $('.update-it input').val()  );
+	var pubmedid = $('.update-it input').val();
+	var xx = String($('.update-it input').val());
+    }
+    function clear()
+    {
+        $('div.update-here').html($(''));
+    }
+
+
+	function pubmed() {
+		console.log("check id entered only: " + $('.update-it input').val()  );
+		var pubmedid = $('.update-it input').val();
+		document.getElementById('pubmedresult').value=pubmedid;
+		
+	        args = {'apikey'  : '191d24f81e61c107bca103f7d6a9ca10',
+	                'dbfrom'  : 'pubmed',
+	                'id'      : pubmedid,
+	                'db'      : 'pubmed',
+	                'mindate' : '1990',
+	                'datetype': 'pdat',
+	                'max'     : '1'}
+
+	        $.getJSON('http://entrezajax.appspot.com/elink+esummary?callback=?', args, function(data) {                $('#result').html('');
+	                $.each(data.result, function(i, item) {
+	                        var author_list = '';
+	                        for(var i = 0; i < item.AuthorList.length; i ++) {
+	                                if(i != 0) {
+	                                        author_list += ', ';
+	                                }
+	                                author_list += item.AuthorList[i];
+	                        }
+	                        var html = '<p><a href=\'http://www.ncbi.nlm.nih.gov/pubmed/' + item.ArticleIds.pubmed + '\'>' + item.Title + '</a><br/>' + author_list + '<br/>' + item.FullJournalName + ' ' + item.PubDate + '</p>';
+	                        $("<div/>").html(html).appendTo('#result');
+	                });
+	        });
+	};
+
+</script>
+
+
+<h1>Data Submission</h1>
+
+<div class="update-it">
+  <p>Find details associated with a Pubmed unique identifier:</p> 
+  <input type="text" name="update" />
+   <button type="button" class="update btn btn-primary" data-loading-text="Loading..." value="update">Load Pubmed Id</button>
+   @* <input class="clear" type="button" value="clear" /> *@
+  
+</div>
+
+<div class="update-here">
+</div>
+
+<div>
+<div id="result">
+  Contacting NCBI Entrez ...
+</div>
+
+<h3>Selected (multiple) reported method(s)</h3>
+
+<form>
+
+<select name="method" multiple size="10">
+	@for(m <- method) {
+	  	<option value="@m.id">@m.description</option>
+}
+</select>
+<p><--- Add New ---></p>
+
+UniProt ID: <input type="text" id="uniprotid" name="uniprot">
+<input type="hidden" id="pubmedresult" value=""/>
+
+<div id="selection" class="row-fluid">
+    <select  name=tissue MULTIPLE id="e1" id="listBox" class="span10"></select>
+    <button type="submit" class="btn btn-primary">Search</button>
+</div>
+
+<div id="selection" class="row-fluid">
+                      <select  name=tissue MULTIPLE id="e2" id="listBox" class="span10"></select>
+                      <button type="submit" class="btn btn-primary">Search</button>
+</div>
+
+
+
+</form>
+
+</div>
+
+@*
+@views.html.pubmedsearch.pubmed2("pubmed")
+*@
+
+}
