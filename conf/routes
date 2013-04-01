@@ -2,6 +2,10 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
+# Authentication
+GET     /login                 controllers.Application.login()
+POST    /login                 controllers.Application.authenticate()
+
 # Default path will just redirect to the computer list
 GET  /                         controllers.Application.index()
 GET  /about                    controllers.Admin.about()
@@ -37,10 +41,12 @@ GET  /compositions             controllers.Application.compositions()
 
 GET  /format/:s		       controllers.Application.format(s: String)
 
-GET  /login                    controllers.Application.login()
 GET  /workflows                controllers.Application.workflows()
 
 GET  /massspec                controllers.Application.massspec()
+
+GET  /pubmed		       controllers.Pubmed.getpubmed()
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET  /assets/*file             controllers.Assets.at(path="/public", file)
