@@ -27,7 +27,7 @@
   </div>
 
   <div class='row-fluid'>
-    <form class="form-horizontal" accept-charset="UTF-8" action="/users/sign_in" method="post" novalidate="novalidate"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="vg7ZWYEjJd7R3fPCfs6RRWUCJxW1iPBJFeldLbpa8VI=" /></div>
+	<div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="vg7ZWYEjJd7R3fPCfs6RRWUCJxW1iPBJFeldLbpa8VI=" /></div>
 
       <div class='control-group'>
         <label class='control-label' for='user_email'>Email:</label>
@@ -42,16 +42,15 @@
         </div>
       </div>
       <div class='control-group'>
-        <div class='pre'>
+        @* <div class='pre'>
           <a href='/user/sign_up' class='btn'>Sign Up</a>
-        </div>
+        </div> *@
         <div class='controls'>
 	  <button type="submit">Login</button>
+	  <input class="btn btn-primary" name="commit" type="submit" value="Log in">
           <a href='/user/password/new' class='btn'>Forgot your password?</a>
         </div>
       </div>
-
-    </form>
 
 
   </div><!-- /col -->
