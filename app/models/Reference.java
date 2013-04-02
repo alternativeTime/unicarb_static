@@ -44,6 +44,9 @@ public class Reference extends Model {
 
     @OneToMany
     public List<Refmethod> refmethod;
+
+    @OneToMany
+    public List<Ftmerge> ftmerge;
     
      public Reference(String volume, String pages, String medline, String title, String authors, String first, Journal journal) {
         this.first = first;

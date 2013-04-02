@@ -262,5 +262,21 @@ public class UniprotConnection extends Controller {
                 );
     	}
 
+	public static Result swissprotFT( String ft) {
+		HashSet<Reference> references = new HashSet<Reference>();
+
+		System.out.println("swissprot ft check " + ft);
+		List<Ftmerge> fts = null;
+		fts = Ftmerge.findFt(ft);
+		for(Ftmerge f : fts ) {
+			System.out.println("jsjsjsjsj " + f.reference.id);
+			Long refid = f.reference.id;
+			Reference reference = Ebean.find(Reference.class, refid);
+			references.add(reference);
+		}
+		
+	return ok(swissprotFT.render(references, ft));
+	}
+
 	
 }
