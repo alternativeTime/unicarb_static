@@ -1,5 +1,47 @@
 @(notation: String, proteinName: String, accession: String, biol: ArrayList[Biolsource], protein: List[Proteins], uniprot: List[String], gssites: List[GsProteinStr2], source: HashSet[Reference], description: List[SitesReferences], sequence: String, proteinMultiple: List[Proteins], generalSites: List[GeneralSites], definedSites: List[DefinedSites], typeEntry: String, swissProtName: String)
 
+<script language="JavaScript" type="text/javascript" src="http://www.ebi.ac.uk/Tools/biojs/registry/src/Biojs.DasProteinFeatureViewer.js"></script>
+<script language="JavaScript" type="text/javascript" src="http://www.ebi.ac.uk/Tools/biojs/registry/src/Biojs.js"></script>
+<script language="JavaScript" type="text/javascript" src="http://www.ebi.ac.uk/Tools/biojs/registry/src/Biojs.FeatureViewer.js"></script>
+<script language="JavaScript" type="text/javascript" src="http://www.ebi.ac.uk/Tools/biojs/registry/src/Biojs.DasProteinFeatureViewer.js"></script>
+
+<script language="JavaScript" type="text/javascript" src="http://www.ebi.ac.uk/Tools/biojs/biojs/dependencies/jquery/jquery-1.4.2.min.js">
+<script language="JavaScript" type="text/javascript" src="http://www.ebi.ac.uk/Tools/biojs/biojs/dependencies/jquery/jquery.tooltip.js"></script>
+<script language="JavaScript" type="text/javascript" src="http://www.ebi.ac.uk/Tools/biojs/biojs/dependencies/jquery/jquery.bgiframe.js"></script>
+<script language="JavaScript" type="text/javascript" src="http://www.ebi.ac.uk/Tools/biojs/biojs/dependencies/jquery/jquery.delegate.js"></script>
+<script language="JavaScript" type="text/javascript" src="http://www.ebi.ac.uk/Tools/biojs/biojs/dependencies/jquery/jquery.dimensions.min.js"></script>
+<script language="JavaScript" type="text/javascript" src="http://www.ebi.ac.uk/Tools/biojs/biojs/dependencies/jquery/jquery.url.js"></script>
+<script language="JavaScript" type="text/javascript" src="http://www.ebi.ac.uk/Tools/biojs/biojs/dependencies/graphics/raphael.js"></script>
+<script language="JavaScript" type="text/javascript" src="http://www.ebi.ac.uk/Tools/biojs/biojs/dependencies/graphics/canvg.js"></script>
+<script language="JavaScript" type="text/javascript" src="http://www.ebi.ac.uk/Tools/biojs/biojs/dependencies/graphics/rgbcolor.js"></script>
+<script src="http://www.ebi.ac.uk/Tools/biojs/biojs/dependencies/jquery/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script>
+<script language="JavaScript" type="text/javascript" src="http://www.ebi.ac.uk/Tools/biojs/biojs/dependencies/jquery/jquery-1.4.2.min.js"></script>
+<script language="JavaScript" type="text/javascript" src="http://www.ebi.ac.uk/Tools/biojs/biojs/dependencies/jquery/jquery.tooltip.js"></script>
+<script language="JavaScript" type="text/javascript" src="http://www.ebi.ac.uk/Tools/biojs/biojs/dependencies/jquery/jquery.bgiframe.js"></script>
+<script language="JavaScript" type="text/javascript" src="http://www.ebi.ac.uk/Tools/biojs/biojs/dependencies/jquery/jquery.delegate.js"></script>
+<script language="JavaScript" type="text/javascript" src="http://www.ebi.ac.uk/Tools/biojs/biojs/dependencies/jquery/jquery.dimensions.min.js"></script>
+<script language="JavaScript" type="text/javascript" src="http://www.ebi.ac.uk/Tools/biojs/biojs/dependencies/jquery/jquery.url.js"></script>
+<script language="JavaScript" type="text/javascript" src="http://www.ebi.ac.uk/Tools/biojs/biojs/dependencies/graphics/raphael.js"></script>
+<script language="JavaScript" type="text/javascript" src="http://www.ebi.ac.uk/Tools/biojs/biojs/dependencies/graphics/canvg.js"></script>
+<script language="JavaScript" type="text/javascript" src="http://www.ebi.ac.uk/Tools/biojs/biojs/dependencies/graphics/rgbcolor.js"></script>
+<script src="http://www.ebi.ac.uk/Tools/biojs/biojs/dependencies/jquery/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="http://www.ebi.ac.uk/Tools/biojs/biojs/dependencies/jquery/jquery.tooltip.css"/>
+<link rel="stylesheet" href="http://www.ebi.ac.uk/Tools/biojs/biojs/dependencies/jquery/jquery-ui-1.8.2.css">
+<link rel="stylesheet" href="http://www.ebi.ac.uk/Tools/biojs/biojs/dependencies/jquery/jquery.tooltip.css">
+<link rel="stylesheet" href="http://www.ebi.ac.uk/Tools/biojs/biojs/dependencies/jquery/jquery-ui-1.8.2.css">
+
+<script language="JavaScript" type=text/javascript">
+window.onload = function() {
+var myPainter = new Biojs.DasProteinFeatureViewer({
+   target: "YourOwnDivId",
+   segment: "a4_human"
+});
+ 
+};
+</script>
+
+
 @main {
 
 
@@ -28,6 +70,9 @@
           </div>
 	  *@
         </div> 
+
+	<div id="YourOwnDivId" />
+
 
         <div class='ptm-details'>
 	  <h3>UniProtKB/Swiss-Prot PTM Description</h3>

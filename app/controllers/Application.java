@@ -460,6 +460,7 @@ public class Application extends Controller {
 
     @Security.Authenticated(Secured.class)
     public static Result massspec() {
+	System.out.println("message " + request().username() );
       return ok ( mass_spec.render() );
     }
 

@@ -5,6 +5,7 @@
 # Authentication
 GET     /login                 controllers.Application.login()
 POST    /login                 controllers.Application.authenticate()
+GET     /logout                controllers.Application.logout()
 
 # Default path will just redirect to the computer list
 GET  /                         controllers.Application.index()
@@ -38,6 +39,8 @@ GET  /proteinsite              controllers.UniprotConnection.proteinsite()
 
 GET  /taxonomysearch           controllers.Application.taxonsearch(taxonomy ?= "")
 GET  /compositions             controllers.Application.compositions()
+
+GET  /swissprotFT	       controllers.UniprotConnection.swissprotFT(feature ?= "")
 
 GET  /format/:s		       controllers.Application.format(s: String)
 
