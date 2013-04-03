@@ -88,18 +88,13 @@
             <a class="btn" id="add" href="/proteins">Show All Proteins</a>
         </form> *@
     
-	 <div id="test"  class="controls">
-                <label class="checkbox">
-                  <form class="form-search" action="@link(0, "name")" method="GET">
-                    <!--<h4>Protein Association</h4>-->
-                    <div id="selection" class="row-fluid">
-                      <select  name="m" MULTIPLE id="e3" id="listBox" class="span8"></select>
-			<input type="submit" id="searchsubmit" value="Filter" class="btn btn-primary">
-			<a class="btn success" id="add" href="/proteins">Show All Glycoproteins</a>
-                    </div>
-                  </form>
-                </label>
-              </div>
+        <div id='test'  class="input-append controls">
+          <form class='form-search' action="@link(0, "name")" method="GET">
+            <select  name="m" MULTIPLE id="e3" id="listBox" class="input-xxlarge"></select>
+            <input type="submit" id="searchsubmit" value="Filter" class="btn btn-primary">
+            <a class="btn success" id="add" href="/proteins">Show All Glycoproteins</a>
+          </form>
+        </div>
 
     
     </div>
@@ -134,11 +129,12 @@
 			<a href="proteinsummary/@protein.swissProt" style="text-decoration : none, font-color: #404040; ">@protein.name</a></td>
 			}
 			<td>
-			@for(tax <- protein.proteinsTax) {
-                         <a href="taxonomysearch?taxonomy=@tax.species" style="text-decoration : none, font-color: #404040; ">@tax.species</a>
-			}</td> 
+        @for(tax <- protein.proteinsTax) {
+          <a href="taxonomysearch?taxonomy=@tax.species" style="text-decoration : none, font-color: #404040; ">@tax.species</a>
+        }
+      </td> 
 			<td><a href="proteinsummary/@protein.name" style="text-decoration : none, font-color: #404040; ">@protein.stproteins.size()</a></td>	
-			<td><a href="proteinsummary/@protein.name" style="text-decoration : none, font-color: #404040; ">@* @if(protein.proteinGeneralSites.size() > 0) {<span class="label">Global</span> } *@ @if(protein.proteinDefinedSites.size() > 0 ) { <span class="label">Site Specific</span>}</a></td>
+      <td><a href="proteinsummary/@protein.name" style="text-decoration : none, font-color: #404040; ">@if(protein.proteinDefinedSites.size() > 0 ) { <span class="label">Site Specific</span>}</a></td>
                     </tr>
                 }
 

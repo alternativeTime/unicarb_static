@@ -5,8 +5,10 @@
 <script src="@routes.Assets.at("/public","javascripts/Biojs.Sequence.js")"></script>
 <script src="@routes.Assets.at("/public","javascripts/Biojs.EbiGlobalSearch.js")"></script>
 
+@*
 <link rel="stylesheet" href="//www.ebi.ac.uk/web_guidelines/css/compliance/develop/ebi-visual.css" type="text/css" />
 <link rel="stylesheet" href="http://www.ebi.ac.uk/Tools/biojs/css/Biojs.EbiGlobalSearch.css" type="text/css">
+*@
 
 <script>
       $(document).ready(function(){
@@ -121,56 +123,100 @@
 </script>
 
 
-<h1>Data Submission</h1>
-
-<div class="update-it">
-  <p>Find details associated with a Pubmed unique identifier:</p> 
-  <input type="text" name="update" />
-   <button type="button" class="update btn btn-primary" data-loading-text="Loading..." value="update">Load Pubmed Id</button>
-   @* <input class="clear" type="button" value="clear" /> *@
-  
-</div>
-
-<div class="update-here">
-</div>
-
-<div>
-<div id="result">
-  Contacting NCBI Entrez ...
-</div>
-
-<h3>Selected (multiple) reported method(s)</h3>
-
-<form>
-
-<select name="method" multiple size="10">
-	@for(m <- method) {
-	  	<option value="@m.id">@m.description</option>
-}
-</select>
-<p><--- Add New ---></p>
-
-UniProt ID: <input type="text" id="uniprotid" name="uniprot">
-<input type="hidden" id="pubmedresult" value=""/>
-
-<div id="selection" class="row-fluid">
-    <select  name=tissue MULTIPLE id="e1" id="listBox" class="span10"></select>
-    <button type="submit" class="btn btn-primary">Search</button>
-</div>
-
-<div id="selection" class="row-fluid">
-                      <select  name=tissue MULTIPLE id="e2" id="listBox" class="span10"></select>
-                      <button type="submit" class="btn btn-primary">Search</button>
-</div>
-
-
-
-</form>
-
-</div>
-
 @*
 @views.html.pubmedsearch.pubmed2("pubmed")
 *@
+
+
+<ul class="breadcrumb">
+  <li><i class="icon-home" ></i><a href="/"> UniCarbKB</a> <span class="divider">></span></li>
+  <li class="active"><i class="icon-briefcase" ></i> Data Entry<span class="divider"></span></li>
+</ul>
+
+<section id="layouts" class="browse">
+  <div class="page-header row-fluid">
+    <h1>Data Submission</h1>
+    <h4 class="subheader">UnicarbKB Mass Spec details.</h4>
+  </div>
+
+  <div class="row-fluid">
+    <div class="span4 search">
+      <div class="row-fluid">
+        <div class="filterbar tabbable clearfix">
+          <ul class="nav nav-tabs" id="myTabBar">
+            <li id='workflow1-toggle' class='active'><a href='#workflow1' data-toggle="tab">Pubmed ID<span class="pull-right count"></span></a></li>
+            <li id='workflow2-toggle'><a href='#workflow2' data-toggle="tab">Method</a></li>
+            <li id='workflow3-toggle'><a href='#workflow3' data-toggle="tab">UniProt<span class="pull-right count"></span></a></li>
+          </ul>
+        </div>
+        <div class='info'>
+          <h3>Mass Spec Details</h3>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="span8 rightpanel">
+
+
+      <div class='tab-content span12'>
+
+        <div id="workflow1" class="tab-pane active control-group glycosuitedb">
+          <h3>Find details associated with a Pubmed unique identifier:</h3> 
+          <input type="text" name="update" />
+          <button type="button" class="update btn btn-primary" data-loading-text="Loading..." value="update">Load Pubmed Id</button>
+          @* <input class="clear" type="button" value="clear" /> *@
+          <div id="result">
+            Contacting NCBI Entrez ...
+          </div>
+
+        </div> @* end filter1 *@
+
+        <div id="workflow2" class="tab-pane control-group row-fluid eurocarb">
+          <form>
+            <select name="method" multiple size="10">
+              @for(m <- method) { <option value="@m.id">@m.description</option> }
+            </select>
+        </div> @* end of filter2 *@
+
+        <div id="workflow3" class="tab-pane control-group nextprot">
+
+            <p><--- Add New ---></p>
+
+            UniProt ID: <input type="text" id="uniprotid" name="uniprot">
+            <input type="hidden" id="pubmedresult" value=""/>
+
+            <div id="selection" class="row-fluid">
+              <select  name=tissue MULTIPLE id="e1" id="listBox" class="span10"></select>
+              <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+
+            <div id="selection" class="row-fluid">
+              <select  name=tissue MULTIPLE id="e2" id="listBox" class="span10"></select>
+              <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+
+          </form>
+
+        </div> @* end of filter3 *@
+
+      </div>
+
+    </div>
+  </div>
+</div><!-- /col -->
+</div><!-- /row -->
+<div class="footer row-fluid">
+  <div class="span12">
+    <p class="pull-left">UniCarbKB</p>
+    <p class="pull-right">Supported by 
+      <a href="http://www.nectar.org.au">NeCTAR</a> &nbsp;|&nbsp; 
+      <a href="http://www.ands.org.au">ANDS</a> &nbsp;|&nbsp;
+      <a href="http://www.stint.se"> STINT</a> &nbsp;|&nbsp;
+      <a href="http://expasy.org/"> SIB ExPASy</a>
+    </p>
+  </div>
+</div>
+</section>
 
 }

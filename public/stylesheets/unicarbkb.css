@@ -500,6 +500,7 @@ table .header::after {
 ////////////////////////////////////////////////////////////////////////////////////////////////*/
 
 .footer { margin-top: 60px; }
+.twitter-follow-button { margin: 0 0 -5px 0; }
 
 /* !LAYOUT - !SIDEBAR //////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -904,6 +905,28 @@ span#more-structures { cursor: pointer; }
 /* !LAYOUT - !PROTEIN SUMMARY //////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+#test { font-size: 0; }
+#test .select2-container, #selection .select2-container { font-size: 14px; }
+
+#test .select2-choices, #selection .select2-choices { 
+  -webkit-border-radius: 4px 0 0 0px;
+  -moz-border-radius: 4px 0 0 0px;
+  border-radius: 4px 0 0 0px;
+}
+
+#test .select2-input, #selection .select2-input { 
+  height: 20px;
+  margin: 0;
+  padding: 4px 6px;
+}
+
+#selection button:last-child { 
+  -webkit-border-radius: 0 4px 4px 0;
+  -moz-border-radius: 0 4px 4px 0;
+  border-radius: 0 4px 4px 0;
+}
+
 
 .history label, .name label { text-align: left; }
 
