@@ -43,6 +43,9 @@ public class Structure extends Model {
     @OneToMany
     public List<Stsource> stsource;
 
+    @OneToMany
+    public List<Pubchem> pubchem;
+
 
      public Structure(String glycanst, String aminolink, String core, String type, String antigenic, String lectin, String endoglycosidase, String link, String compositionId) {
         this.compositionId = compositionId;
