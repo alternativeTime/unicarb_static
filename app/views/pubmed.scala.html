@@ -159,13 +159,25 @@
     <div class="span8 rightpanel">
 
 
+
+
+
+
       <div class='tab-content span12'>
 
-        <div id="workflow1" class="tab-pane active control-group glycosuitedb">
+        <div id="workflow1" class="tab-pane active control-group glycosuitedb update-it">
+
           <h3>Find details associated with a Pubmed unique identifier:</h3> 
-          <input type="text" name="update" />
-          <button type="button" class="update btn btn-primary" data-loading-text="Loading..." value="update">Load Pubmed Id</button>
+          <div class='input-append'>
+            <input class='input-xlarge' type="text" name="update" />
+            <button type="button" class="update btn btn-primary" data-loading-text="Loading..." value="update">Load Pubmed Id</button>
+          </div>
+
           @* <input class="clear" type="button" value="clear" /> *@
+
+          <div class="update-here">
+          </div>
+
           <div id="result">
             Contacting NCBI Entrez ...
           </div>
@@ -173,14 +185,11 @@
         </div> @* end filter1 *@
 
         <div id="workflow2" class="tab-pane control-group row-fluid eurocarb">
+          <h3>Selected (multiple) reported method(s)</h3>
           <form>
             <select name="method" multiple size="10">
               @for(m <- method) { <option value="@m.id">@m.description</option> }
             </select>
-        </div> @* end of filter2 *@
-
-        <div id="workflow3" class="tab-pane control-group nextprot">
-
             <p><--- Add New ---></p>
 
             UniProt ID: <input type="text" id="uniprotid" name="uniprot">
@@ -197,6 +206,10 @@
             </div>
 
           </form>
+        </div> @* end of filter2 *@
+
+        <div id="workflow3" class="tab-pane control-group nextprot">
+
 
         </div> @* end of filter3 *@
 
