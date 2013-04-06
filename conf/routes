@@ -34,7 +34,7 @@ GET  /browse                   controllers.Application.browse()
 GET  /proteins                 controllers.ProteinDetails.proteinlist(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "", protein ?= "")
 GET  /proteinsummary/:s        controllers.Application.proteinsummary(s: String)
 GET  /proteinsummary/:s        controllers.Application.proteinsummary(s: String)
-GET  /proteinsummary           controllers.Application.browse()
+#GET  /proteinsummary           controllers.Application.browse()
 GET  /proteinsite              controllers.UniprotConnection.proteinsite()
 
 GET  /taxonomysearch           controllers.Application.taxonsearch(taxonomy ?= "")

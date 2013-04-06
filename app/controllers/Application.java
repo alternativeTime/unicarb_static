@@ -165,9 +165,8 @@ public class Application extends Controller {
 		return ok(compositions.render(compositionResult));
 	}
 
-	@Cached(key = "browse", duration = 86400)
 	public static Result browse() {
-		Cache.set("item.key", "testing", 0);
+		//Cache.set("item.key", "testing", 0);
 		List<String> taxonomy  = Taxonomy.findSpecies(); 
 		HashSet taxUnique = Taxonomy.findSpeciesUnique();
 		
