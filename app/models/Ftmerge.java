@@ -19,6 +19,8 @@ public class Ftmerge extends Model {
     public Long id;
     public String glycodb_no;
     public String ft;
+    public String amino_acid;
+    public String swiss_prot;
 
     @ManyToOne
     public Reference reference;
