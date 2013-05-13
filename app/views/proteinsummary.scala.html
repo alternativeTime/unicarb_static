@@ -1,4 +1,4 @@
-@(notation: String, proteinName: String, accession: String, biol: ArrayList[Biolsource], protein: List[Proteins], uniprot: List[String], gssites: List[GsProteinStr2], source: HashSet[Reference], description: List[SitesReferences], sequence: String, proteinMultiple: List[Proteins], generalSites: List[GeneralSites], definedSites: List[DefinedSites], typeEntry: String, swissProtName: String)
+@(notation: String, proteinName: String, accession: String, biol: ArrayList[Biolsource], protein: List[Proteins], uniprot: List[String], gssites: List[GsProteinStr2], source: HashSet[Reference], description: List[SitesReferences], sequence: String, proteinMultiple: List[Proteins], generalSites: List[GeneralSites], definedSites: List[DefinedSites], typeEntry: String, swissProtName: String, proteinsource: List[Proteinsource])
 
 
 @main {
@@ -165,10 +165,27 @@
 	@if(sequence.length > 1) {
         <div class="info">
           <h3>Sequence</h3>
-	  <div class="sequence">
+	  		<div class="sequence">
             @sequence
-          </div>
+          	</div>
         </div>}
+        
+        <div class="info">
+      		<div class='info'>
+        	<h3>Biological Associations</h4>
+        	<div class='source'>
+          	<a id='toggle-source'><span class='label label-success'><span class='icon-leaf icon-white'></span> Taxonomy (@proteinsource.size()) <span class="caret"></span></span></a>
+            </div>
+        <div>
+          <ul id='more-source'>
+            <h3 id='less-source'><span class='icon-tags icon-white'></span> Taxonomies</h3>
+            @for(p <- proteinsource){
+            <li><span class='icon-tag icon-white'></span> @p.species @p.system </li>
+            }
+          </ul>   
+        </div>
+      	</div>
+     
 
         <div class="info">
           <h3>References @if(source.size() > 5) {showing top 5} <span class="label label-notice" style="font-size:16px">@source.size()</span> </h3>
