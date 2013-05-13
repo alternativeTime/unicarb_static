@@ -44,8 +44,6 @@ public class Application extends Controller {
 	
 	public static Result proteinsummary(String protein) {	
 
-			
-
 		List<com.avaje.ebean.SqlRow> listSql = null;
 		List<com.avaje.ebean.SqlRow> listSqlArray = null; // = new List<com.avaje.ebean.SqlRow>();
 	        
@@ -132,13 +130,15 @@ public class Application extends Controller {
 			uniprotDetails.add("No info");
 		}
 		
+		List<Proteinsource> proteinsource = Proteinsource.findProteinsource(protein);
+		
 		Object format = Cache.get("format");	
 		String notation = "gs";
 		if(format != null) {notation = (String) format.toString();}	
 
 		
 		return ok(
-			proteinsummary.render(notation, proteinName, protein, biolSourceProtein, proteins, uniprotDetails, gsProteinSite, referencesU, description, sequenceRetrieval, proteinMultiple, generalSites, definedSites, typeProteinEntry, swissProtName)
+			proteinsummary.render(notation, proteinName, protein, biolSourceProtein, proteins, uniprotDetails, gsProteinSite, referencesU, description, sequenceRetrieval, proteinMultiple, generalSites, definedSites, typeProteinEntry, swissProtName, proteinsource)
 			);
 		
 	}
