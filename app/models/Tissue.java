@@ -25,6 +25,9 @@ public class Tissue extends Model {
 
     @OneToMany
     public List<Stsource> stsource;
+    
+    @OneToMany
+    public List<Proteinsource> taxproteinsource;
 
 
     public static Model.Finder<Long,Tissue> find = new Model.Finder<Long,Tissue>(Long.class, Tissue.class);

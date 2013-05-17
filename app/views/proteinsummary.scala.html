@@ -180,7 +180,7 @@
           <ul id='more-source'>
             <h3 id='less-source'><span class='icon-tags icon-white'></span> Taxonomies</h3>
             @for(p <- proteinsource){
-            <li><span class='icon-tag icon-white'></span> @p.species @p.system </li>
+            <li><span class='icon-tag icon-white'></span> <a href="/taxonomy/@p.taxonomy.id">@p.species</a> &gt; <a href="/tissuesummary/@p.tissue.id">@p.system</a> </li>
             }
           </ul>   
         </div>

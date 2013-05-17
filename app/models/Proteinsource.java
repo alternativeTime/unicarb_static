@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import play.db.ebean.Model;
 
@@ -28,6 +29,13 @@ public class Proteinsource extends Model {
     public String div2;
     public String div3;
     public String div4;
+    
+    @ManyToOne
+    public Taxonomy taxonomy;
+    
+    @ManyToOne
+    public Tissue tissue;
+    
     
     public static Model.Finder<Long,Proteinsource> find = new Model.Finder<Long,Proteinsource>(Long.class, Proteinsource.class);
 

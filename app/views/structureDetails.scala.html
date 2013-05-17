@@ -1,4 +1,4 @@
-@(notation: String, references: List[Structure], structureId: Long, proteinNames: ArrayList[String], proteinItems: ArrayList[Proteins], sourceNames: ArrayList[String], sourceItems: ArrayList[Tissue], test: List[Array[String]], uniprot: ArrayList[String], taxItems: ArrayList[Taxonomy], taxNames: ArrayList[String])
+@(strcomp: List[Structure], notation: String, references: List[Structure], structureId: Long, proteinNames: ArrayList[String], proteinItems: ArrayList[Proteins], sourceNames: ArrayList[String], sourceItems: ArrayList[Tissue], test: List[Array[String]], uniprot: ArrayList[String], taxItems: ArrayList[Taxonomy], taxNames: ArrayList[String])
 @import helper._
 
 @**********************************
@@ -74,6 +74,16 @@
     <div class="span4 sidebar">
 
       @views.html.format.format()
+      	
+      <div class='info'>
+      	<h3>Mass Details</h3>
+      	@for(c <- strcomp) {
+      		@for(c <- c.strcomposition) {
+      		<p>Average mass: @c.glycan_mass </p>
+      		<p>Monoisotopic mass: @c.glycan_mass_monoisotopic</p>
+      		}
+      	}
+      </div>
 
       <div class='info'>
         <h3>Biological Associations</h4>

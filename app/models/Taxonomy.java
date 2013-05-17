@@ -26,7 +26,10 @@ public class Taxonomy extends Model {
 
     @OneToMany
     public List<Taxprotein> taxprotein;
-
+    
+    @OneToMany
+    public List<Proteinsource> taxproteinsource;
+    
     public static Model.Finder<Long,Taxonomy> find = new Model.Finder<Long,Taxonomy>(Long.class, Taxonomy.class);
 
     
