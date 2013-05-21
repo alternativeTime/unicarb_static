@@ -593,8 +593,28 @@ public class Application extends Controller {
 			databaseReference = t.div1 + t.div2 + t.div3 + t.div4;
 		}
 
+		ArrayList taxNames = new ArrayList();
+		ArrayList taxItems = new ArrayList();
+		ArrayList taxIds = new ArrayList();
+		ArrayList proteinNames = new ArrayList();
+		ArrayList proteinIds = new ArrayList();
+		ArrayList proteinItems = new ArrayList();
+		ArrayList sourceNames = new ArrayList();
+		ArrayList sourceItems = new ArrayList();
+
+    Taxonomy taxonomy  = Taxonomy.find.byId(id);
+		String taxon = taxonomy.species;
+		List<Biolsource> biolsource = Biolsource.findTaxonomyProtein(taxon);
+		List<com.avaje.ebean.SqlRow> listSql = Biolsource.findTaxonomyProteinSQL(taxon);
+
+		Object format = Cache.get("format");
+		String notation = "gs";
+		if(format != null) {notation = (String) format.toString();} 
+
+
+
 		return ok(
-				tissuesummary.render("Tissue Summary", databaseReference, tissueresult)
+				tissuesummary.render(notation, "Tissue Summary", databaseReference, taxonomy,  tissueresult, taxNames, taxItems, proteinNames, proteinItems, sourceNames, sourceItems, biolsource, listSql)
 				);
 	} 
 
