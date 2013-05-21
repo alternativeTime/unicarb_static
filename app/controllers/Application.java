@@ -316,10 +316,7 @@ public class Application extends Controller {
 
 
 	public static Result structureDetails(Long id) {
-
-		List<Structure> strMain = Structure.findCompositionDetails(id);
-				
-				//Structure.find.byId(id);
+		
 		List<Structure> strDisplay = Structure.findStructureRef(id);
 		ArrayList proteinNames = new ArrayList();
 		ArrayList proteinIds = new ArrayList();
@@ -339,7 +336,7 @@ public class Application extends Controller {
 
 		List<String[]> rowList = new ArrayList<String[]>();
 		Map<String, Integer> m = new HashMap<String, Integer>();
-
+		String compositionId = "";
 		//rowList.add(new int[] { 1, 2, 3 });
 
 		if (strDisplay !=null){
@@ -347,6 +344,8 @@ public class Application extends Controller {
 				List<Stproteins> stToProtein = entries.stproteins;
 				List<Strtaxonomy> stToTax = entries.strtaxonomy;
 				List<Stsource> stToSource = entries.stsource;
+				
+				compositionId = entries.compositionId;
 
 				if (!stToProtein.isEmpty()) {
 					for (Stproteins stProteinEntry : stToProtein){
@@ -385,7 +384,8 @@ public class Application extends Controller {
 		String notation = "gs";
 		if(format != null) {notation = (String) format.toString();} 
 
-
+		List<Composition> strMain = Composition.findCompositionDetails(compositionId.trim());
+		
 		return ok(
 				structureDetails.render(strMain, notation, strDisplay, id, proteinNames, proteinItems, sourceNames, sourceItems, rowList, uniprot, taxItems, taxNames)
 

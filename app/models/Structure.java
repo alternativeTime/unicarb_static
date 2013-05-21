@@ -70,14 +70,6 @@ public class Structure extends Model {
 				.findList();
 	}
 
-	public static List<Structure> findCompositionDetails(Long id){
-		return find.fetch("strcomposition")
-				   .where()
-					.eq("id", id)
-				   .findList();
-	}
-
-
 	/**
 	 * Generic query helper for entity Reference with id Long
 	 */

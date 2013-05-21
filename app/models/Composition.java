@@ -1,5 +1,7 @@
 package models;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -11,7 +13,7 @@ import play.db.ebean.Model;
 public class Composition extends Model {
 
 	@Id
-	public Long id;
+	public Long id; //represents a string of compositions not a PK
 
 	public int hexose;
 	public int hexnac;
@@ -40,5 +42,11 @@ public class Composition extends Model {
 
 	public static Model.Finder<Long,Composition> find = new Model.Finder<Long,Composition>(Long.class, Composition.class);
 
+	public static List<Composition> findCompositionDetails(String compositionId){
+		return find
+				.where()
+				.eq("id", compositionId)
+				.findList();
+	}
 
 }
