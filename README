@@ -1,3 +1,23 @@
 UniCarbKB is an initiative that aims to promote the creation of an online information storage and search platform for glycomics and glycobiology research. The knowledgebase will offer a freely accessible and information rich resource supported by querying interfaces, annotation technologies and the adoption of common standards to integrate structural, experimental and functional data. Through cross-referencing existing databases and information resources, the UniCarbKB framework endeavours to support the growth of glycobioinformatics and the dissemination of knowledge through the provision of an open and unified portal to encourage the sharing of data.
 
 Supported by NeCTAR Australia: http://www.nectar.org.au/tools-glycomics
+
+#Play Version
+The UniCarbKB application is compatiable with version 2.1 (http://playframework.org) and all necessary libraries have been included in this repository.
+
+#Java
+Java 7 is required
+
+#PostgreSQL
+The database component supports version 9.x. For full details on the souring the latest dabase build please contact the development team.
+
+#Get the application running
+Once you have requested and setup the database instance the following steps are required:
+
+1. Clone the repository
+1. Alter the application.conf file setting the db.default attributes to minor your database setup
+2. Run 'play clean'
+3. Run 'play run' or 'play start' 
+4. Go to localhost:9000 to see the application up and running
+
+
