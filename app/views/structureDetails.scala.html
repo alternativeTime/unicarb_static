@@ -1,4 +1,4 @@
-@(strcomp: List[Composition], notation: String, references: List[Structure], structureId: Long, proteinNames: ArrayList[String], proteinItems: ArrayList[Proteins], sourceNames: ArrayList[String], sourceItems: ArrayList[Tissue], test: List[Array[String]], uniprot: ArrayList[String], taxItems: ArrayList[Taxonomy], taxNames: ArrayList[String])
+@(strcomp: List[Composition], notation: String, references: List[Structure], structureId: Long, proteinNames: ArrayList[String], proteinItems: HashSet[Proteins], sourceNames: ArrayList[String], sourceItems: ArrayList[Tissue], test: List[Array[String]], uniprot: ArrayList[String], taxItems: ArrayList[Taxonomy], taxNames: ArrayList[String])
 @import helper._
 
 @**********************************
@@ -111,7 +111,7 @@
           <ul id='more-source'>
             <h3 id='less-source'><span class='icon-leaf icon-white'></span> Source</h3>
             @for(source <- sourceItems){
-            <li><span class='icon-leaf icon-white'></span> <a href='../taxonomy/@source.id'>@source.div1 > @source.div2 @source.div3 > @source.div4</a></li>
+            <li><span class='icon-leaf icon-white'></span> <a href='../tissuesummary/@source.id'>@source.div1 > @source.div2 @source.div3 > @source.div4</a></li>
             }
           </ul>
         </div>

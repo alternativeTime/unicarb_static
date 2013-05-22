@@ -1,4 +1,4 @@
-@(structure: List[Structure])
+@(notation: String, structure: List[Structurecomp])
 
 @main{
 
@@ -8,9 +8,13 @@
   <li class="active"> Composition Search</li>
 </ul>
 
-<section id="layout" class="browse">
+<section id="structureLayout">
+  <section id="layouts">
+
+  <div class="page-header row-fluid">
 	<h1>Composition Search</h1>
-	<h4 class="subheader">GlycosuiteDB records with matching residues</h4>
+	<h4 class="subheader span8">GlycosuiteDB records</h4>
+  </div>
 	<div class="row-fluid">
 
 	<div class="span3 search">
@@ -34,7 +38,9 @@
 	  @if(structure.size() >1 ) {
       <ul class="structures media-grid">
         @for(structure <- structure) {
-        <li><a href="/structure/@structure.id"><img class="thumbnail" src="../images/_@{structure.id}.png" alt=""></a></li>
+        <li>
+	@views.html.format.structure(notation, structure.structure.id)
+	</li>
         }
       </ul>
 	  }

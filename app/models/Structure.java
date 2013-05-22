@@ -48,6 +48,9 @@ public class Structure extends Model {
 
 	@OneToMany
 	public List<Composition> strcomposition;
+	
+	@OneToMany
+	public List<Structurecomp> structurecomp;
 
 
 	public Structure(String glycanst, String aminolink, String core, String type, String antigenic, String lectin, String endoglycosidase, String link, String compositionId) {
