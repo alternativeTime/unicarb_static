@@ -1,4 +1,4 @@
-@(notation: String, message: String, description: String, taxon: Taxonomy, tissue: List[Tissue], taxNames: ArrayList[Taxonomy], taxItems: ArrayList[Taxonomy], proteinNames: ArrayList[String], proteinItems: ArrayList[Proteins], sourceNames: ArrayList[String], sourceItems: ArrayList[Tissue], biolsource: List[Biolsource], groupTax: List[com.avaje.ebean.SqlRow])
+@(test: HashSet[String], test2: HashSet[Structure], notation: String, message: String, description: String, taxon: Taxonomy, tissue: List[Tissue], taxNames: ArrayList[Taxonomy], taxItems: ArrayList[Taxonomy], proteinNames: ArrayList[String], proteinItems: ArrayList[Proteins], sourceNames: ArrayList[String], sourceItems: ArrayList[Tissue], biolsource: List[Biolsource], groupTax: List[com.avaje.ebean.SqlRow])
 @import helper._
 
 @**********************************
@@ -32,9 +32,21 @@
 
 
       <ul class="structures clearfix">
-        @for((s, i) <- taxon.strtaxonomy.zipWithIndex; if (i <=5) ){
+        @* @for((s, i) <- taxon.strtaxonomy.zipWithIndex; if (i <=5) ){ *@
+	@for(t <- test) {
         <li class="span5">
-          @views.html.format.structure(notation, s.structure.id)  
+          @* @views.html.format.structure(notation, id) *@  
+
+	<a href="">
+@if(notation.matches("gs")) {
+        <img class="sugar_image"  src="../images/@notation/_@{t}.png">
+}
+@if(!notation.matches("gs") ) {
+        <img class="sugar_image"  src="../images/@notation/@{t}.png">
+}
+</a>
+
+
         </li>
         }
       </ul>
@@ -64,6 +76,16 @@
           <a id='toggle-protein'><span class='label label-warning'><span class='icon-map-marker icon-white'></span> Protein (@proteinItems.size()) <span class="caret"></span></span></a>
           <a id='toggle-source'><span class='label label-success'><span class='icon-leaf icon-white'></span> Source (@sourceItems.size()) <span class="caret"></span></span></a>
         </div>
+	
+	<div>
+          <ul id='more-taxonomy'>
+            <h3 id='less-taxonomy'><span class='icon-tags icon-white'></span> Taxonomies</h3>
+            @for(t <- test2){
+            <li><span class='icon-tag icon-white'></span> <a href='../taxonomy/@t'>@t</a></li>
+            }
+          </ul>
+	</div>
+
       </div>
 
 

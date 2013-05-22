@@ -1,6 +1,7 @@
 package models;
 
 import java.util.*;
+
 import javax.persistence.*;
 
 import play.db.ebean.*;
@@ -12,17 +13,35 @@ import com.avaje.ebean.*;
 @Entity 
 public class Stsource extends Model {
 
-    @Id
-    public Long id;
+	@Id
+	public Long id;
 
-    @ManyToOne
-    public Structure structure; 
+	public String div1;
+	   
+    public String div2;
 
-    @ManyToOne
-    public Tissue tissue;
+    public String div3;
 
-    public static Model.Finder<Long,Stsource> find = new Model.Finder<Long,Stsource>(Long.class, Stsource.class);
+    public String div4;
 
-    
+	
+	@ManyToOne
+	public Structure structure; 
+
+	@ManyToOne
+	public Tissue tissue;
+
+	public static Model.Finder<Long,Stsource> find = new Model.Finder<Long,Stsource>(Long.class, Stsource.class);
+	
+	public static List<Stsource> findStsource(String tissue1, String tissue2, String tissue3, String tissue4) {
+        return
+           find.where().disjunction()
+		.ilike("div1", tissue1)
+		.ilike("div2", tissue2)
+		.ilike("div3", tissue3)
+		.ilike("div4", tissue4)
+		.findList();
+   }
+
 }
 

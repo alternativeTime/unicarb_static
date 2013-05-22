@@ -1,6 +1,7 @@
 package models;
 
 import java.util.*;
+
 import javax.persistence.*;
 
 import play.db.ebean.*;
@@ -73,5 +74,18 @@ public class Tissue extends Model {
 	   .findList();
    }
     
+   public static List<SqlRow> findTissueStructures(Long id) {
+
+	   String sql = "SELECT stsource.structure_id from public.tissue, public.stsource where tissue.id = stsource.tissue_id and tissue.id = " + id;
+	  // "biolsource.protein, biolsource.swiss_prot, proteins.name FROM public.biolsource, public.proteins WHERE biolsource.protein = proteins.name and biolsource.taxonomy ilike '" + taxon +  "' group by biolsource.swiss_prot,  biolsource.protein, proteins.name";
+
+	   RawSql rawSql = RawSqlBuilder.parse(sql).columnMapping("stsource.structure_id", "stsource.structure_id").create();
+
+	   SqlQuery sqlQuery = Ebean.createSqlQuery(sql);
+	   List<SqlRow> listSql = sqlQuery.findList();
+	   return listSql;
+   }
+   
+   
 }
 

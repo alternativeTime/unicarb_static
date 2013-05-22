@@ -4,7 +4,6 @@ import java.util.*;
 import play.mvc.*;
 import play.data.*;
 import play.*;
-import play.cache.Cache;
 import play.cache.*;
 
 import views.html.*;
@@ -18,7 +17,7 @@ import static play.data.Form.*;
 
 
 import com.avaje.ebean.*; //dont think this should be here due to SqlRow
-import static play.libs.Json.toJson;
+
 import static play.libs.Json.*;
 import java.net.URLDecoder;
 import java.io.UnsupportedEncodingException;
@@ -595,11 +594,15 @@ public class Application extends Controller {
 	public static Result tissueSummary(Long id) {
 
 		//	List<Stsource> stsourceTissue = Tissue.tissueStructures(tissueResult);
+		System.out.print("i want to check this query\n");
 		List<Tissue> tissueresult = Tissue.tissuehelp(id);
 		String databaseReference = "";
 		for(Tissue t : tissueresult) {
 			databaseReference = t.div1 + t.div2 + t.div3 + t.div4;
+
 		}
+		
+		
 
 		ArrayList taxNames = new ArrayList();
 		ArrayList taxItems = new ArrayList();
@@ -609,8 +612,30 @@ public class Application extends Controller {
 		ArrayList proteinItems = new ArrayList();
 		ArrayList sourceNames = new ArrayList();
 		ArrayList sourceItems = new ArrayList();
+		ArrayList structureTest = new ArrayList();
+		HashSet structureTesta = new HashSet();
+		HashSet structureTestab = new HashSet();
+		
+		List<com.avaje.ebean.SqlRow> listSql2 = Tissue.findTissueStructures(id);
+		for(com.avaje.ebean.SqlRow l : listSql2) {
+			
+			structureTest.add(l.getLong("structure_id"));
+			for(Object ll : structureTest){
+				structureTesta.add(ll.toString() );
+			}
+		}
+		
+		for(Object a : structureTesta){
+			String aa = a.toString();
+			Long look =  Long.valueOf(aa);
+			Structure objectStr = Ebean.find(Structure.class, look);
+			
+			structureTestab.add(objectStr);
+			
+		}
+		
 
-		Taxonomy taxonomy  = Taxonomy.find.byId(id);
+		Taxonomy taxonomy  = Taxonomy.find.byId(id); //check here
 		String taxon = taxonomy.species;
 		List<Biolsource> biolsource = Biolsource.findTaxonomyProtein(taxon);
 		List<com.avaje.ebean.SqlRow> listSql = Biolsource.findTaxonomyProteinSQL(taxon);
@@ -622,7 +647,7 @@ public class Application extends Controller {
 
 
 		return ok(
-				tissuesummary.render(notation, "Tissue Summary", databaseReference, taxonomy,  tissueresult, taxNames, taxItems, proteinNames, proteinItems, sourceNames, sourceItems, biolsource, listSql)
+				tissuesummary.render(structureTesta, structureTestab, notation, "Tissue Summary", databaseReference, taxonomy,  tissueresult, taxNames, taxItems, proteinNames, proteinItems, sourceNames, sourceItems, biolsource, listSql)
 				);
 	} 
 
