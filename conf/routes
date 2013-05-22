@@ -10,6 +10,7 @@ GET     /logout                controllers.Application.logout()
 # Default path will just redirect to the computer list
 GET  /                         controllers.Application.index()
 GET  /about                    controllers.Admin.about()
+GET  /query                   controllers.Application.query()
 
 GET  /references               controllers.Application.list2(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "", protein ?= "")
 GET  /references/:id           controllers.Application.refdisplay(id:Long)
@@ -28,8 +29,6 @@ GET  /ms                       controllers.Application.ms()
 GET  /builder                  controllers.Application.builder()
 
 GET  /saySearch/:s             controllers.Search.saySearch(s: String)
-
-GET  /browse                   controllers.Application.browse()
 
 GET  /proteins                 controllers.ProteinDetails.proteinlist(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "", protein ?= "")
 GET  /proteinsummary/:s        controllers.Application.proteinsummary(s: String)

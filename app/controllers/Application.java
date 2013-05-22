@@ -144,7 +144,13 @@ public class Application extends Controller {
 	}
 
 	public static Result compositions() {
-		List<Structure> compositionResult = null;
+		//List<Structure> compositionResult = null;
+		List<Structurecomp> compositionResult = null;
+		
+		Object format = Cache.get("format");	
+		String notation = "gs";
+		if(format != null) {notation = (String) format.toString();}
+
 		if (request().queryString().size() > 0  ) {
 			Map<String, String[]> params = request().queryString();
 			String[] searchTerms = null;
@@ -155,17 +161,19 @@ public class Application extends Controller {
 			}
 			if(key.contains("comp")) {
 				String out =  Structure.buildComposition(searchTerms);
-				compositionResult = Structure.findComposition(out);
+				//compositionResult = Structure.findComposition(out);
+				
+				compositionResult = Structurecomp.findStructurecomp(out);
 			}
 
 			return ok(
-					compositions.render(compositionResult)
+					compositions.render(notation, compositionResult)
 					);
 		}
-		return ok(compositions.render(compositionResult));
+		return ok(compositions.render(notation, compositionResult));
 	}
 
-	public static Result browse() {
+	public static Result query() {
 		//Cache.set("item.key", "testing", 0);
 		List<String> taxonomy  = Taxonomy.findSpecies(); 
 		HashSet taxUnique = Taxonomy.findSpeciesUnique();
@@ -308,15 +316,15 @@ public class Application extends Controller {
 
 
 
-			return ok(browse.render(taxonomy, taxonomyList, biolsource, listSql2, sourceUnique, proteinUnique, proteinList, tissueList, foundTissue, glycobaseFindPerturbation, /*glycobaseSqlArray, glycobaseSqlArrayTissue,*/ outputlist, countGlycobase, outputtissuelist, countTissueGlycobase, outputproteinlist, countProteinGlycobase));
+			return ok(query.render(taxonomy, taxonomyList, biolsource, listSql2, sourceUnique, proteinUnique, proteinList, tissueList, foundTissue, glycobaseFindPerturbation, /*glycobaseSqlArray, glycobaseSqlArrayTissue,*/ outputlist, countGlycobase, outputtissuelist, countTissueGlycobase, outputproteinlist, countProteinGlycobase));
 		}
 
-		return ok(browse.render(taxonomy, taxonomyList, biolsource, listSql2, sourceUnique, proteinUnique, proteinList, tissueList, foundTissue, glycobaseFindPerturbation, /* glycobaseSqlArray, glycobaseSqlArrayTissue,*/ outputlist, countGlycobase, outputtissuelist, countTissueGlycobase, outputproteinlist, countProteinGlycobase));
+		return ok(query.render(taxonomy, taxonomyList, biolsource, listSql2, sourceUnique, proteinUnique, proteinList, tissueList, foundTissue, glycobaseFindPerturbation, /* glycobaseSqlArray, glycobaseSqlArrayTissue,*/ outputlist, countGlycobase, outputtissuelist, countTissueGlycobase, outputproteinlist, countProteinGlycobase));
 	}
 
 
 	public static Result structureDetails(Long id) {
-		
+
 		List<Structure> strDisplay = Structure.findStructureRef(id);
 		ArrayList proteinNames = new ArrayList();
 		ArrayList proteinIds = new ArrayList();
@@ -344,7 +352,7 @@ public class Application extends Controller {
 				List<Stproteins> stToProtein = entries.stproteins;
 				List<Strtaxonomy> stToTax = entries.strtaxonomy;
 				List<Stsource> stToSource = entries.stsource;
-				
+
 				compositionId = entries.compositionId;
 
 				if (!stToProtein.isEmpty()) {
@@ -354,6 +362,7 @@ public class Application extends Controller {
 						if (stProteinEntry.proteins != null) { 
 							proteinNames.add(stProteinEntry.proteins.name);
 							proteinItems.add(stProteinEntry.proteins);
+							proteinNamesUnique.add(stProteinEntry.proteins);
 						}
 						if (stProteinEntry.proteins == null) {
 
@@ -372,7 +381,6 @@ public class Application extends Controller {
 					for (Stsource stSourceEntry : stToSource) {
 						String div = "<a href=\"../taxonomy/" +  stSourceEntry.tissue.id + "\"> > " + stSourceEntry.tissue.div1 + " > " + stSourceEntry.tissue.div2 + " > " + stSourceEntry.tissue.div3 + " > " + stSourceEntry.tissue.div4 + "</a> <br />";
 						sourceNamesUnique.add(div);
-
 						sourceNames.add(stSourceEntry.tissue.id);
 						sourceItems.add(stSourceEntry.tissue);
 					}
@@ -385,9 +393,9 @@ public class Application extends Controller {
 		if(format != null) {notation = (String) format.toString();} 
 
 		List<Composition> strMain = Composition.findCompositionDetails(compositionId.trim());
-		
+
 		return ok(
-				structureDetails.render(strMain, notation, strDisplay, id, proteinNames, proteinItems, sourceNames, sourceItems, rowList, uniprot, taxItems, taxNames)
+				structureDetails.render(strMain, notation, strDisplay, id, proteinNames, proteinNamesUnique, sourceNames, sourceItems, rowList, uniprot, taxItems, taxNames)
 
 				);
 	};
@@ -602,7 +610,7 @@ public class Application extends Controller {
 		ArrayList sourceNames = new ArrayList();
 		ArrayList sourceItems = new ArrayList();
 
-    Taxonomy taxonomy  = Taxonomy.find.byId(id);
+		Taxonomy taxonomy  = Taxonomy.find.byId(id);
 		String taxon = taxonomy.species;
 		List<Biolsource> biolsource = Biolsource.findTaxonomyProtein(taxon);
 		List<com.avaje.ebean.SqlRow> listSql = Biolsource.findTaxonomyProteinSQL(taxon);
