@@ -344,13 +344,14 @@ public class Application extends Controller {
 		List<String[]> rowList = new ArrayList<String[]>();
 		Map<String, Integer> m = new HashMap<String, Integer>();
 		String compositionId = "";
-		//rowList.add(new int[] { 1, 2, 3 });
+		String type = "";
 
 		if (strDisplay !=null){
 			for (Structure entries : strDisplay){
 				List<Stproteins> stToProtein = entries.stproteins;
 				List<Strtaxonomy> stToTax = entries.strtaxonomy;
 				List<Stsource> stToSource = entries.stsource;
+				type = entries.type;
 
 				compositionId = entries.compositionId;
 
@@ -394,7 +395,7 @@ public class Application extends Controller {
 		List<Composition> strMain = Composition.findCompositionDetails(compositionId.trim());
 
 		return ok(
-				structureDetails.render(strMain, notation, strDisplay, id, proteinNames, proteinNamesUnique, sourceNames, sourceItems, rowList, uniprot, taxItems, taxNames)
+				structureDetails.render(type, strMain, notation, strDisplay, id, proteinNames, proteinNamesUnique, sourceNames, sourceItems, rowList, uniprot, taxItems, taxNames)
 
 				);
 	};
@@ -593,16 +594,10 @@ public class Application extends Controller {
 
 	public static Result tissueSummary(Long id) {
 
-		//	List<Stsource> stsourceTissue = Tissue.tissueStructures(tissueResult);
 		System.out.print("i want to check this query\n");
-		List<Tissue> tissueresult = Tissue.tissuehelp(id);
-		String databaseReference = "";
-		for(Tissue t : tissueresult) {
-			databaseReference = t.div1 + t.div2 + t.div3 + t.div4;
+		Tissue tissueFind = Ebean.find(Tissue.class, id);
 
-		}
-		
-		
+		String databaseReference = tissueFind.div1 + tissueFind.div2 + tissueFind.div3 + tissueFind.div4;
 
 		ArrayList taxNames = new ArrayList();
 		ArrayList taxItems = new ArrayList();
@@ -614,7 +609,10 @@ public class Application extends Controller {
 		ArrayList sourceItems = new ArrayList();
 		ArrayList structureTest = new ArrayList();
 		HashSet structureTesta = new HashSet();
-		HashSet structureTestab = new HashSet();
+		HashSet structureTax = new HashSet();
+		//Set<String> ordertax = new TreeSet<String>(); //order tax
+		TreeMap ordertax = new TreeMap();
+		
 		
 		List<com.avaje.ebean.SqlRow> listSql2 = Tissue.findTissueStructures(id);
 		for(com.avaje.ebean.SqlRow l : listSql2) {
@@ -629,16 +627,22 @@ public class Application extends Controller {
 			String aa = a.toString();
 			Long look =  Long.valueOf(aa);
 			Structure objectStr = Ebean.find(Structure.class, look);
-			
-			structureTestab.add(objectStr);
-			
+
+			List<Strtaxonomy> tax = objectStr.strtaxonomy;
+			for(Strtaxonomy t : tax){
+				structureTax.add(t.species);
+				//ordertax.add(t.species.toString());
+				ordertax.put(t.species, t.species );
+				
+			}
+
 		}
 		
 
-		Taxonomy taxonomy  = Taxonomy.find.byId(id); //check here
-		String taxon = taxonomy.species;
-		List<Biolsource> biolsource = Biolsource.findTaxonomyProtein(taxon);
-		List<com.avaje.ebean.SqlRow> listSql = Biolsource.findTaxonomyProteinSQL(taxon);
+		//Taxonomy taxonomy  = Taxonomy.find.byId(id); //check here
+		//String taxon = taxonomy.species;
+		//List<Biolsource> biolsource = Biolsource.findTaxonomyProtein(taxon);
+		//List<com.avaje.ebean.SqlRow> listSql = Biolsource.findTaxonomyProteinSQL(taxon);
 
 		Object format = Cache.get("format");
 		String notation = "gs";
@@ -647,7 +651,7 @@ public class Application extends Controller {
 
 
 		return ok(
-				tissuesummary.render(structureTesta, structureTestab, notation, "Tissue Summary", databaseReference, taxonomy,  tissueresult, taxNames, taxItems, proteinNames, proteinItems, sourceNames, sourceItems, biolsource, listSql)
+				tissuesummary.render(tissueFind, structureTesta, ordertax, notation, "Tissue Summary", databaseReference,  taxNames, taxItems, proteinNames, proteinItems, sourceNames, sourceItems)
 				);
 	} 
 

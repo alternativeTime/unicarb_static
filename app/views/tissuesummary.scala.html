@@ -1,4 +1,4 @@
-@(test: HashSet[String], test2: HashSet[Structure], notation: String, message: String, description: String, taxon: Taxonomy, tissue: List[Tissue], taxNames: ArrayList[Taxonomy], taxItems: ArrayList[Taxonomy], proteinNames: ArrayList[String], proteinItems: ArrayList[Proteins], sourceNames: ArrayList[String], sourceItems: ArrayList[Tissue], biolsource: List[Biolsource], groupTax: List[com.avaje.ebean.SqlRow])
+@(tissue: Tissue, test: HashSet[String], strtax: TreeMap[String, String], notation: String, message: String, description: String, taxNames: ArrayList[Taxonomy], taxItems: ArrayList[Taxonomy], proteinNames: ArrayList[String], proteinItems: ArrayList[Proteins], sourceNames: ArrayList[String], sourceItems: ArrayList[Tissue] )
 @import helper._
 
 @**********************************
@@ -35,27 +35,12 @@
         @* @for((s, i) <- taxon.strtaxonomy.zipWithIndex; if (i <=5) ){ *@
 	@for(t <- test) {
         <li class="span5">
-          @* @views.html.format.structure(notation, id) *@  
-
-	<a href="">
-@if(notation.matches("gs")) {
-        <img class="sugar_image"  src="../images/@notation/_@{t}.png">
-}
-@if(!notation.matches("gs") ) {
-        <img class="sugar_image"  src="../images/@notation/@{t}.png">
-}
-</a>
-
+           @views.html.format.structure(notation, t.toLong)   
 
         </li>
         }
       </ul>
       <ul id='more-thumbnails' class='structures clearfix'>
-        @for(s <- taxon.strtaxonomy ){
-        <li class="span5">
-          @views.html.format.structure(notation, s.structure.id)
-        </li>
-        }
       </ul>
       <div id='show-structures' class='more-structures' href='#'>
         See more structures
@@ -72,18 +57,29 @@
       <div class='info'>
         <h3>Biological Associations</h4>
         <div class='taxonomy'>
-          <a id='toggle-taxonomy'><span class='label label-important'><span class='icon-tags icon-white'></span> Taxonomy (@taxItems.size()) <span class="caret"></span></span></a>
-          <a id='toggle-protein'><span class='label label-warning'><span class='icon-map-marker icon-white'></span> Protein (@proteinItems.size()) <span class="caret"></span></span></a>
-          <a id='toggle-source'><span class='label label-success'><span class='icon-leaf icon-white'></span> Source (@sourceItems.size()) <span class="caret"></span></span></a>
+          <a id='toggle-taxonomy'><span class='label label-important'><span class='icon-tags icon-white'></span> Taxonomy (@tissue.taxtissue.size()) <span class="caret"></span></span></a>
+          <a id='toggle-protein'><span class='label label-warning'><span class='icon-map-marker icon-white'></span> Protein (@tissue.proteintissue.size()) <span class="caret"></span></span></a>
+          @* <a id='toggle-source'><span class='label label-success'><span class='icon-leaf icon-white'></span> Source (@sourceItems.size()) <span class="caret"></span></span></a> *@
         </div>
 	
 	<div>
           <ul id='more-taxonomy'>
             <h3 id='less-taxonomy'><span class='icon-tags icon-white'></span> Taxonomies</h3>
-            @for(t <- test2){
-            <li><span class='icon-tag icon-white'></span> <a href='../taxonomy/@t'>@t</a></li>
+            @*
+	     @for((key, value) <- strtax){
+            <li><span class='icon-tag icon-white'></span> <a href='../taxonomy/@value'>@key</a></li>
+            } *@
+
+	    @for(t <- tissue.taxtissue) {
+	     <li><span class='icon-tag icon-white'></span> <a href='../taxonomy/@t.taxonomy.id'>@t.species</a></li>
             }
-          </ul>
+          </ul> 
+
+	  <ul id='more-protein'>
+	    @for(t <- tissue.proteintissue){
+	    <li><span class='icon-map-marker icon-white'></span> <a href='../proteinsummary/@t.swiss'>@t.protein (@t.swiss)</a></li>
+	    }
+	  </ul>
 	</div>
 
       </div>

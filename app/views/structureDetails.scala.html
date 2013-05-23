@@ -1,4 +1,4 @@
-@(strcomp: List[Composition], notation: String, references: List[Structure], structureId: Long, proteinNames: ArrayList[String], proteinItems: HashSet[Proteins], sourceNames: ArrayList[String], sourceItems: ArrayList[Tissue], test: List[Array[String]], uniprot: ArrayList[String], taxItems: ArrayList[Taxonomy], taxNames: ArrayList[String])
+@(glycantype: String, strcomp: List[Composition], notation: String, references: List[Structure], structureId: Long, proteinNames: ArrayList[String], proteinItems: HashSet[Proteins], sourceNames: ArrayList[String], sourceItems: ArrayList[Tissue], test: List[Array[String]], uniprot: ArrayList[String], taxItems: ArrayList[Taxonomy], taxNames: ArrayList[String])
 @import helper._
 
 @**********************************
@@ -39,7 +39,7 @@
 
   <div class="page-header row-fluid">
     <h1>Structure</h1>
-    <h4 class="subheader span8">Details for structure</h4>
+    <h4 class="subheader span8">Details for this @glycantype glycan structure</h4>
   </div>
 
  <div class="row-fluid">
@@ -81,6 +81,11 @@
       		<p>Average Mass: @c.glycan_mass</p>
       		<p>Monoisotopic Mass: @c.glycan_mass_monoisotopic</p>
       	}
+      </div>
+
+      <div class='info'>
+	<h3>Linkage Type</h3>
+	<p>@glycantype glycan structure</p>
       </div>
 
       <div class='info'>

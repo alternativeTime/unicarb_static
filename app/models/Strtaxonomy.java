@@ -20,6 +20,8 @@ public class Strtaxonomy extends Model {
 
     @ManyToOne
     public Structure structure; 
+    
+    public String species;
 
     public static Model.Finder<Long,Strtaxonomy> find = new Model.Finder<Long,Strtaxonomy>(Long.class, Strtaxonomy.class);
 
