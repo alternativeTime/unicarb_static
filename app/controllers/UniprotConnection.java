@@ -162,7 +162,9 @@ public class UniprotConnection extends Controller {
 		ArrayList<Biolsource> biolSourceProtein = new ArrayList<Biolsource>();
 		List<Biolsource> biolSourceProteins = Biolsource.findBiolSourceIds(protein);
 		HashSet taxsources = new HashSet();
-		ArrayList taxsourcesUnique = new ArrayList();
+		//ArrayList taxsourcesUnique = new ArrayList();
+		
+		Proteinstaxonomy proteinstax = Proteinstaxonomy.findProteinTax(protein);
 
 		if (request().queryString().size() > 0  ) {
 			Map<String, String[]> params = request().queryString();
@@ -248,12 +250,13 @@ public class UniprotConnection extends Controller {
 			for(Biolsource biol : biolSourceProteins){
 				swissProtName = biol.swiss_prot;
 				proteinName = biol.protein;
-				Biolsource objectBiolSource = Ebean.find(Biolsource.class, biol.id);
-				taxsources.add(objectBiolSource.taxonomy);
-				biolSourceProtein.add(objectBiolSource);
+				//Biolsource objectBiolSource = Ebean.find(Biolsource.class, biol.id);
+				//taxsources.add(objectBiolSource.taxonomy);
+				//biolSourceProtein.add(objectBiolSource);
 			}
 
-			taxsourcesUnique.addAll(taxsources);	
+			//why am i getting multiple tax for one swiss ID
+			//taxsourcesUnique.addAll(taxsources);	
 
 			biolRefs = Biolsource.findBiolsourceRefs(protein);
 
@@ -265,10 +268,8 @@ public class UniprotConnection extends Controller {
 		String notation = "gs";
 		if(format != null) {notation = (String) format.toString();}
 
-		System.out.println("xxxxxxxxxx" + protein + " ssssssssssssss" + site + " 11 " + sequenceRetrieval.length() + " 22 " + protein.length() + " 33 " + biolRefs.size() + " 4 " + site.length() + " 5 " + structuresShow.size() + " 6 x" + taxsourcesUnique.size());
-
 		return ok(
-				proteinsite.render(notation, sequenceRetrieval,  protein, biolRefs, site, structuresShow,  taxsourcesUnique )
+				proteinsite.render(notation, sequenceRetrieval,  protein, biolRefs, site, structuresShow,  proteinstax )
 				);
 	}
 
@@ -324,8 +325,11 @@ public class UniprotConnection extends Controller {
 		for(Ftmerge f : fts ) {
 			protein = f.swiss_prot;
 			site = f.amino_acid;
+			
 		}
 
+		Proteinstaxonomy proteinstax = Proteinstaxonomy.findProteinTax(protein);
+		
 		type = "defined";
 
 		if(type.equals("defined")) {
@@ -367,12 +371,12 @@ public class UniprotConnection extends Controller {
 		for(Biolsource biol : biolSourceProteins){
 			swissProtName = biol.swiss_prot;
 			proteinName = biol.protein;
-			Biolsource objectBiolSource = Ebean.find(Biolsource.class, biol.id);
-			taxsources.add(objectBiolSource.taxonomy);
-			biolSourceProtein.add(objectBiolSource);
+			//Biolsource objectBiolSource = Ebean.find(Biolsource.class, biol.id);
+			//taxsources.add(objectBiolSource.taxonomy);
+			//biolSourceProtein.add(objectBiolSource);
 		}
 
-		taxsourcesUnique.addAll(taxsources);	
+		//taxsourcesUnique.addAll(taxsources);	
 
 		biolRefs = Biolsource.findBiolsourceRefs(protein);
 
@@ -385,7 +389,7 @@ public class UniprotConnection extends Controller {
 
 
 		return ok(
-				proteinsite.render(notation, sequenceRetrieval,  protein, biolRefs, site, structuresShow,  taxsourcesUnique )
+				proteinsite.render(notation, sequenceRetrieval,  protein, biolRefs, site, structuresShow,  proteinstax )
 				);
 
 	}

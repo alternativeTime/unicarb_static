@@ -1,4 +1,4 @@
-@(notation: String, proteinName: String, accession: String, biol: ArrayList[Biolsource], protein: List[Proteins], uniprot: List[String], gssites: List[GsProteinStr2], source: HashSet[Reference], description: List[SitesReferences], sequence: String, proteinMultiple: List[Proteins], generalSites: List[GeneralSites], definedSites: List[DefinedSites], typeEntry: String, swissProtName: String, proteinsource: List[Proteinsource])
+@(notation: String, proteinName: String, accession: String, biol: ArrayList[Biolsource], protein: List[Proteins], uniprot: List[String], gssites: List[GsProteinStr2], source: HashSet[Reference], description: List[SitesReferences], sequence: String, proteinMultiple: List[Proteins], generalSites: List[GeneralSites], definedSites: List[DefinedSites], typeEntry: String, swissProtName: String, proteinsource:  List[com.avaje.ebean.SqlRow] )
 
 
 @main {
@@ -184,7 +184,7 @@
           <ul id='more-taxonomy'>
             <h3 id='less-taxonomy'><span class='icon-tags icon-white'></span> Taxonomies</h3>
             @for(p <- proteinsource){
-            <li><span class='icon-tag icon-white'></span> <a href="/taxonomy/@p.taxonomy.id">@p.species</a> &gt; <a href="/tissuesummary/@p.tissue.id">@p.system</a> </li>
+            <li><span class='icon-tag icon-white'></span> <a href="/taxonomy/@p.get("taxonomy_id")">@p.get("species")</a> &gt; <a href="/tissuesummary/@p.get("tissue_id")">@p.get("system")</a> </li>
             }
           </ul>
           <ul id='more-protein'>
@@ -193,7 +193,7 @@
           </ul>
           <ul id='more-source'>
           @for(p <- proteinsource){
-          	<li><span class='icon-leaf icon-white'></span> <a href='../tissuesummary/@p.tissue.id'>@p.div1 > @p.div2 @p.div3 > @p.div4</a></li>
+          	<li><span class='icon-leaf icon-white'></span> <a href='../tissuesummary/@p.get("tissue_id")'>@p.get("div1") > @p.get("div2") > @p.get("div3") > @p.get("div4")</a></li>
           	}
           </ul>   
         </div>

@@ -1,6 +1,7 @@
 package models;
 
 import java.util.*;
+
 import javax.persistence.*;
 
 import play.db.ebean.*;
@@ -30,6 +31,14 @@ public class Proteinstaxonomy extends Model {
     public Proteins proteins;
 
     public static Model.Finder<Long,Proteinstaxonomy> find = new Model.Finder<Long,Proteinstaxonomy>(Long.class, Proteinstaxonomy.class);
+    
+    public static Proteinstaxonomy findProteinTax(String protein) {
+		return
+			find.where().disjunction()
+				.ilike("swiss_prot", protein)
+				.ilike("protein", protein)
+				.findUnique();
+	}
     
 }
 

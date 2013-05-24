@@ -129,7 +129,27 @@ public class Application extends Controller {
 			uniprotDetails.add("No info");
 		}
 
-		List<Proteinsource> proteinsource = Proteinsource.findProteinsource(protein);
+		List<com.avaje.ebean.SqlRow> proteinTax = Proteinsource.findProteinSource(protein);
+		
+		
+		/*List<Proteinsource> proteinsource = Proteinsource.findProteinsource(protein); //need to clean dups
+		List<Proteinsource> depdupeProteinsource =
+			    new ArrayList<Proteinsource>(new LinkedHashSet<Proteinsource>(proteinsource));
+		
+		HashSet test = new HashSet();
+		
+		
+		Set<Proteinsource> s = new HashSet<Proteinsource>(depdupeProteinsource);
+		
+		for(Proteinsource ss : s){
+			System.out.println("whats up   " + ss.div1 + " " + ss.div2 + " " + ss.div3 + " " + ss.div4 );
+			test.add(ss);
+		}
+		
+		for (Object test2 : test) {
+			System.out.println("help me " + test2.toString() );
+		}*/
+		
 
 		Object format = Cache.get("format");	
 		String notation = "gs";
@@ -137,7 +157,7 @@ public class Application extends Controller {
 
 
 		return ok(
-				proteinsummary.render(notation, proteinName, protein, biolSourceProtein, proteins, uniprotDetails, gsProteinSite, referencesU, description, sequenceRetrieval, proteinMultiple, generalSites, definedSites, typeProteinEntry, swissProtName, proteinsource)
+				proteinsummary.render(notation, proteinName, protein, biolSourceProtein, proteins, uniprotDetails, gsProteinSite, referencesU, description, sequenceRetrieval, proteinMultiple, generalSites, definedSites, typeProteinEntry, swissProtName, proteinTax)
 				);
 
 	}
