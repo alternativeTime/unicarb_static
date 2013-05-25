@@ -61,7 +61,7 @@ public class StructureToSiteDefined extends Model {
 		.ilike("swiss_prot", protein)
 		.ilike("protein_name", protein)
 		.endJunction()
-		.ilike("amino_acid_position", site)
+		.ilike("amino_acid_position", "%" + site + "%")
 		.findList();
    }
 
