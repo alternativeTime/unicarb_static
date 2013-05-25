@@ -213,7 +213,6 @@ public class UniprotConnection extends Controller {
 
 			if(type.equals("defined")) {
 				definedStructures = StructureToSiteDefined.findStructuresDefined(protein, site);
-				int svalue;
 				int x;
 				for(StructureToSiteDefined s : definedStructures) {
 					x = s.structure_id;
@@ -273,27 +272,6 @@ public class UniprotConnection extends Controller {
 				);
 	}
 
-	/*public static Result swissprotFT( String ft) {
-		HashSet<Reference> references = new HashSet<Reference>();
-
-		List<Ftmerge> fts = null;
-		fts = Ftmerge.findFt(ft);
-
-
-		//ideal we need to send user to the page expecting see JIRA
-		for(Ftmerge f : fts ) {
-			String swiss = f.swiss_prot;
-			String position = f.amino_acid;
-
-			Long refid = f.reference.id;
-			Reference reference = Ebean.find(Reference.class, refid);
-			references.add(reference);
-		}
-		//http://unicarbkb.org/proteinsite?position=ASN-516&protein=P43237&type=defined ?;
-
-		return ok(swissprotFT.render(references, ft));
-	}*/
-
 	//this needs some tidying 
 	public static Result swissprotFT( String ft ) {
 		//redirect("/proteinsite");
@@ -334,11 +312,8 @@ public class UniprotConnection extends Controller {
 
 		if(type.equals("defined")) {
 			definedStructures = StructureToSiteDefined.findStructuresDefined(protein, site);
-			int svalue;
-			int x;
 			for(StructureToSiteDefined s : definedStructures) {
-				x = s.structure_id;
-				Long value = Long.valueOf(x);
+				Long value = Long.valueOf(s.structure_id);
 				//this check should not be required but for safety
 				if(!structuresShow.contains(value)) {
 					structuresShow.add(value);
@@ -347,24 +322,18 @@ public class UniprotConnection extends Controller {
 		}
 
 		else if (type.equals("general")) {
-			int gvalue;
-			int x;
 			generalStructures = GeneralSites.findStructuresGeneral(protein, site);
 			for(GeneralSites str : generalStructures) {
 				List<StructureToSiteGeneral> general = str.strSiteGeneral;
 				for(StructureToSiteGeneral g : general) {
 					if(g.structure_id  > 0){
-						gvalue = g.structure_id;
-						Long value = Long.valueOf(gvalue);
+						Long value = Long.valueOf(g.structure_id);
 						//this check should not be required but for safety
 						if(!structuresShow.contains(value)) {
 							structuresShow.add(value);
 						}
 					}
 				}
-			}
-			for(Long s : structuresShow) {
-				System.out.println("check values" + s );
 			}
 		}
 
