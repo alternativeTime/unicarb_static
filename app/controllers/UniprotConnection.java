@@ -268,7 +268,7 @@ public class UniprotConnection extends Controller {
 		if(format != null) {notation = (String) format.toString();}
 
 		return ok(
-				proteinsite.render(notation, sequenceRetrieval,  protein, biolRefs, site, structuresShow,  proteinstax )
+				proteinsite.render(notation, sequenceRetrieval,  protein, biolRefs, site, structuresShow,  proteinstax)
 				);
 	}
 
