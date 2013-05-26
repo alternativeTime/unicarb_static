@@ -33,12 +33,26 @@ public class Proteinstaxonomy extends Model {
     public static Model.Finder<Long,Proteinstaxonomy> find = new Model.Finder<Long,Proteinstaxonomy>(Long.class, Proteinstaxonomy.class);
     
     public static Proteinstaxonomy findProteinTax(String protein) {
+		try{
 		return
 			find.where().disjunction()
 				.ilike("swiss_prot", protein)
 				.ilike("protein", protein)
 				.findUnique();
-	}
+		} catch(Exception e)  {
+		System.out.println("here we go " + e) ;
+		}
+		return null;
+    
+    }
+
+    public static List<Proteinstaxonomy> findProteinsTax(String protein) {
+		return
+			find.where().disjunction()
+                                .ilike("swiss_prot", protein)
+                                .ilike("protein", protein)
+                                .findList();
+    }
     
 }
 

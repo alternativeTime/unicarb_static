@@ -152,6 +152,7 @@ public class UniprotConnection extends Controller {
 		String type = "";
 		String sequenceRetrieval = "";
 		String protein = "";
+		List<Proteinstaxonomy> proteinstaxList = null;
 
 		ArrayList<SqlRow> biolRefs  = new ArrayList<SqlRow>();
 		List<StructureToSiteDefined> definedStructures = null;
@@ -162,10 +163,17 @@ public class UniprotConnection extends Controller {
 		ArrayList<Biolsource> biolSourceProtein = new ArrayList<Biolsource>();
 		List<Biolsource> biolSourceProteins = Biolsource.findBiolSourceIds(protein);
 		HashSet taxsources = new HashSet();
-		//ArrayList taxsourcesUnique = new ArrayList();
-		
+		HashSet multiCAR = new HashSet();
+	
 		Proteinstaxonomy proteinstax = Proteinstaxonomy.findProteinTax(protein);
-
+		if (proteinstax == null ) {
+		//this means we have a multi car to protein link in glycobase
+		proteinstaxList = Proteinstaxonomy.findProteinsTax(protein);
+		for(Proteinstaxonomy p : proteinstaxList){
+			multiCAR.add(p.protein);
+		}
+		}
+	
 		if (request().queryString().size() > 0  ) {
 			Map<String, String[]> params = request().queryString();
 			String[] searchTerms = null;
@@ -268,7 +276,7 @@ public class UniprotConnection extends Controller {
 		if(format != null) {notation = (String) format.toString();}
 
 		return ok(
-				proteinsite.render(notation, sequenceRetrieval,  protein, biolRefs, site, structuresShow,  proteinstax)
+				proteinsite.render(notation, sequenceRetrieval,  protein, biolRefs, site, structuresShow,  proteinstax, proteinstaxList, multiCAR)
 				);
 	}
 
@@ -283,6 +291,7 @@ public class UniprotConnection extends Controller {
 		String type = "";
 		String sequenceRetrieval = "";
 		String protein = "";
+		List<Proteinstaxonomy> proteinstaxList = null;
 
 		ArrayList<SqlRow> biolRefs  = new ArrayList<SqlRow>();
 		List<StructureToSiteDefined> definedStructures = null;
@@ -294,6 +303,7 @@ public class UniprotConnection extends Controller {
 		List<Biolsource> biolSourceProteins = Biolsource.findBiolSourceIds(protein);
 		HashSet taxsources = new HashSet();
 		ArrayList taxsourcesUnique = new ArrayList();
+		HashSet multiCAR = new HashSet();
 
 		List<Ftmerge> fts;
 
@@ -307,6 +317,13 @@ public class UniprotConnection extends Controller {
 		}
 
 		Proteinstaxonomy proteinstax = Proteinstaxonomy.findProteinTax(protein);
+		if (proteinstax == null ) {
+                //this means we have a multi car to protein link in glycobase
+                proteinstaxList = Proteinstaxonomy.findProteinsTax(protein);
+		for(Proteinstaxonomy p : proteinstaxList){
+                        multiCAR.add(p.protein);
+                }
+                }
 		
 		type = "defined";
 
@@ -358,7 +375,7 @@ public class UniprotConnection extends Controller {
 
 
 		return ok(
-				proteinsite.render(notation, sequenceRetrieval,  protein, biolRefs, site, structuresShow,  proteinstax )
+				proteinsite.render(notation, sequenceRetrieval,  protein, biolRefs, site, structuresShow,  proteinstax, proteinstaxList, multiCAR )
 				);
 
 	}
