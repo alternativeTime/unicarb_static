@@ -62,7 +62,6 @@ public class Taxonomy extends Model {
    }
    String tax = "";
    for(Object glycotax : glycobasetax) {
-	System.out.println("check this value " + glycotax);
 	if(glycotax != null) {tax = glycotax.toString();
 		result.add(tax);
 	}

@@ -96,8 +96,6 @@ public class Application extends Controller {
 			generalSites = GeneralSites.findProteinsGeneral(protein);
 			definedSites = DefinedSites.findProteinsDefined(protein);
 
-			System.out.println("check match statment ---->: " + protein);
-
 			String [] splitProtein = protein.split("\\s*[and]+\\s*");
 
 			proteinMultiple = Proteins.findProteinsSwissProt(protein);
@@ -377,7 +375,6 @@ public class Application extends Controller {
 
 				if (!stToProtein.isEmpty()) {
 					for (Stproteins stProteinEntry : stToProtein){
-						System.out.println("check " + stProteinEntry.proteins);	
 
 						if (stProteinEntry.proteins != null) { 
 							proteinNames.add(stProteinEntry.proteins.name);
@@ -614,7 +611,6 @@ public class Application extends Controller {
 
 	public static Result tissueSummary(Long id) {
 
-		System.out.print("i want to check this query\n");
 		Tissue tissueFind = Ebean.find(Tissue.class, id);
 
 		String databaseReference = tissueFind.div1 + tissueFind.div2 + tissueFind.div3 + tissueFind.div4;
