@@ -551,12 +551,12 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
 
     @for(p <- tissueList) {
     <div class="row-fluid glycosuiteResult">
-      <h3><a href="#">@p.div1, @p.div2, @p.div3, @p.div4</a></h3>
+      <h3><a href="tissuesummary/@p.id">@p.div1, @p.div2, @p.div3, @p.div4</a></h3>
       <div class="details span9">
-        <p class="">@p.stsource.size() structures are associated with this protein</p>
+        <p class="">@p.stsource.size() structures are associated with this tissue</p>
       </div>
       <div class="span3">
-        <p class="pull-right structures"><a href="#">@p.stsource.size() structures </a></p>
+        <p class="pull-right structures"><a href="tissuesummary/@p.id">@p.stsource.size() structures </a></p>
       </div>
     </div>
     }

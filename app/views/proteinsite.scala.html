@@ -44,7 +44,7 @@
           @for(gs <- proteinSite) {   
           @for(gss <- gs.gsProteinSiteStr2) {
           <tr>
-            <td>@gss.glyco_aa_site</td>
+            <td>@gss.glyco_aa_site.replace("N-", "ASN-").replace("Asn-", "ASN-").replace("S-", "SER-").replace("Ser-", "SER-").replace("T-", "THR-").replace("Thr-", "THR-")</td>
             <td>
               <a href="/proteinsite?position=@gss.glyco_aa_site&protein=@accession">
                 <span class="label label-notice"><i class='icon-th icon-white'></i> 
