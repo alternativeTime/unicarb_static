@@ -15,127 +15,141 @@ import com.avaje.ebean.*;
 @Entity 
 public class Biolsource extends Model {
 
-    @Id
-    public Long id;
-    
-    public String protein;
-    public String taxonomy;
-    public String swiss_prot;
+	@Id
+	public Long id;
 
-   	@OneToMany
-   	public List<Sourceref> sourceref; 
+	public String protein;
+	public String taxonomy;
+	public String swiss_prot;
 
-    //@ManyToOne
-    //Biolsource biolsource;
+	@OneToMany
+	public List<Sourceref> sourceref; 
 
-    public static List<String> proteinNames;
-    /**
-     * Generic query helper for entity Reference with id Long
-     */
-   	public static Finder<Long,Biolsource> find = new Finder<Long,Biolsource>(Long.class, Biolsource.class);
-    
+	//@ManyToOne
+	//Biolsource biolsource;
+
+	public static List<String> proteinNames;
+	/**
+	 * Generic query helper for entity Reference with id Long
+	 */
+	public static Finder<Long,Biolsource> find = new Finder<Long,Biolsource>(Long.class, Biolsource.class);
+
 	public static List<SqlRow> findTaxonomyProteinSQL(String taxon) {
 
-	String sql = "SELECT biolsource.protein, biolsource.swiss_prot, proteins.name FROM public.biolsource, public.proteins WHERE biolsource.protein = proteins.name and biolsource.taxonomy ilike '" + taxon +  "' group by biolsource.swiss_prot,  biolsource.protein, proteins.name";
+		String sql = "SELECT biolsource.protein, biolsource.swiss_prot, proteins.name FROM public.biolsource, public.proteins WHERE biolsource.protein = proteins.name and biolsource.taxonomy ilike '" + taxon +  "' group by biolsource.swiss_prot,  biolsource.protein, proteins.name";
 
-	RawSql rawSql = RawSqlBuilder.parse(sql).columnMapping("proteins.name", "proteins.name").columnMapping("biolsource.protein", "biolsource.protein").columnMapping("biolsource.swiss_prot", "biolsource.swiss_prot").create();
-   
-	SqlQuery sqlQuery = Ebean.createSqlQuery(sql);
-	List<SqlRow> listSql = sqlQuery.findList();
-	return listSql;
-    }
+		RawSql rawSql = RawSqlBuilder.parse(sql).columnMapping("proteins.name", "proteins.name").columnMapping("biolsource.protein", "biolsource.protein").columnMapping("biolsource.swiss_prot", "biolsource.swiss_prot").create();
 
-    public static List<List<String>> findTaxonomyProteinString(String taxon) {
+		SqlQuery sqlQuery = Ebean.createSqlQuery(sql);
+		List<SqlRow> listSql = sqlQuery.findList();
+		return listSql;
+	}
 
-	System.out.println("sit here once?");
-	String sql = "SELECT biolsource.protein, proteins.name FROM public.biolsource, public.proteins WHERE biolsource.protein = proteins.name and biolsource.taxonomy ilike '" + taxon +  "' group by  biolsource.protein, proteins.name";
+	public static List<List<String>> findTaxonomyProteinString(String taxon) {
 
-	RawSql rawSql = RawSqlBuilder.parse(sql).columnMapping("proteins.name", "proteins.name").columnMapping("biolsource.protein", "biolsource.protein").create();
+		System.out.println("sit here once?");
+		String sql = "SELECT biolsource.protein, proteins.name FROM public.biolsource, public.proteins WHERE biolsource.protein = proteins.name and biolsource.taxonomy ilike '" + taxon +  "' group by  biolsource.protein, proteins.name";
 
-	SqlQuery sqlQuery = Ebean.createSqlQuery(sql);
-        List<SqlRow> listSql = sqlQuery.findList();
-	System.out.println("check rowsss " + listSql.size() );
-	String protein = "";
-	List<String> proteinNames = new ArrayList<String>();
+		RawSql rawSql = RawSqlBuilder.parse(sql).columnMapping("proteins.name", "proteins.name").columnMapping("biolsource.protein", "biolsource.protein").create();
 
-	List <String[]> result = new ArrayList<String[]>();
-	int columnCount = 0;
-	String[] rowresult = new String[2];	
+		SqlQuery sqlQuery = Ebean.createSqlQuery(sql);
+		List<SqlRow> listSql = sqlQuery.findList();
+		System.out.println("check rowsss " + listSql.size() );
+		String protein = "";
+		List<String> proteinNames = new ArrayList<String>();
 
-	ArrayList<String> results = new ArrayList<String>();
-	HashMap<String,String> zl = new HashMap<String,String>();
-	List<List<String>> addresses = new ArrayList<List<String>>();
-	 
-	for (SqlRow row : listSql) {
-                //System.out.println("check row " + row.getString("protein") );
-		String proteinfound = row.getString("protein").toString();
-		proteinNames.add(proteinfound);
-		//System.out.println("check row again " + proteinfound);
+		List <String[]> result = new ArrayList<String[]>();
+		int columnCount = 0;
+		String[] rowresult = new String[2];	
 
-		//rowresult[0] = proteinfound;
-		//rowresult[1] = "taxon";
+		ArrayList<String> results = new ArrayList<String>();
+		HashMap<String,String> zl = new HashMap<String,String>();
+		List<List<String>> addresses = new ArrayList<List<String>>();
 
-		//result.add(proteinfound, "taxon");
+		for (SqlRow row : listSql) {
+			//System.out.println("check row " + row.getString("protein") );
+			String proteinfound = row.getString("protein").toString();
+			proteinNames.add(proteinfound);
+			//System.out.println("check row again " + proteinfound);
 
-		ArrayList<String> single = new ArrayList<String>();
-		single.add(proteinfound);
-		single.add(taxon);
-		addresses.add(single);
-		
+			//rowresult[0] = proteinfound;
+			//rowresult[1] = "taxon";
 
-		//result.add(rowresult);
-		
-        }
+			//result.add(proteinfound, "taxon");
 
-        return addresses;	
-    }
+			ArrayList<String> single = new ArrayList<String>();
+			single.add(proteinfound);
+			single.add(taxon);
+			addresses.add(single);
+
+
+			//result.add(rowresult);
+
+		}
+
+		return addresses;	
+	}
 	public static List<Biolsource> findTaxonomyProtein(String taxon) {
-        return
-            find.where()
-                .ilike("taxonomy", "%" + taxon + "%")
-                .findList();
-    }
+		return
+				find.where()
+				.ilike("taxonomy", "%" + taxon + "%")
+				.findList();
+	}
 
 	public static List<Biolsource> findBiolSourceIds(String protein) {
 		return
-			find.where().disjunction()
+				find.where().disjunction()
 				.ilike("swiss_prot", protein)
 				.ilike("protein", protein)
 				.findList();
 	}
-
+	
+	/*
+	 * Use to find a single swissprot id
+	 */
 	public static List<Biolsource> findBiolSourceIdsUniProt(String protein) {
-                return
-                        find.where().disjunction()
-                                .ilike("swiss_prot", protein)
-                                .findList();
-        }
+		return
+				find.where().disjunction()
+				.ilike("swiss_prot", protein)
+				.findList();
+	}
+	
+	/*
+	 * A few glycosuite entries have multiple accession ids 
+	 * Use this method where a single search is null
+	 */
+	public static List<Biolsource> findBiolSourceIdsUniProtMultiple(String protein){
+		return
+				find.where().disjunction()
+				.ilike("swiss_prot", "%" + protein + "%")
+				.findList();
+	}
 
 	public static List<Biolsource> findBiolSourceIdsName(String protein) {
-                return
-                        find.where().disjunction()
-                                .ilike("protein", protein)
-                                .findList();
-        } 
+		return
+				find.where().disjunction()
+				.ilike("protein", protein)
+				.findList();
+	} 
 
 
 	public static ArrayList<SqlRow> findBiolsourceRefs(String protein) {
-	List<SqlRow> listSql = null;
-                ArrayList<SqlRow> listSqlArray = new ArrayList<SqlRow>();
-                String proteinName = "";
-                ArrayList<Biolsource> biolSourceProtein = new ArrayList<Biolsource>();
-                List<Biolsource> biolSourceProteins = Biolsource.findBiolSourceIds(protein);
-                for(Biolsource biol : biolSourceProteins){
-                        proteinName = biol.protein;
-                        Biolsource objectBiolSource = Ebean.find(Biolsource.class, biol.id);
-                                biolSourceProtein.add(objectBiolSource);
+		List<SqlRow> listSql = null;
+		ArrayList<SqlRow> listSqlArray = new ArrayList<SqlRow>();
+		String proteinName = "";
+		ArrayList<Biolsource> biolSourceProtein = new ArrayList<Biolsource>();
+		List<Biolsource> biolSourceProteins = Biolsource.findBiolSourceIds(protein);
+		for(Biolsource biol : biolSourceProteins){
+			proteinName = biol.protein;
+			Biolsource objectBiolSource = Ebean.find(Biolsource.class, biol.id);
+			biolSourceProtein.add(objectBiolSource);
 
-                        listSql = Sourceref.findReferenceSource(biol.id);
-                        listSqlArray.addAll(listSql);
-                                
-                }
-	return listSqlArray;
+			listSql = Sourceref.findReferenceSource(biol.id);
+			listSqlArray.addAll(listSql);
+
+		}
+		return listSqlArray;
 	}
-    
+
 }
 

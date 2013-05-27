@@ -64,9 +64,14 @@ public class Application extends Controller {
 		List<DefinedSites> definedSites = null;
 
 		List<Biolsource> biolSourceProteins = null;
+		String warning = "";
 
 		if(protein.matches("[A-Z][0-9].*")) {
 			biolSourceProteins = Biolsource.findBiolSourceIdsUniProt(protein);
+			if(biolSourceProteins.isEmpty()){
+				biolSourceProteins = Biolsource.findBiolSourceIdsUniProtMultiple(protein);
+				warning = "GlycoSuiteDB records match multiple IDs containing " + protein;
+			}
 		}
 		else{
 			biolSourceProteins = Biolsource.findBiolSourceIdsName(protein);
@@ -89,6 +94,9 @@ public class Application extends Controller {
 		}
 
 		proteins = Proteins.findProteins(protein);
+		if(proteins.isEmpty()){
+			proteins = Proteins.findProteinSwissProtMulti(protein);
+		}
 
 		//problems with legacy feature of and in the swiss prot names
 		if(protein.matches("[A-Z][0-9].*")) {
@@ -97,14 +105,18 @@ public class Application extends Controller {
 			definedSites = DefinedSites.findProteinsDefined(protein);
 
 			String [] splitProtein = protein.split("\\s*[and]+\\s*");
-
+			
 			proteinMultiple = Proteins.findProteinsSwissProt(protein);
-
-
-			for(String partProtein : splitProtein) {
-				uniprotDetails = UniprotConnection.EntryRetrievalExample(partProtein);
-				sequenceRetrieval = UniprotConnection.EntryRetrievalSequence(partProtein);
+			if(proteinMultiple.isEmpty()){
+				proteinMultiple = Proteins.findProteinSwissProtMulti(protein);
 			}
+
+			if(!proteinMultiple.isEmpty()){
+			//for(String partProtein : splitProtein) {
+				uniprotDetails = UniprotConnection.EntryRetrievalExample(protein);
+				sequenceRetrieval = UniprotConnection.EntryRetrievalSequence(protein);
+			}
+			
 			//List<GsProteinSite> gsProteinSite = GsProteinSite.ProteinRetrieval(protein);
 			gsProteinSite = GsProteinStr2.ProteinRetrieval(protein);
 			//List<SitesReferences2> description = SitesReferences2.findSitesReferences(protein);
@@ -115,6 +127,8 @@ public class Application extends Controller {
 		if(!protein.matches("[A-Z][0-9].*")) {
 			generalSites = GeneralSites.findProteinsGeneralName(protein);
 			definedSites = DefinedSites.findProteinsDefinedName(protein);
+			
+			
 			proteinMultiple = Proteins.findProteinsName(protein);
 			//typeProteinEntry = "not swiss prot";	
 		}
@@ -127,26 +141,8 @@ public class Application extends Controller {
 			uniprotDetails.add("No info");
 		}
 
+		System.out.println("MUST CHECK");
 		List<com.avaje.ebean.SqlRow> proteinTax = Proteinsource.findProteinSource(protein);
-		
-		
-		/*List<Proteinsource> proteinsource = Proteinsource.findProteinsource(protein); //need to clean dups
-		List<Proteinsource> depdupeProteinsource =
-			    new ArrayList<Proteinsource>(new LinkedHashSet<Proteinsource>(proteinsource));
-		
-		HashSet test = new HashSet();
-		
-		
-		Set<Proteinsource> s = new HashSet<Proteinsource>(depdupeProteinsource);
-		
-		for(Proteinsource ss : s){
-			System.out.println("whats up   " + ss.div1 + " " + ss.div2 + " " + ss.div3 + " " + ss.div4 );
-			test.add(ss);
-		}
-		
-		for (Object test2 : test) {
-			System.out.println("help me " + test2.toString() );
-		}*/
 		
 
 		Object format = Cache.get("format");	
@@ -155,7 +151,7 @@ public class Application extends Controller {
 
 
 		return ok(
-				proteinsummary.render(notation, proteinName, protein, biolSourceProtein, proteins, uniprotDetails, gsProteinSite, referencesU, description, sequenceRetrieval, proteinMultiple, generalSites, definedSites, typeProteinEntry, swissProtName, proteinTax)
+				proteinsummary.render(warning, notation, proteinName, protein, biolSourceProtein, proteins, uniprotDetails, gsProteinSite, referencesU, description, sequenceRetrieval, proteinMultiple, generalSites, definedSites, typeProteinEntry, swissProtName, proteinTax)
 				);
 
 	}
@@ -191,7 +187,7 @@ public class Application extends Controller {
 	}
 
 	public static Result query() {
-		//Cache.set("item.key", "testing", 0);
+
 		List<String> taxonomy  = Taxonomy.findSpecies(); 
 		HashSet taxUnique = Taxonomy.findSpeciesUnique();
 
@@ -202,6 +198,8 @@ public class Application extends Controller {
 		HashSet proteinUnique = Proteins.proteinSummary();
 		HashSet pertubationUnique = GlycobaseSource.perturbationSummary();
 		proteinUnique.addAll(pertubationUnique);
+		
+		HashSet proteinAccession = Proteins.proteinAccessionSummary();
 
 
 		List<Tissue> foundTissue = null;
@@ -229,6 +227,7 @@ public class Application extends Controller {
 		String outputtissue = "";
 		String outputprotein = "";
 		List<String> outputlist = new ArrayList<String>();
+		ArrayList<Proteins> accSearch = new ArrayList<Proteins>();
 		List<String> outputtissuelist = new ArrayList<String>();
 		List<String> outputproteinlist = new ArrayList<String>();
 		int countGlycobase = 0;
@@ -254,6 +253,14 @@ public class Application extends Controller {
 
 
 			}*/
+			
+			if(key.equals("swiss")){
+				for (String querySwiss : searchTerms){
+					List<Proteins> proteinsTerm = Proteins.findProteinsSwissProt(querySwiss);
+					accSearch.addAll(proteinsTerm);
+				}
+				
+			}
 
 			if(key.equals("taxonomy")){
 				for (String queryTaxonomy : searchTerms) {
@@ -333,10 +340,10 @@ public class Application extends Controller {
 
 
 
-			return ok(query.render(taxonomy, taxonomyList, biolsource, listSql2, sourceUnique, proteinUnique, proteinList, tissueList, foundTissue, glycobaseFindPerturbation, /*glycobaseSqlArray, glycobaseSqlArrayTissue,*/ outputlist, countGlycobase, outputtissuelist, countTissueGlycobase, outputproteinlist, countProteinGlycobase));
+			return ok(query.render(taxonomy, taxonomyList, biolsource, listSql2, sourceUnique, proteinUnique, proteinList, tissueList, foundTissue, glycobaseFindPerturbation, /*glycobaseSqlArray, glycobaseSqlArrayTissue,*/ outputlist, countGlycobase, outputtissuelist, countTissueGlycobase, outputproteinlist, countProteinGlycobase, proteinAccession, accSearch));
 		}
 
-		return ok(query.render(taxonomy, taxonomyList, biolsource, listSql2, sourceUnique, proteinUnique, proteinList, tissueList, foundTissue, glycobaseFindPerturbation, /* glycobaseSqlArray, glycobaseSqlArrayTissue,*/ outputlist, countGlycobase, outputtissuelist, countTissueGlycobase, outputproteinlist, countProteinGlycobase));
+		return ok(query.render(taxonomy, taxonomyList, biolsource, listSql2, sourceUnique, proteinUnique, proteinList, tissueList, foundTissue, glycobaseFindPerturbation, /* glycobaseSqlArray, glycobaseSqlArrayTissue,*/ outputlist, countGlycobase, outputtissuelist, countTissueGlycobase, outputproteinlist, countProteinGlycobase, proteinAccession, accSearch));
 	}
 
 

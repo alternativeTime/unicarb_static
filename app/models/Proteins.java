@@ -51,9 +51,14 @@ public class Proteins extends Model {
            find.where().ilike("swiss_prot", protein).findList();
    }
    
+   public static List<Proteins> findProteinSwissProtMulti(String protein){
+	   return
+	           find.where().ilike("swiss_prot", "%" + protein + "%").findList();
+   }
+   
    public static List<Proteins> findProteinsName(String protein) {
         return
-           find.where().ilike("name", protein).findList();
+           find.where().ilike("name", "%" + protein + "%").findList();
    }
 
 
@@ -67,6 +72,19 @@ public class Proteins extends Model {
         }
 
     return proteinUnique;
+    }
+    
+    /*
+     * Find all accession ids
+     */
+    public static HashSet proteinAccessionSummary() {
+    	HashSet proteinAccession = new HashSet();
+    	List<Proteins> proteinAcc = Proteins.find.all();
+
+    	for (Proteins acc : proteinAcc) {
+    		proteinAccession.add(acc.swissProt);
+    	}
+    	return proteinAccession;
     }
 
     public static Page<Proteins> proteinpage(int page, int pageSize, String sortBy, String order, String filter) {

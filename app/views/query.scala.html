@@ -1,4 +1,4 @@
-@(taxonomy: List[String], taxon: ArrayList[Taxonomy],  biolsource: List[Biolsource], groupTax: List[List[String]], sources: HashSet[String], proteins: HashSet[String], proteinList: ArrayList[Proteins], tissueList: ArrayList[Tissue], tissueTerms: List[Tissue], glycobasePerturbation: List[GlycobaseSource], output: List[String], count: Integer, outputtissue: List[String], counttissue: Integer, outputprotein: List[String], countprotein: Integer)
+@(taxonomy: List[String], taxon: ArrayList[Taxonomy],  biolsource: List[Biolsource], groupTax: List[List[String]], sources: HashSet[String], proteins: HashSet[String], proteinList: ArrayList[Proteins], tissueList: ArrayList[Tissue], tissueTerms: List[Tissue], glycobasePerturbation: List[GlycobaseSource], output: List[String], count: Integer, outputtissue: List[String], counttissue: Integer, outputprotein: List[String], countprotein: Integer, proteinaccession: HashSet[String],  accsearch: ArrayList[Proteins])
 
 @main{
 
@@ -29,6 +29,27 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
 });
 });
 </script>
+
+<script>
+      $(document).ready(function(){
+        $("#e12").select2({
+          placeholder: "Select SwissProt ID...",
+          allowClear: true,
+        minimumInputLength: 1,
+        });
+        });
+</script>
+
+<script>
+      $(document).ready(function(){
+        $("#e13").select2({
+          placeholder: "Select SwissProt ID...",
+          allowClear: true,
+        minimumInputLength: 1,
+        });
+        });
+</script>
+
 
 <script>
       $(document).ready(function(){
@@ -157,6 +178,22 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
 </script>
 
 <script>
+        $(function() {
+        var myAcc = new Array();
+        @for(a <- proteinaccession){
+                myAcc.push("@a");
+        }
+        myAcc.sort();
+        options = '';
+        for (var i = 0; i < myAcc.length; i++) {
+                options += '<option value="' + myAcc[i] + '">' + myAcc[i] + '</option>';
+        }
+	$('#e12').html(options);
+	$('#e13').html(options);
+	});
+</script>
+
+<script>
 	$(function() {
         var mySources = new Array();
 	@for(s <- sources){
@@ -211,7 +248,7 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
       <div class="filterbar tabbable clearfix">
         <ul class="nav nav-tabs" id="myTabBar">
           <li class="title">Select a Structure Database: </li>
-          <li><a href="#filter1" data-toggle="tab">GlycoSuiteDB <span class="pull-right count">@if(taxon.size() != 0) {@taxon.size()} @if(proteinList.size() != 0) {@proteinList.size()} @if(tissueList.size() != 0) {@tissueList.size()}</span></a></li>
+          <li><a href="#filter1" data-toggle="tab">GlycoSuiteDB <span class="pull-right count">@if(taxon.size() != 0) {@taxon.size()} @if(proteinList.size() != 0) {@proteinList.size()} @if(tissueList.size() != 0) {@tissueList.size()} @if(accsearch != 0) {@accsearch.size()}</span></a></li>
           <li class=""><a href="#filter2" data-toggle="tab">EUROCarbDB</a></li>
           <li><a href="#filter3" data-toggle="tab">GlycoBase <span class="pull-right count"> @if(count != 0) {@count} @if(counttissue != 0) {@counttissue}</span></a></li> </ul>
       </div>
@@ -230,7 +267,7 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
       <ul class="nav nav-tabs row-fluid" id="myTab">
         <li class="active"><a href="#tab1" data-toggle="tab"><h2>Construct a Query:</h2></a></li>
         <li class="span12"><a class="returnedresults" href="#tab2" data-toggle="tab">
-          <h2>Search returned @if(taxon.size() != 0) {@taxon.size()} @if(proteinList.size() != 0) {@proteinList.size()} @if(tissueList.size() != 0) {@tissueList.size()} results...
+          <h2>Search returned @if(taxon.size() != 0) {@taxon.size()} @if(proteinList.size() != 0) {@proteinList.size()} @if(tissueList.size() != 0) {@tissueList.size()} @if(accsearch != 0) {@accsearch.size()} results...
           </h2>
           <a href="/query"><input type="button" value="Search Again" href="/query" class="btn btn-small pull-right"></a>
         </a></li>
@@ -255,6 +292,9 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
                 </label>
                 <label class="radio">
                   <input type="radio" name="glycosuitedbSearch" value="ProteinLocalisation"> <h4>Protein</h4>
+                </label>
+		<label class="radio">
+                  <input type="radio" name="glycosuitedbSearch" value="Accession"> <h4>Protein Acc</h4>
                 </label>
                 <label class="radio">
                   <input type="radio" name="glycosuitedbSearch" value="Composition"> <h4>Composition</h4>
@@ -294,6 +334,17 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
                   </form>
                 </label>
               </div>
+	      <div id="glycosuitedbAcc" class="controls">
+		<label class="checkbox">
+		   <form class="form-search">
+                    <!--<h4>Localisation</h4>-->
+		     <div id="selection" class="row-fluid">
+                      <select  name=swiss MULTIPLE id="e12" id="listBox" class="span10"></select>
+                      <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+                  </form>
+		</label>
+	      </div>
               <form id="glycosuitedbComposition" class="form-search controls" action="/compositions">
                 <!--<h4>Query by Composition</h4>-->
                 <div class='row-fluid'>
@@ -562,6 +613,26 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
     }
     }
 
+    @if(accsearch.size() != 0 ) {
+    <div class="row-fluid glycosuiteResult">
+      <div class="controls">
+        <label class="checkbox">
+          <form class="form-search">
+            <div id="selection">
+              <select  name=swiss MULTIPLE id="e13" style="width:350px"  id="listBox"></select>
+              <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+          </form>
+        </label>
+      </div>
+    </div>
+    @for(a <- accsearch) {
+    <div class="row-fluid glycosuiteResult">
+      <h3><a href="proteinsummary/@a.swissProt">@a.swissProt (@a.name)</a></h3>
+    </div>
+    }
+    }
+
     @for( (taxon, ii) <- taxon.zipWithIndex) {        <div class="row-fluid glycosuiteResult">
       <div class="details span9">
         <h3><a href="/taxonomysearch?taxonomy=@taxon.species">@taxon.species</a>@*<span class="pull-right"><span class="label success">Curated Entry</span> <span class="label notice">GlycoSuiteDB</span></span>*@</h3>
@@ -625,3 +696,15 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
   })
 </script>
 }
+
+@if(accsearch.size() != 0 ) {
+<script>
+  $(function () {
+    var test = 'first'; @* target this during page reload *@
+    $('#myTabBar a:' + test).tab('show');
+    $('#myTab a[href="#tab2"]').tab('show');
+  })
+</script>
+}
+
+
