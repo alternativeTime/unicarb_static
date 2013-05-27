@@ -16,55 +16,55 @@
       <h4 class="subheader"> Feature Table Link for @car </h4>
     </div>
 
-        <table class="computers table table-striped">
-            <thead>
-		<tr>
-                    <th>Title</th>
-                    <th>Year</th>
-                    <th>Authors</th>
-                    <th>Journal</th>
-                    <th>Associated Glycans</th>
-                </tr>
+    <table class="computers table table-striped">
 
-            </thead>
-            <tbody>
-		@for(reference <- ft) {
-                    <tr>
-                        <td><a href="references/@reference.id" style="text-decoration : none, font-color: #404040; ">@reference.title</a></td>
-                        <td>
-                            @if(reference.year < 1) {
-                                <em>-</em>
-                            } else {
-                                @reference.year
-                            }
-                        </td>
-                        <td>
-                            @if(reference.authors == null) {
-                                <em>-</em>
-                            } else {
-                                @reference.authors
-                            }
-                        </td>
-                        <td>
-                            @if(reference.journal == null) {
-                                <em>-</em>
-                            } else {
-                                @reference.journal.name                            }
-                        </td>
-                        <td>
-                           @reference.streference.size()
-                        </td>
-                    </tr>
-                }
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Year</th>
+          <th>Authors</th>
+          <th>Journal</th>
+          <th>Associated Glycans</th>
+        </tr>
+      </thead>
 
-            </tbody>
-        </table>
+      <tbody>
+        @for(reference <- ft) {
+        <tr>
+          <td><a href="references/@reference.id" style="text-decoration : none, font-color: #404040; ">@reference.title</a></td>
+          <td>
+            @if(reference.year < 1) {
+            <em>-</em>
+            } else {
+            @reference.year
+            }
+          </td>
+          <td>
+            @if(reference.authors == null) {
+            <em>-</em>
+            } else {
+            @reference.authors
+            }
+          </td>
+          <td>
+            @if(reference.journal == null) {
+            <em>-</em>
+            } else {
+            @reference.journal.name                            }
+          </td>
+          <td>
+            @reference.streference.size()
+          </td>
+        </tr>
+        }
 
-	
-      @views.html.footerunicarb.footerunicarb()    
+      </tbody>
+    </table>
+
+    @views.html.footerunicarb.footerunicarb()    
 
   </section>
-        
-}
 
-            
+  }
+
+

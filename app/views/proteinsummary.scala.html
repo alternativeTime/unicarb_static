@@ -175,7 +175,7 @@
           <div class='source'>
             <a id='toggle-taxonomy'><span class='label label-important'><span class='icon-leaf icon-white'></span> Taxonomy (@proteinsource.size()) <span class="caret"></span></span></a>
             <a id='toggle-protein'><span class='label label-warning'><span class='icon-map-marker icon-white'></span> Protein (1) <span class="caret"></span></span></a>
-            <a id='toggle-source'><span class='label label-success'><span class='icon-leaf icon-white'></span> Source  <span class="caret"></span></span></a>
+            <a id='toggle-source'><span class='label label-success'><span class='icon-leaf icon-white'></span> Source <span class="caret"></span></span></a>
           </div>
 
           <div>
@@ -190,6 +190,7 @@
               <li><span cclass='icon-map-marker icon-white'></span> <a href='../proteinsummary/@proteinName'>@proteinName</a></li>
             </ul>
             <ul id='more-source'>
+              <h3 id='less-source'><span class='icon-leaf icon-white'></span> Source</h3>
               @for(p <- proteinsource){
               <li><span class='icon-leaf icon-white'></span> <a href='../tissuesummary/@p.get("tissue_id")'>@p.get("div1") > @p.get("div2") > @p.get("div3") > @p.get("div4")</a></li>
               }
@@ -199,7 +200,7 @@
 
 
         <div class="info">
-          <h3>References @if(source.size() > 5) {showing top 5} <span class="label label-notice" style="font-size:16px">@source.size()</span> </h3>
+          <h3>References @if(source.size() > 5) {showing top <span class="label" style="font-size:16px">5</span>}else{ <span class="label" style="font-size:16px">@source.size()</span>} </h3>
           <ol>
             @for((source,i) <- source.zipWithIndex; if (i < 5)) {
             <li class="references">
