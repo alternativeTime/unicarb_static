@@ -32,6 +32,6 @@ public class SitesReferences extends Model {
 
     public static List<SitesReferences> findSites(String protein) {
         return
-           find.where().ilike("swiss_prot", protein).findList();
+           find.where().ilike("swiss_prot", "%" + protein + "%").findList();
     }
 }

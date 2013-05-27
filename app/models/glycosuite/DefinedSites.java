@@ -58,7 +58,7 @@ public class DefinedSites extends Model {
 
     public static List<DefinedSites> findProteinsDefined(String protein) {
         return
-           find.where().ilike("swiss_prot", protein).findList();
+           find.where().ilike("swiss_prot", "%" + protein + "%").findList();
     }
     
     public static List<DefinedSites> findProteinsDefinedName(String protein) {

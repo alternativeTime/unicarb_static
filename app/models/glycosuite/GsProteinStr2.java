@@ -59,7 +59,7 @@ public class GsProteinStr2 extends Model {
 
     public static List<GsProteinStr2> ProteinRetrieval(String accession) {
 	return
-	  find.where().ilike("swiss_prot", accession).findList();
+	  find.where().ilike("swiss_prot", "%" + accession + "%").findList();
 
     }
 

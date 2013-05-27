@@ -20,6 +20,10 @@ $(document).ready(function(){
     $("#queryproteinehide").toggle();
   });
 
+  $("#queryaccessioncheck").click(function() {
+    $("#queryaccessionhide").toggle();
+  });
+
   $("#querytaxonomycheck").click(function() {
     $("#querytaxonomyhide").toggle();
   });
@@ -37,6 +41,7 @@ $(document).ready(function(){
     if ($(this).val() === "Localisation") { $("#glycosuitedbLocalisation").show(); } else { $("#glycosuitedbLocalisation").hide(); }
     if ($(this).val() === "ProteinLocalisation") { $("#glycosuitedbAssociation").show(); } else { $("#glycosuitedbAssociation").hide(); }
     if ($(this).val() === "Composition") { $("#glycosuitedbComposition").show(); } else { $("#glycosuitedbComposition").hide(); }
+    if ($(this).val() === "Accession") { $("#glycosuitedbAcc").show(); } else { $("#glycosuitedbAcc").hide(); }
   });
 
   $("input[name='eurocarbdbSearch']").change(function() {

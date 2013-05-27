@@ -38,7 +38,7 @@ public class GeneralSites extends Model {
 
     public static List<GeneralSites> findProteinsGeneral(String protein) {
         return
-           find.where().ilike("swiss_prot", protein).findList();
+           find.where().ilike("swiss_prot", "%" + protein + "%").findList();
    }
 
    public static List<GeneralSites> findStructuresGeneral(String protein, String site) {
