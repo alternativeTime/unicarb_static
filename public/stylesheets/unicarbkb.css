@@ -797,7 +797,7 @@ h2.lead { margin: 30px 0; font-size: 25px; }
 
 #filter1 .controls, #filter2 .controls, #filter3 .controls { margin-top: 20px;}
 
-#glycosuitedbLocalisation, #glycosuitedbAssociation, #glycosuitedbComposition,
+#glycosuitedbLocalisation, #glycosuitedbAssociation, #glycosuitedbAcc, #glycosuitedbComposition,
 #eurocarbdbLocalisation, #eurocarbdbAssociation,
 #glycobaseLocalisation, #glycobaseAssociation, #glycobaseComposition {
     display: none;
