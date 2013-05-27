@@ -61,7 +61,7 @@
 
           <tbody>
             <tr>
-              <td>@generalSites.glyco_aa_site.replace("N-", "ASN-").replace("Asn-", "ASN-").replace("S-", "SER-").replace("Ser-", "SER-").replace("T-", "THR-").replace("Thr-", "THR-")</td>
+              <td>@generalSites.glyco_aa_site.replace("N-", "ASN-").replace("Asn-", "ASN-").replace("S-", "SER-").replace("Ser-", "SER-").replace("T-", "THR-").replace("Thr-", "THR-").replace("ASASN-", "ASN-")</td>
               <td>
                 <a href="/proteinsite?position=@generalSites.glyco_aa_site&protein=@accession&type=general">
                   <span class="label label-notice"><i class='icon-th icon-white'></i> 
@@ -93,7 +93,7 @@
           <tbody>
             @for(definedSites <- definedSites) {
             <tr>
-              <td>@definedSites.amino_acid_position.replace("N-", "ASN-").replace("Asn-", "ASN-").replace("S-", "SER-").replace("Ser-", "SER-").replace("T-", "THR-").replace("Thr-", "THR-")</td>
+              <td>@definedSites.amino_acid_position.replace("N-", "ASN-").replace("Asn-", "ASN-").replace("S-", "SER-").replace("Ser-", "SER-").replace("T-", "THR-").replace("Thr-", "THR-").replace("ASASN-", "ASN-")</td>
               <td>
                 <a href="/proteinsite?position=@definedSites.amino_acid_position&protein=@accession&type=defined">
                   <span class="label label-notice"><i class='icon-th icon-white'></i>
