@@ -46,7 +46,7 @@
           @for(gs <- proteinSite) {   
           @for(gss <- gs.gsProteinSiteStr2) {
           <tr>
-            <td>@gss.glyco_aa_site.replace("N-", "ASN-").replace("Asn-", "ASN-").replace("S-", "SER-").replace("Ser-", "SER-").replace("T-", "THR-").replace("Thr-", "THR-")</td>
+            <td>@gss.glyco_aa_site.replace("N-", "ASN-").replace("Asn-", "ASN-").replace("S-", "SER-").replace("Ser-", "SER-").replace("T-", "THR-").replace("Thr-", "THR-").replace("ASASN-", "ASN-")</td>
             <td>
               <a href="/proteinsite?position=@gss.glyco_aa_site&protein=@accession">
                 <span class="label label-notice"><i class='icon-th icon-white'></i> 
@@ -103,7 +103,7 @@
           <li class="references">
             <p class="title"><a href='/references/@source.get("id")'>@source.get("title")</a></p>
             <p class="author">@source.get("authors")</p>
-            <p class="ref">PubMed: <a href='http://www.ncbi.nlm.nih.gov/pubmed/@source.get("pmid")'></a>@source.get("pmid")</p>
+            <p class="ref">PubMed: <a href='http://www.ncbi.nlm.nih.gov/pubmed/@source.get("pmid")'>@source.get("pmid")</a> Year: @source.get("year")</p>
           </li>
           }
 
