@@ -267,7 +267,7 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
       <ul class="nav nav-tabs row-fluid" id="myTab">
         <li class="active"><a href="#tab1" data-toggle="tab"><h2>Construct a Query:</h2></a></li>
         <li class="span12"><a class="returnedresults" href="#tab2" data-toggle="tab">
-          <h2>Search returned @if(taxon.size() != 0) {@taxon.size()} @if(proteinList.size() != 0) {@proteinList.size()} @if(tissueList.size() != 0) {@tissueList.size()} @if(accsearch != 0) {@accsearch.size()} results...
+          <h2>Search returned @if(taxon.size() != 0) {@taxon.size()} @if(proteinList.size() != 0) {@proteinList.size()} @if(tissueList.size() != 0) {@tissueList.size()} @if(!accsearch.isEmpty()  ) {@accsearch.size()} results...
           </h2>
           <a href="/query"><input type="button" value="Search Again" href="/query" class="btn btn-small pull-right"></a>
         </a></li>
