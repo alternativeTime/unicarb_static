@@ -11,7 +11,8 @@ object ApplicationBuild extends Build {
       // Add your project dependencies here,
       //	"com.github.play2war" %% "play2-war-core" % "0.3",
 	 "org.hibernate" % "hibernate-entitymanager" % "3.6.9.Final",
-	 javaCore, javaJdbc, javaEbean, anorm, jdbc, javaJpa, filters
+	 javaCore, javaJdbc, javaEbean, anorm, jdbc, javaJpa, filters,
+	 "com.jolbox" % "bonecp" % "0.8.0-rc1"
     )
 
     val main = play.Project(appName, appVersion, appDependencies).settings(
