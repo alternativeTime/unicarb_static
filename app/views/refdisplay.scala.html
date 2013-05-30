@@ -1,4 +1,4 @@
-@(notation: String, message: String, references: List[Reference], refmethods: List[Reference], taxsources: ArrayList[String], proteinsources: ArrayList[String], prot: ArrayList[String] )
+@(notation: String, message: String, references: List[Reference], refmethods: List[Reference], taxsources: ArrayList[String], proteinsources: ArrayList[Biolsource], prot: ArrayList[String] )
 @import helper._
 
 
@@ -56,7 +56,7 @@
           <ul id='more-protein'>
             <h3 id='less-protein'><span class='icon-map-marker icon-white'></span> Protein</h3>
             @for(protein <- proteinsources){
-            <li><span class='icon-map-marker icon-white'></span> <a href='/proteinsummary/@prot'>@protein</a></li>
+            <li><span class='icon-map-marker icon-white'></span> <a href='/proteinsummary/@protein.protein'>@protein.protein</a></li>
             }
           </ul>
         </div>

@@ -45,6 +45,7 @@ public class Application extends Controller {
 		
 		try{
 		protein = URLDecoder.decode(protein, "UTF-8");
+		System.out.println("decoded -- " + protein);
 		} catch (Exception e){
 			
 		}
@@ -139,6 +140,10 @@ public class Application extends Controller {
 			//typeProteinEntry = "not swiss prot";	
 		}
 
+		if(protein.contains("and") || protein.contains("AND") ) {
+			typeProteinEntry = "not swiss prot";
+		}		
+
 		if (swissProtName == null) {
 			typeProteinEntry = "not swiss prot";
 		}	
@@ -153,7 +158,18 @@ public class Application extends Controller {
 
 		Object format = Cache.get("format");	
 		String notation = "gs";
-		if(format != null) {notation = (String) format.toString();}	
+		if(format != null) {notation = (String) format.toString();}
+		
+		HashSet<String> uniqueStructures = new HashSet<String>();
+		
+		for(Proteins p : proteinMultiple){
+			List<Stproteins> stproteins = p.stproteins;
+			for(Stproteins s : stproteins){
+				System.out.println("check structures " + s.structure.id);
+				uniqueStructures.add( String.valueOf(s.structure.id) );
+				
+			}
+		}
 
 
 		return ok(
@@ -250,15 +266,6 @@ public class Application extends Controller {
 				searchTerms = entry.getValue();
 			}
 
-			/*if(key.contains("comp")) {
-			String out =  Structure.buildComposition(searchTerms);
-			System.out.println("output is " + out);
-			List<Structure> compositions = Structure.findComposition(out);
-
-			return ok(compositions.render(compositions));
-
-
-			}*/
 			
 			if(key.equals("swiss")){
 				for (String querySwiss : searchTerms){
@@ -437,25 +444,25 @@ public class Application extends Controller {
 		List<Method> m = Method.findmethod(id);
 		List<Reference> u = Reference.findRefMethods(id);
 
+		/*
 		for (Reference r : t ) {
 			List<Sourceref> biol = r.sourceref;		
-		}
+		} */
 
 		ArrayList taxsources = new ArrayList();
 		ArrayList proteinsources = new ArrayList();
 		ArrayList protsources = new ArrayList();
 		HashSet hs = new HashSet();
-		HashSet proteinHs = new HashSet();
+		HashSet<Biolsource> proteinHs = new HashSet<Biolsource>();
 		HashSet swissHs = new HashSet();
 
 		for (Reference taxfind : u){
 			List<Sourceref> source = taxfind.sourceref;
 			for (Sourceref tax : source){
 				hs.add(tax.biolsource.taxonomy);
-				proteinHs.add(tax.biolsource.protein);
+				proteinHs.add(tax.biolsource); //.protein);
 				swissHs.add(tax.biolsource.swiss_prot);
-				//String taxsource = tax.biolsource.taxonomy;
-				//taxsources.add(taxsource); 
+				System.out.println("test --- " + tax.biolsource.swiss_prot);
 			}
 		}
 
