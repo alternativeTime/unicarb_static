@@ -1,4 +1,4 @@
-@(notation: String, sequence: String, accession: String, source: ArrayList[com.avaje.ebean.SqlRow], site: String, structures: ArrayList[Long], taxsources: Proteinstaxonomy, taxsourceslist: List[Proteinstaxonomy], multicar: HashSet[String]) 
+@(notation: String, sequence: String, accession: String, source: ArrayList[com.avaje.ebean.SqlRow], site: String, structures: ArrayList[Long], taxsources: Proteinstaxonomy, taxsourceslist: List[Proteinstaxonomy], multicar: HashSet[String], proteinFromTax: String) 
 
 @main {
 
@@ -14,8 +14,13 @@
   <div class="page-header row-fluid">
     <h1>Associated Structures</h1>
     @if(taxsources != null ){
-    <h4 class="subheader span8">Accession: <a href='/proteinsummary/@accession'>@accession</a> (@taxsources.protein)
-      <span class="pull-right"><a href="http://uniprot.org/uniprot/@accession"><span class='label label-light'>UniProt Entry</span></a></span>
+    <h4 class="subheader span8">Accession: <a href='/proteinsummary/@accession'>@accession</a> <br/>@taxsources.protein
+      <span class="pull-right"><a href="http://uniprot.org/uniprot/@accession"><span class='label label-light'>UniProtKB/SWISS-PROT Entry</span></a></span>
+    </h4>
+    }
+    @if(taxsources == null ){
+    <h4 class="subheader span8">Accession: <a href='/proteinsummary/@accession'>@accession</a> @for(car <- multicar) {<br/>@car } 
+      <span class="pull-right"><a href="http://uniprot.org/uniprot/@accession"><span class='label label-light'>UniProtkb/swiss-prot Entry</span></a></span>
     </h4>
     }
   </div>

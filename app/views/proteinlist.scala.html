@@ -123,7 +123,7 @@
                     <tr>
 			<td>
 			@if(protein.swissProt == null) {
-			<a href="proteinsummary/@java.net.URLEncoder.encode(protein.name, "utf-8")" style="text-decoration : none, font-color: #404040; ">@protein.name</a></td>
+			<a href="proteinsummary/@helper.urlEncode(protein.name)" style="text-decoration : none, font-color: #404040; ">@protein.name</a></td>
 			}
 			@if(protein.swissProt != null) {
 			<a href="proteinsummary/@protein.swissProt" style="text-decoration : none, font-color: #404040; ">@protein.name</a></td>

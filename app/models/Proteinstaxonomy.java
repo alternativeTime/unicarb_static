@@ -40,7 +40,7 @@ public class Proteinstaxonomy extends Model {
 				.ilike("protein", protein)
 				.findUnique();
 		} catch(Exception e)  {
-		System.out.println("here we go " + e) ;
+		System.out.println("Error with Protein Tax query" + e) ;
 		}
 		return null;
     

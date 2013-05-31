@@ -59,13 +59,10 @@ public class Application extends Controller {
 		ArrayList<Biolsource> biolSourceProtein = new ArrayList<Biolsource>();
 		String accession = "";
 		List<Proteins> proteins = null;
-		//List<String> uniprotDetails = null;
 		List<String> uniprotDetails = new ArrayList<String>();
-		//List<SitesReferences> description = null ;
 		List<SitesReferences> description = new ArrayList<SitesReferences>();
 		List<GsProteinStr2> gsProteinSite = null;
 		String sequenceRetrieval = "";
-		//List<Proteins> proteinMultiple = null;
 		List<Proteins> proteinMultiple = new ArrayList<Proteins>();
 		List<GeneralSites> generalSites = null;
 		List<DefinedSites> definedSites = null;
@@ -148,11 +145,6 @@ public class Application extends Controller {
 			typeProteinEntry = "not swiss prot";
 		}	
 
-		if (uniprotDetails.isEmpty()) {
-			uniprotDetails.add("No info");
-		}
-
-		System.out.println("MUST CHECK");
 		List<com.avaje.ebean.SqlRow> proteinTax = Proteinsource.findProteinSource(protein);
 		
 
@@ -170,7 +162,6 @@ public class Application extends Controller {
 				
 			}
 		}
-
 
 		return ok(
 				proteinsummary.render(warning, notation, proteinName, protein, biolSourceProtein, proteins, uniprotDetails, gsProteinSite, referencesU, description, sequenceRetrieval, proteinMultiple, generalSites, definedSites, typeProteinEntry, swissProtName, proteinTax)

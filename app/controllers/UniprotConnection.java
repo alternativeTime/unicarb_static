@@ -164,6 +164,8 @@ public class UniprotConnection extends Controller {
 		List<Biolsource> biolSourceProteins = Biolsource.findBiolSourceIds(protein);
 		HashSet taxsources = new HashSet();
 		HashSet multiCAR = new HashSet();
+
+		String proteinFromTax = "";
 	
 		Proteinstaxonomy proteinstax = Proteinstaxonomy.findProteinTax(protein);
 		if (proteinstax == null ) {
@@ -275,8 +277,20 @@ public class UniprotConnection extends Controller {
 		String notation = "gs";
 		if(format != null) {notation = (String) format.toString();}
 
+		proteinstax = Proteinstaxonomy.findProteinTax(protein);	
+                if (proteinstax == null ) {
+                //this means we have a multi car to protein link in glycobase
+                proteinstaxList = Proteinstaxonomy.findProteinsTax(protein);
+                for(Proteinstaxonomy p : proteinstaxList){
+			multiCAR.add(p.protein);
+			System.out.println("HELP " + p.protein);
+			proteinFromTax = p.protein;
+                }
+                }
+
+
 		return ok(
-				proteinsite.render(notation, sequenceRetrieval,  protein, biolRefs, site, structuresShow,  proteinstax, proteinstaxList, multiCAR)
+				proteinsite.render(notation, sequenceRetrieval,  protein, biolRefs, site, structuresShow,  proteinstax, proteinstaxList, multiCAR, proteinFromTax)
 				);
 	}
 
@@ -304,6 +318,8 @@ public class UniprotConnection extends Controller {
 		HashSet taxsources = new HashSet();
 		ArrayList taxsourcesUnique = new ArrayList();
 		HashSet multiCAR = new HashSet();
+
+		String proteinFromTax = "";
 
 		List<Ftmerge> fts;
 
@@ -374,8 +390,20 @@ public class UniprotConnection extends Controller {
 		if(format != null) {notation = (String) format.toString();}
 
 
+		proteinstax = Proteinstaxonomy.findProteinTax(protein);
+                if (proteinstax == null ) {
+                //this means we have a multi car to protein link in glycobase
+                proteinstaxList = Proteinstaxonomy.findProteinsTax(protein);
+                for(Proteinstaxonomy p : proteinstaxList){
+                        multiCAR.add(p.protein);
+                        System.out.println("HELP " + p.protein);
+                        proteinFromTax = p.protein;
+                }
+                }
+
+
 		return ok(
-				proteinsite.render(notation, sequenceRetrieval,  protein, biolRefs, site, structuresShow,  proteinstax, proteinstaxList, multiCAR )
+				proteinsite.render(notation, sequenceRetrieval,  protein, biolRefs, site, structuresShow,  proteinstax, proteinstaxList, multiCAR, proteinFromTax )
 				);
 
 	}
