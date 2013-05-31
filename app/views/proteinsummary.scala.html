@@ -142,22 +142,22 @@
 
       <div class='notes'>
         <h3>Notes</h3>
-        <p>Accompanying GlycoSuite information</p>
+        <p>Accompanying information sourced from GlycoSuiteDB</p>
         @if(!description.isEmpty() ) {
+	<ol>
         @for(d <- description){
-        <ol>
-          <li>@d.glyco_aa_site.replace("N-", "ASN-").replace("Asn-", "ASN-").replace("S-", "SER-").replace("Ser-", "SER-").replace("T-", "THR-").replace("Thr-", "THR-")</li>
-        </ol>
-        }}
+          <li class="references">@d.glyco_aa_site.replace("N-", "ASN-").replace("Asn-", "ASN-").replace("S-", "SER-").replace("Ser-", "SER-").replace("T-", "THR-").replace("Thr-", "THR-").replace("ASASN-", "ASN-").replaceAll("(^, )", "").trim</li>
+        }
+	</ol>}
       </div>
 
-      <div class='history'>
+      @*<div class='history'>
         <h3>History</h3>
         <label>Integrated:</label>
         <div class="controls">2010-03-01</div>
         <label>Last updated:</label>
         <div class="controls">2012-11-02</div>
-      </div>
+      </div>*@
 
     </div><!-- /col -->
 
