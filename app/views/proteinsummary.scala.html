@@ -6,7 +6,7 @@
 
 <ul class="breadcrumb">
   <li><i class="icon-home" ></i><a href="#"> UniCarbKB</a> <span class="divider">></span></li>
-  <li><i class="icon-map-marker" ></i><a href="/query"> Protein</a> <span class="divider">></span></li>
+  <li><i class="icon-map-marker" ></i><a href="/proteins"> Protein</a> <span class="divider">></span></li>
   <li class="active" > @proteinName</li>
 </ul>
 
@@ -196,7 +196,7 @@
               <h3 id='less-source'><span class='icon-leaf icon-white'></span> Source</h3>
               @for(p <- proteinsource){
               <li><span class='icon-leaf icon-white'></span> <a href='../tissuesummary/@p.get("tissue_id")'>@p.get("div1") > @p.get("div2") > @p.get("div3") > @p.get("div4")</a></li>
-              }
+             }
             </ul>   
           </div>
         </div>
