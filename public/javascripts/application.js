@@ -93,6 +93,11 @@ $(document).ready(function(){
     $("#more-source").toggle();
   });
 
+  //References
+  $("#show-references, #show-more-references").click(function() {
+    $("#more-references").toggle();
+  });
+
 
 
 });

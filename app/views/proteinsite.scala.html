@@ -81,8 +81,8 @@
       <div class="info">
         <h3>Biological Associations</h3>
         <div class='taxonomy'>
-          <a id='toggle-taxonomy'><span class='label label-important'><span class='icon-tags icon-white'></span> Taxonomy <span class="caret"></span></span></a>
-          <a id='toggle-protein'><span class='label label-warning'><span class='icon-map-marker icon-white'></span> Protein <span class="caret"></span></span></a>
+          <a id='toggle-taxonomy'><span class='label label-important'><span class='icon-tags icon-white'></span> Taxonomy @if(taxsources != null) {"1"} else {(0)} <span class="caret"></span></span></a>
+          <a id='toggle-protein'><span class='label label-warning'><span class='icon-map-marker icon-white'></span> Protein @if(taxsources != null) {(1)} else {(0)} <span class="caret"></span></span></a>
         </div>
         <div class='taxonomy'>
           <ul id='more-taxonomy'>
@@ -100,16 +100,32 @@
         </div>
       </div>
       <div class="info">
-        <h3>Reference @if(source.size() > 5) {showing top 5} <span class="label" style="font-size:16px">@source.size()</span></h3>
+        <h3>Reference @if(source.size() > 5) {showing top 5} <span id='show-references' class="label" style="font-size:16px"><a href="#4">@source.size()</a></span></h3>
         <ol>
           @*	{source().list.map { source => <tr><td> {source.id}</td></tr> }} *@
 
           @for((source,i) <- source.zipWithIndex; if (i < 5)) {
           <li class="references">
-            <p class="title"><a href='/references/@source.get("id")'>@source.get("title")</a></p>
+            <p class="title"><a name='@i' href='/references/@source.get("id")'>@source.get("title")</a></p>
             <p class="author">@source.get("authors")</p>
             <p class="ref">PubMed: <a href='http://www.ncbi.nlm.nih.gov/pubmed/@source.get("pmid")'>@source.get("pmid")</a> Year: @source.get("year")</p>
           </li>
+          }
+          <div id='more-references'>
+          @for((source,i) <- source.zipWithIndex; if (i > 5)) {
+          <li class="references">
+            <p class="title"><a name='@i' href='/references/@source.get("id")'>@source.get("title")</a></p>
+            <p class="author">@source.get("authors")</p>
+            <p class="ref">PubMed: <a href='http://www.ncbi.nlm.nih.gov/pubmed/@source.get("pmid")'>@source.get("pmid")</a> Year: @source.get("year")</p>
+          </li>
+          }
+          </div>
+          @if(source.size() > 5) {
+          <div id='show-more-references' class='more-structures' href='#'>
+            See more references
+            <br />
+            <span>&#9679; &#9679; &#9679;</span>
+          </div>
           }
 
         </ol>

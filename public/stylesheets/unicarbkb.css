@@ -209,6 +209,8 @@ p.builder {
   text-transform: uppercase; text-shadow: none; white-space: nowrap;
   -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px;
 }
+.label a { color: #FFF; }
+.label a:hover { color: #FFF; }
 a .label:hover { background: #2E3A43; }
 
 .sidebar .label { margin-bottom: 10px; }
@@ -872,6 +874,11 @@ label.radio { padding-left: 20px; width: auto; display: inline-block; }
 .info .references .title { margin: 0; font-weight: bold; color: #4B5C66; }
 .info .references .author { margin-bottom: 0; }
 
+#more-references { display: none; }
+#show-references, #show-more-references {
+    text-align: center;
+    cursor: pointer;
+}
 
 /* !LAYOUT - !TAXONOMY DESCRIPTION /////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////

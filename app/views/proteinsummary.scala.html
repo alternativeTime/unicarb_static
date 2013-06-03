@@ -123,10 +123,10 @@
         </ul>
         <ul id='more-thumbnails' class="structures clearfix">
           @for(s <- proteinMultiple) { 
-          @for(s <- s.stproteins ){
-          <li class="span5">
+          @for((s, i) <- s.stproteins.zipWithIndex; if (i >5) ){
+          <li>
             <a href="@routes.Application.structureDetails(s.structure.id)">
-              <img src="../images/@notation/_@{s.structure.id}.png" alt="">
+              <img class="sugar_image" src="../images/@notation/_@{s.structure.id}.png" alt="">
             </a>
           </li>
           }}
@@ -203,15 +203,33 @@
 
 
         <div class="info">
-          <h3>References @if(source.size() > 5) {showing top 5} <span class="label" style="font-size:16px">@source.size()</span></h3>
+          <h3>References @if(source.size() > 5) {showing top 5} <span id='show-references' class="label" style="font-size:16px"><a href="#4">@source.size()</a></span></h3>
           <ol>
             @for((source,i) <- source.zipWithIndex; if (i < 5)) {
             <li class="references">
-              <p class="title"><a href='/references/@source.id'>@source.title</a></p>
+              <p class="title"><a name='@i' href='/references/@source.id'>@source.title</a></p>
               <p class="author">@source.authors</p>
               <p class="ref">PubMed: <a href='http://www.ncbi.nlm.nih.gov/pubmed/@source.pmid'>@source.pmid</a> Year: @source.year</p>
             </li>
             }
+            <div id='more-references'>
+              @for((source,i) <- source.zipWithIndex; if (i > 5)) {
+              <li class="references">
+                <p class="title"><a name='@i' href='/references/@source.id'>@source.title</a></p>
+                <p class="author">@source.authors</p>
+                <p class="ref">PubMed: <a href='http://www.ncbi.nlm.nih.gov/pubmed/@source.pmid'>@source.pmid</a> Year: @source.year</p>
+              </li>
+              }
+            </div>
+            @if(source.size() > 5) {
+            <div id='show-more-references' class='more-structures' href='#'>
+              See more references
+              <br />
+              <span>&#9679; &#9679; &#9679;</span>
+            </div>
+            }
+
+
           </ol>         
         </div>
 

@@ -57,12 +57,12 @@
     <ul class="structures clearfix">
       @for((s, i) <- taxon.strtaxonomy.zipWithIndex; if (i <=5) ){
         <li class="span5">
-	  @views.html.format.structure(notation, s.structure.id)  
+          @views.html.format.structure(notation, s.structure.id)  
         </li>
       }
     </ul>
     <ul id='more-thumbnails' class='structures clearfix'>
-      @for(s <- taxon.strtaxonomy ){
+      @for((s, i) <- taxon.strtaxonomy.zipWithIndex; if (i >=6) ){
         <li class="span5">
  	  @views.html.format.structure(notation, s.structure.id)
         </li>
