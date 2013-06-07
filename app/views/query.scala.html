@@ -3,6 +3,13 @@
 @main{
 
 <script>
+  $(function() {
+  $(".glycanType .btn").click(function() {
+    $("#glycanType").val($(this).text());
+  }); }); 
+</script>
+
+<script>
 $(document).ready(function() {
 $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
   e.target // activated tab
@@ -346,34 +353,42 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
 		</label>
 	      </div>
               <form id="glycosuitedbComposition" class="form-search controls" action="/compositions">
-                <!--<h4>Query by Composition</h4>-->
+                <h4>Glycan Type</h4>
+		<input type="hidden" name="glycanType" id="glycanType" value="" />
+		<div class="btn-group glycanType" data-toggle="buttons-radio">
+  	     	    <button type="button" class="btn btn-primary" data-value="N-LINKED">N-Linked</button>
+  		    <button type="button" class="btn btn-primary" data-value="O-LINKED">O-Linked</button>
+                </div>
+		<br />
+
+		<h4>Monosaccharide Residues</h4>
                 <div class='row-fluid'>
-                  <label class='checkbox span4'><input class="span2" name=comp type=text> Hex</label>
-                  <label class='checkbox span4'><input class="span2" name=comp type=text> HexNAc</label>
-                  <label class='checkbox span4'><input class="span2" name=comp type=text> dHex</label>
+                  <label class='checkbox span4'><input class="span2" name=comp_Hexose type=text> Hex</label>
+                  <label class='checkbox span4'><input class="span2" name=comp_HexNAc type=text> HexNAc</label>
+                  <label class='checkbox span4'><input class="span2" name=comp_deoxyHexose type=text> dHex</label>
                 </div>
 
                 <div class='row-fluid'>
-                  <label class='checkbox span4'><input class="span2" name=comp type=text> NeuAc</label>
-                  <label class='checkbox span4'><input class="span2" name=comp type=text> NeuGc</label>
-                  <label class='checkbox span4'><input class="span2" name=comp type=text> Pentose</label>
+                  <label class='checkbox span4'><input class="span2" name=comp_NeuAc type=text> NeuAc</label>
+                  <label class='checkbox span4'><input class="span2" name=comp_NeuGc type=text> NeuGc</label>
+                  <label class='checkbox span4'><input class="span2" name=comp_pentose type=text> Pentose</label>
                 </div>
 
                 <div class='row-fluid'>
-                  <label class='checkbox span4'><input class="span2" name=comp type=text> Sulphate</label>
-                  <label class='checkbox span4'><input class="span2" name=comp type=text> Phosphate</label>
-                  <label class='checkbox span4'><input class="span2" name=comp type=text> KDN</label>
+                  <label class='checkbox span4'><input class="span2" name=comp_sulfate type=text> Sulphate</label>
+                  <label class='checkbox span4'><input class="span2" name=comp_phosphate type=text> Phosphate</label>
+                  <label class='checkbox span4'><input class="span2" name=comp_KDN type=text> KDN</label>
                 </div>
 
                 <div class='row-fluid'>
-                  <label class='checkbox span4'><input class="span2" name=comp type=text> KDO</label>
-                  <label class='checkbox span4'><input class="span2" name=comp type=text> HexA</label>
-                  <label class='checkbox span4'><input class="span2" name=comp type=text> Methyl</label>
+                  <label class='checkbox span4'><input class="span2" name=comp_KDO type=text> KDO</label>
+                  <label class='checkbox span4'><input class="span2" name=comp_HexA type=text> HexA</label>
+                  <label class='checkbox span4'><input class="span2" name=comp_methyl type=text> Methyl</label>
                 </div>
 
                 <div class='row-fluid'>
-                  <label class='checkbox span4'><input class="span2" name=comp type=text> Acetyl</label>
-                  <label class='checkbox span4'><input class="span2" name=comp type=text> Other</label>
+                  <label class='checkbox span4'><input class="span2" name=comp_acetyl type=text> Acetyl</label>
+                  <label class='checkbox span4'><input class="span2" name=comp_other type=text> Other</label>
                 </div>
 
                 <div class='row-fluid'>

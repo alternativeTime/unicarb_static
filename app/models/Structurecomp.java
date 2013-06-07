@@ -15,6 +15,8 @@ public class Structurecomp {
 	public Long id;
 	public String glycanst;
 	public String compositionId;
+		
+	public String glycanType;
 	
 	@ManyToOne
 	public Structure structure;
@@ -25,11 +27,22 @@ public class Structurecomp {
 	 * 
 	 * Find matching composition string used in glycosuite
 	 */
-	public static List<Structurecomp> findStructurecomp(String compositionId){
+	public static List<Structurecomp> findStructurecomp(String compositionId, String glycanType){
+
+		if(glycanType != null) {
 		return find
 				.where()
 				.eq("compositionId", compositionId)
+				.ieq("glycanType", glycanType)
 				.findList();
+		}
+		else{
+		return find
+                                .where()
+                                .eq("compositionId", compositionId)
+                                .findList();
+
+		}
 	}
 
 }

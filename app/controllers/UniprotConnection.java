@@ -276,6 +276,10 @@ public class UniprotConnection extends Controller {
 		Object format = Cache.get("format");
 		String notation = "gs";
 		if(format != null) {notation = (String) format.toString();}
+		else{
+                Cache.set("format", "gs", 0);
+                }
+
 
 		proteinstax = Proteinstaxonomy.findProteinTax(protein);	
                 if (proteinstax == null ) {
@@ -388,6 +392,10 @@ public class UniprotConnection extends Controller {
 		Object format = Cache.get("format");
 		String notation = "gs";
 		if(format != null) {notation = (String) format.toString();}
+		else{
+                Cache.set("format", "gs", 0);
+                }
+
 
 
 		proteinstax = Proteinstaxonomy.findProteinTax(protein);

@@ -22,9 +22,6 @@ import static play.libs.Json.*;
 import java.net.URLDecoder;
 import java.io.UnsupportedEncodingException;
 
-/**
- * Manage a database of computers
- */
 public class Application extends Controller {
 
 	/**
@@ -151,7 +148,10 @@ public class Application extends Controller {
 		Object format = Cache.get("format");	
 		String notation = "gs";
 		if(format != null) {notation = (String) format.toString();}
-		
+		else{
+		Cache.set("format", "gs", 0);
+		}
+	
 		HashSet<String> uniqueStructures = new HashSet<String>();
 		
 		for(Proteins p : proteinMultiple){
@@ -170,27 +170,111 @@ public class Application extends Controller {
 	}
 
 	public static Result compositions() {
-		//List<Structure> compositionResult = null;
+		
 		List<Structurecomp> compositionResult = null;
+		String type = "";
 		
 		Object format = Cache.get("format");	
 		String notation = "gs";
 		if(format != null) {notation = (String) format.toString();}
+		else{
+                Cache.set("format", "gs", 0);
+                }
+		
+		int e = 0;
+		String[] list = new String[14];
+
 
 		if (request().queryString().size() > 0  ) {
 			Map<String, String[]> params = request().queryString();
 			String[] searchTerms = null;
+
 			String key = null;
+			String out = "";
+			String glycanType[] = new String[1] ;
+			String g = "";
 			for (Map.Entry<String, String[]> entry : params.entrySet() ){
-				key = entry.getKey();
+				key = entry.getKey().toString();
 				searchTerms = entry.getValue();
-			}
-			if(key.contains("comp")) {
-				String out =  Structure.buildComposition(searchTerms);
-				//compositionResult = Structure.findComposition(out);
+				System.out.println("HJHEHEHEHE ----- " + searchTerms.toString() );
+
+				if(key.equals("glycanType")){
+				glycanType = searchTerms;
+				}
 				
-				compositionResult = Structurecomp.findStructurecomp(out);
+				if(key.equals("comp_Hexose")) {
+				list[0] = Structure.buildComposition(searchTerms);				
+				}
+
+				if(key.equals("comp_HexNAc")) {
+				list[1] = Structure.buildComposition(searchTerms);
+                                }
+
+				if(key.equals("comp_deoxyHexose")) {
+				list[2] = Structure.buildComposition(searchTerms);
+                                }
+				
+				if(key.equals("comp_pentose")) {
+				list[5] = Structure.buildComposition(searchTerms);
+                                }
+
+				if(key.equals("comp_NeuAc")) {
+				list[3] = Structure.buildComposition(searchTerms);
+                                }
+
+				if(key.equals("comp_NeuGc")) {
+				list[4] = Structure.buildComposition(searchTerms);
+                                }
+
+				if(key.equals("comp_KDN")) {
+				list[8] = Structure.buildComposition(searchTerms);
+                                }
+				
+				if(key.equals("comp_HexA")) {
+				list[10] = Structure.buildComposition(searchTerms);
+                                }
+
+				if(key.equals("comp_phosphate")) {
+				list[7] = Structure.buildComposition(searchTerms);
+                                }
+		
+				if(key.equals("comp_sulfate")) {
+				list[6] = Structure.buildComposition(searchTerms);
+                                }
+		
+				if(key.equals("comp_methyl")) {
+				list[11] = Structure.buildComposition(searchTerms);
+                                }
+	
+				if(key.equals("comp_acetyl")) {
+				list[12] = Structure.buildComposition(searchTerms);
+                                }
+				
+				if(key.equals("comp_other")) {
+                                list[13] = Structure.buildComposition(searchTerms);
+                                }
+				
+				if(key.equals("comp_KDO")) {
+                                list[9] = Structure.buildComposition(searchTerms);
+                                }
+
 			}
+
+			StringBuilder builder = new StringBuilder();
+			String r = "";
+			for(String s : list) {
+    				builder.append(s);
+    				r += s;
+			}
+
+			StringBuilder glycanT = new StringBuilder();
+                                for(String s : glycanType) {
+                                glycanT.append(s);
+                                g += s;
+                        }
+
+
+			compositionResult = Structurecomp.findStructurecomp(r, g);
 
 			return ok(
 					compositions.render(notation, compositionResult)
@@ -419,6 +503,10 @@ public class Application extends Controller {
 		Object format = Cache.get("format");
 		String notation = "gs";
 		if(format != null) {notation = (String) format.toString();} 
+		else{
+                Cache.set("format", "gs", 0);
+                }
+
 
 		List<Composition> strMain = Composition.findCompositionDetails(compositionId.trim());
 
@@ -464,6 +552,10 @@ public class Application extends Controller {
 		Object format = Cache.get("format");
 		String notation = "gs";
 		if(format != null) {notation = (String) format.toString();}
+		else{
+                Cache.set("format", "gs", 0);
+                }
+
 
 		return ok( 
 				refdisplay.render(notation, "View selected reference", t, u, taxsources, proteinsources, protsources)
@@ -540,6 +632,10 @@ public class Application extends Controller {
 		Object format = Cache.get("format");
 		String notation = "gs";
 		if(format != null) {notation = (String) format.toString();}
+		else{
+                Cache.set("format", "gs", 0);
+                }
+
 		//return TODO;
 		return ok(
 				taxonDetails.render(notation, "Taxonomy Description", taxonomy, biolsource, listSql)
@@ -561,6 +657,10 @@ public class Application extends Controller {
 			Object format = Cache.get("format");
 			String notation = "gs";
 			if(format != null) {notation = (String) format.toString();}	
+			else{
+                	Cache.set("format", "gs", 0);
+                	}
+
 			//return TODO;
 			return ok(
 					taxonDetails.render(notation, "Taxonomy Description", taxonomy, biolsource, listSql));
@@ -674,6 +774,10 @@ public class Application extends Controller {
 		Object format = Cache.get("format");
 		String notation = "gs";
 		if(format != null) {notation = (String) format.toString();} 
+		else{
+                Cache.set("format", "gs", 0);
+                }
+
 
 
 
