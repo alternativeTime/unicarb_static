@@ -1,4 +1,4 @@
-@(warning: String, notation: String, proteinName: String, accession: String, biol: ArrayList[Biolsource], protein: List[Proteins], uniprot: List[String], gssites: List[GsProteinStr2], source: HashSet[Reference], description: List[SitesReferences], sequence: String, proteinMultiple: List[Proteins], generalSites: List[GeneralSites], definedSites: List[DefinedSites], typeEntry: String, swissProtName: String, proteinsource:  List[com.avaje.ebean.SqlRow] )
+@(warning: String, notation: String, proteinName: String, accession: String, biol: ArrayList[Biolsource], protein: List[Proteins], uniprot: List[String], gssites: List[GsProteinStr2], source: HashSet[Reference], description: List[SitesReferences], sequence: String, proteinMultiple: HashSet[String], generalSites: List[GeneralSites], definedSites: List[DefinedSites], typeEntry: String, swissProtName: String, proteinsource:  List[com.avaje.ebean.SqlRow] )
 
 
 @main {
@@ -17,7 +17,7 @@
     <h4 class="subheader span8">Accession:
       @if(typeEntry.matches("not swiss prot")) {<a href="http://uniprot.org/uniprot/?query=@accession+AND+reviewed%3Ayes&sort=score">@accession </a><span class="pull-right"><a href="http://uniprot.org/uniprot/?query=@proteinName+AND+reviewed%3Ayes&sort=score"><span class='label label-light'>UniProtKB/Swiss-Prot</span></a></span> }
       @if(!typeEntry.matches("not swiss prot")) {<a href="http://uniprot.org/uniprot/@accession">@accession </a><span class="pull-right"><a href="http://uniprot.org/uniprot/@accession"><span class='label label-light'>UniProtKB/Swiss-Prot Entry</span></a></span> }
-      @proteinName</h4>
+      </h4>
   </div>
 
 
@@ -115,18 +115,18 @@
         <ul class="structures clearfix">
 
           @for(s <- proteinMultiple) {
-          @for((s, i) <- s.stproteins.zipWithIndex; if (i <=5) ){
+          @for((s, i) <- s.zipWithIndex; if (i <=5) ){
           <li>
-            @views.html.format.structure(notation, s.structure.id)
+            @views.html.format.structure(notation, s)
           </li>
           }}
         </ul>
         <ul id='more-thumbnails' class="structures clearfix">
           @for(s <- proteinMultiple) { 
-          @for((s, i) <- s.stproteins.zipWithIndex; if (i >5) ){
+          @for((s, i) <- s.zipWithIndex; if (i >5) ){
           <li>
-            <a href="@routes.Application.structureDetails(s.structure.id)">
-              <img class="sugar_image" src="../images/@notation/_@{s.structure.id}.png" alt="">
+            <a href="@routes.Application.structureDetails(s)">
+              <img class="sugar_image" src="../images/@notation/_@{s}.png" alt="">
             </a>
           </li>
           }}

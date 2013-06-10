@@ -1,4 +1,4 @@
-@(glycantype: String, strcomp: List[Composition], notation: String, references: List[Structure], structureId: Long, proteinNames: ArrayList[String], proteinItems: HashSet[Proteins], sourceNames: ArrayList[String], sourceItems: ArrayList[Tissue], test: List[Array[String]], uniprot: ArrayList[String], taxItems: ArrayList[Taxonomy], taxNames: ArrayList[String])
+@(glycantype: String, strcomp: List[Composition], notation: String, references: List[Structure], structureId: Long, proteinNames: ArrayList[String], proteinItems: HashSet[Proteins], sourceNames: ArrayList[String], sourceItems: ArrayList[Tissue], test: List[Array[String]], uniprot: ArrayList[String], taxItems: ArrayList[Taxonomy], taxNames: ArrayList[String], pubchem: String)
 @import helper._
 
 @**********************************
@@ -121,6 +121,9 @@
           </ul>
         </div>
       </div>
+      @if(pubchem != null) {
+	 @views.html.format.pubchem( pubchem )
+      }
     </div>
   </div>
 

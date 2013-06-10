@@ -158,13 +158,17 @@ public class Application extends Controller {
 			List<Stproteins> stproteins = p.stproteins;
 			for(Stproteins s : stproteins){
 				System.out.println("check structures " + s.structure.id);
-				uniqueStructures.add( String.valueOf(s.structure.id) );
-				
+				uniqueStructures.add( String.valueOf(s.structure.id) );				
 			}
+		}
+		
+		for(String s : uniqueStructures){
+			
+			System.out.println("sid " + s);
 		}
 
 		return ok(
-				proteinsummary.render(warning, notation, proteinName, protein, biolSourceProtein, proteins, uniprotDetails, gsProteinSite, referencesU, description, sequenceRetrieval, proteinMultiple, generalSites, definedSites, typeProteinEntry, swissProtName, proteinTax)
+				proteinsummary.render(warning, notation, proteinName, protein, biolSourceProtein, proteins, uniprotDetails, gsProteinSite, referencesU, description, sequenceRetrieval, /*proteinMultiple,*/ uniqueStructures, generalSites, definedSites, typeProteinEntry, swissProtName, proteinTax)
 				);
 
 	}
@@ -458,15 +462,23 @@ public class Application extends Controller {
 		Map<String, Integer> m = new HashMap<String, Integer>();
 		String compositionId = "";
 		String type = "";
+		String pubchemId = "";
 
 		if (strDisplay !=null){
 			for (Structure entries : strDisplay){
 				List<Stproteins> stToProtein = entries.stproteins;
 				List<Strtaxonomy> stToTax = entries.strtaxonomy;
 				List<Stsource> stToSource = entries.stsource;
+				List<Pubchem> pubchem = entries.pubchem;
 				type = entries.type;
 
 				compositionId = entries.compositionId;
+				
+				if ( !pubchem.isEmpty() ){
+					for(Pubchem c : pubchem) {
+						pubchemId = c.pubchem_id;
+					}
+				}
 
 				if (!stToProtein.isEmpty()) {
 					for (Stproteins stProteinEntry : stToProtein){
@@ -496,7 +508,7 @@ public class Application extends Controller {
 						sourceNames.add(stSourceEntry.tissue.id);
 						sourceItems.add(stSourceEntry.tissue);
 					}
-				}
+				}	
 			}
 		}
 
@@ -511,7 +523,7 @@ public class Application extends Controller {
 		List<Composition> strMain = Composition.findCompositionDetails(compositionId.trim());
 
 		return ok(
-				structureDetails.render(type, strMain, notation, strDisplay, id, proteinNames, proteinNamesUnique, sourceNames, sourceItems, rowList, uniprot, taxItems, taxNames)
+				structureDetails.render(type, strMain, notation, strDisplay, id, proteinNames, proteinNamesUnique, sourceNames, sourceItems, rowList, uniprot, taxItems, taxNames, pubchemId)
 
 				);
 	};
