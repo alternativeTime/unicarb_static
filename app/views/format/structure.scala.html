@@ -1,10 +1,15 @@
 @(notation: String, structureId: Long)
 
- <a href="@routes.Application.structureDetails(structureId)">
+<a href="@routes.Application.structureDetails(structureId)">
 @if(notation.matches("gs")) {
         <img class="sugar_image"  src="../images/@notation/_@{structureId}.png">
 }
 @if(!notation.matches("gs") ) {
-        <img class="sugar_image"  src="../images/@notation/@{structureId}.png">
+	@if(!new java.io.File("../images/@notation/smaller/@{structureId}.png").exists()){ 
+	<img class="sugar_image"  src="../images/@notation/smaller/@{structureId}.png" alt="">
+	}
+        @if(new java.io.File("../images/@notation/smaller/@{structureId}.png").exists()){
+        <img class="sugar_image"  src="../images/@notation/smaller/@{structureId}.png" alt="">
+        } 
 }
 </a>
