@@ -157,7 +157,8 @@ public class UniprotConnection extends Controller {
 		ArrayList<SqlRow> biolRefs  = new ArrayList<SqlRow>();
 		List<StructureToSiteDefined> definedStructures = null;
 		List<GeneralSites> generalStructures = null;
-		ArrayList<Long> structuresShow = new ArrayList();
+		//ArrayList<Long> structuresShow = new ArrayList();
+		HashSet<Long> structuresShow = new HashSet();
 		List<SqlRow> listSql = null;
 		ArrayList<SqlRow> listSqlArray = new ArrayList<SqlRow>();
 		ArrayList<Biolsource> biolSourceProtein = new ArrayList<Biolsource>();
@@ -287,7 +288,6 @@ public class UniprotConnection extends Controller {
                 proteinstaxList = Proteinstaxonomy.findProteinsTax(protein);
                 for(Proteinstaxonomy p : proteinstaxList){
 			multiCAR.add(p.protein);
-			System.out.println("HELP " + p.protein);
 			proteinFromTax = p.protein;
                 }
                 }
@@ -314,7 +314,8 @@ public class UniprotConnection extends Controller {
 		ArrayList<SqlRow> biolRefs  = new ArrayList<SqlRow>();
 		List<StructureToSiteDefined> definedStructures = null;
 		List<GeneralSites> generalStructures = null;
-		ArrayList<Long> structuresShow = new ArrayList();
+		//ArrayList<Long> structuresShow = new ArrayList();
+		HashSet<Long> structuresShow = new HashSet();
 		List<SqlRow> listSql = null;
 		ArrayList<SqlRow> listSqlArray = new ArrayList<SqlRow>();
 		ArrayList<Biolsource> biolSourceProtein = new ArrayList<Biolsource>();

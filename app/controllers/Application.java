@@ -42,7 +42,6 @@ public class Application extends Controller {
 		
 		try{
 		protein = URLDecoder.decode(protein, "UTF-8");
-		System.out.println("decoded -- " + protein);
 		} catch (Exception e){
 			
 		}
@@ -161,14 +160,16 @@ public class Application extends Controller {
 				uniqueStructures.add( String.valueOf(s.structure.id) );				
 			}
 		}
-		
+	
+		ArrayList<String> test = new ArrayList();	
 		for(String s : uniqueStructures){
-			
+			//test.add(Long.parseLong(s));	
+			test.add(s);
 			System.out.println("sid " + s);
 		}
 
 		return ok(
-				proteinsummary.render(warning, notation, proteinName, protein, biolSourceProtein, proteins, uniprotDetails, gsProteinSite, referencesU, description, sequenceRetrieval, /*proteinMultiple,*/ uniqueStructures, generalSites, definedSites, typeProteinEntry, swissProtName, proteinTax)
+				proteinsummary.render(warning, notation, proteinName, protein, biolSourceProtein, proteins, uniprotDetails, gsProteinSite, referencesU, description, sequenceRetrieval, /*proteinMultiple, uniqueStructures,*/ test, generalSites, definedSites, typeProteinEntry, swissProtName, proteinTax)
 				);
 
 	}
