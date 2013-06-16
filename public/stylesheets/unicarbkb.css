@@ -976,9 +976,9 @@ th[class*="span"] {
 
 .taxonomy, .protein, .source { margin: 0 0 10px 0; }
 
-#toggle-taxonomy, #toggle-protein, #toggle-source { cursor: pointer; }
+#toggle-taxonomy, #toggle-protein, #toggle-source, #toggle-pubchen { cursor: pointer; }
 
-#more-taxonomy, #more-protein, #more-source { 
+#more-taxonomy, #more-protein, #more-source, #more-pubchem { 
   margin: 0; padding: 20px;
   display: none;
   -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px
@@ -987,6 +987,7 @@ th[class*="span"] {
 #more-taxonomy { background: #DF2E30; }
 #more-protein { background: #f89406; }
 #more-source { background: #419926; }
+#more-pubchem { background: red;}
 
 #more-taxonomy h3, #more-protein h3, #more-source h3 { color: #FFF; cursor: pointer; }
 #more-taxonomy h3 span,
