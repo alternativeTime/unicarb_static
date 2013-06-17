@@ -115,12 +115,11 @@
         <ul class="structures clearfix">
 
           @for(s <- proteinMultiple) {
-	  @for((s,i) <- s.zipWithIndex; if (i <=5) ) {
           <li>
             @views.html.format.structure(notation, s.toLong) 
           </li>
-          }}
-        </ul>
+          }
+        </ul> 
 
 	@*
         <ul id='more-thumbnails' class="structures clearfix">
@@ -133,11 +132,11 @@
           }
         </ul>
 	*@
-        <div id='show-structures' class='more-structures' href='#'>
+        @* <div id='show-structures' class='more-structures' href='#'>
           See more structures
           <br />
           <span>&#9679; &#9679; &#9679;</span>
-        </div>
+        </div> *@
       </div>
 
 
