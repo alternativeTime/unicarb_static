@@ -161,15 +161,18 @@ public class Application extends Controller {
 			}
 		}
 	
-		ArrayList<String> test = new ArrayList();	
+		HashSet<String> test = new HashSet();	
 		for(String s : uniqueStructures){
 			//test.add(Long.parseLong(s));	
 			test.add(s);
 			System.out.println("sid " + s);
 		}
 
+		ArrayList<String> t2 = new ArrayList<String>();
+		 t2.addAll(test);
+
 		return ok(
-				proteinsummary.render(warning, notation, proteinName, protein, biolSourceProtein, proteins, uniprotDetails, gsProteinSite, referencesU, description, sequenceRetrieval, /*proteinMultiple, uniqueStructures,*/ test, generalSites, definedSites, typeProteinEntry, swissProtName, proteinTax)
+				proteinsummary.render(warning, notation, proteinName, protein, biolSourceProtein, proteins, uniprotDetails, gsProteinSite, referencesU, description, sequenceRetrieval, /*proteinMultiple, uniqueStructures,*/ t2, generalSites, definedSites, typeProteinEntry, swissProtName, proteinTax)
 				);
 
 	}

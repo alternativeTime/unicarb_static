@@ -93,8 +93,9 @@ public class Biolsource extends Model {
 	 * Use to find a single swissprot id
 	 */
 	public static List<Biolsource> findBiolSourceIdsUniProt(String protein) {
+	System.out.println("test here");
 		return
-				find.where().disjunction()
+				find.where()
 				.ilike("swiss_prot", protein)
 				.findList();
 	}
