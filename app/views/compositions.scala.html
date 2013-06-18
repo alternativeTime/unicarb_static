@@ -1,4 +1,4 @@
-@(notation: String, structure: List[Structurecomp])
+@(notation: String, structure: List[Structurecomp], query: Array[String])
 
 @main{
 
@@ -28,13 +28,16 @@
 
           <div class="info">
             <h4>Other Options:</h4>
-            <p><b>Glycan Builder:</b> Build and search a glycan structure<a href="/search"> using the new interface</a>.</p>
+            <p><b>Glycan Builder:</b> Build and search a glycan structure<a href="/builder"> using the new interface</a>.</p>
             <p><b>Curated Publications:</b> Search the <a href="/references">growing list of publications, associated structures, and metadata</a>.</p>
           </div>
         </div>
   	</div>
 
 	<div class="span9 rightpanel">
+	  <h3>Query</h3>
+	  <p>@for(q <- query) {@q}</p>
+	  @views.html.format.format()
 	  @if(structure.size() >1 ) {
       <ul class="structures media-grid">
         @for(structure <- structure) {

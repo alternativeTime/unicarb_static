@@ -191,7 +191,7 @@ public class Application extends Controller {
 		
 		int e = 0;
 		String[] list = new String[14];
-
+		String[] l = new String[14];
 
 		if (request().queryString().size() > 0  ) {
 			Map<String, String[]> params = request().queryString();
@@ -204,67 +204,156 @@ public class Application extends Controller {
 			for (Map.Entry<String, String[]> entry : params.entrySet() ){
 				key = entry.getKey().toString();
 				searchTerms = entry.getValue();
-				System.out.println("HJHEHEHEHE ----- " + searchTerms.toString() );
 
 				if(key.equals("glycanType")){
 				glycanType = searchTerms;
 				}
 				
-				if(key.equals("comp_Hexose")) {
-				list[0] = Structure.buildComposition(searchTerms);				
-				}
+				if(key.equals("comp_Hex")) {
+				list[0] = Structure.buildComposition(searchTerms); 
+				
+			        if(searchTerms !=null ) {
+					for(String s : searchTerms){
+					if(!s.isEmpty()){
+					l[0] = "Hexose: " + s ;
+					}}	
+				}}
 
 				if(key.equals("comp_HexNAc")) {
 				list[1] = Structure.buildComposition(searchTerms);
+				if(searchTerms !=null ) {
+                                        for(String s : searchTerms){
+					if(!s.isEmpty()){
+                                        l[1] = " HexNAc: " + s ;
+                                        }}
                                 }
 
-				if(key.equals("comp_deoxyHexose")) {
-				list[2] = Structure.buildComposition(searchTerms);
                                 }
+
+				if(key.equals("comp_Deoxyhexose")) {
+				list[2] = Structure.buildComposition(searchTerms);
+                                
+				if(searchTerms !=null ) {
+                                        for(String s : searchTerms){
+					if(!s.isEmpty()){
+                                        l[3] = " dHex: " + s ;
+                                        }}
+                                }
+				}
 				
-				if(key.equals("comp_pentose")) {
+				if(key.equals("comp_Pent")) {
 				list[5] = Structure.buildComposition(searchTerms);
+
+				if(searchTerms !=null ) {
+                                        for(String s : searchTerms){
+					if(!s.isEmpty()){
+                                        l[5] = " Pentose: " + s ;
+                                        }}
+                                }
                                 }
 
 				if(key.equals("comp_NeuAc")) {
 				list[3] = Structure.buildComposition(searchTerms);
+                                
+				if(searchTerms !=null ) {
+                                        for(String s : searchTerms){
+					if(!s.isEmpty()){
+                                        l[3] = " NeuAc: " + s ;
+                                        }}
                                 }
+				}
 
 				if(key.equals("comp_NeuGc")) {
 				list[4] = Structure.buildComposition(searchTerms);
+                                if(searchTerms !=null ) {
+                                        for(String s : searchTerms){
+					if(!s.isEmpty()){
+                                        l[4] = " NeuGc: " + s ;
+                                        }}
                                 }
+				}
 
 				if(key.equals("comp_KDN")) {
 				list[8] = Structure.buildComposition(searchTerms);
+                                
+				if(searchTerms !=null ) {
+                                        for(String s : searchTerms){
+					if(!s.isEmpty()){
+                                        l[8] = " KDN: " + s ;
+                                        }}
                                 }
+}
 				
 				if(key.equals("comp_HexA")) {
 				list[10] = Structure.buildComposition(searchTerms);
+
+				if(searchTerms !=null ) {
+                                        for(String s : searchTerms){
+                                        if(!s.isEmpty()){
+					l[10] = " HexA: " + s ;
+                                        }}
+                                }
                                 }
 
-				if(key.equals("comp_phosphate")) {
+				if(key.equals("comp_Phos")) {
 				list[7] = Structure.buildComposition(searchTerms);
-                                }
+        			if(searchTerms !=null ) {
+                                        for(String s : searchTerms){
+                                        if(!s.isEmpty()){
+					l[7] = " Phos: " + s ;
+                                        }}
+                                }                        
+				}
 		
-				if(key.equals("comp_sulfate")) {
+				if(key.equals("comp_Sulph")) {
 				list[6] = Structure.buildComposition(searchTerms);
+				if(searchTerms !=null ) {
+                                        for(String s : searchTerms){
+					if(!s.isEmpty()){
+                                        l[6] = " Sulph: " + s ;
+                                        }}
+                                }
                                 }
 		
 				if(key.equals("comp_methyl")) {
 				list[11] = Structure.buildComposition(searchTerms);
+				if(searchTerms !=null ) {
+                                        for(String s : searchTerms){
+					if(!s.isEmpty()){
+                                        l[11] = " Methyl: " + s ;
+                                        }}
+                                }
                                 }
 	
 				if(key.equals("comp_acetyl")) {
 				list[12] = Structure.buildComposition(searchTerms);
+                                if(searchTerms !=null ) {
+                                        for(String s : searchTerms){
+                                        if(!s.isEmpty()){
+					l[12] = " Acetyl: " + s ;
+                                        }}
                                 }
+				}
 				
 				if(key.equals("comp_other")) {
                                 list[13] = Structure.buildComposition(searchTerms);
+                                if(searchTerms !=null ) {
+                                        for(String s : searchTerms){
+					if(!s.isEmpty()){
+                                        l[13] = " Other: " + s ;
+                                        }}
                                 }
+				}
 				
 				if(key.equals("comp_KDO")) {
                                 list[9] = Structure.buildComposition(searchTerms);
+                                if(searchTerms !=null ) {
+                                        for(String s : searchTerms){
+					if(!s.isEmpty()){
+                                        l[9] = " KDO: " + s ;
+                                        }}
                                 }
+				}
 
 			}
 
@@ -285,10 +374,10 @@ public class Application extends Controller {
 			compositionResult = Structurecomp.findStructurecomp(r, g);
 
 			return ok(
-					compositions.render(notation, compositionResult)
+					compositions.render(notation, compositionResult, l)
 					);
 		}
-		return ok(compositions.render(notation, compositionResult));
+		return ok(compositions.render(notation, compositionResult, l));
 	}
 
 	public static Result query() {
