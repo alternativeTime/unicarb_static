@@ -46,6 +46,23 @@
     <div class="span8">
       <ul class='structures'>
       @views.html.format.structureLarge(notation, structureId) 
+
+
+	<!-- Button to trigger modal -->
+<a href="#modal-gallery" role="button" class="label label-dark" data-toggle="modal">View High-Res</a>
+
+<!-- modal-gallery is the modal dialog used for the image gallery -->
+<div id="modal-gallery" class="modal modal-gallery hide fade" tabindex="-1">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">&times;</a>
+        <h3 class="modal-title"></h3>
+    </div>
+    <div class="modal-body"><img class="sugar_image"  src="../images/cfgl/smaller/@{structureId}.png" alt=""></div>
+    <div class="modal-footer">
+        <a class="btn modal-download" target="_blank" href="../images/cfgl/smaller/@{structureId}.png"><i class="icon-download"></i> Download</a>
+    </div>
+</div>
+
       </ul>
 
       <h3>References associated to structure</h3>

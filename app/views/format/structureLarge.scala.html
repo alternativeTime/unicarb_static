@@ -5,8 +5,11 @@
         <img class="sugar_image"  src="../images/@notation/_@{structureId}.png">
 }
 @if(notation.matches("cfgl") ) {
-	<img class="sugar_image"  src="../images/cfgl/@{structureId}.png" alt="">
-        } 
+	    <div id="demoLightbox" class="lightbox hide fade"  tabindex="-1" role="dialog" aria-hidden="true">
+	<div class='lightbox-content'>
+	    <img class="sugar_image"  src="../images/cfgl/smaller/@{structureId}.png" alt="">
+	</div></div>
+}
 
 @if(notation.matches("uoxf") ) {
         <img class="sugar_image"  src="../images/uoxf/smaller/@{structureId}.png" alt="">
