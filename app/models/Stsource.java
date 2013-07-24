@@ -11,6 +11,7 @@ import play.data.validation.*;
 import com.avaje.ebean.*;
 
 @Entity 
+@Table(schema="public", name="stsource")
 public class Stsource extends Model {
 
 	@Id

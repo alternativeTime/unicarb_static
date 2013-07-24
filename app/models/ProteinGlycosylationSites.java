@@ -10,6 +10,7 @@ import play.data.validation.*;
 import com.avaje.ebean.*;
 
 @Entity 
+@Table(schema="public", name="protein_glycosylation_sites")
 public class ProteinGlycosylationSites extends Model {
 
     @Id

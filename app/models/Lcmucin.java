@@ -13,6 +13,7 @@ import com.avaje.ebean.*;
  * Structure entity managed by Ebean
  */
 @Entity 
+@Table(schema="public", name="lcmucin")
 public class Lcmucin extends Model {
 
     @Id

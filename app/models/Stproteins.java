@@ -16,6 +16,7 @@ import com.avaje.ebean.*;
  */
 @SuppressWarnings("serial")
 @Entity 
+@Table(schema="public", name="stproteins")
 public class Stproteins extends Model {
 
     @Id

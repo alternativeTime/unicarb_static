@@ -13,6 +13,7 @@ import com.avaje.ebean.*;
  * Journal entity managed by Ebean
  */
 @Entity 
+@Table(schema="public", name="journal")
 public class Journal extends Model {
 
     @Id

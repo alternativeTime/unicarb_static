@@ -13,6 +13,7 @@ import com.avaje.ebean.*;
  * Taxprotein entity managed by Ebean
  */
 @Entity 
+@Table(schema="public", name="taxprotein")
 public class Taxprotein extends Model {
 
     @Id

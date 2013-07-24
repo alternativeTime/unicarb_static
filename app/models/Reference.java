@@ -13,6 +13,7 @@ import com.avaje.ebean.*;
  * Reference entity managed by Ebean
  */
 @Entity 
+@Table(schema="public", name="reference")
 public class Reference extends Model {
 
     @Id
@@ -29,6 +30,7 @@ public class Reference extends Model {
     public String pmid;
     public String title;
     public String authors; 
+    public String source;
 
     //@ManyToOne(fetch=FetchType.EAGER)
      @ManyToOne

@@ -13,6 +13,7 @@ import com.avaje.ebean.*;
  * Unicarbdbreference entity managed by Ebean
  */
 @Entity 
+@Table(schema="public", name="unicarbdbreference")
 public class Unicarbdbreference extends Model {
 
     @Id

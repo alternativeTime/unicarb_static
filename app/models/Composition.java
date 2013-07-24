@@ -5,11 +5,13 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import play.db.ebean.Model;
 
 @SuppressWarnings("serial")
-@Entity 
+@Entity
+@Table(schema="public", name="composition") 
 public class Composition extends Model {
 
 	@Id

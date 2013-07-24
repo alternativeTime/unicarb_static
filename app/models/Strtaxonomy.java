@@ -10,6 +10,7 @@ import play.data.validation.*;
 import com.avaje.ebean.*;
 
 @Entity 
+@Table(schema="public", name="strtaxonomy")
 public class Strtaxonomy extends Model {
 
     @Id

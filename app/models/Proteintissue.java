@@ -3,10 +3,12 @@ package models;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import play.db.ebean.Model;
 
 @Entity
+@Table(schema="public", name="protein_tissue")
 public class Proteintissue {
 	
 	@Id

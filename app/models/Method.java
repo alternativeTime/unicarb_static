@@ -15,6 +15,7 @@ import com.avaje.ebean.*;
  * Method entity managed by Ebean
  */
 @Entity 
+@Table(schema="public", name="method")
 public class Method extends Model {
 
     @Id

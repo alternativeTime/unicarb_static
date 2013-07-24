@@ -5,11 +5,13 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import play.db.ebean.Model;
 
 @Entity
-public class Structurecomp {
+@Table(schema="public", name="structurecomp")
+public class Structurecomp extends Model {
 
 	@Id
 	public Long id;

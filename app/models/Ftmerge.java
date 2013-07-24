@@ -13,6 +13,7 @@ import com.avaje.ebean.*;
  * Reference entity managed by Ebean
  */
 @Entity 
+@Table(schema="public", name="ftmerge")
 public class Ftmerge extends Model {
 
     @Id

@@ -15,8 +15,8 @@ import com.avaje.ebean.*;
  * Refmethod entity managed by Ebean
  */
 
-
 @Entity 
+@Table(schema="public", name="refmethod")
 public class Refmethod extends Model {
 
 

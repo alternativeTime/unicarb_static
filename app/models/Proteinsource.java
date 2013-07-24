@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.RawSql;
@@ -15,6 +16,7 @@ import com.avaje.ebean.SqlRow;
 import play.db.ebean.Model;
 
 @Entity 
+@Table(schema="public", name="protein_source")
 public class Proteinsource extends Model {
 
     /**

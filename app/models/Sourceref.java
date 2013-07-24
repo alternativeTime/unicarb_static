@@ -13,6 +13,7 @@ import com.avaje.ebean.*;
  * Structure entity managed by Ebean
  */
 @Entity 
+@Table(schema="public", name="sourceref")
 public class Sourceref extends Model {
 
     @Id

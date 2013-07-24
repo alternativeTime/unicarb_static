@@ -16,6 +16,7 @@ import com.avaje.ebean.*;
  */
 @SuppressWarnings("serial")
 @Entity 
+@Table(schema="public", name="streference")
 public class Streference extends Model {
 
     @Id
