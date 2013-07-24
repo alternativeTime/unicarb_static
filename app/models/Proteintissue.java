@@ -8,7 +8,7 @@ import javax.persistence.Table;
 import play.db.ebean.Model;
 
 @Entity
-@Table(schema="public", name="protein_tissue")
+@Table(schema="public", name="proteintissue")
 public class Proteintissue {
 	
 	@Id

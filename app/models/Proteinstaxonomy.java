@@ -11,7 +11,7 @@ import play.data.validation.*;
 import com.avaje.ebean.*;
 
 @Entity 
-@Table(schema="public", name="proteins_taxonomy")
+@Table(schema="public", name="proteinstaxonomy")
 public class Proteinstaxonomy extends Model {
 
     @Id

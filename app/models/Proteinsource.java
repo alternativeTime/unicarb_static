@@ -16,7 +16,7 @@ import com.avaje.ebean.SqlRow;
 import play.db.ebean.Model;
 
 @Entity 
-@Table(schema="public", name="protein_source")
+@Table(schema="public", name="proteinsource")
 public class Proteinsource extends Model {
 
     /**
