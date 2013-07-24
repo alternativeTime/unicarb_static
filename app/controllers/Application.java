@@ -370,6 +370,7 @@ public class Application extends Controller {
                                 g += s;
                         }
 
+			r = r.replace("null", "0");	
 
 			compositionResult = Structurecomp.findStructurecomp(r, g);
 
@@ -390,6 +391,7 @@ public class Application extends Controller {
 		sourceUnique.addAll(tissueUnique);
 
 		HashSet proteinUnique = Proteins.proteinSummary();
+		//pull in the glycobase associated proteins
 		HashSet pertubationUnique = GlycobaseSource.perturbationSummary();
 		proteinUnique.addAll(pertubationUnique);
 		
