@@ -16,7 +16,7 @@ import com.avaje.ebean.*;
  */
 @SuppressWarnings("serial")
 @Entity 
-@Table(schema="connected")
+@Table(schema="connected", name="glycobase")
 public class Glycobase extends Model {
 
     @Id
