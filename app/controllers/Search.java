@@ -32,7 +32,7 @@ import org.eurocarbdb.MolecularFramework.util.visitor.GlycoVisitorException;
 import org.eurocarbdb.action.core.SearchUnicarbGlycanSequence;
 
 //  eurocarb imports
-import org.eurocarbdb.dataaccess.core.*;
+/*import org.eurocarbdb.dataaccess.core.*;
 import org.eurocarbdb.dataaccess.core.seq.*;
 import org.eurocarbdb.action.EurocarbAction;
 import org.eurocarbdb.action.BrowseAction;
@@ -45,7 +45,7 @@ import org.eurocarbdb.sugar.SugarSequence;
 
 import org.eurocarbdb.application.glycanbuilder.*;
 
-import org.eurocarbdb.dataaccess.SavedGlycanSequenceSearch;
+import org.eurocarbdb.dataaccess.SavedGlycanSequenceSearch;*/
 import org.apache.commons.io.FileUtils;
 
 import play.mvc.Controller;
@@ -61,7 +61,7 @@ import com.google.common.io.Files;
 public class Search extends Controller {
 
 	
-	public static Result saySearch(String structure) throws SugarImporterException, GlycoVisitorException, IOException, ParserConfigurationException, SAXException {
+	public static Result saySearch(String structure) throws IOException{   // SugarImporterException, GlycoVisitorException,  ParserConfigurationException, SAXException {
 		
 	
 		List<Translation> translation = null;

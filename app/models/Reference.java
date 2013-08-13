@@ -30,7 +30,7 @@ public class Reference extends Model {
     public String pmid;
     public String title;
     public String authors; 
-    public String source;
+    //public String source;
 
     //@ManyToOne(fetch=FetchType.EAGER)
      @ManyToOne
