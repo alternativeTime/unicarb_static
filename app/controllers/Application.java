@@ -20,7 +20,9 @@ import com.avaje.ebean.*; //dont think this should be here due to SqlRow
 
 import static play.libs.Json.*;
 import java.net.URLDecoder;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+
 
 public class Application extends Controller {
 
@@ -552,7 +554,6 @@ public class Application extends Controller {
 		HashSet taxIdsUnique = new HashSet();
 		HashSet taxDivsUnique = new HashSet();
 
-
 		List<String[]> rowList = new ArrayList<String[]>();
 		Map<String, Integer> m = new HashMap<String, Integer>();
 		String compositionId = "";
@@ -617,6 +618,13 @@ public class Application extends Controller {
 
 		List<Composition> strMain = Composition.findCompositionDetails(compositionId.trim());
 
+		try{
+		String reader  = Structure.getJSON(id);
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		     }
+		
 		return ok(
 				structureDetails.render(type, strMain, notation, strDisplay, id, proteinNames, proteinNamesUnique, sourceNames, sourceItems, rowList, uniprot, taxItems, taxNames, pubchemId)
 
