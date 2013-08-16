@@ -618,16 +618,17 @@ public class Application extends Controller {
 
 		List<Composition> strMain = Composition.findCompositionDetails(compositionId.trim());
 
+		/*Should make this an ajax call */
+		String reader = "";
 		try{
-		String reader  = Structure.getJSON(id);
+			reader  = Structure.getJSON(id);
 		}
 		catch (IOException e) {
 			e.printStackTrace();
 		     }
 		
 		return ok(
-				structureDetails.render(type, strMain, notation, strDisplay, id, proteinNames, proteinNamesUnique, sourceNames, sourceItems, rowList, uniprot, taxItems, taxNames, pubchemId)
-
+				structureDetails.render(type, strMain, notation, strDisplay, id, proteinNames, proteinNamesUnique, sourceNames, sourceItems, rowList, uniprot, taxItems, taxNames, pubchemId, reader)
 				);
 	};
 

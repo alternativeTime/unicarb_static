@@ -4,11 +4,11 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
-import com.google.gson.*;
-import com.google.gson.stream.JsonReader;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
+import org.json.simple.parser.ContainerFactory;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
@@ -60,7 +60,7 @@ public class Structure extends Model {
 
 	@OneToMany
 	public List<Composition> strcomposition;
-	
+
 	@OneToMany
 	public List<Structurecomp> structurecomp;
 
@@ -114,35 +114,77 @@ public class Structure extends Model {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	public static String getJSON(Long id) throws IOException {
-		
+
 		Structure structure = Structure.find.byId(id);
 		String iupac = structure.glycanst;
-		Logger.info("str is " + iupac);
+		List<String> components = new ArrayList<String>();
+		ArrayList<Object[]> ob = new ArrayList<>();
+		String html = "";
 		
 		JSONParser parser = new JSONParser();
-		 
+
 		try {
-	 
+
 			Object obj = parser.parse(new FileReader("/tmp/json/" + iupac + ".json"));
-	 
+
 			JSONObject jsonObject = (JSONObject) obj;
-	 
+
 			String name = (String) jsonObject.get("str");
-			System.out.println(name);
-	 
-			//long age = (Long) jsonObject.get("age");
-			//System.out.println(age);
-	 
-			// loop array
+
 			JSONArray msg = (JSONArray) jsonObject.get("parts");
-			Iterator<String> iterator = msg.iterator();
-			
+
 			for(Object c : msg){
-				System.out.println( c.toString() );
+
+				JSONParser parserString = new JSONParser();
+				ContainerFactory containerFactory = new ContainerFactory(){
+					public List creatArrayContainer() {
+						return new LinkedList();
+					}
+
+					public Map createObjectContainer() {
+						return new LinkedHashMap();
+					}
+
+				};
+				
+				try{
+				    Map json = (Map)parser.parse(c.toString(), 	containerFactory);
+				    Iterator iter = json.entrySet().iterator();
+				    System.out.println("==iterate result==");
+				  
+				   
+				    while(iter.hasNext()){
+				     
+				      Map.Entry entry = (Map.Entry)iter.next();
+				      System.out.println(entry.getKey() + "=>" + entry.getValue());
+				     
+				      if(entry.getKey().equals("enz")){
+				    	  String searchEnz = entry.getValue().toString();
+				    	  long lEnz = Long.parseLong(searchEnz);
+				    	  
+				    	  Enzyme enzyme = Enzyme.find.byId( lEnz );
+				    	  html += "<tr><td>" + enzyme.name + "</td><td>" + enzyme.goterm + "</td>";
+				      }
+				      else{
+				           html  += "<td>" + entry.getValue().toString() + "</td>";
+				      }
+				    }
+				   
+				  
+				   // System.out.println("==toJSONString()==");
+				   // System.out.println(JSONValue.toJSONString(json));
+				     
+				 	html  += "</tr>";
+				 	Logger.info("html " + html);
+				  }
+				  catch(ParseException pe){
+				    System.out.println(pe);
+				  }
+
 			}
-				 
+
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -150,41 +192,11 @@ public class Structure extends Model {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-			    
 
-			    //JSONArray cars = (JSONArray) jsonObject.get("cars");
-
-			   /* for (Object c : cars)
-			    {
-			      System.out.println(c+"");
-			    }*/
-			 // }
-			
-			/*JsonReader reader = new JsonReader(new FileReader("/tmp/json/" + iupac + ".json"));
 		
-		
-		
-		reader.beginObject();
-		while (reader.hasNext()){
-			//Logger.info("files stuff " + reader.toString() );
-			//String name = reader.nextName();
-			
-			//if (name.equals("parts")) {
-			//	Logger.info("print here");
-			//}
-			
-		}
-		 } catch (IOException e) {
-				e.printStackTrace();
-			     } catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-		
-		String test = "test";
-		return test;
+		return html;
 	}
-	
+
 
 
 }
