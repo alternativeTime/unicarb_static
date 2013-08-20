@@ -1,6 +1,24 @@
 @(notation: String, message: String, references: List[Reference], refmethods: List[Reference], taxsources: ArrayList[String], proteinsources: ArrayList[Biolsource], prot: ArrayList[String] )
 @import helper._
 
+@title(text: String) = @{
+  text.split(' ').map(_.capitalize).mkString(" ")
+}
+
+@ands(text: String) = @{
+  text.replaceAll(" ", "-").replaceAll("(\\.$)", "")
+}
+
+<script>
+    var ands = "";
+    var andsTitle = "title";
+	@for(ands <- references){
+		andsTitle = ands.title
+	}
+	andsTitle.replace(/\s+/g, '-').toLowerCase();
+	console.log("ands title " + andsTitle);	
+
+</script>
 
 @main {
 @for(r <- references) {
@@ -21,7 +39,7 @@
   <div class="row-fluid">
     <div class="span8">
 
-      <p><b>@r.title</b></p>
+      <p><b>@title(r.title)</b></p>   	
       <p>PubMed Entry: <a href="http://www.ncbi.nlm.nih.gov/pubmed/@r.pmid">@r.pmid</a></p>
       <div class="mini-layout">
         <div class="mini-layout-body"></div>
@@ -69,10 +87,19 @@
         @for(rmethod <- methods.refmethod) { <p>@rmethod.method.description</p>
         }
         }
+        
+        
         <div class="mini-layout fluid">
           <div class="mini-layout-sidebar"></div>
           <div class="mini-layout-body"></div>
         </div>
+      </div>
+      
+      <div class="info">
+      	 <h3>Connections</h3>
+      	 @for(r <- references){
+      	 <a href='http://researchdata.ands.org.au/@ands(r.title)'> Research Data Australia </a>
+     	 }
       </div>
     </div><!-- /col -->
   </div><!-- /row -->

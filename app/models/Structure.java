@@ -165,7 +165,7 @@ public class Structure extends Model {
 				    	  long lEnz = Long.parseLong(searchEnz);
 				    	  
 				    	  Enzyme enzyme = Enzyme.find.byId( lEnz );
-				    	  html += "<tr><td>" + enzyme.name + "</td><td>" + enzyme.goterm + "</td>";
+				    	  html += "<tr><td>" +enzyme.name + "</td><td>" + enzyme.jcggdb + "</td><td>" + enzyme.kegg + "</td><td>" + enzyme.goterm + "</td>";
 				      }
 				      else{
 				           html  += "<td>" + entry.getValue().toString() + "</td>";

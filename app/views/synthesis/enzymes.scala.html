@@ -1,0 +1,65 @@
+@(references: List[Structure], reader: String)
+@import helper._
+
+@**********************************
+* Helper generating table headers *
+***********************************@
+@header(key:String, title:String) = {
+    <th class="">
+        <a href="">@title</a>
+    </th>
+}
+
+<ul class="nav nav-tabs" data-tabs="tabs">
+    <li class="active"><a data-toggle="tab" href="#red">References</a></li>
+	<li><a data-toggle="tab" href="#annotated">Enzyme</a></li>
+</ul>
+
+<div class="tab-content">
+      <div class="tab-pane active" id="red">
+	  
+	  
+      <h3>References associated to structure</h3>
+      <table class="computers table table-striped">
+        <thead>
+          <tr>
+            @header("title", "Title")
+            @header("year", "Year")
+            @header("authors", "Authors")
+          </tr>
+        </thead>
+        <tbody>
+          @for(stref <- references){
+          @for(reference <- stref.references){
+          <tr>
+            <td><a href="../references/@reference.reference.id">@reference.reference.title</a></td>
+            <td>@reference.reference.year</td>
+            <td>@reference.reference.authors</td>
+          </tr>
+          }
+          }
+        </tbody>
+      </table>
+    
+      </div>
+      
+      <div class="tab-pane" id="annotated">
+
+      <table class="computers table table-striped">
+        <thead>
+          <tr>
+          	<th>Gene</th>
+          	<th>Name</th>
+          	<th>Enzyme Commission</th>
+          	<th>GO Term</th>
+          	<th>Residue</th>
+          	<th>Linked Residue</th>
+          </tr>
+        </thead>
+        <tbody>
+        @Html(reader)
+        </tbody>
+        </table>
+      </div>
+      
+</div>

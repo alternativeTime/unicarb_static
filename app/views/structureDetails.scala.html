@@ -1,4 +1,4 @@
-@(glycantype: String, strcomp: List[Composition], notation: String, references: List[Structure], structureId: Long, proteinNames: ArrayList[String], proteinItems: HashSet[Proteins], sourceNames: ArrayList[String], sourceItems: ArrayList[Tissue], test: List[Array[String]], uniprot: ArrayList[String], taxItems: ArrayList[Taxonomy], taxNames: ArrayList[String], pubchem: String)
+@(glycantype: String, strcomp: List[Composition], notation: String, references: List[Structure], structureId: Long, proteinNames: ArrayList[String], proteinItems: HashSet[Proteins], sourceNames: ArrayList[String], sourceItems: ArrayList[Tissue], test: List[Array[String]], uniprot: ArrayList[String], taxItems: ArrayList[Taxonomy], taxNames: ArrayList[String], pubchem: String, reader: String)
 @import helper._
 
 @**********************************
@@ -9,6 +9,9 @@
         <a href="">@title</a>
     </th>
 }
+
+<script src="@routes.Assets.at("/public", "javascripts/bootstrap-tab.js")"></script>
+
 
 @main {
 
@@ -46,25 +49,14 @@
     <div class="span8">
       <ul class='structures'>
       @views.html.format.structureLarge(notation, structureId) 
-
-
-	<!-- Button to trigger modal -->
-<a href="#modal-gallery" role="button" class="label label-dark" data-toggle="modal">View High-Res</a>
-
-<!-- modal-gallery is the modal dialog used for the image gallery -->
-<div id="modal-gallery" class="modal modal-gallery hide fade" tabindex="-1">
-    <div class="modal-header">
-        <a class="close" data-dismiss="modal">&times;</a>
-        <h3 class="modal-title"></h3>
-    </div>
-    <div class="modal-body"><img class="sugar_image"  src="../images/cfgl/smaller/@{structureId}.png" alt=""></div>
-    <div class="modal-footer">
-        <a class="btn modal-download" target="_blank" href="../images/cfgl/smaller/@{structureId}.png"><i class="icon-download"></i> Download</a>
-    </div>
-</div>
-
       </ul>
-
+      
+       
+      
+      @if(reader.length > 10){
+       @views.html.synthesis.enzymes(references, reader)
+      }else{
+      
       <h3>References associated to structure</h3>
       <table class="computers table table-striped">
         <thead>
@@ -86,7 +78,68 @@
           }
         </tbody>
       </table>
+      
+      }
+      
+      
+      @*
+	  <div class="tab-content">
+      <div class="tab-pane active" id="red">
+	  
+	  
+      <h3>References associated to structure</h3>
+      <table class="computers table table-striped">
+        <thead>
+          <tr>
+            @header("title", "Title")
+            @header("year", "Year")
+            @header("authors", "Authors")
+          </tr>
+        </thead>
+        <tbody>
+          @for(stref <- references){
+          @for(reference <- stref.references){
+          <tr>
+            <td><a href="../references/@reference.reference.id">@reference.reference.title</a></td>
+            <td>@reference.reference.year</td>
+            <td>@reference.reference.authors</td>
+          </tr>
+          }
+          }
+        </tbody>
+      </table>
+    
+      </div>
+      
+      <div class="tab-pane" id="annotated">
+
+      <table class="computers table table-striped">
+        <thead>
+          <tr>
+          	<th>Gene</th>
+          	<th>Name</th>
+          	<th>Enzyme Commission</th>
+          	<th>GO Term</th>
+          	<th>Residue</th>
+          	<th>Linked Residue</th>
+          </tr>
+        </thead>
+        <tbody>
+        @Html(reader)
+        </tbody>
+        </table>
+      </div>
+      
+      </div>
+      
+      
+      *@
+    
     </div>
+
+
+
+
 
     <div class="span4 sidebar">
 
