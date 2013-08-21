@@ -617,6 +617,10 @@ public class Application extends Controller {
 
 
 		List<Composition> strMain = Composition.findCompositionDetails(compositionId.trim());
+		
+		ct ctt = new ct();
+		//ctt = ct.find.byId(id);
+		ctt.digest(ctt.ct);
 
 		/*Should make this an ajax call */
 		String reader = "";
