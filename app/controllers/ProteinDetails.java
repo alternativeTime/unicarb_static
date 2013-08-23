@@ -47,7 +47,7 @@ public class ProteinDetails extends Controller {
 
 		}
 
-		String queryProtein = "select id, name, swiss_prot, description from proteins where ";
+		String queryProtein = "select id, name, swiss_prot, description from public.proteins where ";
 		int count = 0;
 		if (proteins.size() == 1 ) {
 			for(String proteinlookup : proteins) {

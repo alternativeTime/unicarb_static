@@ -41,13 +41,19 @@ public class ct {
 	public static Finder<Long,ct> find = new Finder<Long,ct>(Long.class, ct.class);
 	
 	
-	public Map<String, String> digest(String ct) throws IOException{
+	public Map<String, String> digest(String ct, String[] enzymesInput) throws IOException{
 		
 		//Logger.info("string ct is " + ct);
 		
 		ArrayList<String> enz = new ArrayList<String>();
-		enz.add("ABS");
-		enz.add("BTG");
+		if(enzymesInput != null){
+		for(String enzIn : enzymesInput){
+			enz.add(enzIn);
+		}
+		} else { 
+			enz.add("ABS");
+		}
+		//enz.add("BTG");
 		
 		//EnzymeMapping e = new EnzymeMapping();
 		//e.createDic_link();
@@ -62,9 +68,9 @@ public class ct {
 		
 		String[] enzymes = StringUtils.substringsBetween(s.glycanTreatment(), "enzyme", "RES");
 	
-		for (String t : enzymes) {
-			System.out.println("t:" + t); // good
-		}
+		//for (String t : enzymes) {
+			//System.out.println("t:" + t); // good
+		//}
 		
 	
 		ArrayList<String> out = s.getGlycanOutput();

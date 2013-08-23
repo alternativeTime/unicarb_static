@@ -13,7 +13,12 @@ import com.avaje.ebean.*;
 @Table(schema="public", name="proteins")
 public class Proteins extends Model {
 
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8438300033977154269L;
+
+	@Id
     public Long id;
     
     public String name;

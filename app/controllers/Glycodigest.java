@@ -23,13 +23,17 @@ import com.avaje.ebean.*; //dont think this should be here due to SqlRow
 public class Glycodigest extends Controller {
 	
 	public static Result glycodigest(Long id) {
+		String[] enzymes = null;
 		Map<String, String> hashMap = new HashMap<String, String>();
+		
+		
+		Logger.info("URL STUFF " + id );
 		
 		ct ctt = new ct();
 		ctt = ct.find.byId(id);
 		
 		try{
-			hashMap = ctt.digest(ctt.ct);
+			hashMap = ctt.digest(ctt.ct, enzymes);
 		}
 		catch(IOException e){
 			e.printStackTrace();
@@ -40,5 +44,19 @@ public class Glycodigest extends Controller {
 				glycodigest.render(hashMap)
 				); 
 	};
+	
+	public static Result glycodigesttest(Long id, String s){
+		Map<String, String> hashMap = new HashMap<String, String>();
+		
+		String[] x = request().queryString().get("digest");
+		
+		Logger.info("---------hdhhdhd#################################  " + request().queryString().get("digest").toString() );
+		
+		//Lorequest().uri();
+		
+		return ok( 
+				glycodigest.render(hashMap)
+				); 
+	}
 
 }
