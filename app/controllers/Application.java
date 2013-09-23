@@ -39,13 +39,21 @@ public class Application extends Controller {
 				stref.ref().render(display)
 				); 
 	};
+	
+	public static Result enzymes(){
+		
+		List<Enzyme> enzyme = Enzyme.getEnzymes();		
+		return ok(
+				enzymes.render(enzyme)
+				);		
+	};
 
 	public static Result proteinsummary(String protein) {	
-		
+
 		try{
-		protein = URLDecoder.decode(protein, "UTF-8");
+			protein = URLDecoder.decode(protein, "UTF-8");
 		} catch (Exception e){
-			
+
 		}
 
 		List<com.avaje.ebean.SqlRow> listSql = null;
@@ -107,18 +115,18 @@ public class Application extends Controller {
 			definedSites = DefinedSites.findProteinsDefined(protein);
 
 			String [] splitProtein = protein.split("\\s*[and]+\\s*");
-			
+
 			proteinMultiple = Proteins.findProteinsSwissProt(protein);
 			if(proteinMultiple.isEmpty()){
 				proteinMultiple = Proteins.findProteinSwissProtMulti(protein);
 			}
 
 			if(!proteinMultiple.isEmpty()){
-			//for(String partProtein : splitProtein) {
+				//for(String partProtein : splitProtein) {
 				uniprotDetails = UniprotConnection.EntryRetrievalExample(protein);
 				sequenceRetrieval = UniprotConnection.EntryRetrievalSequence(protein);
 			}
-			
+
 			//List<GsProteinSite> gsProteinSite = GsProteinSite.ProteinRetrieval(protein);
 			gsProteinSite = GsProteinStr2.ProteinRetrieval(protein);
 			//List<SitesReferences2> description = SitesReferences2.findSitesReferences(protein);
@@ -129,8 +137,8 @@ public class Application extends Controller {
 		if(!protein.matches("[A-Z][0-9].*")) {
 			generalSites = GeneralSites.findProteinsGeneralName(protein);
 			definedSites = DefinedSites.findProteinsDefinedName(protein);
-			
-			
+
+
 			proteinMultiple = Proteins.findProteinsName(protein);
 			//typeProteinEntry = "not swiss prot";	
 		}
@@ -144,17 +152,17 @@ public class Application extends Controller {
 		}	
 
 		List<com.avaje.ebean.SqlRow> proteinTax = Proteinsource.findProteinSource(protein);
-		
+
 
 		Object format = Cache.get("format");	
 		String notation = "gs";
 		if(format != null) {notation = (String) format.toString();}
 		else{
-		Cache.set("format", "gs", 0);
+			Cache.set("format", "gs", 0);
 		}
-	
+
 		HashSet<String> uniqueStructures = new HashSet<String>();
-		
+
 		for(Proteins p : proteinMultiple){
 			List<Stproteins> stproteins = p.stproteins;
 			for(Stproteins s : stproteins){
@@ -162,7 +170,7 @@ public class Application extends Controller {
 				uniqueStructures.add( String.valueOf(s.structure.id) );				
 			}
 		}
-	
+
 		HashSet<String> test = new HashSet();	
 		for(String s : uniqueStructures){
 			//test.add(Long.parseLong(s));	
@@ -171,7 +179,7 @@ public class Application extends Controller {
 		}
 
 		ArrayList<String> t2 = new ArrayList<String>();
-		 t2.addAll(test);
+		t2.addAll(test);
 
 		return ok(
 				proteinsummary.render(warning, notation, proteinName, protein, biolSourceProtein, proteins, uniprotDetails, gsProteinSite, referencesU, description, sequenceRetrieval, /*proteinMultiple, uniqueStructures,*/ t2, generalSites, definedSites, typeProteinEntry, swissProtName, proteinTax)
@@ -180,17 +188,17 @@ public class Application extends Controller {
 	}
 
 	public static Result compositions() {
-		
+
 		List<Structurecomp> compositionResult = null;
 		String type = "";
-		
+
 		Object format = Cache.get("format");	
 		String notation = "gs";
 		if(format != null) {notation = (String) format.toString();}
 		else{
-                Cache.set("format", "gs", 0);
-                }
-		
+			Cache.set("format", "gs", 0);
+		}
+
 		int e = 0;
 		String[] list = new String[14];
 		String[] l = new String[14];
@@ -208,153 +216,153 @@ public class Application extends Controller {
 				searchTerms = entry.getValue();
 
 				if(key.equals("glycanType")){
-				glycanType = searchTerms;
+					glycanType = searchTerms;
 				}
-				
+
 				if(key.equals("comp_Hex")) {
-				list[0] = Structure.buildComposition(searchTerms); 
-				
-			        if(searchTerms !=null ) {
-					for(String s : searchTerms){
-					if(!s.isEmpty()){
-					l[0] = "Hexose: " + s ;
-					}}	
-				}}
+					list[0] = Structure.buildComposition(searchTerms); 
+
+					if(searchTerms !=null ) {
+						for(String s : searchTerms){
+							if(!s.isEmpty()){
+								l[0] = "Hexose: " + s ;
+							}}	
+					}}
 
 				if(key.equals("comp_HexNAc")) {
-				list[1] = Structure.buildComposition(searchTerms);
-				if(searchTerms !=null ) {
-                                        for(String s : searchTerms){
-					if(!s.isEmpty()){
-                                        l[1] = " HexNAc: " + s ;
-                                        }}
-                                }
+					list[1] = Structure.buildComposition(searchTerms);
+					if(searchTerms !=null ) {
+						for(String s : searchTerms){
+							if(!s.isEmpty()){
+								l[1] = " HexNAc: " + s ;
+							}}
+					}
 
-                                }
+				}
 
 				if(key.equals("comp_Deoxyhexose")) {
-				list[2] = Structure.buildComposition(searchTerms);
-                                
-				if(searchTerms !=null ) {
-                                        for(String s : searchTerms){
-					if(!s.isEmpty()){
-                                        l[3] = " dHex: " + s ;
-                                        }}
-                                }
-				}
-				
-				if(key.equals("comp_Pent")) {
-				list[5] = Structure.buildComposition(searchTerms);
+					list[2] = Structure.buildComposition(searchTerms);
 
-				if(searchTerms !=null ) {
-                                        for(String s : searchTerms){
-					if(!s.isEmpty()){
-                                        l[5] = " Pentose: " + s ;
-                                        }}
-                                }
-                                }
+					if(searchTerms !=null ) {
+						for(String s : searchTerms){
+							if(!s.isEmpty()){
+								l[3] = " dHex: " + s ;
+							}}
+					}
+				}
+
+				if(key.equals("comp_Pent")) {
+					list[5] = Structure.buildComposition(searchTerms);
+
+					if(searchTerms !=null ) {
+						for(String s : searchTerms){
+							if(!s.isEmpty()){
+								l[5] = " Pentose: " + s ;
+							}}
+					}
+				}
 
 				if(key.equals("comp_NeuAc")) {
-				list[3] = Structure.buildComposition(searchTerms);
-                                
-				if(searchTerms !=null ) {
-                                        for(String s : searchTerms){
-					if(!s.isEmpty()){
-                                        l[3] = " NeuAc: " + s ;
-                                        }}
-                                }
+					list[3] = Structure.buildComposition(searchTerms);
+
+					if(searchTerms !=null ) {
+						for(String s : searchTerms){
+							if(!s.isEmpty()){
+								l[3] = " NeuAc: " + s ;
+							}}
+					}
 				}
 
 				if(key.equals("comp_NeuGc")) {
-				list[4] = Structure.buildComposition(searchTerms);
-                                if(searchTerms !=null ) {
-                                        for(String s : searchTerms){
-					if(!s.isEmpty()){
-                                        l[4] = " NeuGc: " + s ;
-                                        }}
-                                }
+					list[4] = Structure.buildComposition(searchTerms);
+					if(searchTerms !=null ) {
+						for(String s : searchTerms){
+							if(!s.isEmpty()){
+								l[4] = " NeuGc: " + s ;
+							}}
+					}
 				}
 
 				if(key.equals("comp_KDN")) {
-				list[8] = Structure.buildComposition(searchTerms);
-                                
-				if(searchTerms !=null ) {
-                                        for(String s : searchTerms){
-					if(!s.isEmpty()){
-                                        l[8] = " KDN: " + s ;
-                                        }}
-                                }
-}
-				
-				if(key.equals("comp_HexA")) {
-				list[10] = Structure.buildComposition(searchTerms);
+					list[8] = Structure.buildComposition(searchTerms);
 
-				if(searchTerms !=null ) {
-                                        for(String s : searchTerms){
-                                        if(!s.isEmpty()){
-					l[10] = " HexA: " + s ;
-                                        }}
-                                }
-                                }
+					if(searchTerms !=null ) {
+						for(String s : searchTerms){
+							if(!s.isEmpty()){
+								l[8] = " KDN: " + s ;
+							}}
+					}
+				}
+
+				if(key.equals("comp_HexA")) {
+					list[10] = Structure.buildComposition(searchTerms);
+
+					if(searchTerms !=null ) {
+						for(String s : searchTerms){
+							if(!s.isEmpty()){
+								l[10] = " HexA: " + s ;
+							}}
+					}
+				}
 
 				if(key.equals("comp_Phos")) {
-				list[7] = Structure.buildComposition(searchTerms);
-        			if(searchTerms !=null ) {
-                                        for(String s : searchTerms){
-                                        if(!s.isEmpty()){
-					l[7] = " Phos: " + s ;
-                                        }}
-                                }                        
+					list[7] = Structure.buildComposition(searchTerms);
+					if(searchTerms !=null ) {
+						for(String s : searchTerms){
+							if(!s.isEmpty()){
+								l[7] = " Phos: " + s ;
+							}}
+					}                        
 				}
-		
+
 				if(key.equals("comp_Sulph")) {
-				list[6] = Structure.buildComposition(searchTerms);
-				if(searchTerms !=null ) {
-                                        for(String s : searchTerms){
-					if(!s.isEmpty()){
-                                        l[6] = " Sulph: " + s ;
-                                        }}
-                                }
-                                }
-		
+					list[6] = Structure.buildComposition(searchTerms);
+					if(searchTerms !=null ) {
+						for(String s : searchTerms){
+							if(!s.isEmpty()){
+								l[6] = " Sulph: " + s ;
+							}}
+					}
+				}
+
 				if(key.equals("comp_methyl")) {
-				list[11] = Structure.buildComposition(searchTerms);
-				if(searchTerms !=null ) {
-                                        for(String s : searchTerms){
-					if(!s.isEmpty()){
-                                        l[11] = " Methyl: " + s ;
-                                        }}
-                                }
-                                }
-	
+					list[11] = Structure.buildComposition(searchTerms);
+					if(searchTerms !=null ) {
+						for(String s : searchTerms){
+							if(!s.isEmpty()){
+								l[11] = " Methyl: " + s ;
+							}}
+					}
+				}
+
 				if(key.equals("comp_acetyl")) {
-				list[12] = Structure.buildComposition(searchTerms);
-                                if(searchTerms !=null ) {
-                                        for(String s : searchTerms){
-                                        if(!s.isEmpty()){
-					l[12] = " Acetyl: " + s ;
-                                        }}
-                                }
+					list[12] = Structure.buildComposition(searchTerms);
+					if(searchTerms !=null ) {
+						for(String s : searchTerms){
+							if(!s.isEmpty()){
+								l[12] = " Acetyl: " + s ;
+							}}
+					}
 				}
-				
+
 				if(key.equals("comp_other")) {
-                                list[13] = Structure.buildComposition(searchTerms);
-                                if(searchTerms !=null ) {
-                                        for(String s : searchTerms){
-					if(!s.isEmpty()){
-                                        l[13] = " Other: " + s ;
-                                        }}
-                                }
+					list[13] = Structure.buildComposition(searchTerms);
+					if(searchTerms !=null ) {
+						for(String s : searchTerms){
+							if(!s.isEmpty()){
+								l[13] = " Other: " + s ;
+							}}
+					}
 				}
-				
+
 				if(key.equals("comp_KDO")) {
-                                list[9] = Structure.buildComposition(searchTerms);
-                                if(searchTerms !=null ) {
-                                        for(String s : searchTerms){
-					if(!s.isEmpty()){
-                                        l[9] = " KDO: " + s ;
-                                        }}
-                                }
+					list[9] = Structure.buildComposition(searchTerms);
+					if(searchTerms !=null ) {
+						for(String s : searchTerms){
+							if(!s.isEmpty()){
+								l[9] = " KDO: " + s ;
+							}}
+					}
 				}
 
 			}
@@ -362,15 +370,15 @@ public class Application extends Controller {
 			StringBuilder builder = new StringBuilder();
 			String r = "";
 			for(String s : list) {
-    				builder.append(s);
-    				r += s;
+				builder.append(s);
+				r += s;
 			}
 
 			StringBuilder glycanT = new StringBuilder();
-                                for(String s : glycanType) {
-                                glycanT.append(s);
-                                g += s;
-                        }
+			for(String s : glycanType) {
+				glycanT.append(s);
+				g += s;
+			}
 
 			r = r.replace("null", "0");	
 
@@ -396,7 +404,7 @@ public class Application extends Controller {
 		//pull in the glycobase associated proteins
 		HashSet pertubationUnique = GlycobaseSource.perturbationSummary();
 		proteinUnique.addAll(pertubationUnique);
-		
+
 		HashSet proteinAccession = Proteins.proteinAccessionSummary();
 
 
@@ -442,13 +450,13 @@ public class Application extends Controller {
 				searchTerms = entry.getValue();
 			}
 
-			
+
 			if(key.equals("swiss")){
 				for (String querySwiss : searchTerms){
 					List<Proteins> proteinsTerm = Proteins.findProteinsSwissProt(querySwiss);
 					accSearch.addAll(proteinsTerm);
 				}
-				
+
 			}
 
 			if(key.equals("taxonomy")){
@@ -569,7 +577,7 @@ public class Application extends Controller {
 				type = entries.type;
 
 				compositionId = entries.compositionId;
-				
+
 				if ( !pubchem.isEmpty() ){
 					for(Pubchem c : pubchem) {
 						pubchemId = c.pubchem_id;
@@ -612,13 +620,13 @@ public class Application extends Controller {
 		String notation = "gs";
 		if(format != null) {notation = (String) format.toString();} 
 		else{
-                Cache.set("format", "gs", 0);
-                }
+			Cache.set("format", "gs", 0);
+		}
 
 
 		List<Composition> strMain = Composition.findCompositionDetails(compositionId.trim());
-		
-		
+
+
 		/*Should make this an ajax call */
 		String reader = "";
 		try{
@@ -626,8 +634,8 @@ public class Application extends Controller {
 		}
 		catch (IOException e) {
 			e.printStackTrace();
-		     }
-		
+		}
+
 		return ok(
 				structureDetails.render(type, strMain, notation, strDisplay, id, proteinNames, proteinNamesUnique, sourceNames, sourceItems, rowList, uniprot, taxItems, taxNames, pubchemId, reader)
 				);
@@ -670,8 +678,8 @@ public class Application extends Controller {
 		String notation = "gs";
 		if(format != null) {notation = (String) format.toString();}
 		else{
-                Cache.set("format", "gs", 0);
-                }
+			Cache.set("format", "gs", 0);
+		}
 
 
 		return ok( 
@@ -750,8 +758,8 @@ public class Application extends Controller {
 		String notation = "gs";
 		if(format != null) {notation = (String) format.toString();}
 		else{
-                Cache.set("format", "gs", 0);
-                }
+			Cache.set("format", "gs", 0);
+		}
 
 		//return TODO;
 		return ok(
@@ -775,8 +783,8 @@ public class Application extends Controller {
 			String notation = "gs";
 			if(format != null) {notation = (String) format.toString();}	
 			else{
-                	Cache.set("format", "gs", 0);
-                	}
+				Cache.set("format", "gs", 0);
+			}
 
 			//return TODO;
 			return ok(
@@ -856,17 +864,17 @@ public class Application extends Controller {
 		HashSet structureTax = new HashSet();
 		//Set<String> ordertax = new TreeSet<String>(); //order tax
 		TreeMap ordertax = new TreeMap();
-		
-		
+
+
 		List<com.avaje.ebean.SqlRow> listSql2 = Tissue.findTissueStructures(id);
 		for(com.avaje.ebean.SqlRow l : listSql2) {
-			
+
 			structureTest.add(l.getLong("structure_id"));
 			for(Object ll : structureTest){
 				structureTesta.add(ll.toString() );
 			}
 		}
-		
+
 		for(Object a : structureTesta){
 			String aa = a.toString();
 			Long look =  Long.valueOf(aa);
@@ -877,11 +885,11 @@ public class Application extends Controller {
 				structureTax.add(t.species);
 				//ordertax.add(t.species.toString());
 				ordertax.put(t.species, t.species );
-				
+
 			}
 
 		}
-		
+
 
 		//Taxonomy taxonomy  = Taxonomy.find.byId(id); //check here
 		//String taxon = taxonomy.species;
@@ -892,8 +900,8 @@ public class Application extends Controller {
 		String notation = "gs";
 		if(format != null) {notation = (String) format.toString();} 
 		else{
-                Cache.set("format", "gs", 0);
-                }
+			Cache.set("format", "gs", 0);
+		}
 
 
 
