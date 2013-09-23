@@ -1,0 +1,63 @@
+@(map: Map[String, String])
+
+
+@main {
+
+<script>
+$(document).ready(function() {
+$("#e20").select2({
+    tags:["red", "green", "blue"],
+    tokenSeparators: [",", " "]});
+});
+
+</script>
+
+  <section id="layouts">
+
+    <div class="page-header row-fluid">
+      <h1 id="homeTitle">GlycoDigesy</h1>
+    </div>
+ 
+
+    <div id="actions">
+ 
+        <form class="form-search" action="@routes.Glycodigest.glycodigesttest(1249)" method="GET">
+        <div id="selection" class="row-fluid">
+          <input type="hidden" id="e20" name="digest" class="span4">
+          <input type="submit" id="searchsubmit" value="Filter" class="btn btn-primary">
+          <a class="btn success" id="add" href="/references?s=authors">Show All References</a> 
+        </div>
+        </form>
+        
+    </div>
+    
+    @for((key, value) <- map){
+    <p>shshs</p>
+    <p>@value</p>
+    }
+    <div class="row-fluid">
+   
+        
+        <table class="computers table table-striped">
+            <thead>
+               
+            </thead>
+            <tbody>
+            
+            <tr><td>
+            
+            </td></tr>
+            
+           
+            </tbody>
+        </table>
+
+       
+      </div>
+	
+      @views.html.footerunicarb.footerunicarb()    
+
+
+  </section>
+        
+}
