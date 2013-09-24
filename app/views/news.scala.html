@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html class="about">
+  <head>
+    <title>UnICarbKB</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("/public", "stylesheets/bootstrap.min.css")">
+    <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("/public", "stylesheets/unicarbkb.css")">
+    <link rel="icon" href="@routes.Assets.at("/public", "favicon.ico")" type="image/x-icon">
+    <link rel="icon" href="@routes.Assets.at("/public", "favicon.ico")" type="image/x-icon">
+  </head>
+
+  <header>
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="brand" href="/">UniCarbKB</a>
+          <ul class="nav">
+            <li><a href="/">Home</a></li>
+            <li><a href="/query">Search</a></li>
+            <li><a href="/references">References</a></li>
+            <li><a href="/builder">Glycan Builder</a></li>
+          </ul>
+          <div id="headersearch" class="pull-right">
+            <ul class='nav'>
+              <li class='active'><a href="/about">About</a></li>
+              <li class='active'><a href="/about">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container-fluid content">
+    <div class="row-fluid info">
+      <div class="span8 leftContent">
+        <h3>GlycoSuiteDB redirected to UniCarbKB <em>(24th September 2013)</em></h3>
+        <p>Welcome to UniCarbKB. 
+        The UniCarbKB team in collaboration with the Swiss Institute of Bioinformatics are pleased 
+        to announce the release of UniCarbKB.</p>
+        <p>Thanks to this collaboration all UniProtKB and GlycoMod links associated with 
+        GlycoSuiteDB have been refreshed and will automatically redirect users to relevant UniCarbKB pages.</p> 
+        <p>Previously, GlycoSuiteDB was hosted and maintained by the Swiss Institute of Bioinformatics but has now been discontinued and all services and data have been integrated into UniCarbKB. 
+        </p>
+
+        
+        
+        <h4>GlycoSuiteDB Final Release 8.0</h4>
+        <p>GlycoSuiteDB is a curated and annotated glycan database. Release 8.0 contains 9436 entries, sourced from 864 references. 
+        This data and new content have been integrated into UniCarbKB with a new user interface and functionality. 
+        GlycoSuiteDB, a product of Tyrian Diagnostics Ltd formerly Proteome Systems Ltd, will be safely archived by the Swiss Institute of Bioinformatics.  
+        Thanks to on-going collaborations the glycan database will continue to be publicly accessible.</p>
+      </div>
+
+      <div class='span4 sidebar'>
+        <ul class='nav nav-pills nav-stacked clearfix'>
+          <h3>Contacts</h3>
+          <li>
+            <a href='mailto:nicki.packer&#64;mq.edu.au'>
+              Prof. Nicki Packer; Director, Biomolecular Frontiers Research Centre, Macquarie University, Sydney 
+            </a>
+	    <a href='mailto:matthew.campbell&#64;mq.edu.au'>
+	      Matthew Campbell,  Biomolecular Frontiers Research Centre, Macquarie University, Sydney
+	    </a>
+            <a href='mailto:frederique.lisacek&#64;isb-sib.ch'>
+	      Frederique Lisacek, Swiss Institute for Bioinformatics
+	    </a>
+          </li>
+        </ul>
+	<div class="info clearfix">
+          <h3>Social Connections</h3>
+          <img src='/assets/images/qr/homeqr.png' alt='' /><br/>
+	  	  <a href="../images/Macquarie_BiFoldBrochure_v1_HR.pdf">Check out our latest brochure</a><br/><br/>
+          <a href="https://twitter.com/unicarbkb" class="twitter-follow-button" data-show-count="false">Follow unicarbkb</a>
+          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+          <!-- Place this tag where you want the +1 button to render -->
+          <br><g:plusone size="medium" annotation="none"></g:plusone>
+
+          <!-- Place this render call where appropriate -->
+          <script type="text/javascript">
+            (function() {
+              var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+              po.src = 'https://apis.google.com/js/plusone.js';
+              var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+              })();
+          </script>
+          @* <div class="timeline-arrow"></div> *@
+        </div>
+      </div>
+    </div>
+    
+    <div class="row-fluid logos">
+      <div class='span3 nectar'><a href="http://www.nectar.org.au"><img src='/assets/img/NeCTAR_Logo.png' alt='' /></a></div>
+      <div class='span3'><a href="http://www.ands.org.au"><img src='/assets/img/ANDS_Logo.png' alt='' /></a></div>
+      <div class='span3 stint'><a href="http://www.stint.se"><img src='/assets/img/STINT_Logo.png' alt='' /></a></div>
+      <div class='span3'><a href="http://expasy.org/"><img src='/assets/img/SIB_Logo.png' alt='' /></a></div>
+    </div>
+
+    @views.html.footerunicarb.footerunicarb()
+  
+  </div>
+
+</html>	
