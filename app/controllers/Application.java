@@ -25,6 +25,12 @@ import java.io.UnsupportedEncodingException;
 
 
 public class Application extends Controller {
+	
+	public static Result news() {
+		return ok(
+				news.render()
+		);
+	}
 
 	/**
 	 * This result directly redirect to application home.
