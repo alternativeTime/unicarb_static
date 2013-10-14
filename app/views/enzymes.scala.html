@@ -1,0 +1,34 @@
+@(enzyme: List[Enzyme])
+
+@main{
+	
+	<h1>Enzyme Descriptions</h1>
+	
+	<p>A new feature is the integration of known genes and enzymes involved in the biosynthesis of N-glycans stored in UniCarbKB.</p>
+	<p>A description of the enzymes used is provided:</p>
+ 
+        	<table class="computers table table-striped">
+            <thead>
+                <tr>
+                	
+                    <th>Enzyme Name</th>
+                    <th>JCGGDB Description</th>
+                    <th>GO Term</th>
+                    <th>Enzyme Accession</th>
+                </tr>
+            </thead>
+            <tbody>
+            	@for(e <- enzyme){
+            	@if(!e.name.contains("NA")){
+            	<tr>
+            	<td>@e.name</td><td>@e.jcggdb</td><td>@e.goterm</td><td>@e.kegg</td>
+            	</tr>
+            	}
+            	}
+            	
+            </tbody>
+            </table>	
+          
+  
+}
+    

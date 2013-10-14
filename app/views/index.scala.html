@@ -6,6 +6,22 @@
     <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("/public", "stylesheets/unicarbkb.css")">
     <link rel="icon" href="@routes.Assets.at("/public", "favicon.ico")" type="image/x-icon">
     <link rel="icon" href="@routes.Assets.at("/public", "favicon.ico")" type="image/x-icon">
+    <script type="text/javascript" src="@routes.Assets.at("/public", "javascripts/jquery-2.0.3.min.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("/public", "javascripts/pines/jquery.pnotify.min.js")"></script>
+    <link href="@routes.Assets.at("/public", "stylesheets/pines/jquery.pnotify.default.css")" media="all" rel="stylesheet" type="text/css" />
+ 
+    <script type="text/javascript">
+$(function(){
+	
+	$.pnotify.defaults.history = false;
+	
+    $.pnotify({
+        title: 'GlycoSuiteDB Notice',
+	text: 'From September 2013 GlycoSuiteDB will be redirected to UniCarbKB <a href="/news">more info</a>'
+    });
+});
+</script>
+ 
   </head>
 
   <header>

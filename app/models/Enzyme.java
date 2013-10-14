@@ -33,6 +33,12 @@ public class Enzyme extends Model {
 	public String goterm; //col az
 	
 	public static Finder<Long,Enzyme> find = new Finder<Long,Enzyme>(Long.class, Enzyme.class);
+
+
+	public static List<Enzyme> getEnzymes() {
+			List<Enzyme> enzyme = Enzyme.find.all();
+		return enzyme;
+	}
 	
 }
 
