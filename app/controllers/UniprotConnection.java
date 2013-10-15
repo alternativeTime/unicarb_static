@@ -144,7 +144,7 @@ public class UniprotConnection extends Controller {
 
 
 	public static Result proteinsite() {
-
+		System.out.println("where am i");
 		String proteinName = "";
 		String swissProtName = "";
 		String proteinNameFull = "";
