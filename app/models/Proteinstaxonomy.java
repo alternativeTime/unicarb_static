@@ -25,7 +25,7 @@ public class Proteinstaxonomy extends Model {
     
     public String protein;
   
-    public String strain;
+    //public String strain;
 
 
     @ManyToOne

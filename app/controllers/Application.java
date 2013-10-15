@@ -564,9 +564,11 @@ public class Application extends Controller {
 		ArrayList proteinItems = new ArrayList();
 		HashSet proteinNamesUnique = new HashSet();
 		ArrayList taxNames = new ArrayList();
-		ArrayList taxItems = new ArrayList();
+		//ArrayList taxItems = new ArrayList();
+		HashSet taxItems = new HashSet();
 		ArrayList sourceNames = new ArrayList();
-		ArrayList sourceItems = new ArrayList();
+		//ArrayList sourceItems = new ArrayList();
+		HashSet sourceItems = new HashSet();
 		HashSet sourceNamesUnique = new HashSet();
 		ArrayList uniprot = new ArrayList();
 		HashSet uniprotUnique = new HashSet();
