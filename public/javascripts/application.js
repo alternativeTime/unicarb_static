@@ -60,6 +60,7 @@ $(document).ready(function(){
   // TAXONOMY - Show all structures
   $('#show-structures, #more-structures').click(function() {
     $("#more-thumbnails").slideToggle('slow');
+    $('span.linktext').toggle();
   });
 
   // Structure Associated Descriptions
