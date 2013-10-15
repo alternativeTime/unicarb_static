@@ -1,5 +1,8 @@
 @main {
 
+<link rel="stylesheet" type="text/css" href="/GlycanBuilder/VAADIN/themes/ucdb_2011theme/styles.css"/>
+
+
 <script type="text/javascript"> 
 var vaadin = {
  vaadinConfigurations: {
@@ -13,7 +16,7 @@ versionInfo : {vaadinVersion:"6.0.0-INTERNAL-NONVERSIONED-DEBUG-BUILD",applicati
 </script> 
   
 <script language='javascript' src='GlycanBuilder/VAADIN/widgetsets/ac.uk.icl.dell.vaadin.glycanbuilder.widgetset.GlycanbuilderWidgetset/ac.uk.icl.dell.vaadin.glycanbuilder.widgetset.GlycanbuilderWidgetset.nocache.js'></script> 
-<link rel="stylesheet" type="text/css" href="/GlycanBuilder/VAADIN/themes/ucdb_2011theme/styles.css"/>
+@* <link rel="stylesheet" type="text/css" href="/GlycanBuilder/VAADIN/themes/ucdb_2011theme/styles.css"/> *@
           
 
 <body>
@@ -53,9 +56,22 @@ versionInfo : {vaadinVersion:"6.0.0-INTERNAL-NONVERSIONED-DEBUG-BUILD",applicati
     <a class="btn" href=""><i class="icon-refresh"></i> Refresh</a> <a class="btn btn-warning" href="#"> Builder Applet</a>
     <a class="btn" href="/query"> Search Database (Tissue, Protein and Taxonomy)</a>
   </div>
-  <iframe id="__gwt_historyFrame" style="width:0;height:0;border:0;overflow:hidden" src="javascript:false"></iframe>
 
-        <div id="fb" style="height:450px; width:80%;margin:0"></div>
+    <!-- <iframe id="__gwt_historyFrame" style="width:0;height:0;border:0;overflow:hidden" src="javascript:false"></iframe>  
+
+
+        <div id="fb" style="height:450px; width:80%;margin:0">
+
+        <script src="http://demo.vaadin.com/xsembed/getEmbedJs"
+          type="text/javascript"></script>
+        
+        </div>
+
+-->
+
+<iframe src="http://115.146.85.211:8080/GlycanBuilder" height="450"
+                  width="80%" frameborder="0"></iframe>
+
 
 
 	<script type="text/javascript"> 
