@@ -155,7 +155,13 @@ public class Application extends Controller {
 
 		if (swissProtName == null) {
 			typeProteinEntry = "not swiss prot";
+		}
+
+		if (typeProteinEntry.isEmpty() ) {
+			protein = swissProtName;
 		}	
+
+		System.out.println("Protein typeEntry " + typeProteinEntry + " or swiss " + swissProtName + " name " + protein);
 
 		List<com.avaje.ebean.SqlRow> proteinTax = Proteinsource.findProteinSource(protein);
 

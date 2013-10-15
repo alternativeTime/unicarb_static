@@ -6,7 +6,9 @@ resolvers += "Typesafe repository" at "http://repo.typesafe.com/typesafe/release
 
 // Use the Play sbt plugin for Play projects
 //addSbtPlugin("play" % "sbt-plugin" % Option(System.getProperty("play.version")).getOrElse("2.1.0"))
-addSbtPlugin("play" % "sbt-plugin" % "2.1.3")
+//addSbtPlugin("play" % "sbt-plugin" % "2.2.0")
+addSbtPlugin("com.typesafe.play" % "sbt-plugin" % "2.2.0")
+
 
 //resolvers += "Play2war plugins release" at "http://repository-play-war.forge.cloudbees.com/release/"
 

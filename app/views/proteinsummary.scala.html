@@ -15,7 +15,7 @@
   <div class="page-header row-fluid">
     <h1>Associated Structures</h1>
     <h4 class="subheader span8">Accession:
-      @if(typeEntry.matches("not swiss prot")) {<a href="http://uniprot.org/uniprot/?query=@accession+AND+reviewed%3Ayes&sort=score">@accession </a><span class="pull-right"><a href="http://uniprot.org/uniprot/?query=@proteinName+AND+reviewed%3Ayes&sort=score"><span class='label label-light'>UniProtKB/Swiss-Prot</span></a></span> }
+      @if(typeEntry.matches("not swiss prot")) {<a href="http://uniprot.org/uniprot/?query=@proteinName.replaceAll(" ","+")+AND+reviewed:yes&sort=score">@accession </a><span class="pull-right"><a href="http://uniprot.org/uniprot/?query=@proteinName.replaceAll(" ","+")+AND+reviewed:yes&sort=score"><span class='label label-light'>UniProtKB/Swiss-Prot</span></a></span> }
       @if(!typeEntry.matches("not swiss prot")) {<a href="http://uniprot.org/uniprot/@accession">@accession </a><span class="pull-right"><a href="http://uniprot.org/uniprot/@accession"><span class='label label-light'>UniProtKB/Swiss-Prot Entry</span></a></span> }
       </h4>
   </div>
@@ -133,7 +133,8 @@
         </ul>
 	*@
         @* <div id='show-structures' class='more-structures' href='#'>
-          See more structures
+	  <span class="linktext">See more structures</span>
+          <span class="linktext" style="display:none">See less structures</span>          
           <br />
           <span>&#9679; &#9679; &#9679;</span>
         </div> *@
@@ -224,7 +225,8 @@
             </div>
             @if(source.size() > 5) {
             <div id='show-more-references' class='more-structures' href='#'>
-              See more references
+	      <span class="linktext">See more references</span>
+      	      <span class="linktext" style="display:none">See less references</span>
               <br />
               <span>&#9679; &#9679; &#9679;</span>
             </div>
