@@ -63,7 +63,12 @@
             <tr>
               <td>@generalSites.glyco_aa_site.replace("N-", "ASN-").replace("Asn-", "ASN-").replace("S-", "SER-").replace("Ser-", "SER-").replace("T-", "THR-").replace("Thr-", "THR-").replace("ASASN-", "ASN-")</td>
               <td>
-                <a href="/proteinsite?position=@generalSites.glyco_aa_site&protein=@accession&type=general">
+                @* identified fault with entries where proteins have multiple accessions 
+		 <a href="/proteinsite?position=@generalSites.glyco_aa_site&protein=@accession&type=general">
+                  <span class="label label-notice"><i class='icon-th icon-white'></i> 
+                    Associated Structures: <b>@generalSites.strSiteGeneral.size()</b></span>
+                </a> *@
+		<a href="/proteinsite?position=@generalSites.glyco_aa_site&protein=@generalSites.swiss_prot&type=general">
                   <span class="label label-notice"><i class='icon-th icon-white'></i> 
                     Associated Structures: <b>@generalSites.strSiteGeneral.size()</b></span>
                 </a>
@@ -95,7 +100,12 @@
             <tr>
               <td>@definedSites.amino_acid_position.replace("N-", "ASN-").replace("Asn-", "ASN-").replace("S-", "SER-").replace("Ser-", "SER-").replace("T-", "THR-").replace("Thr-", "THR-").replace("ASASN-", "ASN-")</td>
               <td>
+		@* see above two plus acccessions
                 <a href="/proteinsite?position=@definedSites.amino_acid_position&protein=@accession&type=defined">
+                  <span class="label label-notice"><i class='icon-th icon-white'></i>
+                    Associated Structures: <b>@definedSites.strSiteDefined.size()</b></span>
+                </a> *@
+		 <a href="/proteinsite?position=@definedSites.amino_acid_position&protein=@definedSites.swiss_prot&type=defined">
                   <span class="label label-notice"><i class='icon-th icon-white'></i>
                     Associated Structures: <b>@definedSites.strSiteDefined.size()</b></span>
                 </a>
