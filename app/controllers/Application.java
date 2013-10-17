@@ -862,6 +862,19 @@ public class Application extends Controller {
 	public static Result tissueSummary(Long id) {
 
 		Tissue tissueFind = Ebean.find(Tissue.class, id);
+		
+		/*List<Proteintissue> proteinTissue = tissueFind.proteintissue;
+		List<Taxtissue> taxTissue = tissueFind.taxtissue;
+		HashSet proteinTissueUnique = new HashSet();
+		HashSet taxTissueUnique = new HashSet();
+		
+		for (Proteintissue p : proteinTissue){
+			proteinTissueUniq.add(p.protein);
+		}
+		
+		for (Taxtissue t : taxTissue){
+			proteinTaxUniq.add(t.
+		} */
 
 		String databaseReference = tissueFind.div1 + tissueFind.div2 + tissueFind.div3 + tissueFind.div4;
 

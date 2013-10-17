@@ -47,7 +47,7 @@ public class StructureToSiteDefined extends Model {
     //public String note;
     public int structure_id;
     //public String glycan_type;
-    public int source_id; //make this a relationship
+    //public int source_id; //make this a relationship
 
     @ManyToOne
     public DefinedSites definedSites; 
