@@ -14,13 +14,13 @@ public class Proteintissue {
 	@Id
 	public Long id;
 
-	public String div1;
+	//public String div1;
 
-	public String div2;
+	//public String div2;
 
-	public String div3;
+	//public String div3;
 
-	public String div4;
+	//public String div4;
 	
 	public String protein;
 	

@@ -16,15 +16,15 @@ public class Taxtissue {
 
 	public String species;
 	
-	public String common;
+	//public String common;
 	
-	public String div1;
+	//public String div1;
 	   
-    public String div2;
+    //public String div2;
 
-    public String div3;
+    //public String div3;
 
-    public String div4;
+    //public String div4;
     
     @ManyToOne
     public Tissue tissue;
