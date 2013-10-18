@@ -34,9 +34,9 @@
 
       <div class='ptm-details'>
         <h3>UniProtKB/Swiss-Prot PTM Description</h3>
-        @if(warning.contains("GlycoSuiteDB records match multiple IDs containing")){
+        @* @if(warning.contains("GlycoSuiteDB records match multiple IDs containing")){
 	<div class="alert alert-error">@warning</div>
-	}
+	} *@
 	@for(uniprot <- uniprot) {
         @if(uniprot.isEmpty()) {  <div class="alert alert-error">No UniProt PTM information available. Unable to query UniProt for this accession number(s).</div> }
         @if(!uniprot.matches("No info")) {    
