@@ -47,6 +47,15 @@
         }
       </ul>
 	  }
+	@if(structure.size() == 1){
+	<ul class="structures media-grid">
+	@for(structure <- structure) {
+        <li>
+        @views.html.format.structureLarge(notation, structure.structure.id)
+        </li>
+	}
+    	</ul>
+	}
 	  @if(structure.size() <1 ) {
 	  <div class="row-fluid">
 	  <h3>No structures with that compostion were found</h3>
