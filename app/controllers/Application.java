@@ -637,7 +637,6 @@ public class Application extends Controller {
 			Cache.set("format", "gs", 0);
 		}
 
-
 		List<Composition> strMain = Composition.findCompositionDetails(compositionId.trim());
 
 
