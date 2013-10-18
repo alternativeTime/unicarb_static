@@ -52,7 +52,6 @@
 
     <p>The GlycoSuite database is an annotated and curated relational database of glycan structures. For the taxonomy entry <b>@taxon.species</b> a number of glycan structures, glycoproteins and tissue source's have been curated.</p>
 
-    @* <p><a href=""  data-toggle="modal" data-id='@taxon' class="announceTaxStructures"><i class="icon-resize-full"></i> See more structures</a> <small>limited to six records below</small></p> *@
 
     <ul class="structures clearfix">
       @for((s, i) <- taxon.strtaxonomy.zipWithIndex; if (i <=5) ){
@@ -68,12 +67,14 @@
         </li>
       }
     </ul>
+    @if(taxon.strtaxonomy.size() >=5) {
     <div id='show-structures' class='more-structures' href='#'>
       <span class="linktext">See more structures</span>
       <span class="linktext" style="display:none">See less structures</span>
       <br />
       <span>&#9679; &#9679; &#9679;</span>
     </div>
+    }
   </div>
 
   <div class="span4 sidebar">
