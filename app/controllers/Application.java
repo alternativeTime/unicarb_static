@@ -54,7 +54,7 @@ public class Application extends Controller {
 				);		
 	};
 
-	public static Result proteinsummary(String protein) {	
+	public static Result proteinsummary(String protein, String other) {	
 
 		try{
 			protein = URLDecoder.decode(protein, "UTF-8");
@@ -64,6 +64,7 @@ public class Application extends Controller {
 
 		List<com.avaje.ebean.SqlRow> listSql = null;
 		List<com.avaje.ebean.SqlRow> listSqlArray = null; // = new List<com.avaje.ebean.SqlRow>();
+		List<com.avaje.ebean.SqlRow> biolSourceProteinsRaw = null;
 
 		String proteinName = "";
 		String swissProtName = null;	
@@ -90,23 +91,38 @@ public class Application extends Controller {
 			}
 		}
 		else{
-			biolSourceProteins = Biolsource.findBiolSourceIdsName(protein);
+			//biolSourceProteins = Biolsource.findBiolSourceIdsName(protein); //this is ok unless have proteins multiple times with no swiss acc number
+			biolSourceProteinsRaw = Biolsource.findBiolSourceIdsRaw(protein);
 		}
 
 		List<Reference> referencesFound = new ArrayList<Reference>();
 		HashSet referencesU = new HashSet();
-
+		if (biolSourceProteinsRaw == null) {
 		for(Biolsource biol : biolSourceProteins){
 			proteinName = biol.protein;
 			swissProtName = biol.swiss_prot;
 			Biolsource objectBiolSource = Ebean.find(Biolsource.class, biol.id);
 			biolSourceProtein.add(objectBiolSource);
-			listSqlArray = Sourceref.findReferenceSource(biol.id);
+			listSqlArray = Sourceref.findReferenceSourceAnnotated(biol.id);
 			for (com.avaje.ebean.SqlRow r : listSqlArray) {
 				Reference reference = Ebean.find(Reference.class, r.get("id").toString() );
 				referencesFound.add(reference);	
 			}
 			referencesU.addAll(referencesFound);
+		}
+		}
+		else {
+			for(SqlRow raw : biolSourceProteinsRaw) {
+				String searchId = raw.get("id").toString();
+				proteinName = raw.get("protein").toString();
+				long l = Long.parseLong(searchId);
+				listSqlArray = Sourceref.findReferenceSource(l, other);
+				for (com.avaje.ebean.SqlRow r : listSqlArray) {
+					Reference reference = Ebean.find(Reference.class, r.get("id").toString() );
+				        referencesFound.add(reference);
+				}
+				referencesU.addAll(referencesFound);
+			}
 		}
 
 		proteins = Proteins.findProteins(protein);
@@ -141,6 +157,7 @@ public class Application extends Controller {
 		}
 
 		if(!protein.matches("[A-Z][0-9].*")) {
+			//possible problem identified with species refinement
 			generalSites = GeneralSites.findProteinsGeneralName(protein);
 			definedSites = DefinedSites.findProteinsDefinedName(protein);
 
@@ -162,8 +179,14 @@ public class Application extends Controller {
 		}	
 
 		System.out.println("Protein typeEntry " + typeProteinEntry + " or swiss " + swissProtName + " name " + protein);
+		 List<com.avaje.ebean.SqlRow> proteinTax = null;
+		if(other.equals("annotated")) {
+			proteinTax = Proteinsource.findProteinSourceAnnotated(protein);
+		}
+		else {
+			proteinTax = Proteinsource.findProteinSource(protein, other);
 
-		List<com.avaje.ebean.SqlRow> proteinTax = Proteinsource.findProteinSource(protein);
+		}
 
 
 		Object format = Cache.get("format");	
@@ -176,18 +199,22 @@ public class Application extends Controller {
 		HashSet<String> uniqueStructures = new HashSet<String>();
 
 		for(Proteins p : proteinMultiple){
-			List<Stproteins> stproteins = p.stproteins;
+
+		 	List<SqlRow> stproteins = Proteins.findProteinsNameRaw(p.name);
+		       	for(SqlRow s : stproteins) {
+				uniqueStructures.add( String.valueOf(s.getString("structure_id").toString() ) );
+		        }
+
+			/*List<Stproteins> stproteins = p.stproteins;
 			for(Stproteins s : stproteins){
-				System.out.println("check structures " + s.structure.id);
 				uniqueStructures.add( String.valueOf(s.structure.id) );				
-			}
+			} */
 		}
 
 		HashSet<String> test = new HashSet();	
 		for(String s : uniqueStructures){
 			//test.add(Long.parseLong(s));	
 			test.add(s);
-			System.out.println("sid " + s);
 		}
 
 		ArrayList<String> t2 = new ArrayList<String>();
@@ -679,7 +706,6 @@ public class Application extends Controller {
 				hs.add(tax.biolsource.taxonomy);
 				proteinHs.add(tax.biolsource); //.protein);
 				swissHs.add(tax.biolsource.swiss_prot);
-				System.out.println("test --- " + tax.biolsource.swiss_prot);
 			}
 		}
 

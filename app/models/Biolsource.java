@@ -119,6 +119,13 @@ public class Biolsource extends Model {
 				.findList();
 	} 
 
+	public static List<SqlRow> findBiolSourceIdsRaw(String protein){
+		String sql = "SELECT id, protein, swiss_prot from public.biolsource where protein ilike '" + protein + "' and swiss_prot is null";
+	        SqlQuery sqlQuery = Ebean.createSqlQuery(sql);
+	        List<SqlRow> listSql = sqlQuery.findList();
+		return listSql;
+  	}
+
 
 	public static ArrayList<SqlRow> findBiolsourceRefs(String protein) {
 		List<SqlRow> listSql = null;
@@ -131,7 +138,7 @@ public class Biolsource extends Model {
 			Biolsource objectBiolSource = Ebean.find(Biolsource.class, biol.id);
 			biolSourceProtein.add(objectBiolSource);
 
-			listSql = Sourceref.findReferenceSource(biol.id);
+			listSql = Sourceref.findReferenceSourceAnnotated(biol.id);
 			listSqlArray.addAll(listSql);
 
 		}

@@ -64,7 +64,16 @@ public class Proteins extends Model {
    
    public static List<Proteins> findProteinsName(String protein) {
         return
-           find.where().ilike("name", "%" + protein + "%").findList();
+           //find.where().ilike("name", "%" + protein + "%").findList();
+	   find.where().ilike("name", protein).findList();
+   }
+
+   public static List<SqlRow> findProteinsNameRaw(String protein){
+	String sql = "SELECT s.structure_id FROM public.proteins p, public.stproteins s where p.name ilike '" + protein + "' and p.swiss_prot is null and p.id = s.proteins_id";
+
+	SqlQuery sqlQuery = Ebean.createSqlQuery(sql);
+	List<SqlRow> listSql = sqlQuery.findList();
+	return listSql;
    }
 
 
