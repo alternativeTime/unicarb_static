@@ -52,7 +52,9 @@ public class Sourceref extends Model {
 
     public static List<com.avaje.ebean.SqlRow> findReferenceSource(Long term, String species)  {
 
-	        String sql = "SELECT r.id, r.title, r.authors, r, r.year, r.pmid FROM public.reference as r, public.sourceref as s, public.biolsource as b where s.reference_id = r.id and s.biolsource_id = '" + term + "' and b.taxonomy = '" + species + "' ";
+	        String sql = "SELECT r.id, r.title, r.authors, r, r.year, r.pmid FROM public.reference as r, public.sourceref as s, public.biolsource as b where b.id = s.biolsource_id and r.id = s.reference_id and b.id = '" + term + "' and b.taxonomy ilike '" + species + "' ";
+
+// where s.reference_id = r.id and s.biolsource_id = '" + term + "' and b.taxonomy = '" + species + "' ";
 
 		SqlQuery sqlQuery = Ebean.createSqlQuery(sql);
 		List<com.avaje.ebean.SqlRow> listSql = sqlQuery.findList();
