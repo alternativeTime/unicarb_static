@@ -31,8 +31,8 @@ GET   /builder                  controllers.Application.builder()
 GET   /saySearch/:s             controllers.Search.saySearch(s: String)
 
 GET   /proteins                 controllers.ProteinDetails.proteinlist(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "", protein ?= "")
-GET   /proteinsummary/:s        controllers.Application.proteinsummary(s: String)
-GET   /proteinsummary/:s        controllers.Application.proteinsummary(s: String)
+GET   /proteinsummary/:s/:other       controllers.Application.proteinsummary(s: String, other: String)
+#GET   /proteinsummary/:s        controllers.Application.proteinsummary(s: String)
 #GET  /proteinsummary           controllers.Application.browse()
 GET   /proteinsite              controllers.UniprotConnection.proteinsite()
 
