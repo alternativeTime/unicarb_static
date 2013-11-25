@@ -111,7 +111,8 @@
         <table class="computers table table-striped">
             <thead>
                 <tr>
-                    @header("name", "Name")
+		    @header("name", "Name")
+   		    @header("", "Accession")
                     @header("", "Taxonomy") 
 		    @header("stproteins", "Glycan Structures")
 		    @header("proteinGeneralSites", "General")
@@ -122,18 +123,21 @@
                 @for(protein <- currentPage.getList) {
 @* @if(protein.stproteins.size() > 0 ) { *@
                     <tr>
-			<td>
-			@if(protein.swissProt == null) {
-			<a href="proteinsummary/@helper.urlEncode(protein.name)" style="text-decoration : none, font-color: #404040; ">@protein.name</a></td>
+				<td>@protein.name</td>	    
+			@* @if(protein.swissProt == null) {
+			<a href="proteinsummary/@helper.urlEncode(protein.name)" style="text-decoration : none, font-color: #404040; ">@protein.name  id: @protein.swissProt</a></td>
 			}
 			@if(protein.swissProt != null) {
-			<a href="proteinsummary/@protein.swissProt" style="text-decoration : none, font-color: #404040; ">@protein.name</a></td>
-			}
-			<td>
-        @for(tax <- protein.proteinsTax) {
-          <a href="taxonomysearch?taxonomy=@tax.species" style="text-decoration : none, font-color: #404040; ">@tax.species</a>
-        }
-      </td> 
+			<a href="proteinsummary/@protein.swissProt" style="text-decoration : none, font-color: #404040; ">@protein.name   id: @protein.swissProt</a></td>
+			} *@
+				<td>@if(protein.swissProt != null) { <a href="proteinsummary/@protein.swissProt/annotated">@protein.swissProt</a>}</td>
+			<td>			
+			@for(tax <- protein.proteinsTax) {
+			@* <a href="taxonomysearch?taxonomy=@tax.species" style="text-decoration : none, font-color: #404040; ">@tax.species @if(protein.swissProt != null) {(@protein.swissProt)}</a> *@
+			@if(protein.swissProt != null) {<a href="proteinsummary/@protein.swissProt/annotated">@tax.species </a>}
+			@if(protein.swissProt == null) {<a href="proteinsummary/@protein.name/@tax.species">@tax.species </a>}
+        		}
+      			</td> 
 			<td><a href="proteinsummary/@protein.name" style="text-decoration : none, font-color: #404040; ">@protein.stproteins.size()</a></td>	
       <td><a href="proteinsummary/@protein.name" style="text-decoration : none, font-color: #404040; ">@if(protein.proteinDefinedSites.size() > 0 ) { <span class="label">Site-Specific</span>}</a></td>
                     </tr>
