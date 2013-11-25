@@ -24,10 +24,10 @@ public class ProteinDetails extends Controller {
 
 		Map<String, String[]> params = request().queryString();
 
-		System.out.println("query string +++ " + request() );
+		//System.out.println("query string +++ " + request() );
 		String filterOption = request().toString();
 		filterOption = filterOption.replace("/proteins?", "");
-		System.out.println("updated filteroption " + filterOption);
+		//System.out.println("updated filteroption " + filterOption);
                 String[] searchTerms = null;
                 String key = null;
 	        ArrayList<Proteins> proteinSearch = new ArrayList<Proteins>();
@@ -66,7 +66,7 @@ public class ProteinDetails extends Controller {
 			}
 			}
 	
-		System.out.println(filterOption);
+		//System.out.println(filterOption);
 
                 return ok(
 			proteinlist.render(

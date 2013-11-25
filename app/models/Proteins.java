@@ -76,6 +76,13 @@ public class Proteins extends Model {
 	return listSql;
    }
 
+   public static List<SqlRow> findProteinsNameSummaryUniprot(String protein) {
+	String sql = "SELECT s.structure_id FROM public.proteins p, public.stproteins s where p.swiss_prot ilike '" + protein + "' and p.id = s.proteins_id";
+	SqlQuery sqlQuery = Ebean.createSqlQuery(sql);
+        List<SqlRow> listSql = sqlQuery.findList();
+        return listSql;
+   }
+
 
     public static HashSet proteinSummary() {
 
@@ -117,7 +124,7 @@ public class Proteins extends Model {
     public static Page<Proteins> proteinpagerefine(int page, int pageSize, String sortBy, String order, String filter) {
 
 	RawSql rawsql = RawSqlBuilder.parse(filter).create();
-	System.out.println("fiter" + filter);
+	//System.out.println("fiter" + filter);
         com.avaje.ebean.Query<Proteins> query = Ebean.find(Proteins.class);
 	query.setRawSql(rawsql); 
 

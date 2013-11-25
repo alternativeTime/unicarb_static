@@ -137,7 +137,7 @@ public class Application extends Controller {
 			definedSites = DefinedSites.findProteinsDefined(protein);
 
 			String [] splitProtein = protein.split("\\s*[and]+\\s*");
-
+			System.out.println("this needs checking ----------------");
 			proteinMultiple = Proteins.findProteinsSwissProt(protein);
 			if(proteinMultiple.isEmpty()){
 				proteinMultiple = Proteins.findProteinSwissProtMulti(protein);
@@ -160,7 +160,6 @@ public class Application extends Controller {
 			//possible problem identified with species refinement
 			generalSites = GeneralSites.findProteinsGeneralName(protein);
 			definedSites = DefinedSites.findProteinsDefinedName(protein);
-
 
 			proteinMultiple = Proteins.findProteinsName(protein);
 			//typeProteinEntry = "not swiss prot";	
@@ -199,8 +198,14 @@ public class Application extends Controller {
 		HashSet<String> uniqueStructures = new HashSet<String>();
 
 		for(Proteins p : proteinMultiple){
-
-		 	List<SqlRow> stproteins = Proteins.findProteinsNameRaw(p.name);
+		   	System.out.println("fucking hellll -----------");
+			List<SqlRow> stproteins;
+			if(!other.equals("annotated")) {	
+		 		stproteins = Proteins.findProteinsNameRaw(p.name);
+			}
+			else{
+				stproteins = Proteins.findProteinsNameSummaryUniprot(protein);
+			}
 		       	for(SqlRow s : stproteins) {
 				uniqueStructures.add( String.valueOf(s.getString("structure_id").toString() ) );
 		        }
