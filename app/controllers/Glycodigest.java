@@ -25,7 +25,7 @@ public class Glycodigest extends Controller {
 	public static Result glycodigest(Long id) {
 		String[] enzymes = null;
 		Map<String, String> hashMap = new HashMap<String, String>();
-		
+
 		
 		Logger.info("URL STUFF " + id );
 		
@@ -52,10 +52,25 @@ public class Glycodigest extends Controller {
 		
 		Logger.info("---------hdhhdhd#################################  " + request().queryString().get("digest").toString() );
 		
+		for(String xx : x){
+			Logger.info("djdjdjdjjd " + xx.toString());
+			
+		}
+		
+		/*ct ctt = new ct();
+		ctt = ct.find.byId(id);
+		
+		try{
+			hashMap = ctt.digest(ctt.ct, x);
+		}
+		catch(IOException e){
+			e.printStackTrace();
+			
+		}*/
 		//Lorequest().uri();
 		
 		return ok( 
-				glycodigest.render(hashMap)
+				glycodigesttest.render(hashMap)
 				); 
 	}
 
