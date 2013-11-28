@@ -32,7 +32,46 @@
     <script src="@routes.Assets.at("/public","javascripts/workflows.js")"></script>
     <script src="http://d3js.org/d3.v3.min.js"></script>
     
-    <script type="text/javascript" src="https://jira.intersect.org.au:8443/s/en_USuv5zwi/773/9/1.2.5/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?collectorId=7bd44232"></script>
+    @* <script type="text/javascript" src="https://jira.intersect.org.au:8443/s/en_USuv5zwi/773/9/1.2.5/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?collectorId=7bd44232"></script> *@
+	
+	<script type"text/javascript">
+    	var isAccessible = null;
+        function checkConnection() {
+/*make sure you host a helloWorld HTML page in the following URL, so that requests are succeeded with 200 status code*/
+        var url = "https://jira.intersect.org.au:8443/s/en_USuv5zwi/773/9/1.2.5/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?collectorId=7bd44232"; 
+        $.ajax({
+        	url: "https://jira.intersect.org.au:8443/s/en_USuv5zwi/773/9/1.2.5/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector-embededjs/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector-embededjs.js?collectorId=7bd44232",
+            type: "get",
+	   		    //dataType: ‘script’,
+            cache: true,
+            crossDomain : true,
+            asynchronous : false,
+                  /* jsonpCallback: 'deadCode', */
+            timeout : 1500, // set a timeout in milliseconds
+            complete : function(xhr, responseText, thrownError) {
+            if(xhr.status == "200") {
+            	isAccessible = true;
+                success(url); // yes response came, execute success()				   
+            }
+            else {
+            	isAccessible = false;
+                failure(); // this will be executed after the request gets timed out due to blockage of ports/connections/IPs
+          	}
+            }
+            });
+          }
+		function success(url) {
+			console.log("message");
+			e = document.createElement('script');
+		    e.src = url;
+		    document.body.appendChild(e);
+		} 
+	  
+        $(document).ready( function() {
+              checkConnection(); // here I invoke the checking function
+	
+          });
+   </script>
    
 
     <script>
