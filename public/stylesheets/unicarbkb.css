@@ -436,6 +436,8 @@ table .header::after {
   background-color: #4B5C66;
   background: #4B5C66;
   background: rgba(75, 92, 102, 0.75);
+  opacity: 0.75;
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";
   -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;
   border: 0px solid #d4d4d4;
   -webkit-border-radius: 0px;
