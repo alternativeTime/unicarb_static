@@ -21,6 +21,16 @@ $(function(){
     });
 });
 </script>
+
+  <script type="text/javascript">
+     $(function(){
+	$.pnotify.defaults.history = false;
+     	$.pnotify({
+        title: 'Citation',
+        text: 'New publication now in press: <a href="http://nar.oxfordjournals.org/content/42/D1/D215.long">NAR Database Issue</a>'
+     });
+     });
+ </script>
  
   </head>
 
@@ -98,7 +108,9 @@ $(function(){
           <hr>
           <div class="row-fluid">
             <div class="span12">
-              <h3 class="pull-center lead"><a href="/about">Read more about UniCarbKB...</a></h3>
+		    <h3 class="pull-center lead"><a href="http://nar.oxfordjournals.org/content/42/D1/D215.long">Read more about UniCarbKB...</a></h3>
+		    <p>How to cite us:</p>
+		    <p>Campbell MP, Peterson R, Mariethoz J, Gasteiger E, Akune Y, Aoki-Kinoshita KF, Lisacek F, Packer NH.</p><p><b>UniCarbkb: building a knowledge platform for glycoproteomics</b></p><p><a href="http://nar.oxfordjournals.org/content/42/D1/D215.long"> Nucleic Acids Res. 2014, Jan 1;42(1):D215-21</a></p>
             </div>                                        
           </div>
           <div class="row-fluid">
@@ -196,9 +208,12 @@ $(function(){
 
 <script type="text/javascript">
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-28274077-1']);
-  _gaq.push(['_trackPageview']);
+	var _gaq = _gaq || [];
+	var pluginUrl = 
+	 '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+	 _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  	_gaq.push(['_setAccount', 'UA-28274077-1']);
+  	_gaq.push(['_trackPageview']);
 
   (function() {
     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
@@ -206,6 +221,16 @@ $(function(){
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 
+</script>
+
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-28274077-2', 'unicarbkb.org');
+	ga('send', 'pageview');
 </script>
 
        </html>	
