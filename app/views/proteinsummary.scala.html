@@ -202,7 +202,14 @@
             </ul>
             <ul id='more-protein'>
               <h3 id='less-protein'><span class='icon-map-marker icon-white'></span> Protein</h3>
-              <li><span cclass='icon-map-marker icon-white'></span> <a href='../proteinsummary/@proteinName'>@proteinName</a></li>
+		@if(!typeEntry.matches("not swiss prot")) {
+                 <li><span class='icon-map-marker icon-white'></span> <a href='/proteinsummary/@accession/annotated'>@proteinName</a></li>
+		}
+		@if(typeEntry.matches("not swiss prot")) {
+			@for(p <- proteinsource){
+		 	<li><span class='icon-map-marker icon-white'></span> <a href='/proteinsummary/@proteinName/@p.get("species")'>@proteinName</a></li>
+			}
+		}
             </ul>
             <ul id='more-source'>
               <h3 id='less-source'><span class='icon-leaf icon-white'></span> Source</h3>

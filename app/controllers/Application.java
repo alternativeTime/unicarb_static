@@ -55,7 +55,7 @@ public class Application extends Controller {
 	};
 
 	public static Result proteinsummary(String protein, String other) {	
-
+		
 		try{
 			protein = URLDecoder.decode(protein, "UTF-8");
 		} catch (Exception e){

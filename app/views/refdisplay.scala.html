@@ -74,7 +74,14 @@
           <ul id='more-protein'>
             <h3 id='less-protein'><span class='icon-map-marker icon-white'></span> Protein</h3>
             @for(protein <- proteinsources){
-            <li><span class='icon-map-marker icon-white'></span> <a href='/proteinsummary/@protein.protein'>@protein.protein</a></li>
+
+		@if(protein.swiss_prot != null) {
+           	 <li><span class='icon-map-marker icon-white'></span> <a href='/proteinsummary/@protein.swiss_prot/annotated'>@protein.protein, @protein.swiss_prot</a></li>
+		}
+		@if(protein.swiss_prot == null) {
+                 <li><span class='icon-map-marker icon-white'></span> <a href="/proteinsummary/@protein.protein/@protein.taxonomy">@protein.protein</a></li>
+                }
+		
             }
           </ul>
         </div>
@@ -84,7 +91,7 @@
       <div class="info">
         <h3>Validation Method</h3>
         @for(methods <- refmethods) {
-        @for(rmethod <- methods.refmethod) { <p>@rmethod.method.description</p>
+        @for(rmethod <- methods.refmethod) { <p>@rmethod.method.description.toUpperCase()</p>
         }
         }
         
