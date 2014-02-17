@@ -61,7 +61,7 @@
 
           <tbody>
             <tr>
-              <td>@generalSites.glyco_aa_site.replace("N-", "ASN-").replace("Asn-", "ASN-").replace("S-", "SER-").replace("Ser-", "SER-").replace("T-", "THR-").replace("Thr-", "THR-").replace("ASASN-", "ASN-")</td>
+              <td>@generalSites.glyco_aa_site.replace("N-", "ASN-").replace("Asn-", "ASN-").replace("S-", "SER-").replace("Ser-", "SER-").replace("T-", "THR-").replace("Thr-", "THR-").replace("ASASN-", "ASN-").replace("AsnAsn", "ASN-")</td>
               <td>
                 @* identified fault with entries where proteins have multiple accessions 
 		 <a href="/proteinsite?position=@generalSites.glyco_aa_site&protein=@accession&type=general">
@@ -98,7 +98,7 @@
           <tbody>
             @for(definedSites <- definedSites) {
             <tr>
-              <td>@definedSites.amino_acid_position.replace("N-", "ASN-").replace("Asn-", "ASN-").replace("S-", "SER-").replace("Ser-", "SER-").replace("T-", "THR-").replace("Thr-", "THR-").replace("ASASN-", "ASN-")</td>
+              <td>@definedSites.amino_acid_position.replace("N-", "ASN-").replace("Asn-", "ASN-").replace("S-", "SER-").replace("Ser-", "SER-").replace("T-", "THR-").replace("Thr-", "THR-").replace("ASASN-", "ASN-").replace("AsnAsn", "ASN-")</td>
               <td>
 		@* see above two plus acccessions
                 <a href="/proteinsite?position=@definedSites.amino_acid_position&protein=@accession&type=defined">
@@ -158,7 +158,7 @@
         @if(!description.isEmpty() ) {
 	<ol>
         @for(d <- description){
-          <li class="references">@d.glyco_aa_site.replace("N-", "ASN-").replace("Asn-", "ASN-").replace("S-", "SER-").replace("Ser-", "SER-").replace("T-", "THR-").replace("Thr-", "THR-").replace("ASASN-", "ASN-").replaceAll("(^, )", "").trim</li>
+          <li class="references">@d.glyco_aa_site.replace("N-", "ASN-").replace("Asn-", "ASN-").replace("S-", "SER-").replace("Ser-", "SER-").replace("T-", "THR-").replace("Thr-", "THR-").replace("ASASN-", "ASN-").replace("AsnAsn", "ASN-").replaceAll("(^, )", "").trim</li>
         }
 	</ol>}
       </div>

@@ -28,7 +28,7 @@
   <div class="row-fluid">
     <div class="span8">
       @if(taxsources == null){<div class="alert alert-error">Warning: This entry corresponds to more than one protein description <ul> @for(car <- multicar){ <li>@car</li> } </ul> </div> }
-      <h3>Structures reported on @site.replace("N-", "ASN-").replace("Asn-", "ASN-").replace("S-", "SER-").replace("Ser-", "SER-").replace("T-", "THR-").replace("Thr-", "THR-").replace("ASASN-", "ASN-") <a href="/proteinsummary/@accession"><span class="pull-right" style="text-transform:uppercase;text-transform:uppercase;font-size:12px;text-align:center;color:#21b5fd;margin:0 0 5px;font-weight:600">Discover more sites</span></a></h3>
+      <h3>Structures reported on @site.replace("N-", "ASN-").replace("Asn-", "ASN-").replace("S-", "SER-").replace("Ser-", "SER-").replace("T-", "THR-").replace("Thr-", "THR-").replace("ASASN-", "ASN-").replace("AsnAsn", "ASN-") <a href="/proteinsummary/@accession"><span class="pull-right" style="text-transform:uppercase;text-transform:uppercase;font-size:12px;text-align:center;color:#21b5fd;margin:0 0 5px;font-weight:600">Discover more sites</span></a></h3>
       <ul class="structures clearfix">
 
         @for(s <- structures) {
@@ -51,7 +51,7 @@
           @for(gs <- proteinSite) {   
           @for(gss <- gs.gsProteinSiteStr2) {
           <tr>
-            <td>@gss.glyco_aa_site.replace("N-", "ASN-").replace("Asn-", "ASN-").replace("S-", "SER-").replace("Ser-", "SER-").replace("T-", "THR-").replace("Thr-", "THR-").replace("ASASN-", "ASN-")</td>
+            <td>@gss.glyco_aa_site.replace("N-", "ASN-").replace("Asn-", "ASN-").replace("S-", "SER-").replace("Ser-", "SER-").replace("T-", "THR-").replace("Thr-", "THR-").replace("ASASN-", "ASN-").replace("AsnAsn", "ASN-")</td>
             <td>
               <a href="/proteinsite?position=@gss.glyco_aa_site&protein=@accession">
                 <span class="label label-notice"><i class='icon-th icon-white'></i> 
