@@ -40,13 +40,20 @@ public class Translation extends Model {
                 //.join("strtaxonomy")
 		.findList();
     }
+
+    public static Translation translationCT(Long id){
+    	return	
+	    find.where()
+	    	.eq("gs", id)
+		.findUnique();
     
-	public static String builder(String glycoct){
+    }
+    
+    public static String builder(String glycoct){
     	Glycan g = new Glycan();
     	
     	System.out.println(glycoct);
     	//g.fromGlycoCT(glycoct);
-    	g.fromGlycoCTCondensed(glycoct);
     	
     	
     	
@@ -66,5 +73,5 @@ public class Translation extends Model {
     	
     	return "this value";
     	
-    }
+     }
 }

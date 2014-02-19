@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Arrays;
 
 import javax.persistence.*;
 
@@ -41,19 +42,26 @@ public class ct {
 	public static Finder<Long,ct> find = new Finder<Long,ct>(Long.class, ct.class);
 	
 	
-	public Map<String, String> digest(String ct, String[] enzymesInput) throws IOException{
+	public Map<String, String> digest(String ct, String enzymesInput) throws IOException{
 		
-		//Logger.info("string ct is " + ct);
-		
+		Logger.info("string ct is " + enzymesInput.toString() );
+		//
 		ArrayList<String> enz = new ArrayList<String>();
+		String[] x = null;
+		List<String> list = null;	
 		if(enzymesInput != null){
-		for(String enzIn : enzymesInput){
-			enz.add(enzIn);
-		}
+			Logger.info("some odd " + enzymesInput); // + Arrays.toString(enzymesInput) );
+			String [] strings = enzymesInput.split(",");
+			list = Arrays.asList(strings);
+
 		} else { 
 			enz.add("ABS");
 		}
-		//enz.add("BTG");
+		enz.add("ABS");
+		//
+		for(String l : list){
+			enz.add(l);
+		}
 		
 		//EnzymeMapping e = new EnzymeMapping();
 		//e.createDic_link();
@@ -94,7 +102,7 @@ public class ct {
 		for (String t : enzymes){
 			hashMap.put(t, crap.get(count).toString());
 			count++;
-		}
+		}	
 		
 		for (Map.Entry<String,String> entry : hashMap.entrySet()) {
 			  String key = entry.getKey();

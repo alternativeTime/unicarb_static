@@ -1,4 +1,4 @@
-@(map: Map[String,String])
+@(map: Map[String,String], id: Long, ct: String)
 @import helper._
 
 
@@ -82,8 +82,12 @@
     <h4 class="subheader">A tool to predict exoglycosidase digestions</h4>
 </div>
 
- <div id="actions">           
-    <form class="form-search" action="@routes.Glycodigest.glycodigesttest(1249)" method="GET">  	
+<div id="actions">
+	<div>
+           <img src="http://unicarb-db.biomedicine.gu.se/unicarbdb/get_sugar_image.action?download=false&amp;scale=1.0&amp;opaque=false&amp;outputType=png&notation=cfglink&inputType=glycoct_condensed&sequences=@helper.urlEncode(ct)" />
+        </div>
+	<p>Use the search box below to select the panel of exoglycosidase to digest the structure shown:</p>	
+	 <form class="form-search" action="@routes.Glycodigest.glycodigesttest({id})" method="GET">  	
        <div id="selection" class="row-fluid">
        <input name=digest  id="e20" id="listBox" class="span4"></input>
        <button type="submit" class="btn btn-primary">Search</button>
