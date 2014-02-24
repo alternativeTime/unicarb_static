@@ -2,6 +2,7 @@ package models;
 
 import java.util.*;
 import javax.persistence.*;
+import java.io.IOException;
 
 import org.eurocarbdb.application.glycanbuilder.Glycan;
 import org.eurocarbdb.application.glycanbuilder.MassOptions;
@@ -41,6 +42,17 @@ public class Translation extends Model {
 		.findList();
     }
 
+    public static Translation searchTransUnique(String glycoct) {
+	Translation translation = null;		
+	//return 
+	translation = find.where().like("ct", glycoct).findUnique();
+	if (translation == null ) {
+		throw new RuntimeException("Query is empty");
+	}
+	return translation;
+    }
+	
+
     public static Translation translationCT(Long id){
     	return	
 	    find.where()
@@ -74,4 +86,18 @@ public class Translation extends Model {
     	return "this value";
     	
      }
+
+
+     public static Long checkDigestStructure(String ct) {
+	Long gsId = -1L;
+	Translation translation = new Translation();
+	translation = Translation.searchTransUnique(ct);
+	if(translation.gs > 0 ) {
+		return translation.gs;
+	} else {
+		return gsId;
+	}
+
+     }
+
 }

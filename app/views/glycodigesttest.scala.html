@@ -64,6 +64,29 @@
 </style>
 
 <script>
+	$(document).ready(function() {
+	$('input:button').click(function() {
+		    var x = $(this).attr('id');
+	   	    ajax(x);
+   	});
+
+	function ajax(x){
+		$.ajax({
+	    	type: 'GET',
+	        url: 'http://localhost:9000/ajax/' + x,
+	    	dataType: 'json',
+        	success: function(json) {
+		$('#badge').append( "<a href=\"/structure/" + json.message + "\"><span class=\"label label-dark\"><span class=\"icon-adjust icon-white\"></span> Link to UniCarbKB</span></a>"  );
+     		},
+		error: function(json) {
+			$('#badge').append("<p>no result</p>");
+		}
+        });
+	}
+	});
+	</script>
+
+<script>
         $(document).ready(function() {  
         
         $("#e20").select2({
@@ -84,8 +107,14 @@
 
 <div id="actions">
 	<div>
-	    <img src="http://unicarb-db.biomedicine.gu.se/unicarbdb/get_sugar_image.action?download=false&amp;scale=1.0&amp;opaque=false&amp;outputType=png&notation=cfglink&inputType=glycoct_condensed&sequences=@helper.urlEncode(ct)" />
-    </div>
+		<a href="@controllers.Application.structureDetails(1249)"><img src="http://unicarb-db.biomedicine.gu.se/unicarbdb/get_sugar_image.action?download=false&amp;scale=1.0&amp;opaque=false&amp;outputType=png&notation=cfg&inputType=glycoct_condensed&sequences=@helper.urlEncode(ct)" ></a>
+	</div>
+	
+	<h4>Check structure link to UniCarbKB</h4>
+	<p>Click the 'UniCarbKB' button below to check if the structure is listed in UniCarbKB</p>
+	<div id="badge"></div><br/>
+	<input type="button" value="UniCarbKB" id="@helper.urlEncode(ct)"/>
+
     <p>Use the search box below to select the panel of exoglycosidase to digest the structure shown:</p>    
     <form class="form-search" action="@routes.Glycodigest.glycodigesttest(1249)" method="GET">  	
        <div id="selection" class="row-fluid">
@@ -100,16 +129,24 @@
 @for((key, value) <- map){
 	<li class="span4">
     <div class="thumbnail">
-      <img src="http://unicarb-db.biomedicine.gu.se/unicarbdb/get_sugar_image.action?download=false&amp;scale=0.5&amp;opaque=false&amp;outputType=png&notation=cfglink&inputType=glycoct_condensed&sequences=@value" />
-      <p class="pin2">Enzyme@key</p>
-    </div>
-    </li>
+         <img src="http://unicarb-db.biomedicine.gu.se/unicarbdb/get_sugar_image.action?download=false&amp;scale=1.0&amp;opaque=false&amp;outputType=png&notation=cfg&inputType=glycoct_condensed&sequences=@value" />
+      	<p class="pin2">Enzyme@key</p>
+
+      	@* <input type="button" value="UniCarbKB" id="@value"/> *@
+
+        </div>
+        </li>
 }
 	</ul>
 
 </div>
 
+<div>
+      @* <h2>Check structure link to UniCarbKB</h2>
+      <p>Click the 'UniCarbKB' buttons above to check if the structure is listed in UniCarbKB</p>
+      <div id="badge"></div>  *@
 
+</div>
       @views.html.footerunicarb.footerunicarb()    
 
 

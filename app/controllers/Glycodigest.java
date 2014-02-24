@@ -17,6 +17,9 @@ import play.db.ebean.*;
 import play.data.format.*;
 import play.data.validation.*;
 import static play.data.Form.*;
+import play.libs.Json;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import com.avaje.ebean.*; //dont think this should be here due to SqlRow
 
@@ -27,9 +30,6 @@ public class Glycodigest extends Controller {
 	public static Result glycodigest(Long id) {
 		String enzymes = "";
 		Map<String, String> hashMap = new HashMap<String, String>();
-
-		
-		Logger.info("URL STUFF " + id );
 	
 		Translation translation = new Translation();
 		Translation ctt = translation.translationCT(id);
@@ -57,25 +57,17 @@ public class Glycodigest extends Controller {
 		String uri =  request().uri();
 
 
-Set<Map.Entry<String,String[]>> entries = request().queryString().entrySet();
+	Set<Map.Entry<String,String[]>> entries = request().queryString().entrySet();
         for (Map.Entry<String,String[]> entry : entries) {
-		            final String key = entry.getKey();
-			                final String value = Arrays.toString(entry.getValue());
-					            Logger.debug(key + " " + value);
+	        final String key = entry.getKey();
+                final String value = Arrays.toString(entry.getValue());
+        Logger.debug(key + " " + value);
 						            }
-	Logger.debug(request().getQueryString("digest"));
+	//Logger.debug(request().getQueryString("digest"));
 	String test = request().getQueryString("digest");
-	Logger.info("come one " + test);
 
-
-		Logger.info("-------> ");
-		Logger.info("---------hdhhdhd#################################  " + request().queryString().toString() );
+		Logger.info("---------#  " + request().queryString().toString() );
 		
-		/*for(String xx : x){
-			Logger.info("djdjdjdjjd " + xx.toString());
-			
-		}*/
-	
 		Translation translation = new Translation();
 		Translation ctt = translation.translationCT(id);
 		ct ctt2 = new ct();
@@ -87,21 +79,35 @@ Set<Map.Entry<String,String[]>> entries = request().queryString().entrySet();
 			e.printStackTrace();
 		}
 
-		/*ct ctt = new ct();
-		ctt = ct.find.byId(id);
-		
-		try{
-			hashMap = ctt.digest(ctt.ct, x);
-		}
-		catch(IOException e){
-			e.printStackTrace();
-			
-		}*/
-		//Lorequest().uri();
-		
 		return ok( 
 				glycodigesttest.render(hashMap, id, ctt.ct)
 				); 
 	}
+	@BodyParser.Of(BodyParser.Json.class)
+	public static Result glycodigestStructureDB(String ct){
+
+		Long id = -1L;
+		id = Translation.checkDigestStructure(ct);
+			
+		JsonNode json = request().body().asJson();
+		  ObjectNode result = Json.newObject();
+		  if(id > 0 ) {
+			  result.put("status", "OK");
+		 	  result.put("message", id );
+		  } else {
+			  result.put("status", "Bad");
+		  }
+		  Logger.info("created json " + result);
+		  return ok(result);
+
+
+		//return ok(Json.toJson(id));
+		//return ok(ajax_result.render());
+		//return ok (
+				//digest.digestMatchDB.render()
+		//		);
+	}
+
+
 
 }

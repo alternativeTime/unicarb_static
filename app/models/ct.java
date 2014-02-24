@@ -41,11 +41,8 @@ public class ct {
 	
 	public static Finder<Long,ct> find = new Finder<Long,ct>(Long.class, ct.class);
 	
-	
 	public Map<String, String> digest(String ct, String enzymesInput) throws IOException{
 		
-		Logger.info("string ct is " + enzymesInput.toString() );
-		//
 		ArrayList<String> enz = new ArrayList<String>();
 		String[] x = null;
 		List<String> list = null;	
@@ -73,57 +70,33 @@ public class ct {
 		//SugarTreatment d = new SugarTreatment(ct, e, enz, null, false);
 		//Logger.info("output enz treatment" + s.glycanTreatment());
 		
-		
 		String[] enzymes = StringUtils.substringsBetween(s.glycanTreatment(), "enzyme", "RES");
-	
-		//for (String t : enzymes) {
-			//System.out.println("t:" + t); // good
-		//}
-		
 	
 		ArrayList<String> out = s.getGlycanOutput();
 		
-		//Logger.info("size is " + out.size() );
 		String[] enz2 = null;
-		List crap = new ArrayList<String>();
+		List enzList = new ArrayList<String>();
 		for(String o : out){
 			o.toString();
 			enz2 = o.split("enzyme \\:");
 			Logger.info("split " + URLEncoder.encode(enz2[0]) );
-			crap.add(URLEncoder.encode(enz2[0]));
+			enzList.add(URLEncoder.encode(enz2[0]));
 
 		}
-		Logger.info("size is " + crap.size() );
-		//String[][] product = new String[enzymes.length][enz2.length];
+		Logger.info("size is " + enzList.size() );
 		
 		Map<String, String> hashMap= 	new HashMap<String, String>();
 		
 		int count = 1;
 		for (String t : enzymes){
-			hashMap.put(t, crap.get(count).toString());
+			hashMap.put(t, enzList.get(count).toString());
 			count++;
 		}	
 		
 		for (Map.Entry<String,String> entry : hashMap.entrySet()) {
 			  String key = entry.getKey();
 			  String value = entry.getValue();
-			  //Logger.info("key: " + key + " value: " + value);
-			  // do stuff
-			}
-		
-		
-		
-		/*String treatment = s.glycanTreatment();
-		
-		
-		for(String o : out){
-			//Logger.info("out " + o.toString());
-			Logger.info("encode string " +  URLEncoder.encode(o.toString() ));
 		}
-		*/
-		//Logger.info("treatment " + treatment);
-		
-		
 		
 		return hashMap;
 	}
