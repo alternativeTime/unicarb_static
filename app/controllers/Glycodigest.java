@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Arrays;
 import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import play.mvc.*;
 import play.data.*;
@@ -52,6 +54,7 @@ public class Glycodigest extends Controller {
 	
 	public static Result glycodigesttest(Long id, String s){
 		Map<String, String> hashMap = new HashMap<String, String>();
+		List<String> arDigestStr = new ArrayList<String>();
 		
 		String x = request().queryString().get("digest").toString() ;
 		String uri =  request().uri();
@@ -74,9 +77,18 @@ public class Glycodigest extends Controller {
 
 		try {
 			hashMap = ctt2.digest(ctt.ct, test);
+			arDigestStr = ctt2.digestCTResults(ctt.ct, test);
 		}
 		catch(IOException e) {
 			e.printStackTrace();
+		}
+
+		Translation translationDigest = null;
+		Map<Long, String> hashMapDigest = new HashMap<Long, String>();	
+		for(String a : arDigestStr) {
+			Logger.info("test this " + a);
+			translationDigest = Translation.searchTransUnique(a);	
+			//hashMapDigest.put(translationDigest.gs, a);	
 		}
 
 		return ok( 
