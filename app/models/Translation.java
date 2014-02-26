@@ -47,7 +47,11 @@ public class Translation extends Model {
 	//return 
 	translation = find.where().like("ct", glycoct).findUnique();
 	if (translation == null ) {
-		throw new RuntimeException("Query is empty");
+		//throw new RuntimeException("Query is empty");
+		try{
+ 		throw new NullPointerException(); // RuntimeException("Query is empty");
+ 		
+ 		}catch(RuntimeException e) { String err = e.getMessage(); } 
 	}
 	return translation;
     }
@@ -92,7 +96,7 @@ public class Translation extends Model {
 	Long gsId = -1L;
 	Translation translation = new Translation();
 	translation = Translation.searchTransUnique(ct);
-	if(translation.gs > 0 ) {
+	if(translation != null && translation.gs > 0 ) {
 		return translation.gs;
 	} else {
 		return gsId;
