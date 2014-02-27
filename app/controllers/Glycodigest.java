@@ -7,6 +7,8 @@ import java.util.Map;
 import java.util.Arrays;
 import java.util.Set;
 
+import org.apache.commons.lang.StringUtils;
+
 import play.mvc.*;
 import play.data.*;
 import play.*;
@@ -80,18 +82,19 @@ public class Glycodigest extends Controller {
 		}
 
 		//check contents of hashmap
- 	
- 		for (Map.Entry<String, String> entry : hashMap.entrySet()) {
- 		    //System.out.println("contents of digesttes map " + entry.getKey()+" : "+entry.getValue());
- 		    String value = entry.getValue().toString();
- 		    if(value.startsWith("RES")){
- 			    Logger.info("need to use this string " + java.net.URLDecoder.decode(value));
- 			    Long idCheck = Translation.checkDigestStructure(java.net.URLDecoder.decode(value));
- 			    Logger.info("hopefully: " + idCheck);
- 		    } 
- 		}	    
- 		
+	
+		for (Map.Entry<String, String> entry : hashMap.entrySet()) {
+		    //System.out.println("contents of digesttes map " + entry.getKey()+" : "+entry.getValue());
+		    String value = entry.getValue().toString();
+		    if(value.startsWith("RES")){
+			    Logger.info("need to use this string " + java.net.URLDecoder.decode(value));
+			    Long idCheck = Translation.checkDigestStructure(java.net.URLDecoder.decode(value));
+			    Logger.info("hopefully: " + idCheck);
+		    } 
+		}	    
+		
 		//
+
 		return ok( 
 				glycodigesttest.render(hashMap, id, ctt.ct)
 				); 

@@ -47,11 +47,10 @@ public class Translation extends Model {
 	//return 
 	translation = find.where().like("ct", glycoct).findUnique();
 	if (translation == null ) {
-		//throw new RuntimeException("Query is empty");
 		try{
- 		throw new NullPointerException(); // RuntimeException("Query is empty");
- 		
- 		}catch(RuntimeException e) { String err = e.getMessage(); } 
+		//throw new NullPointerException(); // RuntimeException("Query is empty");
+		//
+		}catch(RuntimeException e) { String err = e.getMessage(); } 
 	}
 	return translation;
     }
