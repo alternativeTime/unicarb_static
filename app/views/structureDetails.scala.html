@@ -1,4 +1,4 @@
-@(glycantype: String, strcomp: List[Composition], notation: String, references: List[Structure], structureId: Long, proteinNames: ArrayList[String], proteinItems: HashSet[Proteins], sourceNames: ArrayList[String], sourceItems: HashSet[Tissue], test: List[Array[String]], uniprot: ArrayList[String], taxItems: HashSet[Taxonomy], taxNames: ArrayList[String], pubchem: String, reader: String)
+@(strInfo: Structure, glycantype: String, strcomp: List[Composition], notation: String, references: List[Structure], structureId: Long, proteinNames: ArrayList[String], proteinItems: HashSet[Proteins], sourceNames: ArrayList[String], sourceItems: HashSet[Tissue], test: List[Array[String]], uniprot: ArrayList[String], taxItems: HashSet[Taxonomy], taxNames: ArrayList[String], pubchem: String, reader: String)
 @import helper._
 
 @**********************************
@@ -194,6 +194,11 @@
       @if(pubchem != null) {
 	 @views.html.format.pubchem( pubchem )
       }
+      @if(strInfo.glycanst matches ".*\\?.*" ) {
+      <h3>kdkdk: @strInfo.glycanst</h3>
+      
+      } else { @views.html.digest.digest( strInfo ) }
+
     </div>
   </div>
 
