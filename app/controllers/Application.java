@@ -591,6 +591,7 @@ public class Application extends Controller {
 	public static Result structureDetails(Long id) {
 
 		List<Structure> strDisplay = Structure.findStructureRef(id);
+		Structure strInfo = Structure.find.byId(id);
 		ArrayList proteinNames = new ArrayList();
 		ArrayList proteinIds = new ArrayList();
 		ArrayList proteinItems = new ArrayList();
@@ -682,7 +683,7 @@ public class Application extends Controller {
 		}
 
 		return ok(
-				structureDetails.render(type, strMain, notation, strDisplay, id, proteinNames, proteinNamesUnique, sourceNames, sourceItems, rowList, uniprot, taxItems, taxNames, pubchemId, reader)
+				structureDetails.render(strInfo, type, strMain, notation, strDisplay, id, proteinNames, proteinNamesUnique, sourceNames, sourceItems, rowList, uniprot, taxItems, taxNames, pubchemId, reader)
 				);
 	};
 
