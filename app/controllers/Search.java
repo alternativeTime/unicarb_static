@@ -3,17 +3,15 @@ package controllers;
 import java.util.*;
 
 import play.mvc.*;
-//import play.data.*;
 import play.*;
-
 import views.html.*;
-
 import models.*;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -31,21 +29,6 @@ import org.eurocarbdb.MolecularFramework.io.GlycoCT.SugarImporterGlycoCTCondense
 import org.eurocarbdb.MolecularFramework.util.visitor.GlycoVisitorException;
 import org.eurocarbdb.action.core.SearchUnicarbGlycanSequence;
 
-//  eurocarb imports
-/*import org.eurocarbdb.dataaccess.core.*;
-import org.eurocarbdb.dataaccess.core.seq.*;
-import org.eurocarbdb.action.EurocarbAction;
-import org.eurocarbdb.action.BrowseAction;
-import org.eurocarbdb.dataaccess.EntityManager;
-import org.eurocarbdb.dataaccess.HibernateEntityManager;
-import org.eurocarbdb.dataaccess.indexes.*;
-
-import org.eurocarbdb.sugar.Sugar;
-import org.eurocarbdb.sugar.SugarSequence;
-
-import org.eurocarbdb.application.glycanbuilder.*;
-
-import org.eurocarbdb.dataaccess.SavedGlycanSequenceSearch;*/
 import org.apache.commons.io.FileUtils;
 
 import play.mvc.Controller;
@@ -122,5 +105,49 @@ public class Search extends Controller {
 		 
 		return ok (saySearch.render(translation, strDisplay, taxDivs, findStructure));
 	}
+
+	public static Result builderDigestSearch(String str) throws IOException {
+		
+		try{
+			String text = Files.toString(new File("/tmp/test.txt"), Charsets.UTF_8);
+			text= text.replaceAll(" ", "+");
+			System.out.println("digest structure: " + text);
+
+			//urlencod string and send to render
+			str = URLEncoder.encode(text);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return ok(glycodigestBuilder.render(str));
+
+	}
+
+	public static Result glycodigesttestBuilder(String str, String s) {
+		Map<String, String> strMap = new HashMap<String, String>();
+	        String enz = request().queryString().get("digest").toString() ;
+		String uri =  request().uri();
+		String uriPass = request().getQueryString("digest");
+
+	        Set<Map.Entry<String,String[]>> entries = request().queryString().entrySet();
+	        for (Map.Entry<String,String[]> entry : entries) {
+		        final String key = entry.getKey();
+	                final String value = Arrays.toString(entry.getValue());
+		        Logger.debug(key + " " + value);
+	     	}	
+
+		ct ct = new ct();
+
+		try {
+			strMap = ct.digest(str, URLDecoder.decode(uriPass));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return ok(glycodigesttestBuilder.render(strMap, str));
+	}
+
+
 }
 

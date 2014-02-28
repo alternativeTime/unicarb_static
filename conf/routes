@@ -29,6 +29,8 @@ GET   /ms                       controllers.Application.ms()
 GET   /builder                  controllers.Application.builder()
 
 GET   /saySearch/:s             controllers.Search.saySearch(s: String)
+GET   /builderDigest		controllers.Application.builderDigest()
+GET   /builderDigestSearch	controllers.Search.builderDigestSearch(s: String)
 
 GET   /proteins                 controllers.ProteinDetails.proteinlist(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "", protein ?= "")
 GET   /proteinsummary/:s/:other       controllers.Application.proteinsummary(s: String, other: String)
@@ -42,6 +44,8 @@ GET   /glycodigest/:id		    controllers.Glycodigest.glycodigest(id:Long)
 
 # distance based
 GET   /glycodigest/:id/digest   controllers.Glycodigest.glycodigesttest(id: Long, s: String?="")
+GET   /glycodigestBuilder/:s/digest controllers.Search.glycodigesttestBuilder(s: String, d: String?="")
+
 GET   /enzymes			        controllers.Application.enzymes()
 GET   /news					    controllers.Application.news()
 

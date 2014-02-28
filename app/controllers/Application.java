@@ -750,6 +750,10 @@ public class Application extends Controller {
 		return ok (builder.render() );
 	}
 
+	public static Result builderDigest() {
+		return ok (builderDigest.render() );
+	}
+
 	public static Result login() {
 		return ok ( login.render(form(Login.class)) );
 	}
