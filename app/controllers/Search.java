@@ -6,6 +6,7 @@ import play.mvc.*;
 import play.*;
 import views.html.*;
 import models.*;
+import play.cache.Cache;
 
 import java.io.File;
 import java.io.IOException;
@@ -71,13 +72,10 @@ public class Search extends Controller {
 		
 		try {
 		String text = Files.toString(new File("/tmp/test.txt"), Charsets.UTF_8);
-		System.out.println("test: " + text);
-		 text= text.replaceAll(" ", "+");
-		 System.out.println("test: " + text);
-		 
-		 
+		text= text.replaceAll(" ", "+");
+		Logger.info("&&&&&&&&&&&&&&&&&&&&&&&&"); 
 		translation = Translation.searchTranslation(text);
-			
+		
 		for (Translation trans : translation) {
 			Long gsId = trans.gs;
 			findStructure = Structure.find.byId(gsId);
@@ -102,14 +100,28 @@ public class Search extends Controller {
 		}catch (IOException e) {
 			
 		}
-		 
 		return ok (saySearch.render(translation, strDisplay, taxDivs, findStructure));
 	}
 
 	public static Result builderDigestSearch(String str) throws IOException {
-		
+
+		Map<String, String[]> id = request().queryString();
+                String urlcall = "";
+                Iterator iterator=id.entrySet().iterator();
+                while(iterator.hasNext()){
+                Map.Entry mapEntry=(Map.Entry)iterator.next();
+                urlcall = mapEntry.getKey().toString();
+                }
+
+		File file = new File("/tmp/testdigest.txt");
+                FileUtils.writeStringToFile(file, urlcall.toString() );
+
+                String urltest = urlcall.toString();
+
+		Logger.info("####################### " + urltest  );		
+		String text = "";
 		try{
-			String text = Files.toString(new File("/tmp/test.txt"), Charsets.UTF_8);
+			text = Files.toString(new File("/tmp/testdigest.txt"), Charsets.UTF_8);
 			text= text.replaceAll(" ", "+");
 			System.out.println("digest structure: " + text);
 
@@ -120,7 +132,16 @@ public class Search extends Controller {
 			e.printStackTrace();
 		}
 
-		return ok(glycodigestBuilder.render(str));
+		//add string to session
+		/*session().clear();
+		String uuid= java.util.UUID.randomUUID().toString();
+		Cache.set(uuid,str);
+		session("uuid",uuid); */
+		Cache.set("digestStr", text);
+
+		//trying to improve and clean up url requests
+
+		return ok(glycodigestBuilder.render(text));
 
 	}
 
@@ -139,13 +160,20 @@ public class Search extends Controller {
 
 		ct ct = new ct();
 
+		//replace str with value from session see above
+		/* String uuid = session("uuid").toString();
+		String t = Cache.get(uuid).toString(); */
+		//Logger.info(Cache.get("digestStr") );
+
 		try {
-			strMap = ct.digest(str, URLDecoder.decode(uriPass));
+			strMap = ct.digest(Cache.get("digestStr").toString() , URLDecoder.decode(uriPass));
+
 		} catch (IOException e) {
 			e.printStackTrace();
+			return ok(builderDigest.render());
 		}
 
-		return ok(glycodigesttestBuilder.render(strMap, str));
+		return ok(glycodigesttestBuilder.render(strMap, Cache.get("digestStr").toString() ));
 	}
 
 

@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Arrays;
 import java.util.Set;
+import java.util.Iterator;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -115,15 +116,5 @@ public class Glycodigest extends Controller {
 		  }
 		  Logger.info("created json " + result);
 		  return ok(result);
-
-
-		//return ok(Json.toJson(id));
-		//return ok(ajax_result.render());
-		//return ok (
-				//digest.digestMatchDB.render()
-		//		);
 	}
-
-
-
 }

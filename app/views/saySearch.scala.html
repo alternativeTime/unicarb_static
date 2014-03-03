@@ -47,7 +47,7 @@
 		@for(result <- result){
 		<img src="http://unicarb-db.biomedicine.gu.se/unicarbdb/get_sugar_image.action?download=true&scale=1.0&outputType=png&inputType=gws&tolerateUnknown=1&sequences=@{result.gws}" />
 		}
-
+    @if(structureObject != null ) {
     <div class='callout'>
       <h3>Search returned 
         <small>
@@ -57,9 +57,14 @@
         </small>
       </h3>
     </div>
+    } else {
+	<h3>Search returned</h3>
+	<p>The structure submitted could not be found! <br/>Only structures completely matching the submitted glycan topology will be returned.</p>
+    }
 
     <hr>
 
+    @if(structure != null ) {
     <div class='row-fluid'>
       <h3>Publications</h3>
       <div class="details span9">
@@ -70,9 +75,11 @@
         }
       </div>
     </div>
+    }
 
     <hr>
-
+	
+    @if(structureObject != null ) {
     <div class="row-fluid">
       <h3>Biological Associations</h3>
       <div class="details span9">
@@ -80,8 +87,8 @@
         <a href="" style="font-size: 14px; font-weight: normal; line-height: 22px; margin-bottom: 9px; color: #4B5C66;">@tax, </a> 
 		    }
       </div>
-		</div>
-
+    </div>
+    }
   </div>
 
 

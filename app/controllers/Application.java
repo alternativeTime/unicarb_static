@@ -198,7 +198,7 @@ public class Application extends Controller {
 		HashSet<String> uniqueStructures = new HashSet<String>();
 
 		for(Proteins p : proteinMultiple){
-		   	System.out.println("fucking hellll -----------" + p.swissProt);
+		   	System.out.println("swiis_prot -----------" + p.swissProt);
 			List<SqlRow> stproteins;
 			if(!other.equals("annotated")) {	
 		 		stproteins = Proteins.findProteinsNameRaw(p.name);

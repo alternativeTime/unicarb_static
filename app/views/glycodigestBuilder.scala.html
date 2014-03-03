@@ -87,10 +87,10 @@
            <img src="http://unicarb-db.biomedicine.gu.se/unicarbdb/get_sugar_image.action?download=false&amp;scale=1.0&amp;opaque=false&amp;outputType=png&notation=cfglink&inputType=glycoct_condensed&sequences=@helper.urlEncode(str)" />
         </div>
 	<p>Use the search box below to select the panel of exoglycosidase to digest the structure shown:</p>	
-	 <form class="form-search" action="@routes.Search.glycodigesttestBuilder({str})" method="GET">  	
+	 <form class="form-search" action="/glycodigestBuilder/test/digest" method="GET">  	
        <div id="selection" class="row-fluid">
        <input name=digest  id="e20" id="listBox" class="span4"></input>
-       <button type="submit" class="btn btn-primary">Search</button>
+       <button type="submit" class="btn btn-primary">Digest</button>
        </div>
     </form>
 </div>
