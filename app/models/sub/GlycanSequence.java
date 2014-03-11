@@ -1,11 +1,11 @@
-package models.core;
+package models.sub;
 
 import java.util.*;
 
 import javax.persistence.*;
 
 
-import models.core.*;
+import models.sub.*;
 
 import javax.persistence.*;
 
@@ -23,17 +23,17 @@ import com.avaje.ebean.*;
  */
 @SuppressWarnings("serial")
 @Entity 
-@Table(schema="core", name="glycan_sequence")
+@Table(schema="sub", name="glycan_sequence")
 public class GlycanSequence extends Model {
 
 	@Id
-	public Long id;
+	public Long glycanSequenceId;
 
 	public String sequenceGws;
 	public String sequenceCtCondensed;
 	
 	@OneToMany
-	public List<GlycanResidue> glycanResidue;
+	public List<GlycanResidueUnicarb> glycanResidueUnicarb;
 	
 	
 }

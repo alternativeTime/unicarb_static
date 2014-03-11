@@ -1,4 +1,4 @@
-@(result: List[Translation], structure: List[Structure], taxonomy: ArrayList[String], structureObject: Structure)
+@(result: List[Translation], structure: List[Structure], taxonomy: ArrayList[String], structureObject: Structure, listSub: List[com.avaje.ebean.SqlRow])
 @import helper._
 
 
@@ -75,6 +75,10 @@
         }
       </div>
     </div>
+    }
+
+    @if(listSub.size() > 0) {
+    @for(l <- listSub) { @l.get("glycanSequenceId") }
     }
 
     <hr>

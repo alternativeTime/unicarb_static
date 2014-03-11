@@ -6,7 +6,9 @@ import play.mvc.*;
 import play.*;
 import views.html.*;
 import models.*;
+import models.sub.*;
 import play.cache.Cache;
+import com.avaje.ebean.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -63,6 +65,7 @@ public class Search extends Controller {
 		HashSet taxIdsUnique = new HashSet();
 		HashSet taxDivsUnique = new HashSet();
 		ArrayList taxDivs = new ArrayList();
+		List<SqlRow> listSub = null;
 
 		Map<String, String[]> id = request().queryString();
 		String urlcall = "";
@@ -82,6 +85,9 @@ public class Search extends Controller {
 			text= text.replaceAll(" ", "+");
 			Logger.info("&&&&&&&&&&&&&&&&&&&&&&&&"); 
 			translation = Translation.searchTranslation(text);
+
+			GlycanResidueUnicarb substructureUni = new GlycanResidueUnicarb();
+                	listSub  = substructureUni.SubstructureSearch();
 
 			for (Translation trans : translation) {
 				Long gsId = trans.gs;
@@ -107,7 +113,7 @@ public class Search extends Controller {
 		}catch (IOException e) {
 
 		}
-		return ok (saySearch.render(translation, strDisplay, taxDivs, findStructure));
+		return ok (saySearch.render(translation, strDisplay, taxDivs, findStructure, listSub));
 	}
 
 	public static Result builderDigestSearch(String str) throws IOException {
@@ -183,7 +189,15 @@ public class Search extends Controller {
 		return ok(glycodigesttestBuilder.render(strMap, Cache.get("digestStr").toString() ));
 	}
 
-	public static Result SubstructureSearch() {
+	//public static Result SubstructureSearch() {
+	 public static Result SubstructureSearch() { //String ct) { 
+
+		GlycanResidueUnicarb substructureUni = new GlycanResidueUnicarb();
+                List<SqlRow> listSub  = substructureUni.SubstructureSearch();
+
+		return ok();
+	}
+	/*	
 		SubstructureQuery query = null;
 		//Structure s = Structure.find.byId(1);
 		
@@ -192,6 +206,8 @@ public class Search extends Controller {
 
 		SugarSequence seq = new SugarSequence( t.ct );
 		query = new SubstructureQuery( seq.getSugar() );
+		query.setOption( Must_Include_All_Non_Reducing_Terminii );
+
 
 		String q = query.getQueryString();
 		q = q.replaceAll("and.*r\\d.anomer =.*(a||b)", "" );
@@ -200,14 +216,13 @@ public class Search extends Controller {
 		 query.setOption( Must_Include_Reducing_Terminus );
 
 		//if ( submitAction.equals("Search terminal") )
-		query.setOption( Must_Include_All_Non_Reducing_Terminii );
+		//query.setOption( Must_Include_All_Non_Reducing_Terminii );
 
 		//query.execute();
 
-		return ok();
+		return id; // ok();
 
-	}
-
+	} */
 
 }
 
