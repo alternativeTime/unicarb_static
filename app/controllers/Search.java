@@ -29,6 +29,13 @@ import org.eurocarbdb.MolecularFramework.io.GlycoCT.SugarExporterGlycoCT;
 import org.eurocarbdb.MolecularFramework.io.GlycoCT.SugarImporterGlycoCTCondensed;
 import org.eurocarbdb.MolecularFramework.util.visitor.GlycoVisitorException;
 import org.eurocarbdb.action.core.SearchUnicarbGlycanSequence;
+import org.eurocarbdb.action.core.*;
+import org.eurocarbdb.dataaccess.core.seq.*;
+import org.eurocarbdb.sugar.Sugar;
+import org.eurocarbdb.sugar.SugarSequence;
+import org.eurocarbdb.application.glycanbuilder.Glycan;
+import static org.eurocarbdb.dataaccess.core.seq.SubstructureQuery.Option.Must_Include_Reducing_Terminus;
+import static org.eurocarbdb.dataaccess.core.seq.SubstructureQuery.Option.Must_Include_All_Non_Reducing_Terminii;
 
 import org.apache.commons.io.FileUtils;
 
@@ -44,10 +51,10 @@ import com.google.common.io.Files;
 
 public class Search extends Controller {
 
-	
+
 	public static Result saySearch(String structure) throws IOException{   // SugarImporterException, GlycoVisitorException,  ParserConfigurationException, SAXException {
-		
-	
+
+
 		List<Translation> translation = null;
 		Structure findStructure = null;
 		List<Structure> strDisplay = null;
@@ -56,49 +63,49 @@ public class Search extends Controller {
 		HashSet taxIdsUnique = new HashSet();
 		HashSet taxDivsUnique = new HashSet();
 		ArrayList taxDivs = new ArrayList();
-		
+
 		Map<String, String[]> id = request().queryString();
 		String urlcall = "";
 		Iterator iterator=id.entrySet().iterator();
-        	while(iterator.hasNext()){
-            	Map.Entry mapEntry=(Map.Entry)iterator.next();
-            	urlcall = mapEntry.getKey().toString();
-        	}
-	
-	   	String urltest = urlcall.toString();
-		
+		while(iterator.hasNext()){
+			Map.Entry mapEntry=(Map.Entry)iterator.next();
+			urlcall = mapEntry.getKey().toString();
+		}
+
+		String urltest = urlcall.toString();
+
 		File file = new File("/tmp/test.txt");
 		FileUtils.writeStringToFile(file, urltest);
-		
-		try {
-		String text = Files.toString(new File("/tmp/test.txt"), Charsets.UTF_8);
-		text= text.replaceAll(" ", "+");
-		Logger.info("&&&&&&&&&&&&&&&&&&&&&&&&"); 
-		translation = Translation.searchTranslation(text);
-		
-		for (Translation trans : translation) {
-			Long gsId = trans.gs;
-			findStructure = Structure.find.byId(gsId);
-                        strDisplay = Structure.findStructureRef(gsId);
-			for (Structure entries : strDisplay) {
-				stToTax = entries.strtaxonomy;
-				if (!stToTax.isEmpty()){
-                        	for (Strtaxonomy stTaxEntry : stToTax){
-                                	String taxName = stTaxEntry.taxonomy.species;
-                                	Long taxId = stTaxEntry.taxonomy.id;
-                                	taxNamesUnique.add(taxName);
-                                	taxIdsUnique.add(taxId);
-                                	String divtax = taxName;
-                                	taxDivsUnique.add(divtax);
-                        	}
-				taxDivs.addAll(taxDivsUnique);
 
-				}	
-				
+		try {
+			String text = Files.toString(new File("/tmp/test.txt"), Charsets.UTF_8);
+			text= text.replaceAll(" ", "+");
+			Logger.info("&&&&&&&&&&&&&&&&&&&&&&&&"); 
+			translation = Translation.searchTranslation(text);
+
+			for (Translation trans : translation) {
+				Long gsId = trans.gs;
+				findStructure = Structure.find.byId(gsId);
+				strDisplay = Structure.findStructureRef(gsId);
+				for (Structure entries : strDisplay) {
+					stToTax = entries.strtaxonomy;
+					if (!stToTax.isEmpty()){
+						for (Strtaxonomy stTaxEntry : stToTax){
+							String taxName = stTaxEntry.taxonomy.species;
+							Long taxId = stTaxEntry.taxonomy.id;
+							taxNamesUnique.add(taxName);
+							taxIdsUnique.add(taxId);
+							String divtax = taxName;
+							taxDivsUnique.add(divtax);
+						}
+						taxDivs.addAll(taxDivsUnique);
+
+					}	
+
+				}
 			}
-		}
 		}catch (IOException e) {
-			
+
 		}
 		return ok (saySearch.render(translation, strDisplay, taxDivs, findStructure));
 	}
@@ -106,17 +113,17 @@ public class Search extends Controller {
 	public static Result builderDigestSearch(String str) throws IOException {
 
 		Map<String, String[]> id = request().queryString();
-                String urlcall = "";
-                Iterator iterator=id.entrySet().iterator();
-                while(iterator.hasNext()){
-                Map.Entry mapEntry=(Map.Entry)iterator.next();
-                urlcall = mapEntry.getKey().toString();
-                }
+		String urlcall = "";
+		Iterator iterator=id.entrySet().iterator();
+		while(iterator.hasNext()){
+			Map.Entry mapEntry=(Map.Entry)iterator.next();
+			urlcall = mapEntry.getKey().toString();
+		}
 
 		File file = new File("/tmp/testdigest.txt");
-                FileUtils.writeStringToFile(file, urlcall.toString() );
+		FileUtils.writeStringToFile(file, urlcall.toString() );
 
-                String urltest = urlcall.toString();
+		String urltest = urlcall.toString();
 
 		Logger.info("####################### " + urltest  );		
 		String text = "";
@@ -147,16 +154,16 @@ public class Search extends Controller {
 
 	public static Result glycodigesttestBuilder(String str, String s) {
 		Map<String, String> strMap = new HashMap<String, String>();
-	        String enz = request().queryString().get("digest").toString() ;
+		String enz = request().queryString().get("digest").toString() ;
 		String uri =  request().uri();
 		String uriPass = request().getQueryString("digest");
 
-	        Set<Map.Entry<String,String[]>> entries = request().queryString().entrySet();
-	        for (Map.Entry<String,String[]> entry : entries) {
-		        final String key = entry.getKey();
-	                final String value = Arrays.toString(entry.getValue());
-		        Logger.debug(key + " " + value);
-	     	}	
+		Set<Map.Entry<String,String[]>> entries = request().queryString().entrySet();
+		for (Map.Entry<String,String[]> entry : entries) {
+			final String key = entry.getKey();
+			final String value = Arrays.toString(entry.getValue());
+			Logger.debug(key + " " + value);
+		}	
 
 		ct ct = new ct();
 
@@ -174,6 +181,31 @@ public class Search extends Controller {
 		}
 
 		return ok(glycodigesttestBuilder.render(strMap, Cache.get("digestStr").toString() ));
+	}
+
+	public static Result SubstructureSearch() {
+		SubstructureQuery query = null;
+		//Structure s = Structure.find.byId(1);
+		
+		Long id = 2L;
+		Translation t = Translation.find.byId(id);
+
+		SugarSequence seq = new SugarSequence( t.ct );
+		query = new SubstructureQuery( seq.getSugar() );
+
+		String q = query.getQueryString();
+		q = q.replaceAll("and.*r\\d.anomer =.*(a||b)", "" );
+		Logger.info("this is the query string " + q);
+		//if ( submitAction.equals("Search core") )
+		 query.setOption( Must_Include_Reducing_Terminus );
+
+		//if ( submitAction.equals("Search terminal") )
+		query.setOption( Must_Include_All_Non_Reducing_Terminii );
+
+		//query.execute();
+
+		return ok();
+
 	}
 
 
