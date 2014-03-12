@@ -84,13 +84,15 @@
 
 <div id="actions">
 	<div>
-           <img src="http://unicarb-db.biomedicine.gu.se/unicarbdb/get_sugar_image.action?download=false&amp;scale=1.0&amp;opaque=false&amp;outputType=png&notation=cfglink&inputType=glycoct_condensed&sequences=@helper.urlEncode(ct)" />
+           <img src="http://www.glycodigest.org:8123/eurocarb/get_sugar_image.action?download=false&amp;scale=1.0&amp;opaque=false&amp;outputType=png&notation=cfglink&inputType=glycoct_condensed&sequences=@helper.urlEncode(ct)" />
         </div>
 	<p>Use the search box below to select the panel of exoglycosidase to digest the structure shown:</p>	
 	 <form class="form-search" action="@routes.Glycodigest.glycodigesttest({id})" method="GET">  	
        <div id="selection" class="row-fluid">
        <input name=digest  id="e20" id="listBox" class="span4"></input>
-       <button type="submit" class="btn btn-primary">Search</button>
+       <button type="submit" class="btn btn-primary">Digest</button>
+       <a class='btn pull-right' href="/builderDigest"><i class="icon-refresh"></i> New Glycan</a>
+       <p><a href="http://www.glycodigest.org/exoglycosidase.pdf">Exoglycosidase information</a></p>
        </div>
     </form>
 </div>
@@ -100,7 +102,7 @@
 @for((key, value) <- map){
 	<li class="span4">
     <div class="thumbnail">
-      <img src="http://unicarb-db.biomedicine.gu.se/unicarbdb/get_sugar_image.action?download=false&amp;scale=0.5&amp;opaque=false&amp;outputType=png&notation=cfglink&inputType=glycoct_condensed&sequences=@value" />
+      <img src="http://www.glycodigest.org:8123/eurocarb/get_sugar_image.action?download=false&amp;scale=0.5&amp;opaque=false&amp;outputType=png&notation=cfglink&inputType=glycoct_condensed&sequences=@value" />
       <p class="pin2">Enzyme@key</p>
     </div>
     </li>

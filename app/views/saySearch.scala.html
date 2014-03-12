@@ -45,7 +45,7 @@
               <div class="tab-pane active" id="tab1">
                 <a class='btn pull-right' href="/builder"><i class="icon-refresh"></i> New Glycan</a>
 		@for(result <- result){
-		<img src="http://unicarb-db.biomedicine.gu.se/unicarbdb/get_sugar_image.action?download=true&scale=1.0&outputType=png&inputType=gws&tolerateUnknown=1&sequences=@{result.gws}" />
+		 <a href="/structure/@result.gs"><img src="http://www.glycodigest.org:8123/eurocarb/get_sugar_image.action?download=true&scale=1.0&outputType=png&inputType=gws&tolerateUnknown=1&sequences=@{result.gws}" /></a>
 		}
     @if(structureObject != null ) {
     <div class='callout'>
@@ -77,10 +77,6 @@
     </div>
     }
 
-    @if(listSub.size() > 0) {
-    @for(l <- listSub) { @l.get("glycanSequenceId") }
-    }
-
     <hr>
 	
     @if(structureObject != null ) {
@@ -91,6 +87,19 @@
         <a href="" style="font-size: 14px; font-weight: normal; line-height: 22px; margin-bottom: 9px; color: #4B5C66;">@tax, </a> 
 		    }
       </div>
+    </div>
+    }
+
+    <hr>
+
+    @if(listSub.size() > 0) {
+    <div class="row-fluid">
+    <h3>GlycoSuite Substructure Matches @listSub.size()</h3>
+    <div class="details span9">
+    <p>The following structures contain features of the submitted glycan. For more information select one of the entries.</p>
+    @for(l <- listSub) { 
+        <a href="/structure/@{l.get("gs_id")}"><img src="http://www.glycodigest.org:8123/eurocarb/get_sugar_image.action?download=true&scale=1.0&outputType=png&inputType=gws&tolerateUnknown=1&sequences=@{l.get("sequence_gws")}" /></a>
+    }
     </div>
     }
   </div>
