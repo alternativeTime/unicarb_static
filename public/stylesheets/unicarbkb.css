@@ -980,7 +980,7 @@ th[class*="span"] {
 
 #toggle-taxonomy, #toggle-protein, #toggle-source, #toggle-pubchen { cursor: pointer; }
 
-#more-taxonomy, #more-protein, #more-source, #more-pubchem { 
+#more-taxonomy, #more-protein, #more-source, #more-pubchem, #more-exoglycosidases { 
   margin: 0; padding: 20px;
   display: none;
   -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px
@@ -990,6 +990,8 @@ th[class*="span"] {
 #more-protein { background: #f89406; }
 #more-source { background: #419926; }
 #more-pubchem { background: red;}
+#more-exoglycosidases { background: none ; }
+
 
 #more-taxonomy h3, #more-protein h3, #more-source h3 { color: #FFF; cursor: pointer; }
 #more-taxonomy h3 span,
