@@ -94,6 +94,14 @@ $(document).ready(function(){
     $("#more-source").toggle();
   });
 
+  $("#toggle-exoglycosidases").click(function() {
+    $("#more-exoglycosidases").toggle();
+  });
+
+  $("#less-exoglycosidases").click(function() {
+    $("#more-exoglycosidases").toggle();
+   });
+
   //References
   $("#show-references, #show-more-references").click(function() {
     $("#more-references").toggle();
