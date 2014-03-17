@@ -97,10 +97,10 @@
 <div class="bs-callout bs-callout-warning" >
 	<h4>Using Exoglycosidases <span class="glyphicon glyphicon-search"></span></h4>
     <p>Exoglycosidase enzyme array digestions, in combination with U/HPLC and LC-MS, can deliver semi-quantitative glycan analysis of sugars released from glycoproteins. A detailed description and example experimental protocols for using and applying exoglycosidases is published by <a href="http://link.springer.com/protocol/10.1385%2F1-59745-167-3%3A125" target="_blank">Royle et al., Methods Mol Biol. 2006;347:125-43</a>.</p>
-    <p>A summary of the mode of action of exoglycosidases and examples can be found <a href="http://www.glycodigest.org/exoglycosidase.pdf" target="_blank">here</a>. Click the 'Information on Glycosidases' button for more information.</p>
-    <div class='more-exoglycosidases'>
+    <p>A summary of the mode of action of exoglycosidases and examples can be found <a href="http://www.glycodigest.org/exoglycosidase.pdf" target="_blank">here</a>. Click the 'Information on Glycosidases' button in the 'Build Exoglycosidases' box below.</p>
+    @* <div class='more-exoglycosidases'>
     <a id='toggle-exoglycosidases'><span class='label'><span class='icon-tags icon-white'></span> Information on Exoglycosidases <span class="caret"></span></span></a>
-   </div>
+   </div> *@
 
 
 
@@ -120,6 +120,10 @@
        <a class='btn pull-right' href="/builderDigest"><i class="icon-refresh"></i> New Glycan</a>
        </div>
     </form>
+<div class='more-exoglycosidases'>
+    <a id='toggle-exoglycosidases'><span class='label'><span class='icon-tags icon-white'></span> Information on Exoglycosidases <span class="caret"></span></span></a>
+   </div>
+
 </div>
 
 <div>
@@ -227,11 +231,11 @@
 @for((key, value) <- map){
     <div class="col-xs-6 col-md-3"">
       <img class="thumbnail" src="http://www.glycodigest.org:8123/eurocarb/get_sugar_image.action?download=false&amp;scale=0.5&amp;opaque=false&amp;outputType=png&notation=cfglink&inputType=glycoct_condensed&sequences=@value" />
-      <p class="pin2">Enzyme@key</p>
+      <p>@key.replace("ABS", "ABS - Sialidase").replace("BTG", "β(1-3,4)-Galactosidase").replace("NAN1", "NAN1 - α(2-3)-Sialidase").replace("BKF", "BKF α(1-2,3,4,6)-Fucosidase").replace("XMF", "XMF α(1-2)-Fucosidase").replace("AMF", "AMF α(1-3,4)-Fucosidase").replace("SPG", "SPG β(1-4)-Galactosidase").replace("CBG", "CBG α(1-3,4,6)-Galactosidase").replace("JBM", "JBM α(1-2,3,6)-Mannosidase").replace("GUH", "GUH β-N-Acetylhexosaminidase").replace("JBH", "JBH β-N-Acetylhexosaminidase")</p>
     </div>
 }
-
 </div>
+
 
 
       @views.html.footerunicarb.footerunicarb()    
