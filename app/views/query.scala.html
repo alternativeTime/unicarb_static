@@ -585,7 +585,7 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
     @for(p <- proteinList) {
     <div class="row-fluid glycosuiteResult">
       <div class="details span9">
-        <h3>@if(p.swissProt != null) {<a href="@routes.Application.proteinsummary(p.swissProt, "accession" )">@p.name</a>}
+        <h3>@if(p.swissProt != null) {<a href="@routes.Application.proteinsummary(p.swissProt, "annotated" )">@p.name</a>}
 	    @if(p.swissProt == null){
 
 	    @for(t <- p.proteinsTax){ <a href="/proteinsummary/@p.name/@t.species">@p.name</a>

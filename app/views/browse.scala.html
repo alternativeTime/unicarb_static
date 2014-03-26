@@ -519,7 +519,7 @@ $('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
     @for(p <- proteinList) {
     <div class="row-fluid glycosuiteResult">
       <div class="details span9">
-        <h3>@if(p.swissProt != null) {<a href="@routes.Application.proteinsummary(p.swissProt, "accession" )">}
+        <h3>@if(p.swissProt != null) {<a href="@routes.Application.proteinsummary(p.swissProt, "annotated" )">}
 	     @if(p.swissProt == null) {<a href="@routes.Application.proteinsummary(p.name, "name" )">}
 	    @p.name</a></h3>  
         <p class="">@p.stproteins.size() structures are associated with this protein</p>
