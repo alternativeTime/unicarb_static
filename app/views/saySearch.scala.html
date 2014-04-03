@@ -1,4 +1,4 @@
-@(result: List[Translation], structure: List[Structure], taxonomy: ArrayList[String], structureObject: Structure, listSub: List[com.avaje.ebean.SqlRow])
+@(result: List[Translation], structure: List[Structure], taxonomy: ArrayList[String], structureObject: Structure, listSub: List[com.avaje.ebean.SqlRow], subStr: HashSet[Structure])
 @import helper._
 
 
@@ -45,7 +45,8 @@
               <div class="tab-pane active" id="tab1">
                 <a class='btn pull-right' href="/builder"><i class="icon-refresh"></i> New Glycan</a>
 		@for(result <- result){
-		 <a href="/structure/@result.gs"><img src="http://www.glycodigest.org:8123/eurocarb/get_sugar_image.action?download=true&scale=1.0&outputType=png&inputType=gws&tolerateUnknown=1&sequences=@{result.gws}" /></a>
+		@* changes result.gs to result.structure.id *@
+		 <a href="/structure/@result.structure.id"><img src="http://www.glycodigest.org:8123/eurocarb/get_sugar_image.action?download=true&scale=1.0&outputType=png&inputType=gws&tolerateUnknown=1&sequences=@{result.gws}" /></a>
 		}
     @if(structureObject != null ) {
     <div class='callout'>
@@ -91,10 +92,10 @@
     }
 
     <hr>
-
+    @*
     @if(listSub.size() > 0) {
     <div class="row-fluid">
-    <h3>GlycoSuite Substructure Matches @listSub.size()</h3>
+    <h3>GlycoSuite Substructure Matches (<i>@listSub.size() hits</i>)</h3>
     <div class="details span9">
     <p>The following structures contain features of the submitted glycan. For more information select one of the entries.</p>
     @for(l <- listSub) { 
@@ -102,12 +103,40 @@
     }
     </div>
     }
+    </div> *@
+
+
+    @if(subStr.size() > 0) {
+    <div class="row-fluid">
+    <h3>GlycoSuite Substructure Matches (<i>@subStr.size() hits</i>)</h3>
+    <div class="details span9">
+    <p>The following structures contain features of the submitted glycan. For more information select one of the entries.</p>
+
+
+    @for((ls, i) <- subStr.zipWithIndex; if (i <=5)) {
+    @for(l <- ls.translation) {
+        <a href="/structure/@l.structure.id"><img src="http://www.glycodigest.org:8123/eurocarb/get_sugar_image.action?download=true&scale=1.0&outputType=png&inputType=gws&tolerateUnknown=1&sequences=@{l.gws}.png" /></a>
+
+	<div class="bs-callout bs-callout-info">
+	<h4>Taxonomy</h4>
+	@for(t <- l.structure.strtaxonomy) {
+	@{t.species.split(" ").map(_.toLowerCase.capitalize).mkString(" ")}
+	}
+
+	<h4>Glycoproteins</h4>
+	@for(p <- l.structure.stproteins){
+	    @{p.proteins.name.split(" ").map(_.toLowerCase.capitalize).mkString(" ")}
+	}
+	
+	</div>
+    }}
+    </div>
+    }
   </div>
 
-
-              </div>
-            </div>
-          </div>
+  </div>
+  </div>
+  </div>
         </div><!-- /col -->
       </div><!-- /row -->
     </section>

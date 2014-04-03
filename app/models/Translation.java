@@ -27,9 +27,11 @@ public class Translation extends Model {
     public String ct;
 
     public String gws;
-    
-    public Long gs;
 
+    @ManyToOne    
+    public Structure structure;
+    
+    //public Long gs;
 
     public static Model.Finder<Long,Translation> find = new Model.Finder<Long,Translation>(Long.class, Translation.class);
 
@@ -95,8 +97,8 @@ public class Translation extends Model {
 	Long gsId = -1L;
 	Translation translation = new Translation();
 	translation = Translation.searchTransUnique(ct);
-	if(translation != null && translation.gs > 0 ) {
-		return translation.gs;
+	if(translation != null && translation.structure.id > 0 ) {  //test change
+		return translation.structure.id; //test change
 	} else {
 		return gsId;
 	}

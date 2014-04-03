@@ -66,6 +66,7 @@ public class Search extends Controller {
 		HashSet taxDivsUnique = new HashSet();
 		ArrayList taxDivs = new ArrayList();
 		List<SqlRow> listSub = null;
+		HashSet strSub = new HashSet();
 
 		Map<String, String[]> id = request().queryString();
 		String urlcall = "";
@@ -88,9 +89,19 @@ public class Search extends Controller {
 
 			GlycanResidueUnicarb substructureUni = new GlycanResidueUnicarb();
                 	listSub  = substructureUni.SubstructureSearch();
+		
+			/*
+			*users would like list of tax
+			*/
+			for(SqlRow r : listSub) {
+				String idSub = r.get("gs_id").toString();
+				Long idSubL = new Long(idSub);
+				strSub.add( Structure.find.byId( idSubL) );
+			}
+
 
 			for (Translation trans : translation) {
-				Long gsId = trans.gs;
+				Long gsId = trans.structure.id;
 				findStructure = Structure.find.byId(gsId);
 				strDisplay = Structure.findStructureRef(gsId);
 				for (Structure entries : strDisplay) {
@@ -113,7 +124,7 @@ public class Search extends Controller {
 		}catch (IOException e) {
 
 		}
-		return ok (saySearch.render(translation, strDisplay, taxDivs, findStructure, listSub));
+		return ok (saySearch.render(translation, strDisplay, taxDivs, findStructure, listSub, strSub));
 	}
 
 	public static Result builderDigestSearch(String str) throws IOException {
