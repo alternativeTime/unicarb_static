@@ -163,7 +163,7 @@ $(document).ready(function () {
         <input id="filter" type="text" class="form-control" placeholder="Type here...">
         </div>
 <table id="demo" class="table table-striped table-bordered table-condensed">
-        <thead><th>Structure</th><th>Taxonomy</th></thead>
+	<thead><th>Structure</th><th>Taxonomy</th><th>Glycoprotein</th></thead>
         <tbody class="searchable">
         @for(ls <- subStr) {
         @for(l <- ls.translation) {
@@ -172,7 +172,7 @@ $(document).ready(function () {
         @for(t <- l.structure.strtaxonomy) {
         <p>@{t.species.split(" ").map(_.toLowerCase.capitalize).mkString(" ")}</p>
         }
-        </td></tr>
+</td><td>ss</td></tr>
         }
         }
         </tbody></table>
@@ -225,14 +225,14 @@ $(document).ready(function () {
         <input id="filter" type="text" class="form-control" placeholder="Type here...">
         </div>
         <table id="demo" class="table table-striped table-bordered table-condensed">
-	<thead><th>Structure</th><th>Taxonomy</th></thead>
+		<thead><th>Structure</th><th>Taxonomy</th></thead>
 	<tbody class="searchable">
 	@for(ls <- subStr) {
     	@for(l <- ls.translation) {
         <tr><td><a href="/structure/@l.structure.id"><img src="http://www.glycodigest.org:8123/eurocarb/get_sugar_image.action?download=true&scale=1.0&outputType=png&inputType=gws&tolerateUnknown=1&sequences=@{l.gws}.png" /></a>
 	</td><td>
-	@for(t <- l.structure.strtaxonomy) {
-        <p>@{t.species.split(" ").map(_.toLowerCase.capitalize).mkString(" ")}</p>
+	@for(t <- l.structure.strproteintax) {
+	<p>@{t.taxonomy.species.split(" ").map(_.toLowerCase.capitalize).mkString(" ")} -- @if(t.proteins != null) {@{t.proteins.name}} </p>
         }
 	</td></tr>
 	}
@@ -241,7 +241,6 @@ $(document).ready(function () {
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>

@@ -1,6 +1,25 @@
 @(notation: String, structure: List[Structurecomp], query: Array[String])
 
 @main{
+<script>
+$(document).ready(function () {
+
+    (function ($) {
+
+        $('#filter').keyup(function () {
+
+            var rex = new RegExp($(this).val(), 'i');
+            $('.searchable tr').hide();
+            $('.searchable tr').filter(function () {
+                return rex.test($(this).text());
+            }).show();
+
+        })
+
+    }(jQuery));
+
+});
+</script>
 
 <ul class="breadcrumb">
   <li><i class="icon-home"></i><a href="/"> UniCarbKB</a> <span class="divider">&gt;</span></li>
@@ -39,13 +58,16 @@
 	  <p>@for(q <- query) {@q}</p>
 	  @views.html.format.format()
 	  @if(structure.size() >1 ) {
-      <ul class="structures media-grid">
-        @for(structure <- structure) {
-        <li>
-	@views.html.format.structure(notation, structure.structure.id)
-	</li>
-        }
-      </ul>
+	  <div class="input-group"> <span class="input-group-addon">Filter</span>
+          <input id="filter" type="text" class="form-control" placeholder="Type here...">
+          </div>
+	  <table class="table table-striped table-bordered table-condensed"><thead><th>Structure</th><th>Information</th></thead><tbody class="searchable">
+          @for(structure <- structure) {
+	  <tr><td>@views.html.format.structure(notation, structure.structure.id)</td><td> @if(structure.structure.strproteintax.size() > 0) {@for(s <- structure.structure.strproteintax){ @if(s.proteins != null ){
+			  <p>@{ s.proteins.name } (@{s.taxonomy.species}) </p>
+			  }}} </td></tr>
+	  } 
+	  </tbody></table>
 	  }
 	@if(structure.size() == 1){
 	<ul class="structures media-grid">
