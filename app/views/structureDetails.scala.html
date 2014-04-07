@@ -191,6 +191,22 @@
           </ul>
         </div>
       </div>
+
+      <div class='info'>
+        <h3>Defined Content</h3>
+      <div class='taxonomy'>
+	<a id='toggle-defined'><span class='label label-success'><span class='icon-leaf icon-white'></span> Source (@sourceItems.size()) <span class="caret"></span></span></a>
+      </div>
+      <div>
+         <ul id='more-defined'>
+            <h3 id='less-defined'><span class='icon-leaf icon-white'></span> More Defined Info</h3>
+            @for(d <- strInfo.strproteintax){
+            <li><span class='icon-leaf icon-white'></span> <a href=''>@if(d.taxonomy != null ) { @{d.taxonomy.species}  >} @if(d.proteins !=null ){ @{d.proteins.name} }</a></li>
+            }
+         </ul>
+      </div>
+      </div>
+
       @if(pubchem != null) {
 	 @views.html.format.pubchem( pubchem )
       }
