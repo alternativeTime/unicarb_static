@@ -115,12 +115,14 @@ $(document).ready(function () {
                 @for(l <- ls.translation) {
                    <tr><td><a href="/structure/@l.structure.id"><img src="http://www.glycodigest.org:8123/eurocarb/get_sugar_image.action?download=true&scale=1.0&outputType=png&inputType=gws&tolerateUnknown=1&sequences=@{l.gws}.png" /></a>
                    </td><td>
-                @for(t <- l.structure.strproteintaxbiolsource) {
-                   <p>@{t.taxonomy.species.split(" ").map(_.toLowerCase.capitalize).mkString(" ")} -- @if(t.proteins != null) {<span class="label label-primary">@{t.proteins.name}</span>}
-                   (<a href="/references/@{t.sourceref.reference.id}">@{t.sourceref.reference.first.split(" ").map(_.toLowerCase.capitalize).mkString(" ")} <i>et al.,</i></a>)
-                   </p>
-		} 
+		 
+		   @l.structure.strproteintaxbiolsource.groupBy(_.taxonomy).map{ case (i, j) => {<p>@i.species</p> 
+		   @*l.structure.strproteintaxbiolsource.groupBy(_.sourceref).map{ case (i, j) => {<p>@i.biolsource.taxonomy</p> *@
+		   @j.map { x => <p>cccc @x.sourceref.reference.id - @x.sourceref.reference.first</p> }
+		   }
+		   }
 
+		   
 
                 </td></tr>
                 }

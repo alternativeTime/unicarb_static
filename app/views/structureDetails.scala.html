@@ -200,7 +200,7 @@
       <div>
          <ul id='more-defined'>
             <h3 id='less-defined'><span class='icon-leaf icon-white'></span> More Defined Info</h3>
-            @for(d <- strInfo.strproteintax){
+            @for(d <- strInfo.strproteintaxbiolsource){
             <li><span class='icon-leaf icon-white'></span> <a href=''>@if(d.taxonomy != null ) { @{d.taxonomy.species}  >} @if(d.proteins !=null ){ @{d.proteins.name} }</a></li>
             }
          </ul>

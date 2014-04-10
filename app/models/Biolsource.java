@@ -28,6 +28,12 @@ public class Biolsource extends Model {
 
 	//@ManyToOne
 	//Biolsource biolsource;
+	//below associations introduced based on user feedback etc	
+	//@ManyToOne
+	//public Taxonomy taxonomyName;
+
+	//@ManyToOne
+	//public Proteins proteins;
 
 	public static List<String> proteinNames;
 	/**

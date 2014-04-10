@@ -9,9 +9,13 @@ import play.data.validation.*;
 
 import com.avaje.ebean.*;
 
+import play.mvc.Controller;
+import play.mvc.Result;
+
 /**
  * Structure entity managed by Ebean
  */
+@SuppressWarnings("serial")
 @Entity 
 @Table(schema="public", name="sourceref")
 public class Sourceref extends Model {
@@ -21,16 +25,20 @@ public class Sourceref extends Model {
 
     @ManyToOne
     public Reference reference;
+
     @ManyToOne
     public Biolsource biolsource;    
 
     //@OneToMany
     //public List<Biolsource> biolsource;
+    //
+    @OneToMany
+    public List<Strproteintaxbiolsource> strproteintaxbiolsource;
 
-    public Sourceref(Reference reference, Biolsource biolsource) {
+    /* public Sourceref(Reference reference, Biolsource biolsource) {
         this.reference=reference;
 	this.biolsource = biolsource;
-    }
+    } */
 
     
     /**

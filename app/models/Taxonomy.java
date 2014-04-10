@@ -36,6 +36,9 @@ public class Taxonomy extends Model {
 
     @OneToMany
     public List<Strproteintax> strproteintax;
+
+    //@OneToMany
+    //public List<Biolsource> biolsource;
     
     public static Model.Finder<Long,Taxonomy> find = new Model.Finder<Long,Taxonomy>(Long.class, Taxonomy.class);
 
