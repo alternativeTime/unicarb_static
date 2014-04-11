@@ -76,7 +76,8 @@ $(document).ready(function () {
     		} else {
 		   <h3>Search returned</h3>
 			<div class="bs-callout bs-callout-warning">
-        		<p>The structure submitted could not be found! <br/>Only structures completely matching the submitted glycan topology will be returned.</p>
+				<p>The structure submitted could not be found! <br/>Only structures completely matching the submitted glycan topology will be returned.</p>
+				<p>Check any similar structure in the 'Substructure' tab above!</p>
 			</div>	
 		}
 		@if(structure != null ) {
@@ -116,11 +117,17 @@ $(document).ready(function () {
                    <tr><td><a href="/structure/@l.structure.id"><img src="http://www.glycodigest.org:8123/eurocarb/get_sugar_image.action?download=true&scale=1.0&outputType=png&inputType=gws&tolerateUnknown=1&sequences=@{l.gws}.png" /></a>
                    </td><td>
 		 
-		   @l.structure.strproteintaxbiolsource.groupBy(_.taxonomy).map{ case (i, j) => {<p>@i.species</p> 
+		   @l.structure.strproteintaxbiolsource.groupBy(_.taxonomy).map{ case (i, j) => <p>@i.species   
 		   @*l.structure.strproteintaxbiolsource.groupBy(_.sourceref).map{ case (i, j) => {<p>@i.biolsource.taxonomy</p> *@
-		   @j.map { x => <p>cccc @x.sourceref.reference.id - @x.sourceref.reference.first</p> }
+		   @j.groupBy(_.reference).map{ case (y,z) => (<a href="/references/@y.id" target="_blank">@y.first , @y.year</a>) 
+		   @z.groupBy(_.proteins).map{ case (d,e) =>  @if(d != null ) {<span class="label label-default">@d.name</span>  }
+		   </p>
+		   }}
+		   
+		   
+		   @* j.map { x => <p>cccc @x.sourceref.reference.id - @x.sourceref.reference.first</p> } *@
 		   }
-		   }
+		   
 
 		   
 

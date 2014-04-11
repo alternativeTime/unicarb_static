@@ -61,7 +61,7 @@ public class Translation extends Model {
     public static Translation translationCT(Long id){
     	return	
 	    find.where()
-	    	.eq("gs", id)
+	    	.eq("structure_id", id)
 		.findUnique();
     
     }

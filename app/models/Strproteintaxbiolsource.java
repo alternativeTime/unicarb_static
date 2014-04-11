@@ -30,6 +30,8 @@ public class Strproteintaxbiolsource extends Model {
     public Taxonomy taxonomy;
     @ManyToOne
     public Sourceref sourceref; 
+    @ManyToOne
+    public Reference reference;
       
     
     /**
