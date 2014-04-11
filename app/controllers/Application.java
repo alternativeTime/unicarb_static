@@ -205,6 +205,7 @@ public class Application extends Controller {
 			}
 			else{
 				stproteins = Proteins.findProteinsNameSummaryUniprot(p.swissProt); //(protein);
+				Logger.info("---------- check query ---------");
 			}
 		       	for(SqlRow s : stproteins) {
 				uniqueStructures.add( String.valueOf(s.getString("structure_id").toString() ) );

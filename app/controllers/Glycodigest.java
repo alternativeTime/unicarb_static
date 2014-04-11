@@ -29,7 +29,11 @@ import com.avaje.ebean.*; //dont think this should be here due to SqlRow
 
 
 public class Glycodigest extends Controller {
-	
+
+	public static Result glycodigestHome() {
+		return ok( glycodigestHome.render() );
+	}
+
 	public static Result glycodigest(Long id) {
 		String enzymes = "";
 		Map<String, String> hashMap = new HashMap<String, String>();

@@ -33,14 +33,15 @@ GET   /builderDigest		controllers.Application.builderDigest()
 GET   /builderDigestSearch/:s	controllers.Search.builderDigestSearch(s: String)
 
 GET   /proteins                 controllers.ProteinDetails.proteinlist(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "", protein ?= "")
-GET   /proteinsummary/:s/:other       controllers.Application.proteinsummary(s: String, other: String)
-#GET   /proteinsummary/:s        controllers.Application.proteinsummary(s: String)
+GET   /proteinsummary/:s/:other controllers.Application.proteinsummary(s: String, other: String)
+#GET   /proteinsummary/:s       controllers.Application.proteinsummary(s: String)
 #GET  /proteinsummary           controllers.Application.browse()
 GET   /proteinsite              controllers.UniprotConnection.proteinsite()
 
 GET   /taxonomysearch           controllers.Application.taxonsearch(taxonomy ?= "")
 GET   /compositions             controllers.Application.compositions()
-GET   /glycodigest/:id		    controllers.Glycodigest.glycodigest(id:Long)
+GET   /glycodigest/:id		controllers.Glycodigest.glycodigest(id:Long)
+GET   /glycodigest              controllers.Glycodigest.glycodigestHome()
 
 # distance based
 GET   /glycodigest/:id/digest   controllers.Glycodigest.glycodigesttest(id: Long, s: String?="")
