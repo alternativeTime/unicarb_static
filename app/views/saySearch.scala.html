@@ -61,7 +61,7 @@ $(document).ready(function () {
               <div class="tab-pane active" id="red">
 		<a class='btn pull-right' href="/builder"><i class="icon-refresh"></i> New Glycan</a>
                 @for(result <- result){
-                 <a href="/structure/@result.structure.id"><img src="http://www.glycodigest.org:8123/eurocarb/get_sugar_image.action?download=true&scale=1.0&outputType=png&inputType=gws&tolerateUnknown=1&sequences=@{result.gws}" /></a>
+                 <a href="/structure/@result.structure.id"><img src="http://www.glycodigest.org:8080/eurocarb/get_sugar_image.action?download=true&scale=1.0&outputType=png&inputType=gws&tolerateUnknown=1&sequences=@{result.gws}" /></a>
                 }
 		@if(structureObject != null ) {
       		<div class="bs-callout bs-callout-info">   
@@ -114,7 +114,7 @@ $(document).ready(function () {
                 <tbody class="searchable">
                 @for(ls <- subStr) {
                 @for(l <- ls.translation) {
-                   <tr><td><a href="/structure/@l.structure.id"><img src="http://www.glycodigest.org:8123/eurocarb/get_sugar_image.action?download=true&scale=1.0&outputType=png&inputType=gws&tolerateUnknown=1&sequences=@{l.gws}.png" /></a>
+                   <tr><td><a href="/structure/@l.structure.id"><img src="http://www.glycodigest.org:8080/eurocarb/get_sugar_image.action?download=true&scale=1.0&outputType=png&inputType=gws&tolerateUnknown=1&sequences=@{l.gws}.png" /></a>
                    </td><td>
 		 
 		   @l.structure.strproteintaxbiolsource.groupBy(_.taxonomy).map{ case (i, j) => <p>@i.species   
