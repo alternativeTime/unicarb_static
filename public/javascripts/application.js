@@ -102,6 +102,14 @@ $(document).ready(function(){
     $("#more-exoglycosidases").toggle();
    });
 
+  $("#toggle-defined").click(function() {
+     $("#more-defined").toggle();
+  });
+
+  $("#less-defined").click(function() {
+     $("#more-defined").toggle();
+  });
+
   //References
   $("#show-references, #show-more-references").click(function() {
     $("#more-references").toggle();
