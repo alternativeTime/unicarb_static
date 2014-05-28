@@ -34,6 +34,8 @@ public class Proteinstaxonomy extends Model {
     public static Model.Finder<Long,Proteinstaxonomy> find = new Model.Finder<Long,Proteinstaxonomy>(Long.class, Proteinstaxonomy.class);
     
     public static Proteinstaxonomy findProteinTax(String protein) {
+	    	protein = protein.trim();
+	    	System.out.println("tracking errors");
 		try{
 		return
 			find.where().disjunction()

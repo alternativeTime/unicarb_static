@@ -332,8 +332,8 @@ public class UniprotConnection extends Controller {
 
 
 		for(Ftmerge f : fts ) {
-			protein = f.swiss_prot;
-			site = f.amino_acid;
+			protein = f.swiss_prot.trim();
+			site = f.amino_acid.trim();
 			
 		}
 
@@ -349,7 +349,7 @@ public class UniprotConnection extends Controller {
 		type = "defined";
 
 		if(type.equals("defined")) {
-			definedStructures = StructureToSiteDefined.findStructuresDefined(protein, site);
+			definedStructures = StructureToSiteDefined.findStructuresDefined(protein.trim(), site);
 			for(StructureToSiteDefined s : definedStructures) {
 				Long value = Long.valueOf(s.structure_id);
 				//this check should not be required but for safety
