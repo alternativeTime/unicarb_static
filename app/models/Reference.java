@@ -1,6 +1,7 @@
 package models;
 
 import java.util.*;
+import models.composition_protein.CompRef;
 import javax.persistence.*;
 
 import play.db.ebean.*;
@@ -52,6 +53,9 @@ public class Reference extends Model {
 
     @OneToMany
     public List<Strproteintaxbiolsource> strproteintaxbiolsource;
+
+    @OneToMany
+    public List<CompRef> compReferences;
     
      public Reference(String volume, String pages, String medline, String title, String authors, String first, Journal journal) {
         this.first = first;

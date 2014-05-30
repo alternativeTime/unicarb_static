@@ -3,16 +3,19 @@ package models;
 import java.util.*;
 import javax.persistence.*;
 
+
+
 import play.db.ebean.*;
 import play.data.format.*;
 import play.data.validation.*;
 
 import com.avaje.ebean.*;
+import scala.reflect.internal.util.TableDef;
 
 /**
  * Journal entity managed by Ebean
  */
-@Entity 
+@Entity
 @Table(schema="public", name="journal")
 public class Journal extends Model {
 

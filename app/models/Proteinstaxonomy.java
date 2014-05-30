@@ -35,7 +35,7 @@ public class Proteinstaxonomy extends Model {
     
     public static Proteinstaxonomy findProteinTax(String protein) {
 	    	protein = protein.trim();
-	    	System.out.println("tracking errors");
+	    	System.out.println("tracking errors xyz " + protein);
 		try{
 		return
 			find.where().disjunction()

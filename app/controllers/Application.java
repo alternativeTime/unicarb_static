@@ -136,23 +136,27 @@ public class Application extends Controller {
 			generalSites = GeneralSites.findProteinsGeneral(protein);
 			definedSites = DefinedSites.findProteinsDefined(protein);
 
-			String [] splitProtein = protein.split("\\s*[and]+\\s*");
-			System.out.println("this needs checking ----------------");
-			proteinMultiple = Proteins.findProteinsSwissProt(protein);
-			if(proteinMultiple.isEmpty()){
-				proteinMultiple = Proteins.findProteinSwissProtMulti(protein);
-			}
+            if(generalSites == null && definedSites == null) {
 
-			if(!proteinMultiple.isEmpty()){
-				//for(String partProtein : splitProtein) {
-				uniprotDetails = UniprotConnection.EntryRetrievalExample(protein);
-				sequenceRetrieval = UniprotConnection.EntryRetrievalSequence(protein);
-			}
+                String[] splitProtein = protein.split("\\s*[and]+\\s*");
+                System.out.println("this needs checking ----------------");
+                proteinMultiple = Proteins.findProteinsSwissProt(protein);
+                if (proteinMultiple.isEmpty()) {
+                    proteinMultiple = Proteins.findProteinSwissProtMulti(protein);
+                }
 
-			//List<GsProteinSite> gsProteinSite = GsProteinSite.ProteinRetrieval(protein);
-			gsProteinSite = GsProteinStr2.ProteinRetrieval(protein);
-			//List<SitesReferences2> description = SitesReferences2.findSitesReferences(protein);
-			description = SitesReferences.findSites(protein);
+                if (!proteinMultiple.isEmpty()) {
+                    //for(String partProtein : splitProtein) {
+                    uniprotDetails = UniprotConnection.EntryRetrievalExample(protein);
+                    sequenceRetrieval = UniprotConnection.EntryRetrievalSequence(protein);
+                }
+
+                //List<GsProteinSite> gsProteinSite = GsProteinSite.ProteinRetrieval(protein);
+                gsProteinSite = GsProteinStr2.ProteinRetrieval(protein);
+                //List<SitesReferences2> description = SitesReferences2.findSitesReferences(protein);
+                description = SitesReferences.findSites(protein);
+
+            }
 
 		}
 

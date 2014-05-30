@@ -349,6 +349,7 @@ public class UniprotConnection extends Controller {
 		type = "defined";
 
 		if(type.equals("defined")) {
+            System.out.println("fyi fiday #########");
 			definedStructures = StructureToSiteDefined.findStructuresDefined(protein.trim(), site);
 			for(StructureToSiteDefined s : definedStructures) {
 				Long value = Long.valueOf(s.structure_id);

@@ -1,5 +1,6 @@
 package models;
 
+import models.composition_protein.CompProtein;
 import java.util.*;
 import javax.persistence.*;
 
@@ -47,6 +48,9 @@ public class Proteins extends Model {
 
     @OneToMany
     public List<Strproteintax> strproteintax;
+
+    @OneToMany
+    public List<CompProtein> compProtein;
 
     //@OneToMany
     //public List<Biolsource> biolsource;
