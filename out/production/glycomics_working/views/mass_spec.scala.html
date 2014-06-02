@@ -1,0 +1,217 @@
+
+@main{
+
+<script src="@routes.Assets.at("/public","javascripts/massspec.js")"></script>
+
+<ul class="breadcrumb">
+  <li><i class="icon-home" ></i><a href="/"> UniCarbKB</a> <span class="divider">></span></li>
+  <li class="active"><i class="icon-briefcase" ></i> Mass Spec<span class="divider"></span></li>
+</ul>
+
+<section id="layouts" class="browse massspec">
+  <div class="page-header row-fluid">
+    <h1>Mass Spec</h1>
+    <h4 class="subheader">UnicarbKB Mass Spec details.</h4>
+  </div>
+
+  <div class="row-fluid">
+    <div class="span4 search">
+      <div class="row-fluid">
+        <div class='info'>
+          <div id='structure-massspec'>
+            <img class="sugar_image" src="../images/gs/_1053.png">
+          </div>
+        </div>
+        <div class="filterbar tabbable clearfix">
+          <ul class="nav nav-tabs" id="myTabBar">
+            <li id='workflow1-toggle' class='active'><a href='#workflow1' data-toggle="tab">Sample Summary<span class="pull-right count"></span></a></li>
+            <li id='workflow2-toggle'><a href='#workflow2' data-toggle="tab">MS/MS Spectra</a></li>
+            <li id='workflow3-toggle'><a href='#workflow3' data-toggle="tab">Peak List<span class="pull-right count"></span></a></li>
+            <li id='workflow4-toggle'><a href='#workflow4' data-toggle="tab">Ion Mode<span class="pull-right count"></span></a></li>
+            <li id='workflow5-toggle'><a href='#workflow5' data-toggle="tab">HPLC Details<span class="pull-right count"></span></a></li>
+          </ul>
+        </div>
+        <div class='info'>
+          <h3>Mass Spec Details</h3>
+          <div class="control-group">
+            <label class='control-label' for="name">Ion:</label>
+            <div class='controls record'>[M-H]</div>
+          </div>
+          <div class="control-group">
+            <label class='control-label'>Base Peak m/z:</label>
+            <div class='controls record'>587.25</div>
+          </div>
+          <div class="control-group">
+            <label class='control-label'>Calculated mass and m/z:</label>
+            <div class='controls record'>588.238 - 587.231</div>
+          </div>
+          <div class="control-group">
+            <label class='control-label'>Intensity:</label>
+            <div class='controls record'>100</div>
+          </div>
+          <div class="control-group">
+            <label class='control-label'>Persubstitution:</label>
+            <div class='controls record'>Underivatised</div>
+          </div>
+          <div class="control-group">
+            <label class='control-label'>Reducing End:</label>
+            <div class='controls record'>Reduced reducing end</div>
+          </div>
+          <div class="control-group">
+            <label class='control-label'>Retention Time:</label>
+            <div class='controls record'>13.65 minutes (see HPLC details)</div>
+          </div>
+          <div class="control-group">
+            <label class='control-label'>Annotated Fragments:</label>
+            <div class='controls record'>17 (more details)</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="span8 rightpanel">
+
+
+        <div class='tab-content span12'>
+
+          <div id="workflow1" class="tab-pane active control-group glycosuitedb">
+
+            <h2>Protein Description and Origin</h2>
+            <p>Mucin-5AC P98088</p>
+            <p>Homo sapiens</p>
+            <p>Gastric Mucosa</p>
+
+            <h2>UniProtKB/Swiss-Prot Annotation</h2>
+
+            <strong>Protein Function</strong>
+            <p>Gel-forming glycoprotein of gastric and respiratoy tract epithelia that protects the mucosa from infection and chemical damage by binding to inhaled microrganisms and particles that are subsequently removed by the mucocilary system</p>
+
+            <strong>Post-translational modification</strong>
+            <p>C-, O- and N-glycosylated. O-glycosylated on the Thr-/Ser-rich tandem repeats. C-mannosylation in the Cys-rich subdomains may be required for proper folding of these regions and for export from the endoplasmic reticulum during biosynthesis Proteolytic cleavage in the C-terminal is initiated early in the secretory pathway and does not involve a serine protease. The extent of cleavage is increased in the acidic parts of the secretory pathway. Cleavage generates a reactive group which could link the protein to a primary amide</p>
+
+          </div> @* end filter1 *@
+
+          <div id="workflow2" class="tab-pane control-group row-fluid eurocarb">
+
+            <div id='spectragraph'>
+              <h2>MS/MS Spectra Graph — Peak List <a id='graph-reset' class='btn btn-warning pull-right'>Reset Graph</a></h2>
+              <svg id='peaklist'>
+            </div>
+            </svg>
+
+          </div> @* end of filter2 *@
+
+          <div id="workflow3" class="tab-pane control-group nextprot">
+
+            <h2>Annotated Peak List</h2>
+
+            <p>A summary listing for all annotated fragments for this structure can be accessed here.</p>
+            <p>Download the peak lists - no reported annotations.</p>
+
+            <table class='table table-striped'>
+              <thead>
+                <tr>
+                  <th>Peak</th>
+                  <th>Intensity</th>
+                  <th>Annotation</th>
+                  <th>Charge</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>171.9</td>
+                  <td>1.6</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div> @* end of filter3 *@
+
+          <div id="workflow4" class="tab-pane control-group nextprot">
+
+            <h2>Ion Mode</h2>
+
+            <div class="control-group">
+              <label class='control-label'>MS Mode:</label>
+              <div class='controls record'>The data was acquired in Negative mode</div>
+            </div>
+
+            <div class="control-group">
+              <label class='control-label'>Ion:</label>
+              <div class='controls record'>[M-H] -</div>
+            </div>
+
+            <div class="control-group">
+              <label class='control-label'>Charge State:</label>
+              <div class='controls record'>-1</div>
+            </div>
+
+          </div> @* end of filter4 *@
+
+          <div id="workflow5" class="tab-pane control-group nextprot">
+
+            <h2>HPLC Details</h2>
+            <p>Sample material was separated using a Thermo Scientific - Hypercarb column and the glycan eluted at 13.65 minutes</p>
+
+            <div class="control-group">
+              <label class='control-label'>Packing Material:</label>
+              <div class='controls record'>Porous Graphitic Carbon</div>
+            </div>
+            
+            <div class="control-group">
+              <label class='control-label'>Column Width:</label>
+              <div class='controls record'>320 um</div>
+            </div>
+            
+            <div class="control-group">
+              <label class='control-label'>Column Length:</label>
+              <div class='controls record'>100 mm</div>
+            </div>
+
+            <p>Information is available for the LC setup and running conditions:</p>
+            
+            <div class="control-group">
+              <label class='control-label'>Solvent A:</label>
+              <div class='controls record'>10mM_AmmBicarb</div>
+            </div>
+            
+            <div class="control-group">
+              <label class='control-label'>Solvent B:</label>
+              <div class='controls record'>10mM_AmmBicarb/80%_ACN</div>
+            </div>
+            
+            <div class="control-group">
+              <label class='control-label'>Flow Rate:</label>
+              <div class='controls record'>10 ul/min</div>
+            </div>
+            
+            <div class="control-group">
+              <label class='control-label'>Time:</label>
+              <div class='controls record'>60 min</div>
+            </div>
+
+          </div> @* end of filter5 *@
+
+        </div>
+
+      </div>
+    </div>
+  </div><!-- /col -->
+</div><!-- /row -->
+<div class="footer row-fluid">
+  <div class="span12">
+    <p class="pull-left">UniCarbKB</p>
+    <p class="pull-right">Supported by 
+      <a href="http://www.nectar.org.au">NeCTAR</a> &nbsp;|&nbsp; 
+      <a href="http://www.ands.org.au">ANDS</a> &nbsp;|&nbsp;
+      <a href="http://www.stint.se"> STINT</a> &nbsp;|&nbsp;
+      <a href="http://expasy.org/"> SIB ExPASy</a>
+    </p>
+  </div>
+</div>
+</section>
+
+}

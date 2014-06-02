@@ -23,10 +23,10 @@ public class CompProtein extends Model  {
     public String swissProt;
 
     @ManyToOne
-    public Proteins proteins_id;
+    public Proteins proteins;
 
     @ManyToOne
-    public CompositionStructure composition_structure_id;
+    public CompositionStructure composition_structure;
 
     public Long getId() {
         return id;
@@ -44,22 +44,32 @@ public class CompProtein extends Model  {
         this.swissProt = swissProt;
     }
 
-    public Proteins getProteins_id() {
-        return proteins_id;
+    public Proteins getProteins() {
+        return proteins;
     }
 
-    public void setProteins_id(Proteins proteins_id) {
-        this.proteins_id = proteins_id;
+    public void setProteins(Proteins proteins) {
+        this.proteins = proteins;
     }
 
-    public CompositionStructure getComposition_structure_id() {
-        return composition_structure_id;
+    public CompositionStructure getComposition_structure() {
+        return composition_structure;
     }
 
-    public void setComposition_structure_id(CompositionStructure composition_structure_id) {
-        this.composition_structure_id = composition_structure_id;
+    public void setComposition_structure(CompositionStructure composition_structure) {
+        this.composition_structure = composition_structure;
     }
 
+    /**
+     * Generic query helper for entity Composition Protein with id Long
+     */
+    public static Finder<Long,CompProtein> find = new Finder<Long,CompProtein>(Long.class, CompProtein.class);
 
-    public static Model.Finder<Long,CompProtein> find = new Model.Finder<Long,CompProtein>(Long.class, CompProtein.class);
+
+    public static List<CompProtein> compProteins(String swissProt) {
+        return find.where()
+                        .ilike("swiss_prot", swissProt ).findList();
+
+    }
+
 }

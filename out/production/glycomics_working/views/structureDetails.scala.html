@@ -1,0 +1,229 @@
+@(strInfo: Structure, glycantype: String, strcomp: List[Composition], notation: String, references: List[Structure], structureId: Long, proteinNames: ArrayList[String], proteinItems: HashSet[Proteins], sourceNames: ArrayList[String], sourceItems: HashSet[Tissue], test: List[Array[String]], uniprot: ArrayList[String], taxItems: HashSet[Taxonomy], taxNames: ArrayList[String], pubchem: String, reader: String)
+@import helper._
+
+@**********************************
+* Helper generating table headers *
+***********************************@
+@header(key:String, title:String) = {
+    <th class="">
+        <a href="">@title</a>
+    </th>
+}
+
+<script src="@routes.Assets.at("/public", "javascripts/bootstrap-tab.js")"></script>
+
+
+@main {
+
+<ul class="breadcrumb">
+  <li><i class="icon-home" ></i><a href="/"> UniCarbKB</a> <span class="divider">></span></li>
+  <li class="active"><i class="icon-th" ></i> Structure<span class="divider"></span></li>
+  <!--<li class="active" > You are here</li>-->
+</ul>
+
+<div class="modal hide fade" id="windowDescription">
+  <div class="modal-header">
+    <a href="#" class="close" data-dismiss="modal">&times;</a>
+    <h3>Protein and Taxonomy Information <span class="label label-success">Curated Entry</span> <span class="label label-notice">GlycoSuiteDB</span></h3>
+  </div>
+  <div class="modal-body">
+    <h2 class="fullname">This structure has been associated with various records:</h2>
+
+    <div id="myDiv"><p></p></div>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn primary" onclick="okClicked ();">OK</a>
+  </div>
+</div>
+
+
+<section id="structureLayout">
+  <section id="layouts">	
+
+  <div class="page-header row-fluid">
+    <h1>Structure</h1>
+    <h4 class="subheader span8">Details for this @glycantype glycan structure</h4>
+  </div>
+
+ <div class="row-fluid">
+    <div class="span8">
+      <ul class='structures'>
+      @views.html.format.structureLarge(notation, structureId) 
+      </ul>
+      
+       
+      
+      @if(reader.length > 10){
+       @views.html.synthesis.enzymes(references, reader)
+      }else{
+      
+      <h3>References associated to structure</h3>
+      <table class="computers table table-striped">
+        <thead>
+          <tr>
+            @header("title", "Title")
+            @header("year", "Year")
+            @header("authors", "Authors")
+          </tr>
+        </thead>
+        <tbody>
+          @for(stref <- references){
+          @for(reference <- stref.references){
+          <tr>
+            <td><a href="../references/@reference.reference.id">@reference.reference.title</a></td>
+            <td>@reference.reference.year</td>
+            <td>@reference.reference.authors</td>
+          </tr>
+          }
+          }
+        </tbody>
+      </table>
+      
+      }
+      
+      
+      @*
+	  <div class="tab-content">
+      <div class="tab-pane active" id="red">
+	  
+	  
+      <h3>References associated to structure</h3>
+      <table class="computers table table-striped">
+        <thead>
+          <tr>
+            @header("title", "Title")
+            @header("year", "Year")
+            @header("authors", "Authors")
+          </tr>
+        </thead>
+        <tbody>
+          @for(stref <- references){
+          @for(reference <- stref.references){
+          <tr>
+            <td><a href="../references/@reference.reference.id">@reference.reference.title</a></td>
+            <td>@reference.reference.year</td>
+            <td>@reference.reference.authors</td>
+          </tr>
+          }
+          }
+        </tbody>
+      </table>
+    
+      </div>
+      
+      <div class="tab-pane" id="annotated">
+
+      <table class="computers table table-striped">
+        <thead>
+          <tr>
+          	<th>Gene</th>
+          	<th>Name</th>
+          	<th>Enzyme Commission</th>
+          	<th>GO Term</th>
+          	<th>Residue</th>
+          	<th>Linked Residue</th>
+          </tr>
+        </thead>
+        <tbody>
+        @Html(reader)
+        </tbody>
+        </table>
+      </div>
+      
+      </div>
+      
+      
+      *@
+    
+    </div>
+
+
+
+
+
+    <div class="span4 sidebar">
+
+      @views.html.format.format()
+      	
+      <div class='info'>
+      	<h3>Mass Details</h3>
+      	@for(c <- strcomp) {
+      		<p>Average Mass: @c.glycan_mass</p>
+      		<p>Monoisotopic Mass: @c.glycan_mass_monoisotopic</p>
+      	}
+      </div>
+
+      <div class='info'>
+	<h3>Linkage Type</h3>
+	<p>@glycantype glycan structure</p>
+      </div>
+
+      <div class='info'>
+        <h3>Biological Associations</h4>
+        <div class='taxonomy'>
+          <a id='toggle-taxonomy'><span class='label label-important'><span class='icon-tags icon-white'></span> Taxonomy (@taxItems.size()) <span class="caret"></span></span></a>
+          <a id='toggle-protein'><span class='label label-warning'><span class='icon-map-marker icon-white'></span> Protein (@proteinItems.size()) <span class="caret"></span></span></a>
+          <a id='toggle-source'><span class='label label-success'><span class='icon-leaf icon-white'></span> Source (@sourceItems.size()) <span class="caret"></span></span></a>
+        </div>
+        <div>
+          <ul id='more-taxonomy'>
+            <h3 id='less-taxonomy'><span class='icon-tags icon-white'></span> Taxonomies</h3>
+            @for(tax <- taxItems){
+            <li><span class='icon-tag icon-white'></span> <a href='../taxonomy/@tax.id'>@tax.species</a></li>
+            }
+          </ul>
+          <ul id='more-protein'>
+            <h3 id='less-protein'><span class='icon-map-marker icon-white'></span> Protein</h3>
+            @for(protein <- proteinItems){
+	    @if(protein.swissProt == null ) {
+	    <li><span class='icon-map-marker icon-white'></span> <a href='../proteinsummary/@protein.name'>@protein.name</a></li>
+	    }
+	    @if(protein.swissProt != null  ) {
+            <li><span class='icon-map-marker icon-white'></span> <a href='../proteinsummary/@protein.swissProt'>@protein.name</a></li>
+            }
+	    }
+          </ul>
+          <ul id='more-source'>
+            <h3 id='less-source'><span class='icon-leaf icon-white'></span> Source</h3>
+            @for(source <- sourceItems){
+            <li><span class='icon-leaf icon-white'></span> <a href='../tissuesummary/@source.id'>@source.div1 > @source.div2 @source.div3 > @source.div4</a></li>
+            }
+          </ul>
+        </div>
+      </div>
+
+      <div class='info'>
+        <h3>Defined Content</h3>
+      <div class='taxonomy'>
+	<a id='toggle-defined'><span class='label label-success'><span class='icon-leaf icon-white'></span> Source (@sourceItems.size()) <span class="caret"></span></span></a>
+      </div>
+      <div>
+         <ul id='more-defined'>
+            <h3 id='less-defined'><span class='icon-leaf icon-white'></span> More Defined Info</h3>
+            @for(d <- strInfo.strproteintaxbiolsource){
+            <li><span class='icon-leaf icon-white'></span> <a href=''>@if(d.taxonomy != null ) { @{d.taxonomy.species}  >} @if(d.proteins !=null ){ @{d.proteins.name} }</a></li>
+            }
+         </ul>
+      </div>
+      </div>
+
+      @if(pubchem != null) {
+	 @views.html.format.pubchem( pubchem )
+      }
+      @if(strInfo.glycanst matches ".*\\?.*" ) {
+      <h3></h3>
+      
+      } else { @views.html.digest.digest( strInfo ) }
+
+    </div>
+  </div>
+
+  <div class="row-fluid">
+
+  </div>
+</section>
+</section>	
+
+@views.html.footerunicarb.footerunicarb()
+
+}

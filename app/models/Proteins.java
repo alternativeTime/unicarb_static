@@ -4,6 +4,7 @@ import models.composition_protein.CompProtein;
 import java.util.*;
 import javax.persistence.*;
 
+import models.composition_protein.CompSite;
 import play.db.ebean.*;
 import play.data.format.*;
 import play.data.validation.*;
@@ -35,13 +36,13 @@ public class Proteins extends Model {
     public List<ProteinGlycosylationSites> proteinsites;
 
     @OneToMany
-    public List<StructureToSites> stsite;
+    public List<models.StructureToSites> stsite;
 
     @OneToMany
-    public List<GeneralSites> proteinGeneralSites;
+    public List<models.GeneralSites> proteinGeneralSites;
 
     @OneToMany
-    public List<DefinedSites> proteinDefinedSites;
+    public List<models.DefinedSites> proteinDefinedSites;
 
     @OneToMany
     public List<Proteinstaxonomy> proteinsTax;
@@ -51,6 +52,9 @@ public class Proteins extends Model {
 
     @OneToMany
     public List<CompProtein> compProtein;
+
+    @OneToMany
+    public List<CompSite> compSites;
 
     //@OneToMany
     //public List<Biolsource> biolsource;

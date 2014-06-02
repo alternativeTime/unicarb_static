@@ -2,6 +2,10 @@ package controllers;
 
 import java.util.*;
 
+import models.StructureToSiteGeneral;
+import models.composition_protein.CompProtein;
+import models.composition_protein.CompSite;
+import models.composition_protein.CompositionStructure;
 import play.mvc.*;
 import play.*;
 import play.cache.*;
@@ -144,7 +148,6 @@ public class UniprotConnection extends Controller {
 
 
 	public static Result proteinsite() {
-		System.out.println("where am i");
 		String proteinName = "";
 		String swissProtName = "";
 		String proteinNameFull = "";
@@ -260,9 +263,6 @@ public class UniprotConnection extends Controller {
 			for(Biolsource biol : biolSourceProteins){
 				swissProtName = biol.swiss_prot;
 				proteinName = biol.protein;
-				//Biolsource objectBiolSource = Ebean.find(Biolsource.class, biol.id);
-				//taxsources.add(objectBiolSource.taxonomy);
-				//biolSourceProtein.add(objectBiolSource);
 			}
 
 			//why am i getting multiple tax for one swiss ID
@@ -292,9 +292,11 @@ public class UniprotConnection extends Controller {
                 }
                 }
 
+        List<CompSite> compSite = CompSite.compSite(protein);
+
 
 		return ok(
-				proteinsite.render(notation, sequenceRetrieval,  protein, biolRefs, site, structuresShow,  proteinstax, proteinstaxList, multiCAR, proteinFromTax)
+				proteinsite.render(notation, sequenceRetrieval,  protein, biolRefs, site, structuresShow,  proteinstax, proteinstaxList, multiCAR, proteinFromTax, compSite)
 				);
 	}
 
@@ -376,15 +378,11 @@ public class UniprotConnection extends Controller {
 			}
 		}
 
-		for(Biolsource biol : biolSourceProteins){
-			swissProtName = biol.swiss_prot;
-			proteinName = biol.protein;
-			//Biolsource objectBiolSource = Ebean.find(Biolsource.class, biol.id);
-			//taxsources.add(objectBiolSource.taxonomy);
-			//biolSourceProtein.add(objectBiolSource);
-		}
 
-		//taxsourcesUnique.addAll(taxsources);	
+        List<CompSite> compSite = CompSite.compSite(protein);
+
+
+
 
 		biolRefs = Biolsource.findBiolsourceRefs(protein);
 
@@ -398,22 +396,19 @@ public class UniprotConnection extends Controller {
                 Cache.set("format", "gs", 0);
                 }
 
-
-
 		proteinstax = Proteinstaxonomy.findProteinTax(protein);
                 if (proteinstax == null ) {
                 //this means we have a multi car to protein link in glycobase
                 proteinstaxList = Proteinstaxonomy.findProteinsTax(protein);
                 for(Proteinstaxonomy p : proteinstaxList){
                         multiCAR.add(p.protein);
-                        System.out.println("HELP " + p.protein);
                         proteinFromTax = p.protein;
                 }
                 }
 
 
 		return ok(
-				proteinsite.render(notation, sequenceRetrieval,  protein, biolRefs, site, structuresShow,  proteinstax, proteinstaxList, multiCAR, proteinFromTax )
+				proteinsite.render(notation, sequenceRetrieval,  protein, biolRefs, site, structuresShow,  proteinstax, proteinstaxList, multiCAR, proteinFromTax, compSite)
 				);
 
 	}

@@ -1,0 +1,235 @@
+@(p: String, method: List[Method], tissue: List[TissueTaxonomy], disease: List[Disease])
+@main{
+
+<script src="@routes.Assets.at("/public","javascripts/Biojs.js")"></script>
+<script src="@routes.Assets.at("/public","javascripts/Biojs.Sequence.js")"></script>
+<script src="@routes.Assets.at("/public","javascripts/Biojs.EbiGlobalSearch.js")"></script>
+
+@*
+<link rel="stylesheet" href="//www.ebi.ac.uk/web_guidelines/css/compliance/develop/ebi-visual.css" type="text/css" />
+<link rel="stylesheet" href="http://www.ebi.ac.uk/Tools/biojs/css/Biojs.EbiGlobalSearch.css" type="text/css">
+*@
+
+<script>
+      $(document).ready(function(){
+        $("#e1").select2({
+          placeholder: "Select multiple tissues...",
+          allowClear: true,
+        minimumInputLength: 1,
+        });
+        });
+</script>
+<script>
+      $(document).ready(function(){
+        $("#e2").select2({
+          placeholder: "Select multiple disease states... ",
+          allowClear: true,
+          minimumInputLength: 1,
+        });
+        });
+</script>
+
+<script>
+        $(function() {
+        var myArray = new Array();
+        @for(a <- tissue){
+                myArray.push("@a.tissue_taxon");
+        }
+        myArray.sort();
+        options = '';
+        for (var i = 0; i < myArray.length; i++) {
+                options += '<option value="' + myArray[i] + '">' + myArray[i] + '</option>';
+        }
+        $('#e1').html(options);
+        });
+</script>
+
+<script>
+        $(function() {
+        var myArray = new Array();
+        @for(a <- disease){
+                myArray.push("@a.disease_name");
+        }
+        myArray.sort();
+        options = '';
+        for (var i = 0; i < myArray.length; i++) {
+                options += '<option value="' + myArray[i] + '">' + myArray[i] + '</option>';
+        }
+        $('#e2').html(options);
+        });
+</script>
+
+
+<script>
+	var textfront = "front-";
+
+    var textend = "-back";
+    var pubmedid = "";
+
+	
+
+    $(document).ready(function() {
+
+        $('.update').click(
+            function (){pubmed(); }
+        );
+        $('.clear').click(
+              function (){clear(); }
+        );
+        
+    });
+
+    function update()
+    {
+        //$('div.update-here').html(textfront+$('.update-it input').val()+textend);
+	console.log("hello" + $('.update-it input').val()  );
+	var pubmedid = $('.update-it input').val();
+	var xx = String($('.update-it input').val());
+    }
+    function clear()
+    {
+        $('div.update-here').html($(''));
+    }
+
+
+	function pubmed() {
+		console.log("check id entered only: " + $('.update-it input').val()  );
+		var pubmedid = $('.update-it input').val();
+		document.getElementById('pubmedresult').value=pubmedid;
+		
+	        args = {'apikey'  : '191d24f81e61c107bca103f7d6a9ca10',
+	                'dbfrom'  : 'pubmed',
+	                'id'      : pubmedid,
+	                'db'      : 'pubmed',
+	                'mindate' : '1990',
+	                'datetype': 'pdat',
+	                'max'     : '1'}
+
+	        $.getJSON('http://entrezajax.appspot.com/elink+esummary?callback=?', args, function(data) {                $('#result').html('');
+	                $.each(data.result, function(i, item) {
+	                        var author_list = '';
+	                        for(var i = 0; i < item.AuthorList.length; i ++) {
+	                                if(i != 0) {
+	                                        author_list += ', ';
+	                                }
+	                                author_list += item.AuthorList[i];
+	                        }
+	                        var html = '<p><a href=\'http://www.ncbi.nlm.nih.gov/pubmed/' + item.ArticleIds.pubmed + '\'>' + item.Title + '</a><br/>' + author_list + '<br/>' + item.FullJournalName + ' ' + item.PubDate + '</p>';
+	                        $("<div/>").html(html).appendTo('#result');
+	                });
+	        });
+	};
+
+</script>
+
+
+@*
+@views.html.pubmedsearch.pubmed2("pubmed")
+*@
+
+
+<ul class="breadcrumb">
+  <li><i class="icon-home" ></i><a href="/"> UniCarbKB</a> <span class="divider">></span></li>
+  <li class="active"><i class="icon-briefcase" ></i> Data Entry<span class="divider"></span></li>
+</ul>
+
+<section id="layouts" class="browse">
+  <div class="page-header row-fluid">
+    <h1>Data Submission</h1>
+    <h4 class="subheader">UnicarbKB Mass Spec details.</h4>
+  </div>
+
+  <div class="row-fluid">
+    <div class="span4 search">
+      <div class="row-fluid">
+        <div class="filterbar tabbable clearfix">
+          <ul class="nav nav-tabs" id="myTabBar">
+            <li id='workflow1-toggle' class='active'><a href='#workflow1' data-toggle="tab">Pubmed ID<span class="pull-right count"></span></a></li>
+            <li id='workflow2-toggle'><a href='#workflow2' data-toggle="tab">Method</a></li>
+            <li id='workflow3-toggle'><a href='#workflow3' data-toggle="tab">UniProt<span class="pull-right count"></span></a></li>
+          </ul>
+        </div>
+        <div class='info'>
+          <h3>Mass Spec Details</h3>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="span8 rightpanel">
+
+
+
+
+
+
+      <div class='tab-content span12'>
+
+        <div id="workflow1" class="tab-pane active control-group glycosuitedb update-it">
+
+          <h3>Find details associated with a Pubmed unique identifier:</h3> 
+          <div class='input-append'>
+            <input class='input-xlarge' type="text" name="update" />
+            <button type="button" class="update btn btn-primary" data-loading-text="Loading..." value="update">Load Pubmed Id</button>
+          </div>
+
+          @* <input class="clear" type="button" value="clear" /> *@
+
+          <div class="update-here">
+          </div>
+
+          <div id="result">
+            Contacting NCBI Entrez ...
+          </div>
+
+        </div> @* end filter1 *@
+
+        <div id="workflow2" class="tab-pane control-group row-fluid eurocarb">
+          <h3>Selected (multiple) reported method(s)</h3>
+          <form>
+            <select name="method" multiple size="10">
+              @for(m <- method) { <option value="@m.id">@m.description</option> }
+            </select>
+            <p><--- Add New ---></p>
+
+            UniProt ID: <input type="text" id="uniprotid" name="uniprot">
+            <input type="hidden" id="pubmedresult" value=""/>
+
+            <div id="selection" class="row-fluid">
+              <select  name=tissue MULTIPLE id="e1" id="listBox" class="span10"></select>
+              <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+
+            <div id="selection" class="row-fluid">
+              <select  name=tissue MULTIPLE id="e2" id="listBox" class="span10"></select>
+              <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+
+          </form>
+        </div> @* end of filter2 *@
+
+        <div id="workflow3" class="tab-pane control-group nextprot">
+
+
+        </div> @* end of filter3 *@
+
+      </div>
+
+    </div>
+  </div>
+</div><!-- /col -->
+</div><!-- /row -->
+<div class="footer row-fluid">
+  <div class="span12">
+    <p class="pull-left">UniCarbKB</p>
+    <p class="pull-right">Supported by 
+      <a href="http://www.nectar.org.au">NeCTAR</a> &nbsp;|&nbsp; 
+      <a href="http://www.ands.org.au">ANDS</a> &nbsp;|&nbsp;
+      <a href="http://www.stint.se"> STINT</a> &nbsp;|&nbsp;
+      <a href="http://expasy.org/"> SIB ExPASy</a>
+    </p>
+  </div>
+</div>
+</section>
+
+}

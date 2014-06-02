@@ -1,0 +1,70 @@
+@(ft: HashSet[Reference], car: String)
+
+
+@main {
+
+  <ul class="breadcrumb">
+    <li><i class="icon-home" ></i><a href="/"> UniCarbKB</a> <span class="divider">></span></li>
+    <li class="active"><i class="icon-book" ></i> SwissProt<span class="divider"></span></li>
+    <!--<li class="active" > You are here</li>-->
+  </ul>
+
+  <section id="layouts">
+
+    <div class="page-header row-fluid">
+      <h1 id="homeTitle">@Messages(" UniProtKB/Swiss-Prot Feature Table ")</h1>
+      <h4 class="subheader"> Feature Table Link for @car </h4>
+    </div>
+
+    <table class="computers table table-striped">
+
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Year</th>
+          <th>Authors</th>
+          <th>Journal</th>
+          <th>Associated Glycans</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        @for(reference <- ft) {
+        <tr>
+          <td><a href="references/@reference.id" style="text-decoration : none, font-color: #404040; ">@reference.title</a></td>
+          <td>
+            @if(reference.year < 1) {
+            <em>-</em>
+            } else {
+            @reference.year
+            }
+          </td>
+          <td>
+            @if(reference.authors == null) {
+            <em>-</em>
+            } else {
+            @reference.authors
+            }
+          </td>
+          <td>
+            @if(reference.journal == null) {
+            <em>-</em>
+            } else {
+            @reference.journal.name                            }
+          </td>
+          <td>
+            @reference.streference.size()
+          </td>
+        </tr>
+        }
+
+      </tbody>
+    </table>
+
+    @views.html.footerunicarb.footerunicarb()    
+
+  </section>
+
+  }
+
+

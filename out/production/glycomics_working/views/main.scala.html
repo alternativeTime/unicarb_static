@@ -1,0 +1,261 @@
+@(content: Html)
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>UniCarbKB</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("/public", "stylesheets/bootstrap.min.css")"> 
+    <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("/public", "stylesheets/customMarkdown.css")">
+    <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("/public", "stylesheets/select2.css")">
+    <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("/public", "stylesheets/unicarbkb.css")">
+    <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("/public", "stylesheets/bootstrap-lightbox.css")">
+    <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("/public", "stylesheets/bootstrap-image-gallery.min.css")">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("/public", "stylesheets/docs.min.css")">
+
+    <link rel="icon" href="@routes.Assets.at("/public", "favicon.ico")" type="image/x-icon">
+
+    <script src="@routes.Assets.at("/public","javascripts/jquery.js")"></script>
+    <script src="@routes.Assets.at("/public","javascripts/jquery.ae.image.resize.min.js")"></script>
+    <script src="@routes.Assets.at("/public","javascripts/bootstrap.min.js")"></script>
+    <script src="@routes.Assets.at("/public","javascripts/jquery.tablesorter.min.js")"></script>
+    <script src="@routes.Assets.at("/public","javascripts/bootstrap-lightbox.min.js")"></script>
+    <script src="@routes.Assets.at("/public","javascripts/showdown.js")"></script>
+    <script src="@routes.Assets.at("/public","javascripts/google-jsapi.js")"></script>
+    @**	 <script src="@routes.Assets.at("/public","javascripts/main.js")"></script> *@
+    <script src="@routes.Assets.at("/public","javascripts/jPages.js")"></script>
+    <script src="@routes.Assets.at("/public","javascripts/jquery.lazyload.js")"></script>
+    <script src="@routes.Assets.at("/public","javascripts/load-image.js")"></script>
+    <script src="@routes.Assets.at("/public","javascripts/bootstrap-image-gallery.min.js")"></script>
+
+    <script src="@routes.Assets.at("/public","javascripts/select2.js")"></script>
+    <script src="@routes.Assets.at("/public","javascripts/application.js")"></script>
+
+    <script src="@routes.Assets.at("/public","javascripts/workflows.js")"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    
+    <script src="@routes.Assets.at("/public","javascripts/test/jira.js")"></script>
+    
+    @*<script type="text/javascript" src="https://jira.intersect.org.au:8443/s/en_USuv5zwi/773/9/1.2.5/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?collectorId=7bd44232"></script> 
+	*@
+	
+   
+   
+
+    <script>
+      $(function() {
+        $( ".resizeme" ).aeImageResize({ height: 400, width: 280 });
+        $( ".resizemeModal" ).aeImageResize({ height: 200, width: 200 });
+      });
+    </script>
+    <script>
+      $(document).ready(function(){
+        $(".announceTaxStructures").click(function(){ // Click to only happen on announce links
+          $("#Id").val($(this).data('id'));
+          $('#taxDescription').modal('show');
+        });
+      });
+      function closeDialog () {
+        $('#taxDescription').modal('hide'); 
+      };
+      function okClicked () {
+        closeDialog ();
+      };
+
+    </script>
+
+    <script>
+      $(document).ready(function(){
+        $(".announce").click(function(){ // Click to only happen on announce links
+          $("#Id").val($(this).data('id'));
+          $('#windowDescription').modal('show');
+
+          var result = $(this).data('id');
+          var replace = result.replace("[","");
+          var replace = replace.replace("]","");
+          var replace = replace.replace(",","");
+          var replace = replace.replace("null","");
+	  var replace = replace.replace("> null ", "");
+	  var replace = replace.replace(" null", "" );
+          var replace = replace.replace(" >  > ","");
+
+          $('p').html(replace).appendTo(document.myDiv);
+
+
+        });
+      });
+
+      function closeDialog () {
+        $('#windowDescription').modal('hide'); 
+      };
+      function okClicked () {
+        closeDialog ();
+      };
+    </script>
+
+
+    <script>
+      $(document).ready(function(){
+        $(".announce2").click(function(){ // Click to only happen on announce links
+          $("#Id").val($(this).data('id'));
+          $('#windowDescription').modal('show');
+
+          var resultdiv = $(this).data('id');
+          var replace = resultdiv.replace("[","");
+          var replace = replace.replace("]","");
+
+          $('p').html(replace).appendTo(document.myDiv);
+
+
+        });
+      });
+
+      function closeDialog () {
+        $('#windowDescription').modal('hide');
+      };
+      function okClicked () {
+        closeDialog ();
+      };
+    </script>
+
+    <script>
+
+      /* Download lazy load plugin and make sure you add it in the head of your page. */
+
+      /* when document is ready */
+      $(function() {
+
+        /* initiate lazyload defining a custom event to trigger image loading  */
+        $("ul li img").lazyload({
+          event : "turnPage",
+          effect : "fadeIn"
+        });
+
+        /* initiate plugin */
+        $("div.holder").jPages({
+          containerID : "itemContainer",
+          animation   : "fadeInUp",
+          callback    : function( pages, items ){
+            /* lazy load current images */
+            items.showing.find("img").trigger("turnPage");
+            /* lazy load next page images */
+            items.oncoming.find("img").trigger("turnPage");
+          }
+        });
+
+      });
+    </script>
+	
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+	    var pluginUrl =
+	    '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+	    _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+	    _gaq.push(['_setAccount', 'UA-28274077-1']);
+	    _gaq.push(['_trackPageview']);
+
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+
+	</script>
+
+	<script>
+	    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	    ga('create', 'UA-28274077-2', 'unicarbkb.org');
+	    ga('send', 'pageview');
+	</script>
+
+  </head>
+  <body>
+
+    @*<header class="topbar">
+    <h1 class="fill">
+      <a href="@routes.Application.index()">
+        Reference Browsing 
+      </a>
+    </h1>
+    </header>*@
+    <header>
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="brand" href="/">UniCarbKB</a>
+          <ul class="nav">
+            <li class=""><a href="/">Home</a></li>
+            <li><a href="/query">Query</a></li>
+            <li><a href="/references?s=authors">References</a></li>
+	    <li><a href="/proteins">Glycoproteins</a></li>
+	    <li><a href="/builder">Glycan Builder</a></li>
+	    <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">GlycoDigest <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+            <li><a href="http://www.glycodigest.org" target="_blank">Home (External)</a></li>
+	    
+	    <li class="dropdown-submenu">
+               <a href="#">Get Started</a>
+	       <ul class="dropdown-menu">
+		       <li><a href="https://github.com/alternativeTime/glycomics/wiki/GlycoDigest-Guide-(UniCarbKB)" target="_blank" >Guide/Wiki</a></li>
+                       <li><a href="/builderDigest">UniCarbKB Integrated</a></li>
+                       <li><a href="https://bitbucket.org/sib-pig/glycodigest/downloads/GlycoDigest-StandAloneRunnableJar.jar">Download Standalone</a></li>
+                       <li><a href="http://www.glycodigest.org/digestJava7.html" target="_blank">GlycoDigest Applet</a></li>
+               </ul>
+            </li>	
+
+            <li class="divider"></li>
+            <li class="dropdown-submenu">
+              <a href="#">Exoglycosidase Information</a>
+              <ul class="dropdown-menu">
+                    <li><a href="http://link.springer.com/protocol/10.1385%2F1-59745-167-3%3A125" target="_blank">Experimental Protocol</a></li>
+                    <li><a href="http://www.glycodigest.org/exoglycosidase.pdf" target="_blank">Exoglycosidase Brief Guide</a></li>
+                    <li><a href="http://www.glycodigest.org/lcms.pdf" target="_blank">Example IgG LC-MS</a></li>
+                    <li><a href="http://link.springer.com/protocol/10.1385%2F1-59745-167-3:125/fulltext.html#Sec16" target="_blank">2-AB HPLC IgG Exoglycosidase Treatment</a></li>
+                    <li><a href="http://www.mdpi.com/2218-1989/2/4/648" target="_blank">O-Links: Using Exoglycosidases and MS</a></li>
+                  </ul>
+            </ul>
+          </li>  
+          </ul>
+          <div id="headersearch" class="pull-right">
+            <ul class='nav'>
+       	    <li><a href="/about">About</a></li>
+            <li><a href="/about"> Contact</a></li>
+	    @*<li id="user"><a href=""> @request.username</li></a> 
+            <li><a href="@controllers.Application.logout()">Logout</a></li>*@
+            </ul>
+
+          @*  <form action="">
+              <input type="text" placeholder="To search proteins, tax, source">
+            </form>
+            <ul>
+              <li class="dropdown" id="menu1">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#menu1">
+                  Login <b class="caret"></b></a>
+                <div class="dropdown-menu">
+                  <form style="margin: 0px" accept-charset="UTF-8" action="/sessions" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="4L/A2ZMYkhTD3IiNDMTuB/fhPRvyCNGEsaZocUUpw40=" /></div>
+                    <fieldset class='textbox' style="padding:10px">
+                      <input style="margin-top: 8px" type="text" placeholder="Username" />
+                      <input style="margin-top: 8px" type="password" placeholder="Passsword" />
+                      <input class="btn-primary" name="commit" type="submit" value="Log In" />
+                    </fieldset>
+                  </form>
+                </div>*@
+              </li>
+            </ul>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+    </header> 
+    <section id="main" class="container-fluid content">
+    @content
+    </section>
+  </body>
+</html>

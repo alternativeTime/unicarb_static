@@ -1,0 +1,72 @@
+@(message: String, taxon: Taxonomy, biolsource: List[Biolsource], groupTax: List[SqlRow] )
+@import helper._
+
+@**********************************
+* Helper generating table headers *
+***********************************@
+
+@header(key:String, title:String) = {
+    <th class="">
+        <a href="">@title</a>
+    </th>
+}
+
+@main {
+
+     <div class="modal hide fade" id="taxDescription">
+	<div class="modal-header">
+		<a href="#" class="close" data-dismiss="modal">&times;</a>
+             	<h3>Taxonomy Structures</h3>
+	</div>
+	<div class="modal-body">
+		<h2 class="fullname">Structure's associated with taxonomy:</h2>
+		<p>@taxon.strtaxonomy.size()</p>
+		@for(str <- taxon.strtaxonomy){
+		<img class="resizemeModal"src="http://glycosuitedb.expasy.org/glycosuite-structures//_@{str.structure.id}.png" alt="">
+		}
+	</div>
+	<div class="modal-footer">
+                <a href="#" class="btn primary" onclick="okClicked ();">OK</a>
+	</div>
+
+     </div>	
+
+
+
+	<div id="containertest" class="clearfix masonry" style="position: relative; height: 839px;">
+	<div class="row"><div class="span8">
+		<div class="box photo  masonry-brick" style="position: absolute; ">
+      			<a href="http://www.flickr.com/photos/nemoorange/5013039951/" title="Stanley by Dave DeSandro, on Flickr"><img src="http://glycosuitedb.expasy.org/glycosuite-structures//_160.png" alt="Stanley"></a>
+    		</div>
+  
+    		<div class="box photo  masonry-brick" style="position: absolute;  ">
+      			<a href="http://www.flickr.com/photos/nemoorange/5013646070/" title="Kendra by Dave DeSandro, on Flickr"><img src="http://glycosuitedb.expasy.org/glycosuite-structures//_180.png" alt="Kendra"></a>
+    		</div>
+  
+    		<div class="box photo masonry-brick col3" style="position: absolute;  ">
+      			<a href="http://www.flickr.com/photos/nemoorange/5013039741/" title="Gavin by Dave DeSandro, on Flickr"><img src="http://glycosuitedb.expasy.org/glycosuite-structures//_260.png" alt="Gavin"></a>
+    		</div>
+	<div class="span3"><p>test this</p></div>
+	</div></div>
+	</div>
+
+
+
+
+<script src="http://masonry.desandro.com/js/jquery-1.7.1.min.js"></script>
+<script src="http://masonry.desandro.com/jquery.masonry.min.js"></script>
+<script>
+  $(function(){
+
+    var $container = $('#containertest');
+  
+    $container.imagesLoaded( function(){
+      $container.masonry({
+        itemSelector : '.box'
+      });
+    });
+  
+  });
+</script>
+
+}

@@ -1,0 +1,183 @@
+@(currentPage: com.avaje.ebean.Page[Proteins], currentSortBy: String, currentOrder: String, currentFilter: String, proteins: List[Proteins], filterYesNo: String)
+@import helper._
+
+
+@****************************************
+* Helper generating navigation links    *
+****************************************@
+@link(newPage:Int, newSortBy:String) = @{
+    
+    var sortBy = currentSortBy
+    var order = currentOrder
+    
+    if(newSortBy != null) {
+        sortBy = newSortBy
+        if(currentSortBy == newSortBy) {
+            if(currentOrder == "asc") {
+                order = "desc"
+            } else {
+                order = "asc"
+            }
+        } else {
+            order = "asc"
+        }
+    }
+    
+    // Generate the link
+    routes.ProteinDetails.proteinlist(newPage, sortBy, order, currentFilter)
+    
+}
+
+
+@**********************************
+* Helper generating table headers *
+***********************************@
+@header(key:String, title:String) = {
+    <th class="@key.replace(".","_") header @if(currentSortBy == key) @{if(currentOrder == "asc") "headerSortDown" else "headerSortUp"}">
+        <a href="@link(0, key)">@title</a>
+    </th>
+}
+
+@main {
+
+<script>
+      $(document).ready(function(){
+        $("#e3").select2({
+          placeholder: "Select multiple proteins...",
+          allowClear: true,
+          minimumInputLength: 1,
+        });
+        });
+</script>
+<script>
+        $(function() {
+        var myProteins = new Array();
+        @for(s <- proteins ){
+                myProteins.push("@s.name");
+        }
+        myProteins.sort();
+        options = '';
+        for (var i = 0; i < myProteins.length; i++) {
+                options += '<option value="' + myProteins[i] + '">' + myProteins[i] + '</option>';
+        }
+        $('#e3').html(options);
+        });
+</script>
+
+
+  <ul class="breadcrumb">
+    <li><i class="icon-home" ></i><a href="/"> UniCarbKB</a> <span class="divider">></span></li>
+    <li class="active"><i class="icon-map-marker" ></i> Proteins<span class="divider"></span></li>
+  </ul>
+   
+    <div class="page-header row-fluid"> 
+      <h1 id="homeTitle">@Messages(" Protein Search ", currentPage.getTotalRowCount)</h1>
+      <h4 class="subheader">Search the curated collection of Protein data by name.</h4>
+    </div>
+    @if(flash.containsKey("success")) {
+        <div class="alert-message warning">
+            <strong>Done!</strong> @flash.get("success")
+        </div>
+    }
+
+    <div id="actions">
+ 
+        @*<form class='input-append' action="@link(0, "name")" method="GET">
+            <input type="search" id="searchbox" class='input-xxlarge' name="f" value="@currentFilter" placeholder="Protein name or Swiss Prot identifier...">
+            <input type="submit" id="searchsubmit" value="Filter" class="btn btn-primary">
+            <a class="btn" id="add" href="/proteins">Show All Proteins</a>
+        </form> *@
+    
+        <div id='test'  class="input-append controls">
+          <form class='form-search' action="@link(0, "name")" method="GET">
+            <select  name="m" MULTIPLE id="e3" id="listBox" class="input-xxlarge"></select>
+            <input type="submit" id="searchsubmit" value="Filter" class="btn btn-primary">
+            <a class="btn success" id="add" href="/proteins">Show All Glycoproteins</a>
+          </form>
+        </div>
+
+    
+    </div>
+    
+    <div class="row-fluid">
+    @if(currentPage.getTotalRowCount == 0) {
+        
+        <div class="well">
+            <em>Nothing to display</em>
+        </div>
+        
+    } else {
+        
+        <table class="computers table table-striped">
+            <thead>
+                <tr>
+		    @header("name", "Name")
+   		    @header("", "Accession")
+                    @header("", "Taxonomy") 
+		    @header("stproteins", "Glycan Structures")
+		    @header("proteinGeneralSites", "General")
+                </tr>
+            </thead>
+            <tbody>
+
+                @for(protein <- currentPage.getList) {
+@* @if(protein.stproteins.size() > 0 ) { *@
+                    <tr>
+				<td>@protein.name</td>	    
+				<td>@if(protein.swissProt != null) { <a href="proteinsummary/@protein.swissProt/annotated">@protein.swissProt</a>}</td>
+			<td>			
+			@for(tax <- protein.proteinsTax) {
+			@if(protein.swissProt != null) {<a href="proteinsummary/@protein.swissProt/annotated">@tax.species </a>}
+			@if(protein.swissProt == null) {<a href="proteinsummary/@protein.name/@tax.species">@tax.species </a>}
+        		}
+			</td>
+			<td>
+			@for(tax <- protein.proteinsTax){
+				@if(protein.swissProt != null) {
+				<a href="proteinsummary/@protein.swissProt/annotated" style="text-decoration : none, font-color: #404040; ">@protein.stproteins.size()</a>}	
+				@if(protein.swissProt == null) { <a href="proteinsummary/@protein.name/@tax.species">@protein.stproteins.size()</a> }
+
+			}
+			</td>
+      <td><a href="proteinsummary/@protein.name" style="text-decoration : none, font-color: #404040; ">@if(protein.proteinDefinedSites.size() > 0 ) { <span class="label">Site-Specific</span>}</a></td>
+                    </tr>
+                }
+@* } *@
+
+            </tbody>
+        </table>
+
+	@if(filterYesNo.matches("no")) {
+        <div id="pagination" class="pagination">
+            <ul class="clearfix">
+              @if(currentPage.hasPrev) {
+                <li class="prev"><a href="@link(currentPage.getPageIndex - 1, null)">&larr; Previous</a></li>
+              } else {
+                <li class="prev disabled"><a>&larr; Previous</a></li>
+              }
+                @* <li class="current"><a>Displaying @currentPage.getDisplayXtoYofZ(" to "," of ")</a></li> *@
+		<li class="current"><a>Displaying @(currentPage.getPageIndex()+1) of @currentPage.getTotalPageCount() Pages</a></li>
+              @if(currentPage.hasNext) {
+                <li class="next"><a href="@link(currentPage.getPageIndex + 1, null)">Next &rarr;</a></li>
+              } else {
+                <li class="next disabled"><a>Next &rarr;</a></li>
+              }
+            </ul>
+        </div>
+	}
+	@if(filterYesNo.matches("yes")){
+	<div id="pagination" class="pagination">
+            <ul class="clearfix">
+		<li class="disabled"><a href="">Displaying All Results</a></li>
+	    </ul>
+        </div>
+	}
+
+      </div>
+    
+      @views.html.footerunicarb.footerunicarb()    
+    }
+        
+}
+
+            

@@ -1,0 +1,449 @@
+@import helper._
+
+@**********************************
+* Helper generating table headers *
+***********************************@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Reference</title>
+         <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("/public", "stylesheets/bootstrap.min.css")"> 
+        @** <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("/public", "stylesheets/bootstrap.ori.min.css")"> **@
+         <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("/public", "stylesheets/style.css")"> 
+        <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("/public", "stylesheets/customMarkdown.css")">
+        <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("/public", "stylesheets/bootstrap-lightbox.css")">
+@**        <script src="http://static.scripting.com/github/bootstrap2/js/jquery.js"></script> **@
+        <script src="http://static.scripting.com/github/bootstrap2/js/bootstrap-modal.js"></script>
+	<script src="@routes.Assets.at("/public","javascripts/bootstrap-modal.js")"></script>
+        <script src="@routes.Assets.at("/public","javascripts/jquery.ae.image.resize.min.js")"></script>
+       @** <script src="http://designshack.net/tutorialexamples/masonry/demos/jquery.wookmark.js"></script> **@
+        <script src="@routes.Assets.at("/public","javascripts/bootstrap.min.js")"></script>
+        <script src="@routes.Assets.at("/public","javascripts/jquery.tablesorter.min.js")"></script>
+        <script src="@routes.Assets.at("/public","javascripts/bootstrap-lightbox.min.js")"></script>
+        <script src="@routes.Assets.at("/public","javascripts/showdown.js")"></script>
+        <script src="@routes.Assets.at("/public","javascripts/google-jsapi.js")"></script>
+@**      <script src="@routes.Assets.at("/public","javascripts/main.js")"></script> **@
+        <script src="@routes.Assets.at("/public","javascripts/jPages.js")"></script>
+        <script src="@routes.Assets.at("/public","javascripts/jquery.lazyload.js")"></script>
+
+	<script>
+
+/* Download lazy load plugin and make sure you add it in the head of your page. */
+
+/* when document is ready */
+$(function() {
+    
+    /* initiate lazyload defining a custom event to trigger image loading  */
+    $("ul li img").lazyload({
+        event : "turnPage",
+        effect : "fadeIn"
+    });
+
+    /* initiate plugin */
+    $("div.pagination").jPages({
+        containerID : "itemContainer",
+        animation   : "fadeInUp",
+        callback    : function( pages, items ){
+            /* lazy load current images */
+            items.showing.find("img").trigger("turnPage");
+            /* lazy load next page images */
+            items.oncoming.find("img").trigger("turnPage");
+        }
+    });
+
+});
+</script>
+
+
+
+<style type="text/css">
+
+	.holder {
+    		margin: 15px 0;
+    	}
+    
+    	.holder a {
+    		font-size: 14px;
+    		cursor: pointer;
+    		margin: 0 5px;
+    		color: #0F466F; 
+    	}
+    
+    	.holder a:hover {
+    		background-color: #222;
+    		color: #fff;
+    	}
+    
+    	.holder a.jp-previous { margin-right: 15px; }
+    	.holder a.jp-next { margin-left: 15px; }
+    
+    	.holder a.jp-current, a.jp-current:hover { 
+    		color: #FF4242;
+    		font-weight: bold;
+    	}
+    
+    	.holder a.jp-disabled, a.jp-disabled:hover {
+    		color: #bbb;
+    	}
+    
+    	.holder a.jp-current, a.jp-current:hover,
+    	.holder a.jp-disabled, a.jp-disabled:hover {
+    		cursor: default; 
+    		background: none;
+    	}
+    
+    	.holder span { margin: 0 5px; }
+        
+		/* content2 */
+
+div#content2 { float: left; width: 680px; }
+div#content2 h2 { font-size: 21px; margin-bottom: 30px; }
+div#content2 h3 { margin: 5px 0px 10px 0px; }
+div#content2 p { line-height:1.5; }
+div#content2 p a { color: white; background: #D4EE5E; font-weight: bold; }
+div#content2 p a:hover { background: black; }
+div#content2 p + div { margin-top: 50px; }
+div#content2 h3 span { background-color: #F4FAD2; color: #5C826D; padding: 2px 3px; margin-left: 10px; font-weight: normal; }
+
+/* content2 -> Code */
+
+div#content2 div.codeBlocks { margin: 20px 0 35px; }
+
+div#content2 pre { float: left; margin-right: 10px; cursor: pointer; }
+div#content2 pre:before { content2: attr(class); padding: 2px 3px; color: white; }
+
+div#content2 pre.html { background: #F0F2EB; border-bottom: 1px solid #D7D9D3; }
+div#content2 pre.html:before { background: #D7D9D3; }
+
+div#content2 pre.javascript { background: #F4FAD2; border-bottom: 1px solid #DBE0BC; }
+div#content2 pre.javascript:before { background: #DBE0BC; }
+
+div#content2 pre.css { background: #E1EDB9; border-bottom: 1px solid #CAD5A6; }
+div#content2 pre.css:before { background: #CAD5A6; }
+
+div#content2 pre.collapse { position: relative; padding:2% 3%; width:94%; }
+div#content2 pre.collapse:before { position: absolute; right: 0; top: 0; }
+
+div#content2 pre code { display: none; background: none; font: 11px/16px "Courier New", Courier, monospace; }
+div#content2 pre.collapse code { display:block; }
+
+/* content2 -> Unordered Lists */
+
+div#content2 ul#itemContainer { list-style: none; padding:0; margin: 20px 0;  }
+div#content2 ul#itemContainer li { display: inline-block; margin: 5px; zoom: 1; *display:inline; }
+div#content2 ul#itemContainer ll li img { vertical-align: bottom; width: 125px; height: 125px; }
+
+/* content2 -> index */
+
+div#content2.index pre { float:none; cursor:default; }
+div#content2.index pre code { display:block; }
+div#content2.index h2 { margin-top: 55px; }
+div#content2.index dl dt,
+div#content2.index dl dd { float: left; margin-top: 10px; }
+div#content2.index dl dt { clear: left; width: 70px; font-style: italic; }
+div#content2.index dl dd { width: 450px; }
+div#content2.index i + p { margin-top: 5px; }
+
+/* content2 -> documentation */
+
+div#content2.documentation h2 { margin-top: 55px; }
+div#content2.documentation dl dt,
+div#content2.documentation dl dd { float: left; margin-top: 10px; }
+div#content2.documentation dl dt { clear: left; width: 70px; font-style: italic; }
+div#content2.documentation dl dd { width: 450px; }
+div#content2.documentation i + p { margin-top: 5px; }
+
+/* content2 -> author */
+
+div#content2.author img { margin-bottom: 50px; }
+div#content2.author img + p:before { content2: '“'; font-size:65px; font-family: Georgia; position:absolute; top: -55px; color: #ccc; }
+div#content2.author p { width: 590px; position: relative; }
+
+/* =============================================================================
+   Non-semantic helper classes
+   Please define your styles before this section.
+   ========================================================================== */
+
+/* For image replacement */
+.ir { display: block; text-indent: -999em; overflow: hidden; background-repeat: no-repeat; text-align: left; direction: ltr; }
+.ir br { display: none; }
+
+/* Hide for both screenreaders and browsers:
+   css-discuss.incutio.com/wiki/Screenreader_Visibility */
+.hidden { display: none; visibility: hidden; }
+
+/* Hide only visually, but have it available for screenreaders: by Jon Neal.
+  www.webaim.org/techniques/css/invisiblecontent2/  &  j.mp/visuallyhidden */
+.visuallyhidden { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
+
+/* Extends the .visuallyhidden class to allow the element to be focusable when navigated to via the keyboard: drupal.org/node/897638 */
+.visuallyhidden.focusable:active, .visuallyhidden.focusable:focus { clip: auto; height: auto; margin: 0; overflow: visible; position: static; width: auto; }
+
+/* Hide visually and from screenreaders, but maintain layout */
+.invisible { visibility: hidden; }
+
+/* Contain floats: nicolasgallagher.com/micro-clearfix-hack/ */ 
+.clearfix:before, .clearfix:after { content2: ""; display: table; }
+.clearfix:after { clear: both; }
+.clearfix { zoom: 1; }
+
+
+
+/* =============================================================================
+   PLACEHOLDER Media Queries for Responsive Design.
+   These override the primary ('mobile first') styles
+   Modify as content2 requires.
+   ========================================================================== */
+
+
+	</style>
+
+    <body>
+
+        @*<header class="topbar">
+            <h1 class="fill">
+                <a href="@routes.Application.index()">
+                   Reference Browsing 
+                </a>
+            </h1>
+        </header>*@
+<header>
+<header>
+        <div class="topbar">
+      <div class="topbar-inner">
+        <div class="container">
+          <a class="brand" href="#">UniCarbKB</a>
+          <ul class="nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+          @*<p class="pull-right">Logged in as <a href="#">username</a></p> *@
+        </div>
+      </div>
+    </div>
+       </header>
+
+
+
+<section class="subHead" style="box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px; ">
+	<section class="row-fluid subHeadInner borBox">
+		<div class="span12">
+			<h2 class="pull-left welcome"><img src="/images/dblogo.png" style="height:80px" />
+ <small>an experimental LC-MS/MS database of glycan structures</small></h2>
+			<figure class="menuButton btn sharp btn-success" style="display: none; "><i class="icon-white icon-th-list"></i> Menu</figure>
+		</div>
+	</section>
+</section>
+<section class="container-fluid" id="mainContainer">
+	<div class="row-fluid">
+		<div class="span2 sideBar" style="height: 273px; ">
+			<ul>
+				<li data-link="home" class=""><figure><i class="icon-home"></i> <div class="menuText">Home</div></figure></li>
+				<li data-link="features"><figure><i class="icon-star"></i> <div class="menuText">Features</div></figure></li>
+				<li data-link="dashboard"><figure><i class="icon-th-list"></i> <div class="menuText">Dashboard</div></figure></li>
+				<hr>
+				<li data-link="features"><figure><i class="icon-th-large"></i> <div class="menuText"><a href="http://unicarb-db.org/unicarbdb/show_mucin.action">303 Structures</a></div></figure></li>
+				<li data-link="features"><figure><i class="icon-th-large"></i> <div class="menuText"><a href="http://unicarb-db.org/unicarbdb/show_mucin.action">269 MS/MS Spectra</a></div></figure></li>
+				@** <li data-link="none" class="dropper">
+					<figure><i class="icon-th"></i> <div class="menuText">Database Links</div></figure>
+					<ul class="subSide">
+						<li data-target="photos"><i class="icon-camera"></i> <div class="menuText">EUROCarbDB</div></li>
+						<li data-target="videos"><i class="icon-facetime-video"></i> <div class="menuText">GlycoBase</div></li>
+					</ul>
+				</li> **@
+			</ul>
+		</div>
+		<div class="span10 content" style="display: block">
+
+<div class="row-fluid">
+	<div class="span7">
+	<p>A platform for presenting N- and O-linked oligosaccharide structures and fragment data characterized by LC-MS/MS strategies. The database is annotated with high-quality MS/MS datasets and is designed to extend and reinforce those standards and ontologies developed by existing glycomics databases.</p>
+	<form class="well form-inline">
+  <input type="text" class="input" placeholder="Search by mass">
+  <label class="checkbox">
+    <input type="checkbox"> -1 
+  </label>
+  <label class="checkbox">
+    <input type="checkbox"> -2
+  </label>
+  <label class="checkbox">
+    <input type="checkbox"> -3
+  </label>
+  <button type="submit" class="btn success">Filter</button>
+  <a href="" class="btn btn-success">Glycan Builder Coming Soon</a>
+</form>
+
+		<!-- MEMEBER LIST ITEMS ARE FILLED HERE,
+			YOU CAN DO IT BY EITHER METHOD, JAVASCRIPT BASED OR STATIC HTML -->
+@**		<ul class="pager">
+                <li>
+                <a href="#">Previous</a>
+                </li>
+                <li>
+                <a href="#">Next</a>
+                </li>
+        	</ul>
+		<ul class="unstyled memberList">
+		<li class="row-fluid" data-key="sampleguy1"><img src="http://unicarb-db.biomedicine.gu.se/unicarbdb/get_sugar_image.action?download=true&scale=0.5&outputType=png&inputType=gws&tolerateUnknown=1&glycanSequenceId=694"><ul class="info unstyled"><li class="name">Mass Value</li></ul></li></ul>
+	</div>  **@
+
+
+<div id="content2"  style="min-height: 1000px">
+       	<h3>Click on structure for information</h3> 
+		<!-- navigation holder -->
+        <div class="pagination" style="overflow-y:auto;overflow-x:hidden;height:100%;width:100%">></div>
+        
+        <!-- item container -->
+        <ul id="itemContainer" >
+		@*
+		@for(s <- groupStructures){
+		<li><img src="http://unicarb-db.biomedicine.gu.se/unicarbdb/get_sugar_image.action?download=true&scale=0.5&outputType=png&inputType=gws&tolerateUnknown=1&glycanSequenceId=@s("glycan_sequence_id")" alt="image"></li>
+		}
+		*@
+		</ul>
+
+	</div> <!--! end of #content -->
+
+</div>
+
+
+
+	<div class="span5">
+	
+		<div class="widget widget-nopad">
+							
+					<div class="widget-header">
+						<i class="icon-list-alt"></i>
+						<h3>Recent Published Data <small><a href="http://unicarb-db.org">(see all)</a></small></h3>
+					</div> <!-- /widget-header -->
+					
+					<div class="widget-content">
+						
+						<ul class="news-items">
+							<li>
+								<div class="news-item-detail">										
+									<a href="" class="news-item-title">Cross Validation of Liquid Chromatography-Mass Spectrometry and Lectin Array for Monitoring Glycosylation in Fed-Batch Glycoprotein Production</a>
+									<p class="news-item-preview">Hayes CA, Doohan R, Kirkley D, Leister K, Harhen B, Savage AV, Karlsson NG.</p>
+								</div>
+								
+								<div class="news-item-date">
+									<img src="/images/charts.png">
+								</div>
+							</li>
+							<li>
+								<div class="news-item-detail">										
+									<a href="javascript:;" class="news-item-title">GlycoSpectrumScan: fishing glycopeptides from MS spectra of protease digests of human colostrum sIgA.</a>
+									<p class="news-item-preview">Deshpande N, Jensen PH, Packer NH, Kolarich D.</p>
+								</div>
+								
+								<div class="news-item-date">
+									<img src="/images/charts.png">
+								</div>
+							</li>
+						</ul>
+						
+					</div> <!-- /widget-content -->
+				
+				</div>
+
+
+	<div class="widget widget-nopad">
+
+                                        <div class="widget-header">
+                                                <i class="icon-eye-open"></i>
+                                                <h3>Browse New Data Collections <small><a href="http://unicarb-db.org">(see all)</a></small></h3>
+                                        </div> <!-- /widget-header -->
+
+                                        <div class="widget-content">
+
+                                                <ul class="news-items">
+                                                        <li>
+                                                                <div class="news-item-detail">
+                                                                        <a href="" class="news-item-title">Saliva data ......</a>
+                                                                </div>
+
+                                                                <div class="news-item-date">
+                                                                        <img src="/images/charts.png">
+                                                                </div>
+                                                        </li>
+                                                        <li>
+                                                                <div class="news-item-detail">
+                                                                        <a href="javascript:;" class="news-item-title">Some agilent chip data</a>
+                                                                </div>
+
+                                                                <div class="news-item-date">
+                                                                        <img src="/images/charts.png">
+                                                                </div>
+                                                        </li>
+                                                </ul>
+
+                                        </div> <!-- /widget-content -->
+
+                                </div>
+
+	<div class="page-header">
+				<h1 class="hBig">Contributors <small>Curated and Annotated MS/MS Data</small></h1>
+	</div>
+				<p>Data collections have been contributed by researchers from:</p>
+				<div class="news-item-detail">										
+				<p class="news-item-preview">University of Gothenburg</p>
+				<p class="news-item-preview">Macquarie University</p>
+				<p class="news-item-preview">Max Planck</p>
+				</div>
+
+        </div>
+
+
+</div></div>
+	</div>
+</section>
+<footer style="box-shadow: rgba(0, 0, 0, 0.0585938) 0px -1px 5px 0px; ">
+	<div class="container-fluid" id="footMain">
+		<div class="row-fluid">
+			<div class="span6">
+				<div class="pull-left">
+					<h6></h6>
+				</div>
+			</div>
+			<div class="span6">
+				<div class="pull-right">
+					<h6>UniCarbKB</h6>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+</div>
+
+
+ <!-- ##### MODALS #####- -->
+<div class="modal fade hide" id="thisModal">
+
+</div>
+
+
+<!-- ### BACKGROUND DIV -->
+<div class="bg">
+</div>
+
+<div class="commandWindow hide">
+	<div class="commandWindow-inner">
+		<h2 class="hBig">CommandLine</h2><br>
+		<div class="form sharp form-horizontal">
+			<div class="input-append row-fluid">
+				<input class="sharp span9" id="commandInput" placeholder="Enter Command" type="text"><button class="btn btn-info">Go</button>
+			</div>
+		</div>
+		<br>
+		<div class="alert fade in">
+			<a class="close" data-dismiss="alert">Ã</a>
+			<p>Type <code> goto("dashboard") or goto("portfolio") </code></p>
+
+		</div>
+	</div>
+</div>
+
+
+	

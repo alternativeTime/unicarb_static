@@ -1,4 +1,4 @@
-@(notation: String, message: String, references: List[Reference], refmethods: List[Reference], taxsources: ArrayList[String], proteinsources: ArrayList[Biolsource], prot: ArrayList[String] )
+@(notation: String, message: String, references: List[Reference], refmethods: List[Reference], taxsources: ArrayList[String], proteinsources: ArrayList[Biolsource], prot: ArrayList[String],  refmethodsgp: List[Reference] )
 @import helper._
 
 @title(text: String) = @{
@@ -92,6 +92,11 @@
         <h3>Validation Method</h3>
         @for(methods <- refmethods) {
         @for(rmethod <- methods.refmethod) { <p>@rmethod.method.description.toUpperCase()</p>
+        }
+        }
+
+        @for(methodsgp <- refmethodsgp) {
+        @for(rmethodgp <- methodsgp.refmethodgps) { <p>@rmethodgp.methodgp.description.toUpperCase()</p>
         }
         }
         

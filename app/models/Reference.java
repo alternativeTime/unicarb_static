@@ -1,7 +1,9 @@
 package models;
 
 import java.util.*;
+
 import models.composition_protein.CompRef;
+
 import javax.persistence.*;
 
 import play.db.ebean.*;
@@ -13,110 +15,111 @@ import com.avaje.ebean.*;
 /**
  * Reference entity managed by Ebean
  */
-@Entity 
-@Table(schema="public", name="reference")
+@Entity
+@Table(schema = "public", name = "reference")
 public class Reference extends Model {
 
+    /**
+     * Generic query helper for entity Reference with id Long
+     */
+    public static Finder<Long, Reference> find = new Finder<Long, Reference>(Long.class, Reference.class);
     @Id
     public Long id;
-    
     @Constraints.Required
     public String first;
-   
     public int year;
-
     public String volume;
     public String pages;
     public String medline;
     public String pmid;
     public String title;
-    public String authors; 
     //public String source;
-
+    public String authors;
     //@ManyToOne(fetch=FetchType.EAGER)
-     @ManyToOne
+    @ManyToOne
     //@JoinColumn(name="id", nullable=false)
     //public Journal getJournal() { return journal; }
     public Journal journal;
-
     @OneToMany
     public List<Streference> streference;
-
     @OneToMany
     public List<Sourceref> sourceref;
-
     @OneToMany
     public List<Refmethod> refmethod;
-
+    @OneToMany
+    public List<Refmethodgp> refmethodgps;
     @OneToMany
     public List<Ftmerge> ftmerge;
-
     @OneToMany
     public List<Strproteintaxbiolsource> strproteintaxbiolsource;
-
     @OneToMany
     public List<CompRef> compReferences;
-    
-     public Reference(String volume, String pages, String medline, String title, String authors, String first, Journal journal) {
+
+
+    public Reference(String volume, String pages, String medline, String title, String authors, String first, Journal journal) {
         this.first = first;
         this.volume = volume;
-	this.pages = pages;
-	this.medline = medline;
-	this.title = title;
-	this.authors = authors;
-	this.journal = journal;
-}
+        this.pages = pages;
+        this.medline = medline;
+        this.title = title;
+        this.authors = authors;
+        this.journal = journal;
+    }
 
-    
     /**
-     * Generic query helper for entity Reference with id Long
-     */
-    public static Finder<Long,Reference> find = new Finder<Long,Reference>(Long.class, Reference.class); 
-    
-    /**
-     * Return a page of references 
+     * Return a page of references
      *
-     * @param page Page to display
+     * @param page     Page to display
      * @param pageSize Number of computers per page
-     * @param sortBy Reference property used for sorting
-     * @param order Sort order (either or asc or desc)
-     * @param filter Filter applied on the name column
+     * @param sortBy   Reference property used for sorting
+     * @param order    Sort order (either or asc or desc)
+     * @param filter   Filter applied on the name column
      */
     public static Page<Reference> page(int page, int pageSize, String sortBy, String order, String filter) {
-        return 
-            find.where().disjunction()
-		.ilike("title", "%" + filter + "%") 
-		.ilike("authors", "%" + filter + "%")
-		.endJunction()
-	       	.orderBy(sortBy + " " + order) 
-		.fetch("journal")
-                .findPagingList(pageSize)
-                .getPage(page);
+        return
+                find.where().disjunction()
+                        .ilike("title", "%" + filter + "%")
+                        .ilike("authors", "%" + filter + "%")
+                        .endJunction()
+                        .orderBy(sortBy + " " + order)
+                        .fetch("journal")
+                        .findPagingList(pageSize)
+                        .getPage(page);
     }
 
 
-  public static List<Reference> findJournal(Long id) {
-       return find.fetch("journal").fetch("sourceref").fetch("sourceref.biolsource")
-           .where()
+    public static List<Reference> findJournal(Long id) {
+        return
+                find.fetch("journal").fetch("sourceref").fetch("sourceref.biolsource")
+                .where()
                 .eq("id", id)
-           .findList();
+                .findList();
     }
-  
-  public static List<Reference> findRefMethods(Long id) {
-      return find.fetch("refmethod.method")
-          .where()
-               .eq("id", id)
-          .findList();
-   }
 
-   public static List<Reference> findSourceref(Long id) {
-	return find.fetch("sourceref").fetch("method")
-	   .where()
-		.eq("reference_id", id)
-	   .findList();
-   }
-   
+    public static List<Reference> findRefMethods(Long id) {
+        return
+                find.fetch("refmethod.method")
+                .where()
+                .eq("id", id)
+                .findList();
+    }
 
-    
+    public static List<Reference> findRefMethodsgp(Long id) {
+        return
+                find.fetch("refmethodgps.methodgp")
+                .where()
+                .eq("id", id)
+                .findList();
+    }
+
+    public static List<Reference> findSourceref(Long id) {
+        return
+                find.fetch("sourceref").fetch("method")
+                .where()
+                .eq("reference_id", id)
+                .findList();
+    }
+
+
 }
 

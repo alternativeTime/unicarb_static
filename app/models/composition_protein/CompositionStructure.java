@@ -77,5 +77,11 @@ public class CompositionStructure extends Model  {
     public void setCompProtein(List<CompProtein> compProtein) {
         this.compProtein = compProtein;
     }
+
+    /**
+     * Generic query helper for entity Composition Protein with id Long
+     */
+    public static Finder<Long,CompositionStructure> find = new Finder<Long,CompositionStructure>(Long.class, CompositionStructure.class);
+
 }
 

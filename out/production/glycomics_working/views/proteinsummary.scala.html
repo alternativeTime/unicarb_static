@@ -1,0 +1,263 @@
+@(warning: String, notation: String, proteinName: String, accession: String, biol: ArrayList[Biolsource], protein: List[Proteins], uniprot: List[String], gssites: List[GsProteinStr2], source: HashSet[Reference], description: List[SitesReferences], sequence: String, proteinMultiple: ArrayList[String], generalSites: List[GeneralSites], definedSites: List[DefinedSites], typeEntry: String, swissProtName: String, proteinsource:  List[com.avaje.ebean.SqlRow] )
+
+
+@main {
+
+
+<ul class="breadcrumb">
+  <li><i class="icon-home" ></i><a href="#"> UniCarbKB</a> <span class="divider">></span></li>
+  <li><i class="icon-map-marker" ></i><a href="/proteins"> Protein</a> <span class="divider">></span></li>
+  <li class="active" > @proteinName</li>
+</ul>
+
+<section id="layouts" class="proteinsummary">
+
+  <div class="page-header row-fluid">
+    <h1>Associated Structures</h1>
+    <h4 class="subheader span8">Accession:
+      @if(typeEntry.matches("not swiss prot")) {<a href="http://uniprot.org/uniprot/?query=@proteinName.replaceAll(" ","+")+AND+reviewed:yes&sort=score">@accession </a><span class="pull-right"><a href="http://uniprot.org/uniprot/?query=@proteinName.replaceAll(" ","+")+AND+reviewed:yes&sort=score"><span class='label label-light'>UniProtKB/Swiss-Prot</span></a></span> }
+      @if(!typeEntry.matches("not swiss prot")) {<a href="http://uniprot.org/uniprot/@accession">@accession </a><span class="pull-right"><a href="http://uniprot.org/uniprot/@accession"><span class='label label-light'>UniProtKB/Swiss-Prot Entry</span></a></span> }
+      </h4>
+  </div>
+
+
+  <div class="row-fluid">
+    <div class="span8">
+      <div class='name'>
+        @* <div class="control-group">
+          <label>Name:</label> <div class="controls">@proteinName</div>
+        </div>
+        *@
+      </div> 
+
+
+
+      <div class='ptm-details'>
+        <h3>UniProtKB/Swiss-Prot PTM Description</h3>
+        @* @if(warning.contains("GlycoSuiteDB records match multiple IDs containing")){
+	<div class="alert alert-error">@warning</div>
+	} *@
+	@for(uniprot <- uniprot) {
+        @if(uniprot.isEmpty()) {  <div class="alert alert-error">No UniProt PTM information available. Unable to query UniProt for this accession number(s).</div> }
+        @if(!uniprot.matches("No info")) {    
+        <p>@uniprot</p>}
+        }
+      </div>
+
+      <div class='glycosylation-sites'>
+        @if(generalSites.size() > 0 ) {
+        <h3>Glycosylation Sites</h3>
+        @for(generalSites <- generalSites) {
+        @if(generalSites.strSiteGeneral.size() > 0 ) {
+        <table class="computers table table-striped">
+          <thead>
+            <tr>
+              <th>Position</th>
+              <th>Structures</th>
+              <th>Description</th>
+              <th>Evidence</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td>@generalSites.glyco_aa_site.replace("N-", "ASN-").replace("Asn-", "ASN-").replace("S-", "SER-").replace("Ser-", "SER-").replace("T-", "THR-").replace("Thr-", "THR-").replace("ASASN-", "ASN-").replace("AsnAsn", "ASN-")</td>
+              <td>
+                @* identified fault with entries where proteins have multiple accessions 
+		 <a href="/proteinsite?position=@generalSites.glyco_aa_site&protein=@accession&type=general">
+                  <span class="label label-notice"><i class='icon-th icon-white'></i> 
+                    Associated Structures: <b>@generalSites.strSiteGeneral.size()</b></span>
+                </a> *@
+		<a href="/proteinsite?position=@generalSites.glyco_aa_site&protein=@generalSites.swiss_prot&type=general">
+                  <span class="label label-notice"><i class='icon-th icon-white'></i> 
+                    Associated Structures: <b>@generalSites.strSiteGeneral.size()</b></span>
+                </a>
+              </td>
+              <td><span class="label">global</span></td>
+              <td>GlycoSuite</td>
+            </tr>
+          </tbody>
+        </table>
+        }}}
+      </div>
+
+      <div class='glycosylation-sites'>
+        @if(definedSites.size() > 0 ) {
+        <h5>Site-Specific Information</h5>
+        <p>A number of glycan structures have been assigned to specific glycosylation sites</p>
+        <table class="computers table table-striped">
+          <thead>
+            <tr>
+              <th>Position</th>
+              <th>Structures</th>
+              <th>Description</th>
+              <th>Evidence</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            @for(definedSites <- definedSites) {
+            <tr>
+              <td>@definedSites.amino_acid_position.replace("N-", "ASN-").replace("Asn-", "ASN-").replace("S-", "SER-").replace("Ser-", "SER-").replace("T-", "THR-").replace("Thr-", "THR-").replace("ASASN-", "ASN-").replace("AsnAsn", "ASN-")</td>
+              <td>
+		@* see above two plus acccessions
+                <a href="/proteinsite?position=@definedSites.amino_acid_position&protein=@accession&type=defined">
+                  <span class="label label-notice"><i class='icon-th icon-white'></i>
+                    Associated Structures: <b>@definedSites.strSiteDefined.size()</b></span>
+                </a> *@
+		 <a href="/proteinsite?position=@definedSites.amino_acid_position&protein=@definedSites.swiss_prot&type=defined">
+                  <span class="label label-notice"><i class='icon-th icon-white'></i>
+                    Associated Structures: <b>@definedSites.strSiteDefined.size()</b></span>
+                </a>
+              </td>
+              <td><span class="label">Site specific</span></td>
+              <td>GlycoSuite</td>
+            </tr>
+            }
+          </tbody>
+        </table>
+        }
+      </div>
+
+
+      <div class='glycosylation-sites'>
+        <h3>Glycan Structures</h3>
+        <ul class="structures clearfix">
+
+          @for(s <- proteinMultiple) {
+          <li>
+             @views.html.format.structure(notation, s.toLong) 
+          </li>
+          }
+        </ul> 
+
+	@*
+        <ul id='more-thumbnails' class="structures clearfix">
+          @for(s <- proteinMultiple) { 
+          <li>
+            <a href="@routes.Application.structureDetails(s.toInt)">
+              <img class="sugar_image" src="../images/@notation/_@{s}.png" alt="">
+            </a>
+          </li>
+          }
+        </ul>
+	*@
+        @* <div id='show-structures' class='more-structures' href='#'>
+	  <span class="linktext">See more structures</span>
+          <span class="linktext" style="display:none">See less structures</span>          
+          <br />
+          <span>&#9679; &#9679; &#9679;</span>
+        </div> *@
+      </div>
+
+
+
+      <div class='notes'>
+        <h3>Notes</h3>
+        <p>Accompanying information sourced from GlycoSuiteDB</p>
+        @if(!description.isEmpty() ) {
+	<ol>
+        @for(d <- description){
+          <li class="references">@d.glyco_aa_site.replace("N-", "ASN-").replace("Asn-", "ASN-").replace("S-", "SER-").replace("Ser-", "SER-").replace("T-", "THR-").replace("Thr-", "THR-").replace("ASASN-", "ASN-").replace("AsnAsn", "ASN-").replaceAll("(^, )", "").trim</li>
+        }
+	</ol>}
+      </div>
+
+      @*<div class='history'>
+        <h3>History</h3>
+        <label>Integrated:</label>
+        <div class="controls">2010-03-01</div>
+        <label>Last updated:</label>
+        <div class="controls">2012-11-02</div>
+      </div>*@
+
+    </div><!-- /col -->
+
+    <div class="span4 details">
+
+      @views.html.format.format()
+
+      @if(sequence.length > 1) {
+      <div class="info">
+        <h3>Sequence</h3>
+        <div class="sequence">
+          @sequence
+        </div>
+      </div>}
+
+        <div class='info'>
+          <h3>Biological Associations</h4>
+          <div class='source'>
+            <a id='toggle-taxonomy'><span class='label label-important'><span class='icon-leaf icon-white'></span> Taxonomy (@proteinsource.size()) <span class="caret"></span></span></a>
+            <a id='toggle-protein'><span class='label label-warning'><span class='icon-map-marker icon-white'></span> Protein (1) <span class="caret"></span></span></a>
+            <a id='toggle-source'><span class='label label-success'><span class='icon-leaf icon-white'></span> Source <span class="caret"></span></span></a>
+          </div>
+
+          <div>
+            <ul id='more-taxonomy'>
+              <h3 id='less-taxonomy'><span class='icon-tags icon-white'></span> Taxonomies</h3>
+              @for(p <- proteinsource){
+              <li><span class='icon-tag icon-white'></span> <a href="/taxonomy/@p.get("taxonomy_id")">@p.get("species")</a> &gt; <a href="/tissuesummary/@p.get("tissue_id")">@p.get("system")</a> </li>
+              }
+            </ul>
+            <ul id='more-protein'>
+              <h3 id='less-protein'><span class='icon-map-marker icon-white'></span> Protein</h3>
+		@if(!typeEntry.matches("not swiss prot")) {
+                 <li><span class='icon-map-marker icon-white'></span> <a href='/proteinsummary/@accession/annotated'>@proteinName</a></li>
+		}
+		@if(typeEntry.matches("not swiss prot")) {
+			@for(p <- proteinsource){
+		 	<li><span class='icon-map-marker icon-white'></span> <a href='/proteinsummary/@proteinName/@p.get("species")'>@proteinName</a></li>
+			}
+		}
+            </ul>
+            <ul id='more-source'>
+              <h3 id='less-source'><span class='icon-leaf icon-white'></span> Source</h3>
+              @for(p <- proteinsource){
+              <li><span class='icon-leaf icon-white'></span> <a href='/tissuesummary/@p.get("tissue_id")'>@p.get("div1") > @p.get("div2") > @p.get("div3") > @p.get("div4")</a></li>
+             }
+            </ul>   
+          </div>
+        </div>
+
+
+        <div class="info">
+          <h3>References @if(source.size() > 5) {showing top 5} <span id='show-references' class="label" style="font-size:16px"><a href="#4">@source.size()</a></span></h3>
+          <ol>
+            @for((source,i) <- source.zipWithIndex; if (i < 5)) {
+            <li class="references">
+              <p class="title"><a name='@i' href='/references/@source.id'>@source.title</a></p>
+              <p class="author">@source.authors</p>
+              <p class="ref">PubMed: <a href='http://www.ncbi.nlm.nih.gov/pubmed/@source.pmid'>@source.pmid</a> Year: @source.year</p>
+            </li>
+            }
+            <div id='more-references'>
+              @for((source,i) <- source.zipWithIndex; if (i > 5)) {
+              <li class="references">
+                <p class="title"><a name='@i' href='/references/@source.id'>@source.title</a></p>
+                <p class="author">@source.authors</p>
+                <p class="ref">PubMed: <a href='http://www.ncbi.nlm.nih.gov/pubmed/@source.pmid'>@source.pmid</a> Year: @source.year</p>
+              </li>
+              }
+            </div>
+            @if(source.size() > 5) {
+            <div id='show-more-references' class='more-structures' href='#'>
+	      <span class="linktext">See more references</span>
+      	      <span class="linktext" style="display:none">See less references</span>
+              <br />
+              <span>&#9679; &#9679; &#9679;</span>
+            </div>
+            }
+
+
+          </ol>         
+        </div>
+
+      </div><!-- /col -->
+    </div><!-- /row -->
+
+    @views.html.footerunicarb.footerunicarb()
+
+  </section>
+
+  }

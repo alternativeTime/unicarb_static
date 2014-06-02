@@ -1,0 +1,75 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Authentication
+GET     /login                 controllers.Application.login()
+POST    /login                 controllers.Application.authenticate()
+GET     /logout                controllers.Application.logout()
+
+# Default path will just redirect to the computer list
+GET   /                         controllers.Application.index()
+GET   /about                    controllers.Admin.about()
+GET   /query                    controllers.Application.query()
+
+GET   /references               controllers.Application.list2(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "", protein ?= "")
+GET   /references/:id           controllers.Application.refdisplay(id:Long)
+
+GET   /streference/:id          controllers.Application.stref(id:Long)
+GET   /structure/:id            controllers.Application.structureDetails(id:Long)
+
+GET   /taxonomy/:id             controllers.Application.taxonDetails(id:Long)
+
+GET   /taxonomy                 controllers.Application.findAllSpecies()
+GET   /tissuesummary/:id        controllers.Application.tissueSummary(id:Long)
+
+GET   /unicarb                  controllers.Application.unicarb(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
+GET   /ms                       controllers.Application.ms()
+
+GET   /builder                  controllers.Application.builder()
+
+GET   /saySearch/:s             controllers.Search.saySearch(s: String)
+GET   /builderDigest		controllers.Application.builderDigest()
+GET   /builderDigestSearch/:s	controllers.Search.builderDigestSearch(s: String)
+
+GET   /proteins                 controllers.ProteinDetails.proteinlist(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "", protein ?= "")
+GET   /proteinsummary/:s/:other controllers.Application.proteinsummary(s: String, other: String)
+#GET   /proteinsummary/:s       controllers.Application.proteinsummary(s: String)
+#GET  /proteinsummary           controllers.Application.browse()
+GET   /proteinsite              controllers.UniprotConnection.proteinsite()
+
+GET   /taxonomysearch           controllers.Application.taxonsearch(taxonomy ?= "")
+GET   /compositions             controllers.Application.compositions()
+GET   /glycodigest/:id		controllers.Glycodigest.glycodigest(id:Long)
+GET   /glycodigest              controllers.Glycodigest.glycodigestHome()
+
+# distance based
+GET   /glycodigest/:id/digest   controllers.Glycodigest.glycodigesttest(id: Long, s: String?="")
+GET   /glycodigestBuilder/:s/digest controllers.Search.glycodigesttestBuilder(s: String, d: String?="")
+
+GET   /enzymes			        controllers.Application.enzymes()
+GET   /news					    controllers.Application.news()
+
+#external links
+GET  /swissprotFT	       	   controllers.UniprotConnection.swissprotFT(feature ?= "")
+GET  /pubchem/:s	           controllers.PubchemLinks.pubchemExternal(s: String)
+
+
+GET  /format/:s		           controllers.Application.format(s: String)
+
+GET  /workflows                controllers.Application.workflows()
+
+GET  /massspec                 controllers.Application.massspec()
+
+GET  /pubmed		           controllers.Pubmed.getpubmed()
+
+#ANDS RIF OAI
+GET  /ands					   controllers.Ands.ands()
+
+
+#Testing
+GET	 /testing					controllers.Search.SubstructureSearch()
+
+# Map static resources from the /public folder to the /assets URL path
+GET  /assets/*file             controllers.Assets.at(path="/public", file)
+GET  /images/*file             controllers.Assets.at(path="/public/images", file)

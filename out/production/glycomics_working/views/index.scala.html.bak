@@ -1,0 +1,178 @@
+@main {
+	
+	<div class="container">
+		<div class="row"><div class="span16">
+		<div class="span14" style="text-align:center; line-height:50px">
+		<image src="@routes.Assets.at("/public/images", "logo.png")" class="imglogo">
+		</div>
+		</div></div>
+
+
+		<div class="span16">
+    <h3><small>Our Recent Projects</small></h3>  
+
+                     
+      
+                <ul class="thumbnails">
+                                        <li class="span7">
+                          <div class="thumbnail">
+                            @** <a href="http://bragthemes.com/demo/agencyboot/project/duck/"><img width="262" height="200" src="http://bragthemes.com/demo/agencyboot/files/2012/05/flying-duck-262x200.jpg" class="attachment-portfolio-four-column wp-post-image" alt="unicarb-db" title="UniCarb-DB"></a>**@
+
+                            <div class="caption">
+                            
+                            <h4><a href="http://www.unicarb-db.org">UniCarb-DB</a></h4>
+                                                                                    <p>A platform for presenting oligosaccharide structures and fragment data characterized by LC-MS/MS strategies. The database is annotated with high-quality datasets and is designed to extend and reinforce those standards and ontologies developed by existing glycomics databases.</p><p> <a class="btn btn-info btn-default" href="http://www.ncbi.nlm.nih.gov/pubmed/21398669">Read More <i class="icon-chevron-right icon-white"></i></a>                                                       
+                                                                                                                  
+                                 <a rel="colorbox" href="@routes.Application.unicarb()" class="btn btn-default btn-primary cboxElement">View Page <i class="icon-picture icon-white"></i></a>  
+
+                            </p>
+                                                      </div>
+                        </div>
+                        </li>
+
+
+                                            <li class="span7">
+                          <div class="thumbnail">
+                            @** <a href="http://bragthemes.com/demo/agencyboot/project/san-fransisco/"><img width="262" height="200" src="/assets/images/output.png" class="attachment-portfolio-four-column wp-post-image" alt="San Fran" title="San Fran"></a> **@
+
+                            <div class="caption">
+                            
+                            <h4><a href="">UniCarbKB</a></h4>
+                                                                                    <p> The UniCarbKB framework endeavors to support the growth of glycobioinformatics and the dissemination of glycobiological data on eukaryotic research through the provision of an open and unified knowledgebase. Supported by the development of tools and procedures for data annotation and interoperability.</p><p> <a class="btn btn-info btn-default" href="http://www.ncbi.nlm.nih.gov/pubmed/21898825">Read More <i class="icon-chevron-right icon-white"></i></a>                                                       
+                                                                                                                  
+                                 <a rel="colorbox" href="@routes.Application.list2()" class="btn btn-default btn-soon cboxElement">Coming Soon</a>  
+
+                            </p>
+                                                      </div>
+                        </div>
+                        </li>
+                </ul>
+		</div>
+		@** 
+		<section>
+		<div class="row">
+		<div class="social_stuff">
+                                        <div class="widget">
+                                                <div class="twitter">
+                                                        <div class="stat"><a href="http://twitter.com/wrapbootstrap" title="Follow us on Twitter!" target="_blank" rel="nofollow"><span class="count">752</span><span class="desc">Followers</span></a></div>
+                                                </div>
+                                                <div class="facebook">
+                                                        <div class="stat"><a href="http://www.facebook.com/wrapbootstrap" title="Follow us on Facebook!" target="_blank" rel="nofollow"><span class="count">283</span><span class="desc">Followers</span></a></div>
+                                                </div>
+                                                <div class="rss">
+                                                        <div class="stat"><a href="http://feeds.feedburner.com/wrapbootstrap" title="Subscribe to our RSS feed!" target="_blank" rel="nofollow"><span class="count">269</span><span class="desc">Subscribers</span></a></div>
+                                                </div>
+                                                <div class="email">
+                                                        <div class="stat"><a href="http://eepurl.com/iVhpj" title="Subscribe to our newsletter!" target="_blank" rel="nofollow"><span class="count">1018</span><span class="desc">Subscribers</span></a></div>
+                                                </div>
+                                        </div>
+                 </div>
+		</div>
+		</section>
+		**@
+		<section>
+		<div class="row">		
+			<ul class="nav nav-pills">
+  <li class="active">
+    <a href="#">Home</a>
+  </li>
+  <li><a href="#">...</a></li>
+  <li><a href="#">...</a></li>
+</ul>
+		</div>
+		</section>
+
+
+		<div class="row">
+       <div class="span1">
+                  <img src="http://littlesparkvt.com/hubblewp/wp-content/uploads/2012/04/icon-responsive2.png">
+               </div>
+       <div class="span6">
+        <h3>International Effort</h3>
+	<p>A collaboration of researchers from the University of Gothenburg, Sweden; Macquarie University, Australia; Swiss Institute for Bioinformatics; Max Planck Institute of Colloids and Interfaces, Germany;  and the National Institute for Bioprocessing Research and Training (NIBRT), Ireland.</p>
+        </div>
+        <div class="span1">
+                   <img src="http://littlesparkvt.com/hubblewp/wp-content/uploads/2012/04/icon-custom4.png">
+                </div>
+        <div class="span6">
+        <h3>Adding Data</h3>
+        <p>The availability of a knowledgebase comprising curated structural glycans from GlycoSuiteDB and EUROCarbDB, including information on biological sources, disease states, protein, PubMed reference and method used. It is envisaged that this resource  will be extended with new data collections that will form a crucial resource for biologists.</p>
+        </div>
+        @** <div class="span1">
+                    <img src="http://littlesparkvt.com/hubblewp/wp-content/uploads/2012/04/icon-question1.png">
+                </div>
+        <div class="span4">
+        <h3>Continued Support</h3>
+        <p>Please contact us with any questions you may have. We want you to fully enjoy all of the features that our databases offer . </p>  
+        </div> **@
+    </div>
+
+
+          
+
+		<div class="row">
+
+			<div class="span7">
+				<div class="widget widget-nopad">
+							
+					<div class="widget-header">
+						<i class="icon-list-alt"></i>
+						<h3>Recent Data <small><a href="http://unicarb-db.org">(see all)</a></small></h3>
+					</div> <!-- /widget-header -->
+					
+					<div class="widget-content">
+						
+						<ul class="news-items">
+							<li>
+								<div class="news-item-detail">										
+									<a href="" class="news-item-title">Cross Validation of Liquid Chromatography-Mass Spectrometry and Lectin Array for Monitoring Glycosylation in Fed-Batch Glycoprotein Production</a>
+									<p class="news-item-preview">Hayes CA, Doohan R, Kirkley D, Leister K, Harhen B, Savage AV, Karlsson NG.</p>
+								</div>
+								
+								<div class="news-item-date">
+									<image src="@routes.Assets.at("/public/images", "charts.png")" >
+								</div>
+							</li>
+							<li>
+								<div class="news-item-detail">										
+									<a href="javascript:;" class="news-item-title">GlycoSpectrumScan: fishing glycopeptides from MS spectra of protease digests of human colostrum sIgA.</a>
+									<p class="news-item-preview">Deshpande N, Jensen PH, Packer NH, Kolarich D.</p>
+								</div>
+								
+								<div class="news-item-date">
+									<image src="@routes.Assets.at("/public/images", "charts.png")" >
+								</div>
+							</li>
+						</ul>
+						
+					</div> <!-- /widget-content -->
+				
+				</div>	
+			</div>
+
+
+	<div class="span7">
+		<div class="well" id="build" style="text-align: left;">
+                    <h3 style="text-align: center;">Funding Support</h3>
+                    <p>Several international funding agencies have supported the development of UniCarb-DB and UniCarbKB including:</p>
+
+                    <ul style="list-style: none outside none; margin: 9px 0pt;">
+                        <li>
+                            <a href="http://www.ands.org.au">Australian National Data Service</a><br>
+				Australian National Data Service under the Data Capture program
+                        </li>
+                        <li>
+                            <a href="http://www.stint.se">STINT</a><br>
+				The Swedish Foundation for International Cooperation in Research and Higher Education under the Institutional Grants scheme
+                        </li>
+                        <li>
+                            <a href="http://www.nectar.org.au/">NeCTAR</a><br>
+				Australian National eResearch Collaboration Tools and Resources
+                        </li>
+                    </ul>
+                </div>
+	</div>
+	</div>
+	</div>
+
+}

@@ -1,0 +1,739 @@
+@(taxonomy: List[String], taxon: ArrayList[Taxonomy],  biolsource: List[Biolsource], groupTax: List[List[String]], sources: HashSet[String], proteins: HashSet[String], proteinList: ArrayList[Proteins], tissueList: ArrayList[Tissue], tissueTerms: List[Tissue], glycobasePerturbation: List[GlycobaseSource], output: List[String], count: Integer, outputtissue: List[String], counttissue: Integer, outputprotein: List[String], countprotein: Integer, proteinaccession: HashSet[String],  accsearch: ArrayList[Proteins])
+
+@main{
+
+<script>
+  $(function() {
+  $(".glycanType .btn").click(function() {
+    $("#glycanType").val($(this).text());
+  }); }); 
+</script>
+
+<script>
+$(document).ready(function() {
+$('#myTabBar a[data-toggle="tab"]').on('shown', function (e) {
+  e.target // activated tab
+  var filterstring = e.target.toString();
+  var filtervalue =filterstring.split('#');
+  var name = filtervalue[1];
+
+  if(name == "filter3"){
+   $('.glycobase').show();
+  }
+  if(name != "filter3"){
+   $('.glycobase').hide();
+  }
+
+  if(name == "filter1"){
+   $('.glycosuiteResult').show();
+  }
+
+  if(name != "filter1"){
+   $('.glycosuiteResult').hide();
+  }
+
+  
+});
+});
+</script>
+
+<script>
+      $(document).ready(function(){
+        $("#e12").select2({
+          placeholder: "Select SwissProt ID...",
+          allowClear: true,
+        minimumInputLength: 1,
+        });
+        });
+</script>
+
+<script>
+      $(document).ready(function(){
+        $("#e13").select2({
+          placeholder: "Select SwissProt ID...",
+          allowClear: true,
+        minimumInputLength: 1,
+        });
+        });
+</script>
+
+
+<script>
+      $(document).ready(function(){
+        $("#e1").select2({
+          placeholder: "Select multiple species...",
+          allowClear: true,
+	minimumInputLength: 1,
+        });
+	});
+</script>
+<script>
+      $(document).ready(function(){
+        $("#e2").select2({
+          placeholder: "Select multiple tissues... ",
+          allowClear: true,
+	  minimumInputLength: 1,
+        });
+        });
+</script>
+<script>
+      $(document).ready(function(){
+        $("#e3").select2({
+          placeholder: "Select multiple proteins...",
+          allowClear: true,
+	  minimumInputLength: 1,
+        });
+        });
+</script>
+
+<script>
+      $(document).ready(function(){
+        $("#e4").select2({
+          placeholder: "Select multiple tissues...",
+          allowClear: true,
+	  minimumInputLength: 1,
+        });
+        });
+</script>
+
+<script>
+      $(document).ready(function(){
+        $("#e5").select2({
+          placeholder: "Select multiple species...",
+          allowClear: true,
+	  minimumInputLength: 1,
+        });
+        });
+</script>
+
+<script>
+      $(document).ready(function(){
+        $("#e6").select2({
+          placeholder: "Select multiple proteins...",
+          allowClear: true,
+	  minimumInputLength: 1,
+        });
+        });
+</script>
+
+<script>
+      $(document).ready(function(){
+        $("#e7").select2({
+          placeholder: "Select multiple species...",
+          allowClear: true,
+	  minimumInputLength: 1,
+        });
+        });
+</script>
+
+<script>
+      $(document).ready(function(){
+        $("#e8").select2({
+          placeholder: "Select multiple tissues...",
+          allowClear: true,
+	  minimumInputLength: 1,
+        });
+        });
+</script>
+
+<script>
+      $(document).ready(function(){
+        $("#e9").select2({
+          placeholder: "Select multiple species...",
+          allowClear: true,
+	  minimumInputLength: 1,
+        });
+        });
+</script>
+
+<script>
+      $(document).ready(function(){
+        $("#e10").select2({
+          placeholder: "Select multiple tissues...",
+          allowClear: true,
+          minimumInputLength: 1,
+        });
+        });
+</script>
+
+<script>
+      $(document).ready(function(){
+        $("#e11").select2({
+          placeholder: "Select multiple proteins...",
+          allowClear: true,
+	  minimumInputLength: 1,
+        });
+        });
+</script>
+
+<script>
+        $(function() {
+        var myArray = new Array();
+        @for(a <- taxonomy){
+                myArray.push("@a");
+        }
+	myArray.sort();
+        options = '';
+        for (var i = 0; i < myArray.length; i++) {
+                options += '<option value="' + myArray[i] + '">' + myArray[i] + '</option>';
+        }
+        $('#e1').html(options);
+	$('#e5').html(options);
+	$('#e7').html(options);
+	$('#e9').html(options);
+        });
+</script>
+
+<script>
+        $(function() {
+        var myAcc = new Array();
+        @for(a <- proteinaccession){
+                myAcc.push("@a");
+        }
+        myAcc.sort();
+        options = '';
+        for (var i = 0; i < myAcc.length; i++) {
+                options += '<option value="' + myAcc[i] + '">' + myAcc[i] + '</option>';
+        }
+	$('#e12').html(options);
+	$('#e13').html(options);
+	});
+</script>
+
+<script>
+	$(function() {
+        var mySources = new Array();
+	@for(s <- sources){
+		mySources.push("@s");
+	}
+	mySources.sort();
+	options = '';
+	for (var i = 0; i < mySources.length; i++) {
+		options += '<option value="' + mySources[i] + '">' + mySources[i] + '</option>';
+        }
+	$('#e2').html(options);
+	$('#e4').html(options);
+	$('#e8').html(options);
+	$('#e10').html(options);
+	});
+</script>
+
+<script>
+        $(function() {
+        var myProteins = new Array();
+        @for(s <- proteins ){
+                myProteins.push("@s");
+        }
+        myProteins.sort();
+        options = '';
+        for (var i = 0; i < myProteins.length; i++) {
+                options += '<option value="' + myProteins[i] + '">' + myProteins[i] + '</option>';
+        }
+        $('#e3').html(options);
+	$('#e6').html(options);
+	$('#e11').html(options);
+        });
+</script>
+
+
+<ul class="breadcrumb">
+  <li><i class="icon-home" ></i><a href="/"> UniCarbKB</a> <span class="divider">></span></li>
+  <li class="active"><i class="icon-search" ></i> Search<span class="divider"></span></li>
+  <!--<li class="active" > You are here</li>-->
+</ul>
+
+<section id="layouts" class="browse">
+
+  <div class="page-header row-fluid">
+    <h1>Search UniCarbKB</h1>
+    <h4 class="subheader">Retrieve records from GlycosuiteDB, EUROCarbDB and GlycoBase</h4>
+  </div>
+
+<div class="row-fluid">
+  <div class="span3 search">
+    <div class="row-fluid">
+      <div class="filterbar tabbable clearfix">
+        <ul class="nav nav-tabs" id="myTabBar">
+          <li class="title">Select a Structure Database: </li>
+          <li><a href="#filter1" data-toggle="tab">GlycoSuiteDB <span class="pull-right count">@if(taxon.size() != 0) {@taxon.size()} @if(proteinList.size() != 0) {@proteinList.size()} @if(tissueList.size() != 0) {@tissueList.size()} @if(!accsearch.isEmpty() ) {@accsearch.size()}</span></a></li>
+          <li class=""><a href="#filter2" data-toggle="tab">EUROCarbDB</a></li>
+          <li><a href="#filter3" data-toggle="tab">GlycoBase <span class="pull-right count"> @if(count != 0) {@count} @if(counttissue != 0) {@counttissue}</span></a></li> </ul>
+      </div>
+
+      <div class="info">
+        <h4>Other Options:</h4>
+        <p><b>Glycan Builder:</b> Build and search a glycan structure<a href="/search"> using the new interface</a>.</p>
+        <p><b>Curated Publications:</b> Search the <a href="/references">growing list of publications, associated structures, and metadata</a>.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="span9 rightpanel">
+    <div class="tabbable"> <!-- Only required for left/right tabs -->
+
+      <ul class="nav nav-tabs row-fluid" id="myTab">
+        <li class="active"><a href="#tab1" data-toggle="tab"><h2>Construct a Query:</h2></a></li>
+        <li class="span12"><a class="returnedresults" href="#tab2" data-toggle="tab">
+          <h2>Search returned @if(taxon.size() != 0) {@taxon.size()} @if(proteinList.size() != 0) {@proteinList.size()} @if(tissueList.size() != 0) {@tissueList.size()} @if(!accsearch.isEmpty()  ) {@accsearch.size()} results...
+          </h2>
+          <a href="/query"><input type="button" value="Search Again" href="/query" class="btn btn-small pull-right"></a>
+        </a></li>
+        <li><a href="#tab3" data-toggle="tab">Related Results</a></li>
+      </ul>
+
+      <div class="tab-content results">
+
+        <div class="tab-pane active" id="tab1">
+
+          <!--<h2><img src="../images/icon_search.png"> Search Features &amp; Results</h2>-->
+          <div id="filter1" class="control-group row-fluid glycosuitedb">
+            <div id="tab1" class="span12" >
+
+              <div class="multi-option clearfix">
+                <span class="pull-left label">Search by: </span>
+                <label class="radio">
+                  <input type="radio" name="glycosuitedbSearch" value="Taxonomy" checked> <h4>Taxonomy</h4>
+                </label>
+                <label class="radio">
+                  <input type="radio" name="glycosuitedbSearch" value="Localisation"> <h4>Tissue</h4>
+                </label>
+                <label class="radio">
+                  <input type="radio" name="glycosuitedbSearch" value="ProteinLocalisation"> <h4>Protein</h4>
+                </label>
+		<label class="radio">
+                  <input type="radio" name="glycosuitedbSearch" value="Accession"> <h4>Protein Accession</h4>
+                </label>
+                <label class="radio">
+                  <input type="radio" name="glycosuitedbSearch" value="Composition"> <h4>Composition</h4>
+                </label>
+              </div>
+
+              <div id="glycosuitedbTaxonomy" class="controls">
+                <label class="checkbox">
+                  <form class="form-search">
+                    <!--<h4>Taxonomy</h4>-->
+                    <div id="selection" class="input-append row-fluid">
+                      <select  name=taxonomy MULTIPLE id="e1" id="listBox" class="span10"></select>
+                      <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+                  </form>
+                </label>
+              </div>
+              <div id="glycosuitedbLocalisation" class="controls">
+                <label class="checkbox">
+                  <form class="form-search">
+                    <!--<h4>Localisation</h4>-->
+                    <div id="selection" class="row-fluid">
+                      <select  name=tissue MULTIPLE id="e2" id="listBox" class="span10"></select>
+                      <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+                  </form>
+                </label>
+              </div>
+              <div id="glycosuitedbAssociation" class="controls">
+                <label class="checkbox">
+                  <form class="form-search">
+                    <!--<h4>Protein Association</h4>-->
+                    <div id="selection" class="row-fluid">
+                      <select  name=protein MULTIPLE id="e3" id="listBox" class="span10"></select>
+                      <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+                  </form>
+                </label>
+              </div>
+	      <div id="glycosuitedbAcc" class="controls">
+		<label class="checkbox">
+		   <form class="form-search">
+                    <!--<h4>Localisation</h4>-->
+		     <div id="selection" class="row-fluid">
+                      <select  name=swiss MULTIPLE id="e12" id="listBox" class="span10"></select>
+                      <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+                  </form>
+		</label>
+	      </div>
+              <form id="glycosuitedbComposition" class="form-search controls" action="/compositions">
+                <h4>Glycan Type</h4>
+		<input type="hidden" name="glycanType" id="glycanType" value="" />
+		<div class="btn-group glycanType" data-toggle="buttons-radio">
+  	     	    <button type="button" class="btn btn-primary" data-value="N-LINKED">N-Linked</button>
+  		    <button type="button" class="btn btn-primary" data-value="O-LINKED">O-Linked</button>
+                </div>
+		<br />
+
+		<h4>Monosaccharide Residues</h4>
+                <div class='row-fluid'>
+                  <label class='checkbox span4'><input class="span2" name=comp_Hex type=text> Hex</label>
+                  <label class='checkbox span4'><input class="span2" name=comp_HexNAc type=text> HexNAc</label>
+                  <label class='checkbox span4'><input class="span2" name=comp_Deoxyhexose type=text> dHex</label>
+                </div>
+
+                <div class='row-fluid'>
+                  <label class='checkbox span4'><input class="span2" name=comp_NeuAc type=text> NeuAc</label>
+                  <label class='checkbox span4'><input class="span2" name=comp_NeuGc type=text> NeuGc</label>
+                  <label class='checkbox span4'><input class="span2" name=comp_Pent type=text> Pentose</label>
+                </div>
+
+                <div class='row-fluid'>
+                  <label class='checkbox span4'><input class="span2" name=comp_Sulph type=text> Sulphate</label>
+                  <label class='checkbox span4'><input class="span2" name=comp_Phos type=text> Phosphate</label>
+                  <label class='checkbox span4'><input class="span2" name=comp_KDN type=text> KDN</label>
+                </div>
+
+                <div class='row-fluid'>
+                  <label class='checkbox span4'><input class="span2" name=comp_KDO type=text> KDO</label>
+                  <label class='checkbox span4'><input class="span2" name=comp_HexA type=text> HexA</label>
+                  <label class='checkbox span4'><input class="span2" name=comp_methyl type=text> Methyl</label>
+                </div>
+
+                <div class='row-fluid'>
+                  <label class='checkbox span4'><input class="span2" name=comp_acetyl type=text> Acetyl</label>
+                  <label class='checkbox span4'><input class="span2" name=comp_other type=text> Other</label>
+                </div>
+
+                <div class='row-fluid'>
+                  <button type="submit" class="btn btn-primary">Composition Search</button>
+                </div>
+
+              </form>
+            </div> @* end of second spand *@
+
+          </div> @* end filter1 *@
+
+          <div id="filter2" class="tab-pane control-group row-fluid eurocarb">
+
+	    <p>Support for EUROCarbDB will be available in the next release</p>
+
+	    @*
+            <div class="multi-option clearfix">
+              <span class="pull-left label">Search by: </span>
+              <label class="radio">
+                <input type="radio" name="eurocarbdbSearch" value="Taxonomy" checked> <h4>Taxonomy</h4>
+              </label>
+              <label class="radio">
+                <input type="radio" name="eurocarbdbSearch" value="Localisation"> <h4>Localisation</h4>
+              </label>
+              <label class="radio">
+                <input type="radio" name="eurocarbdbSearch" value="ProteinAssociation"> <h4>Protein Association</h4>
+              </label>
+            </div>
+
+            <div id="eurocarbdbTaxonomy" class="controls">
+              <label class="checkbox">
+                <form class="form-search">
+                  <!--<h4>Taxonomy</h4>-->
+                  <div id="selection" class="row-fluid">
+                    <select  name=taxonomy MULTIPLE id="e1" id="listBox" class="span10"></select>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                  </div>
+                </form>
+              </label>
+            </div>
+
+            <div id="eurocarbdbLocalisation" class="controls">
+              <label class="checkbox">
+                <form class="form-search">
+                  <!--<h4>Localisation</h4>-->
+                  <div id="selection" class="row-fluid">
+                    <select  name=tissue MULTIPLE id="e2" id="listBox" class="span10"></select>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                  </div>
+                </form>
+              </label>
+            </div>
+
+            <div id="eurocarbdbAssociation" class="controls">
+              <label class="checkbox">
+                <form class="form-search">
+                  <!--<h4>Protein Association</h4>-->
+                  <div id="selection" class="row-fluid">
+                    <select  name=protein MULTIPLE id="e3" id="listBox" class="span10"></select>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                  </div>
+                </form>
+              </label>
+            </div>
+	    *@
+
+          </div> @* end of filter2 *@
+
+          <div id="filter3" class="tab-pane control-group nextprot">
+            <div class="row-fluid">
+
+                <div class="multi-option clearfix">
+                  <span class="pull-left label">Search by: </span>
+                  <label class="radio">
+                    <input type="radio" name="glycobaseSearch" value="Taxonomy" checked> <h4>Taxonomy</h4>
+                  </label>
+                  <label class="radio">
+                    <input type="radio" name="glycobaseSearch" value="Localisation"> <h4>Localisation</h4>
+                  </label>
+                  <label class="radio">
+                    <input type="radio" name="glycobaseSearch" value="ProteinLocalisation"> <h4>Protein</h4>
+                  </label>
+                  <label class="radio">
+                    <input type="radio" name="glycobaseSearch" value="Composition"> <h4>Composition</h4>
+                  </label>
+                </div>
+
+                <div id="glycobaseTaxonomy" class="controls">
+                  <label class="checkbox">
+                    <form class="form-search">
+                      <!--<h4>Taxonomy</h4>-->
+                      <div id="selection" class="row-fluid">
+                        <select  name=taxonomy MULTIPLE id="e5" id="listBox" class="span10"></select>
+                        <button type="submit" class="btn btn-primary">Search</button>
+                      </div>
+                    </form>
+                  </label>
+                </div>
+
+                <div id="glycobaseLocalisation" class="controls">
+                  <label class="checkbox">
+                    <form class="form-search">
+                      <!--<h4>Localisation</h4>-->
+                      <div id="selection" class="row-fluid">
+                        <select  name=tissue MULTIPLE id="e10" id="listBox" class="span10"></select>
+                        <button type="submit" class="btn btn-primary">Search</button>
+                      </div>
+                    </form>
+                  </label>
+                </div>
+
+                <div id="glycobaseAssociation" class="controls">
+                  <label class="checkbox">
+                    <form class="form-search">
+                      <!--<h4>Protein Association</h4>-->
+                      <div id="selection" class="row-fluid">
+                        <select  name=protein MULTIPLE id="e11" id="listBox" class="span10"></select>
+                        <button type="submit" class="btn btn-primary">Search</button>
+                      </div>
+                    </form>
+                  </label>
+                </div>
+
+
+                <!--<h4>Query by Composition</h4>-->
+                <form id="glycobaseComposition" class="form-search controls">
+                  <div class="row-fluid">
+                    <label class="checkbox span4"><input class="span2" name=mscomp_Hexose type=text> Hex</label>
+                    <label class="checkbox span4"><input class="span2" name=mscomp_HexNAc type=text> HexNAc</label>
+                    <label class="checkbox span4"><input class="span2" name=mscomp_deoxyHexose type=text> dHex</label>
+                  </div>
+
+                  <div class="row-fluid">
+                    <label class="checkbox span4"><input class="span2" name=mscomp_pentose type=text> Pent</label>
+                    <label class="checkbox span4"><input class="span2" name=mscomp_NeuAc type=text> NeuAc</label>
+                    <label class="checkbox span4"><input class="span2" name=mscomp_NeuGc type=text> NeuGc</label>
+                  </div>
+
+                  <div class="row-fluid">
+                    <label class="checkbox span4"><input class="span2" name=mscomp_KDN   type=text> KDN</label>
+                    <label class="checkbox span4"><input class="span2" name=mscomp_HexA type=text> HexA</label>
+                  </div>
+                  <div class="row-fluid">
+                    <button type="submit" class="btn btn-primary">Composition Search</button>
+                  </div>
+                </form>
+
+            </div> @* end of filter3 *@
+
+          </div> @* end of tab1 *@
+        </div> @* end of tab1 *@
+
+      <div class="tab-pane" id="tab2">
+
+        <hr />
+
+    @for(out <- output) {
+    <div class="row-fluid glycobase">
+      @Html(out)
+    </div>
+    }
+
+    @for(out <- outputtissue) {
+    <div class="row-fluid glycobase">
+      @Html(out)
+    </div>
+    }
+
+    @for(out <- outputprotein) {
+    <div class="row-fluid glycobase">
+      @Html(out)
+    </div>
+    }
+
+
+    @if(proteinList != null) {
+
+    @if(proteinList.size() >=1 ){
+    <div class="row-fluid glycosuiteResult">
+      <div class="controls">
+        <label class="checkbox">
+          <form class="form-search">
+            <div id="selection">
+              <select  name=protein MULTIPLE id="e6" style="width:350px"  id="listBox"></select>
+              <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+          </form>
+        </label>
+      </div>
+    </div>
+    }
+
+
+    @for(p <- proteinList) {
+    <div class="row-fluid glycosuiteResult">
+      <div class="details span9">
+        <h3>@if(p.swissProt != null) {<a href="@routes.Application.proteinsummary(p.swissProt, "annotated" )">@p.name</a>}
+	    @if(p.swissProt == null){
+
+	    @for(t <- p.proteinsTax){ <a href="/proteinsummary/@p.name/@t.species">@p.name</a>
+	    }
+	} 
+
+
+	   @*{<a href="@routes.Application.proteinsummary(p.name, "name" )">}
+	    @p.name</a>*@
+
+	</h3>
+        <p class="">@p.stproteins.size() structures are associated with this protein</p>
+      </div>
+      <div class="span3">
+	  @for(t <- p.proteinsTax){ <p class="pull-right structures"><a href="/proteinsummary/@p.name/@t.species">@p.stproteins.size() structures </a></p> }
+
+
+        @*<p class="pull-right structures"><a href="@routes.Application.proteinsummary(p.swissProt, t.species  )">@p.stproteins.size() structures </a></p>
+	} *@
+
+      </div>
+    </div>
+    }
+    }
+
+
+
+    @if(tissueList != null && tissueTerms != null) {
+    @if(tissueList.size() >=1 ){
+    <div class="row-fluid glycosuiteResult">
+      <div class="controls">
+        <label class="checkbox">
+          <form class="form-search">
+            <div id="selection">
+              <select  name=tissue MULTIPLE id="e4" style="width:350px"  id="listBox"></select>
+              <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+          </form>
+        </label>
+      </div>
+    </div>
+    }
+
+    @for(p <- tissueList) {
+    <div class="row-fluid glycosuiteResult">
+      <h3><a href="tissuesummary/@p.id">@p.div1, @p.div2, @p.div3, @p.div4</a></h3>
+      <div class="details span9">
+        <p class="">@p.stsource.size() structures are associated with this tissue</p>
+      </div>
+      <div class="span3">
+        <p class="pull-right structures"><a href="tissuesummary/@p.id">@p.stsource.size() structures </a></p>
+      </div>
+    </div>
+    }
+    }
+
+    @if(accsearch.size() != 0 ) {
+    <div class="row-fluid glycosuiteResult">
+      <div class="controls">
+        <label class="checkbox">
+          <form class="form-search">
+            <div id="selection">
+              <select  name=swiss MULTIPLE id="e13" style="width:350px"  id="listBox"></select>
+              <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+          </form>
+        </label>
+      </div>
+    </div>
+    @for(a <- accsearch) {
+    <div class="row-fluid glycosuiteResult">
+      <h3><a href="proteinsummary/@a.swissProt">@a.swissProt (@a.name)</a></h3>
+    </div>
+    }
+    }
+
+    @for( (taxon, ii) <- taxon.zipWithIndex) {        <div class="row-fluid glycosuiteResult">
+      <div class="details span9">
+        <h3><a href="/taxonomysearch?taxonomy=@taxon.species">@taxon.species</a>@*<span class="pull-right"><span class="label success">Curated Entry</span> <span class="label notice">GlycoSuiteDB</span></span>*@</h3>
+        <p class="">@taxon.taxprotein.size() glycoproteins are associated with this taxonomy including: @for( (tax, i) <- taxon.taxprotein.zipWithIndex; if (i <= 6)) {  @if(tax.swiss_prot != null) { <a href="@routes.Application.proteinsummary(tax.swiss_prot, "annotated" )">} @if(tax.swiss_prot == null) {<a href="@routes.Application.proteinsummary(tax.protein, taxon.species )">} @tax.protein, </a> }</p>
+      </div>
+      <div class="span3">
+        <p class="pull-right structures"><a href="/taxonomysearch?taxonomy=@taxon.species">@taxon.strtaxonomy.size() structures </a></p>
+      </div>
+
+    </div>
+    }}
+  </div>
+  @* end tab2 *@
+
+  <div class="tab-pane" id="tab3">
+  </div>
+
+</div>
+    </div>
+  </div><!-- /col -->
+</div><!-- /row -->
+@views.html.footerunicarb.footerunicarb()
+</section>
+
+@if(taxon.size() != 0 ) {
+<script>
+  $(function () {
+    var test = 'first'; @* target this during page reload *@
+    $('#myTabBar a:' + test).tab('show');
+    $('#myTab a[href="#tab2"]').tab('show');
+  })
+</script>
+}
+
+@if(taxon.size() == 0  ) {
+<script>
+  $(function () {
+    var test = 'first'; @* target this during page reload *@
+    $('#myTabBar a:' + test).tab('show');
+    $('#myTab a[href="#tab1"]').tab('show');
+  })
+</script>
+}
+
+@if(proteinList.size() != 0 ) {
+<script>
+  $(function () {
+    var test = 'first'; @* target this during page reload *@
+    $('#myTabBar a:' + test).tab('show');
+    $('#myTab a[href="#tab2"]').tab('show');
+  })
+</script>
+}
+
+@if(tissueList.size() != 0 ) {
+<script>
+  $(function () {
+    var test = 'first'; @* target this during page reload *@
+    $('#myTabBar a:' + test).tab('show');
+    $('#myTab a[href="#tab2"]').tab('show');
+  })
+</script>
+}
+
+@if(accsearch.size() != 0 ) {
+<script>
+  $(function () {
+    var test = 'first'; @* target this during page reload *@
+    $('#myTabBar a:' + test).tab('show');
+    $('#myTab a[href="#tab2"]').tab('show');
+  })
+</script>
+}
+
+

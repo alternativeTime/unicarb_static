@@ -1,0 +1,246 @@
+@(map: Map[String,String], id: Long, ct: String)
+@import helper._
+
+
+@main {
+
+<style type="text/css">
+#wrapperpin {
+	width: 90%;
+	max-width: 1100px;
+	min-width: 800px;
+	margin: 50px auto;
+}
+
+#columnspin {
+	-webkit-column-count: 3;
+	-webkit-column-gap: 10px;
+	-webkit-column-fill: auto;
+	-moz-column-count: 3;
+	-moz-column-gap: 10px;
+	-moz-column-fill: auto;
+	column-count: 3;
+	column-gap: 15px;
+	column-fill: auto;
+}
+.pin {
+	display: inline-block;
+	background: #FEFEFE;
+	border: 2px solid #FAFAFA;
+	box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
+	margin: 0 2px 15px;
+	-webkit-column-break-inside: avoid;
+	-moz-column-break-inside: avoid;
+	column-break-inside: avoid;
+	padding: 15px;
+	padding-bottom: 5px;
+	background: -webkit-linear-gradient(45deg, #FFF, #F9F9F9);
+	opacity: 1;
+	-webkit-transition: all .2s ease;
+	-moz-transition: all .2s ease;
+	-o-transition: all .2s ease;
+	transition: all .2s ease;
+}
+
+.pin img {
+	width: 100%;
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 15px;
+	margin-bottom: 5px;
+}
+
+.pin2 p {
+	font: 12px/18px Arial, sans-serif;
+	color: #333;
+	margin: 0;
+}
+
+
+
+#columns:hover .pin:not(:hover) {
+	opacity: 0.4;
+}
+
+</style>
+
+<script>
+        $(document).ready(function() {  
+        
+        $("#e20").select2({
+            tags:["ABS", "AMF", "BKF", "BTG", "GUH", "JBM", "NAN1", "SPG" ],
+            tokenSeparators: [",", " "]});
+        });
+</script>
+
+<script>
+	$('.container').hide();
+	$('#game_container').show();
+
+	$('.post_types button').click(function(){
+        	var target = "#" + $(this).data("target");
+	        $(".container").not(target).hide();
+	        $(target).show();
+	        $('#post_type').val($(target).text());
+	});
+</script>
+
+<ul class="breadcrumb">
+    <li><i class="icon-home" ></i><a href="/"> UniCarbKB</a> <span class="divider"></span></li>
+    <li class="active"><i class="icon-map-marker" ></i> GlycoDigest<span class="divider"></span></li>
+</ul>
+   
+<div class="page-header row-fluid"> 
+    <h1 id="homeTitle">GlycoDigest</h1>
+    <h4 class="subheader">A tool to predict exoglycosidase digestions</h4>
+</div>
+
+<div class="bs-callout bs-callout-warning" >
+	<h4>Using Exoglycosidases <span class="glyphicon glyphicon-search"></span></h4>
+    <p>Exoglycosidase enzyme array digestions, in combination with U/HPLC and LC-MS, can deliver semi-quantitative glycan analysis of sugars released from glycoproteins. A detailed description and example experimental protocols for using and applying exoglycosidases is published by <a href="http://link.springer.com/protocol/10.1385%2F1-59745-167-3%3A125" target="_blank">Royle et al., Methods Mol Biol. 2006;347:125-43</a>.</p>
+    <p>A summary of the mode of action of exoglycosidases and examples can be found <a href="http://www.glycodigest.org/exoglycosidase.pdf" target="_blank">here</a>. Click the 'Information on Glycosidases' button in the 'Build Exoglycosidases' box below.</p>
+    @* <div class='more-exoglycosidases'>
+    <a id='toggle-exoglycosidases'><span class='label'><span class='icon-tags icon-white'></span> Information on Exoglycosidases <span class="caret"></span></span></a>
+   </div> *@
+
+
+
+</div>
+
+<div id="actions">
+	<div>
+           <img src="http://www.glycodigest.org:8080/eurocarb/get_sugar_image.action?download=false&amp;scale=1.0&amp;opaque=false&amp;outputType=png&notation=cfglink&inputType=glycoct_condensed&sequences=@helper.urlEncode(ct)" />
+   	</div>
+	<div class="bs-callout bs-callout-info" >
+    	   <h4>Build Exoglycosidase Array</h4>
+	   <p>Use the search box below to select the panel of exoglycosidase to digest the structure shown:</p>	
+	 <form class="form-search" action="@routes.Glycodigest.glycodigesttest({id})" method="GET">  	
+       <div id="selection" class="row-fluid">
+       <input name=digest  id="e20" id="listBox" class="span4"></input>
+       <button type="submit" class="btn btn-primary">Digest</button>
+       <a class='btn pull-right' href="/builderDigest"><i class="icon-refresh"></i> New Glycan</a>
+       </div>
+    </form>
+<div class='more-exoglycosidases'>
+    <a id='toggle-exoglycosidases'><span class='label'><span class='icon-tags icon-white'></span> Information on Exoglycosidases <span class="caret"></span></span></a>
+   </div>
+
+</div>
+
+<div>
+	          <ul id='more-exoglycosidases'>
+<div class="table-responsive" id="exoglycosidases">
+	<table class="table table-striped">
+		<thead>
+	        <tr>
+	        <th>Short Name</th>
+	        <th>Full Name</th>
+	        <th>Source</th>
+	        <th>Specificity</th>
+		</tr>
+		</thead>
+		<tr><td>
+			ABS</td>
+		    <td>α(2-3,6,8,9)-Sialidase</td>
+		    <td>Recombinant Arthrobacter ureafaciens gene, expressed in E. coli
+			    </td><td>α(2-3,6,8,9)-specific, cleaves all non-reducing terminal branched and unbranched sialic acids</td></tr>
+		<tr><td>NAN1
+		    </td>
+		    <td>α(2-3)-Sialidase
+		    </td>
+		    <td>Recombinant Streptococcus pneumoniae gene, expressed in E. coli
+		    </td><td>Releases α(2-3)-linked sialic acid
+		    </td>
+	    	</tr>
+		<tr><td>BKF
+		    </td><td>α(1-2,3,4,6)-Fucosidase
+		    </td><td>Bovine Kidney
+		    </td><td>iReleases non-reducing terminal α(1-6) core-linked fucose more efficiently than other α-fucose linkages. Frequently used for release of core fucose residues
+		    </td>
+	    	</tr>
+		<tr><td>XMF
+		    </td>
+		    <td>α(1-2)-Fucosidase
+		    </td>
+		    <td>Xanthomonas manihotis
+		    </td>
+	    	    <td>Releases non-reducing terminal α(1-2)-linked fucose
+		    </td>
+	    	</tr>
+		<tr>
+		    <td>AMF
+		    </td>
+		    <td>α(1-3,4)-Fucosidase
+		    </td>
+		    <td>Almond Meal
+		    </td>
+		    <td>Releases non-reducing terminal α(1-3,4)-linked fucose. Does not release core linked fucose in α(1-3,6) configuration
+		    </td>
+	    	</tr>
+		<tr>
+		   <td>BTG
+		   </td>
+		   <td>	β(1-3,4)-Galactosidase
+		   </td>
+		   <td>Bovine testis
+		   </td>
+		   <td>Releases non-reducing terminal β(1-3,4)-linked galactose residues
+		   </td>
+		</tr>
+		<tr>
+ 		   <td>SPG
+		   </td>
+		   <td>β(1-4)-Galactosidase
+		   </td>
+		   <td>Streptococcus pneumoniae
+		   </td>
+		   <td>β(1-4) specific galactosidase removes galactose residues from non- reducing terminal
+		   </td>
+	   	</tr>
+		<tr><td>CBG</td>
+		<td>α(1-3,4,6)-Galactosidase</td>
+		<td>Coffee Bean</td>
+			<td>Hydrolyses α(1-3,4,6)-linked terminal galactose residues</td>
+		</tr>
+		<tr>
+			<td>JBM</td>
+			<td>α(1-2,3,6)-Mannosidase</td>
+			<td>Jack Bean</td>
+			<td>Releases non-reducing terminal α(1-2,6)-linked mannose residues more efficiently than α(1-3)</td>
+		</tr>
+		<tr>
+			<td>GUH</td>
+			<td>β-N-Acetylhexosaminidase</td>
+			<td>Recombinant Streptococcus pneumoniae gene, expressed in E. coli</td>
+			<td>Releases all non-reducing terminal β-linked N-acetylglucosamine but not bisecting GlcNAc β(1-4)Man residues</td>
+		</tr>
+		<tr>
+			<td>JBH</td>
+			<td>β-N-Acetylhexosaminidase</td>
+			<td>Jack Bean</td>
+			<td>Specific to all non-reducing terminal β(1-2,3,4,6)-linked N- acetylglucosamine and N-acetylgalactosamine residues</td>
+		</tr>
+		   
+
+
+	</table>
+</div>
+</ul></div>
+
+<h2>Results</h2>
+<div>
+@for((key, value) <- map){
+    <div class="col-xs-6 col-md-3"">
+      <img class="thumbnail" src="http://www.glycodigest.org:8080/eurocarb/get_sugar_image.action?download=false&amp;scale=0.5&amp;opaque=false&amp;outputType=png&notation=cfglink&inputType=glycoct_condensed&sequences=@value" />
+      <p>@key.replace("ABS", "ABS - Sialidase").replace("BTG", "β(1-3,4)-Galactosidase").replace("NAN1", "NAN1 - α(2-3)-Sialidase").replace("BKF", "BKF α(1-2,3,4,6)-Fucosidase").replace("XMF", "XMF α(1-2)-Fucosidase").replace("AMF", "AMF α(1-3,4)-Fucosidase").replace("SPG", "SPG β(1-4)-Galactosidase").replace("CBG", "CBG α(1-3,4,6)-Galactosidase").replace("JBM", "JBM α(1-2,3,6)-Mannosidase").replace("GUH", "GUH β-N-Acetylhexosaminidase").replace("JBH", "JBH β-N-Acetylhexosaminidase")</p>
+    </div>
+}
+</div>
+
+
+
+      @views.html.footerunicarb.footerunicarb()    
+
+
+  </section>
+        
+}

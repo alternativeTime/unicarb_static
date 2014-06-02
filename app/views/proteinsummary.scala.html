@@ -1,4 +1,4 @@
-@(warning: String, notation: String, proteinName: String, accession: String, biol: ArrayList[Biolsource], protein: List[Proteins], uniprot: List[String], gssites: List[GsProteinStr2], source: HashSet[Reference], description: List[SitesReferences], sequence: String, proteinMultiple: ArrayList[String], generalSites: List[GeneralSites], definedSites: List[DefinedSites], typeEntry: String, swissProtName: String, proteinsource:  List[com.avaje.ebean.SqlRow] )
+@(warning: String, notation: String, proteinName: String, accession: String, biol: ArrayList[Biolsource], protein: List[Proteins], uniprot: List[String], gssites: List[GsProteinStr2], source: HashSet[Reference], description: List[SitesReferences], sequence: String, proteinMultiple: ArrayList[String], generalSites: List[GeneralSites], definedSites: List[DefinedSites], typeEntry: String, swissProtName: String, proteinsource:  List[com.avaje.ebean.SqlRow], compSite: List[composition_protein.CompSite] )
 
 
 @main {
@@ -28,7 +28,7 @@
           <label>Name:</label> <div class="controls">@proteinName</div>
         </div>
         *@
-      </div> 
+      </div>
 
 
 
@@ -39,10 +39,12 @@
 	} *@
 	@for(uniprot <- uniprot) {
         @if(uniprot.isEmpty()) {  <div class="alert alert-error">No UniProt PTM information available. Unable to query UniProt for this accession number(s).</div> }
-        @if(!uniprot.matches("No info")) {    
+        @if(!uniprot.matches("No info")) {
         <p>@uniprot</p>}
         }
       </div>
+
+
 
       <div class='glycosylation-sites'>
         @if(generalSites.size() > 0 ) {
@@ -63,7 +65,7 @@
             <tr>
               <td>@generalSites.glyco_aa_site.replace("N-", "ASN-").replace("Asn-", "ASN-").replace("S-", "SER-").replace("Ser-", "SER-").replace("T-", "THR-").replace("Thr-", "THR-").replace("ASASN-", "ASN-").replace("AsnAsn", "ASN-")</td>
               <td>
-                @* identified fault with entries where proteins have multiple accessions 
+                @* identified fault with entries where proteins have multiple accessions
 		 <a href="/proteinsite?position=@generalSites.glyco_aa_site&protein=@accession&type=general">
                   <span class="label label-notice"><i class='icon-th icon-white'></i> 
                     Associated Structures: <b>@generalSites.strSiteGeneral.size()</b></span>
@@ -119,6 +121,21 @@
         }
       </div>
 
+        <div class='glycosylation-sites'>
+            <div class="alert alert-info">Compositional data available: <a href="/composition_protein/@accession">@compSite.size() compositions reported</a>
+
+
+
+            <p>@for(cp <- compSite) {} </p>
+
+                @compSite.groupBy(_.aminoAcidPosition).map{ case (y,z) => <p>@y
+                @z.map{ a => @a.composition}</p>
+                    }
+
+
+
+            </div>
+        </div>
 
       <div class='glycosylation-sites'>
         <h3>Glycan Structures</h3>
@@ -126,14 +143,14 @@
 
           @for(s <- proteinMultiple) {
           <li>
-             @views.html.format.structure(notation, s.toLong) 
+             @views.html.format.structure(notation, s.toLong)
           </li>
           }
-        </ul> 
+        </ul>
 
 	@*
         <ul id='more-thumbnails' class="structures clearfix">
-          @for(s <- proteinMultiple) { 
+          @for(s <- proteinMultiple) {
           <li>
             <a href="@routes.Application.structureDetails(s.toInt)">
               <img class="sugar_image" src="../images/@notation/_@{s}.png" alt="">
@@ -144,7 +161,7 @@
 	*@
         @* <div id='show-structures' class='more-structures' href='#'>
 	  <span class="linktext">See more structures</span>
-          <span class="linktext" style="display:none">See less structures</span>          
+          <span class="linktext" style="display:none">See less structures</span>
           <br />
           <span>&#9679; &#9679; &#9679;</span>
         </div> *@
@@ -216,7 +233,7 @@
               @for(p <- proteinsource){
               <li><span class='icon-leaf icon-white'></span> <a href='/tissuesummary/@p.get("tissue_id")'>@p.get("div1") > @p.get("div2") > @p.get("div3") > @p.get("div4")</a></li>
              }
-            </ul>   
+            </ul>
           </div>
         </div>
 
@@ -250,7 +267,7 @@
             }
 
 
-          </ol>         
+          </ol>
         </div>
 
       </div><!-- /col -->

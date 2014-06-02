@@ -23,12 +23,13 @@ public class CompSite extends Model {
 
     public String swissProt;
     public String aminoAcidPosition;
+    public String composition;
 
     @ManyToOne
-    public Proteins proteins_id;
+    public Proteins proteins;
 
     @ManyToOne
-    public CompositionStructure composition_structure_id;
+    public CompositionStructure composition_structure;
 
     public Long getId() {
         return id;
@@ -54,21 +55,36 @@ public class CompSite extends Model {
         this.aminoAcidPosition = aminoAcidPosition;
     }
 
-    public Proteins getProteins_id() {
-        return proteins_id;
+    public Proteins getProteins() {
+        return proteins;
     }
 
-    public void setProteins_id(Proteins proteins_id) {
-        this.proteins_id = proteins_id;
+    public void setProteins(Proteins proteins) {
+        this.proteins = proteins;
     }
 
-    public CompositionStructure getComposition_structure_id() {
-        return composition_structure_id;
+    public CompositionStructure getComposition_structure() {
+        return composition_structure;
     }
 
-    public void setComposition_structure_id(CompositionStructure composition_structure_id) {
-        this.composition_structure_id = composition_structure_id;
+    public void setComposition_structure(CompositionStructure composition_structure) {
+        this.composition_structure = composition_structure;
+    }
+
+    public String getComposition() {
+        return composition;
+    }
+
+    public void setComposition(String composition) {
+        this.composition = composition;
     }
 
     public static Model.Finder<Long,CompSite> find = new Model.Finder<Long,CompSite>(Long.class, CompSite.class);
+
+
+    public static List<CompSite> compSite(String swissProt) {
+        return find.where()
+                .ilike("swiss_prot", swissProt ).findList();
+
+    }
 }
