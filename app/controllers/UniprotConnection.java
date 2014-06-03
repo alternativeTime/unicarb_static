@@ -1,11 +1,17 @@
 package controllers;
 
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.*;
 
 import models.StructureToSiteGeneral;
 import models.composition_protein.CompProtein;
 import models.composition_protein.CompSite;
 import models.composition_protein.CompositionStructure;
+import models.connected.PubMedRecord;
+import models.connected.PubmedCatcher;
+import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 import play.mvc.*;
 import play.*;
 import play.cache.*;
@@ -41,6 +47,10 @@ import uk.ac.ebi.kraken.uuw.services.remoting.UniProtQueryBuilder;
 import uk.ac.ebi.kraken.uuw.services.remoting.AttributeIterator;
 import uk.ac.ebi.kraken.uuw.services.remoting.Attribute;
 import uk.ac.ebi.kraken.uuw.services.remoting.RemoteDataAccessException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 
 public class UniprotConnection extends Controller {
@@ -414,8 +424,7 @@ public class UniprotConnection extends Controller {
 	}
 
 
-
-	private static Result redirect(Result proteinsite) {
+    private static Result redirect(Result proteinsite) {
 		// TODO Auto-generated method stub
 		return null;
 	}

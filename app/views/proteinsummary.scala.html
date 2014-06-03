@@ -121,21 +121,16 @@
         }
       </div>
 
+        @if(compSite.size() > 1){
         <div class='glycosylation-sites'>
             <div class="alert alert-info">Compositional data available: <a href="/composition_protein/@accession">@compSite.size() compositions reported</a>
-
-
-
             <p>@for(cp <- compSite) {} </p>
-
                 @compSite.groupBy(_.aminoAcidPosition).map{ case (y,z) => <p>@y
                 @z.map{ a => @a.composition}</p>
                     }
-
-
-
             </div>
         </div>
+        }
 
       <div class='glycosylation-sites'>
         <h3>Glycan Structures</h3>

@@ -3,7 +3,11 @@ package controllers;
 import java.util.*;
 
 import models.composition_protein.CompProtein;
+import models.composition_protein.CompRef;
 import models.composition_protein.CompSite;
+import models.composition_protein.CompTax;
+import models.connected.PubMedRecord;
+import models.connected.PubmedCatcher;
 import play.mvc.*;
 import play.data.*;
 import play.*;
@@ -721,6 +725,13 @@ public class Application extends Controller {
         List<Method> m = Method.findmethod(id);
         List<Reference> u = Reference.findRefMethods(id);
         List<Reference> refmethodgp = Reference.findRefMethodsgp(id);
+        List<CompRef> compRefs = CompRef.findCompRefs(id);
+
+/*HERE
+        private PubmedCatcher fetcher = new PubmedCatcher();
+        List<PubMedRecord> records;
+
+            records = fetcher.getPubMedRecordForIDs(pubmedIDs);
 
 		/*
 		for (Reference r : t ) {
@@ -747,6 +758,9 @@ public class Application extends Controller {
         proteinsources.addAll(proteinHs);
         protsources.addAll(swissHs);
 
+
+
+
         Object format = Cache.get("format");
         String notation = "gs";
         if (format != null) {
@@ -757,7 +771,7 @@ public class Application extends Controller {
 
 
         return ok(
-                refdisplay.render(notation, "View selected reference", t, u, taxsources, proteinsources, protsources, refmethodgp)
+                refdisplay.render(notation, "View selected reference", t, u, taxsources, proteinsources, protsources, refmethodgp, compRefs)
         );
     }
 
@@ -830,6 +844,7 @@ public class Application extends Controller {
      */
     public static Result taxonDetails(Long id) {
         Taxonomy taxonomy = Taxonomy.find.byId(id);
+        List<CompTax> compTax = CompTax.findCompTax(id);
         String taxon = taxonomy.species;
         List<Biolsource> biolsource = Biolsource.findTaxonomyProtein(taxon);
         List<com.avaje.ebean.SqlRow> listSql = Biolsource.findTaxonomyProteinSQL(taxon);
@@ -843,7 +858,7 @@ public class Application extends Controller {
 
         //return TODO;
         return ok(
-                taxonDetails.render(notation, "Taxonomy Description", taxonomy, biolsource, listSql)
+                taxonDetails.render(notation, "Taxonomy Description", taxonomy, biolsource, listSql, compTax)
         );
     }
 
@@ -856,9 +871,12 @@ public class Application extends Controller {
         ;
         if (taxId > 0) {
             Taxonomy taxonomy = Taxonomy.find.byId(taxId);
+
             String taxon = taxonomy.species;
             List<Biolsource> biolsource = Biolsource.findTaxonomyProtein(taxon);
             List<SqlRow> listSql = Biolsource.findTaxonomyProteinSQL(taxon);
+
+            List<CompTax> compTax = CompTax.findCompTax(taxId);
 
             Object format = Cache.get("format");
             String notation = "gs";
@@ -868,9 +886,10 @@ public class Application extends Controller {
                 Cache.set("format", "gs", 0);
             }
 
+
             //return TODO;
             return ok(
-                    taxonDetails.render(notation, "Taxonomy Description", taxonomy, biolsource, listSql));
+                    taxonDetails.render(notation, "Taxonomy Description", taxonomy, biolsource, listSql, compTax));
         } else {
             return TODO;
         }

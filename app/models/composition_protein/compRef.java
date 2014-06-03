@@ -20,28 +20,23 @@ public class CompRef extends Model  {
     @Id
     public Long id;
 
-    public Reference getReference() {
-        return reference;
-    }
-
-    public void setReference(Reference reference) {
-        this.reference = reference;
-    }
-
-    public CompositionStructure getComposition_structure_id() {
-        return composition_structure_id;
-    }
-
-    public void setComposition_structure_id(CompositionStructure composition_structure_id) {
-        this.composition_structure_id = composition_structure_id;
-    }
+    //public String composition;
 
     @ManyToOne
     public Reference reference;
 
     @ManyToOne
-    public CompositionStructure composition_structure_id;
+    public CompositionStructure composition_structure;
 
     public static Model.Finder<Long,CompRef> find = new Model.Finder<Long,CompRef>(Long.class, CompRef.class);
+
+    public static List<CompRef> findCompRefs(Long id) {
+        return
+                find.fetch("composition_structure")//.fetch("comp_ref")//.fetch("composition_structure")
+                        .where()
+                        .eq("reference_id", id)
+                        .orderBy("composition_structure.composition")
+                        .findList();
+    }
 
 }

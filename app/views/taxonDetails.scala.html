@@ -1,4 +1,4 @@
-@(notation: String, message: String, taxon: Taxonomy, biolsource: List[Biolsource], groupTax: List[com.avaje.ebean.SqlRow] )
+@(notation: String, message: String, taxon: Taxonomy, biolsource: List[Biolsource], groupTax: List[com.avaje.ebean.SqlRow], compTax: List[composition_protein.CompTax] )
 @import helper._
 
 @**********************************
@@ -23,7 +23,7 @@
       @for(s <- taxon.strtaxonomy ){
 
       <li class="span4">
-	@views.html.format.structure(notation, s.structure.id)
+	  @views.html.format.structure(notation, s.structure.id)
       </li>
       }
     </ul>
@@ -52,7 +52,17 @@
 
     <p>The GlycoSuite database is an annotated and curated relational database of glycan structures. For the taxonomy entry <b>@taxon.species</b> a number of glycan structures, glycoproteins and tissue source's have been curated.</p>
 
+    @if(compTax != null) {
+      <div class='glycosylation-sites'>
+          <div class="alert alert-info"><p>Compositional data available: @compTax.size() compositions reported</p>
+              <p>@for(c <- compTax) {
+                  @c.composition_structure.composition
+                  } </p>
+          </div>
+      </div>
+    }
 
+    @if(taxon.strtaxonomy.size() > 1 ){
     <ul class="structures clearfix">
       @for((s, i) <- taxon.strtaxonomy.zipWithIndex; if (i <=5) ){
         <li class="span5">
@@ -63,7 +73,7 @@
     <ul id='more-thumbnails' class='structures clearfix'>
       @for((s, i) <- taxon.strtaxonomy.zipWithIndex; if (i >=6) ){
         <li class="span5">
- 	  @views.html.format.structure(notation, s.structure.id)
+ 	    @views.html.format.structure(notation, s.structure.id)
         </li>
       }
     </ul>
@@ -74,6 +84,7 @@
       <br />
       <span>&#9679; &#9679; &#9679;</span>
     </div>
+    }
     }
   </div>
 
@@ -92,16 +103,26 @@
 
     </div>
 
-    <div class="info">
-      <h3>Glycoproteins</h3>
-      <p><i class="icon-chevron-right"></i><b>@groupTax.size() </b> glycoproteins curated</p>
-      @for( (sql,i) <- groupTax.zipWithIndex; if (i <= 6)) {
-      }
+      <div class='info'>
+          <h3>Biological Associations</h3>
+              <div class='source'>
+                  <a id='toggle-protein'><span class='label label-warning'><span class='icon-map-marker icon-white'></span> Protein @groupTax.size()  <span class="caret"></span></span></a>
+              </div>
+          <div>
+              <ul id='more-protein'>
+                  <h3 id='less-protein'><span class='icon-map-marker icon-white'></span> Protein</h3>
+                    @for(t <- groupTax){
+                    @if(t.get("swiss_prot") != null) {
+                    <li><span class='icon-map-marker icon-white'></span> <a href='/proteinsummary/@t.get("swiss_prot")/annotated'>@t.get("protein") (@t.get("swiss_prot"))</a></li>
+                    }
+                    @if(t.get("swiss_prot") == null) {
+                    <li><span class='icon-map-marker icon-white'></span> <a href='/proteinsummary/@t.get("protein")/@t.get("taxonomy")'>@t.get("protein") </a></li>
+                    }
+                    }
 
-      <div class='more'>
-      </div>
-
-    </div>
+              </ul>
+          </div>
+       </div>
 
   </div>
 </div>
@@ -109,35 +130,6 @@
 @views.html.footerunicarb.footerunicarb()
 
 </section>
-
-
-     @* <script type="text/javascript">
-       $(document).ready(new function() {
-         // Prepare layout options.
-         var options = {
-           autoResize: true, // This will auto-update the layout when the browser window is resized.
-           container: $('#myContent'), // Optional, used for some extra CSS styling
-           offset: 2, // Optional, the distance between grid items
-           itemWidth: 210 // Optional, the width of a grid item
-         };
-
-         // Get a reference to your grid items.
-         var handler = $('#myContent li');
-
-         // Call the layout function.
-         handler.wookmark(options);
-
-         // Capture clicks on grid items.
-         handler.click(function(){
-           // Randomize the height of the clicked item.
-           var newHeight = $('img', this).height() + Math.round(Math.random()*300+30);
-           $(this).css('height', newHeight+'px');
-
-           // Update the layout.
-           handler.wookmark();
-         });
-       });
-       </script> *@
 
 
 }

@@ -25,7 +25,7 @@ public class CompTax extends Model  {
     public Taxonomy taxonomy;
 
     @ManyToOne
-    public CompositionStructure composition_structure_id;
+    public CompositionStructure composition_structure;
 
     public Long getId() {
         return id;
@@ -43,13 +43,22 @@ public class CompTax extends Model  {
         this.taxonomy = taxonomy;
     }
 
-    public CompositionStructure getComposition_structure_id() {
-        return composition_structure_id;
+    public CompositionStructure getComposition_structure() {
+        return composition_structure;
     }
 
-    public void setComposition_structure_id(CompositionStructure composition_structure_id) {
-        this.composition_structure_id = composition_structure_id;
+    public void setComposition_structure(CompositionStructure composition_structure) {
+        this.composition_structure = composition_structure;
     }
 
     public static Model.Finder<Long,CompTax> find = new Model.Finder<Long,CompTax>(Long.class, CompTax.class);
+
+    public static List<CompTax> findCompTax(Long id) {
+        return
+                find.fetch("composition_structure")
+                        .where()
+                        .eq("taxonomy_id", id)
+                        .orderBy("composition_structure.composition")
+                        .findList();
+    }
 }

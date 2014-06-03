@@ -26,6 +26,13 @@ public class Pubmed extends Controller {
 		return ok(pubmed.render("pubmed", method, tissue, disease) );	
 
 	}
+
+
+
+
+
+
+
 	
 }
 
