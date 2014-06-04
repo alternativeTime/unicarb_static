@@ -8,6 +8,7 @@ import models.composition_protein.CompSite;
 import models.composition_protein.CompTax;
 import models.connected.PubMedRecord;
 import models.connected.PubmedCatcher;
+import org.xml.sax.SAXException;
 import play.mvc.*;
 import play.data.*;
 import play.*;
@@ -25,6 +26,8 @@ import static play.data.Form.*;
 
 
 import com.avaje.ebean.*; //dont think this should be here due to SqlRow
+
+import javax.xml.parsers.ParserConfigurationException;
 
 import static play.libs.Json.*;
 
@@ -726,12 +729,32 @@ public class Application extends Controller {
         List<Reference> u = Reference.findRefMethods(id);
         List<Reference> refmethodgp = Reference.findRefMethodsgp(id);
         List<CompRef> compRefs = CompRef.findCompRefs(id);
+        String abstractPMID = "";
 
-/*HERE
-        private PubmedCatcher fetcher = new PubmedCatcher();
+/*HERE*/
+
+        int pmid = Integer.parseInt(displayReferencce.pmid);
+        PubmedCatcher fetcher = new PubmedCatcher();
+        List<Integer> pubmedIDs = null;
+
+
+        try {
+            pubmedIDs.add(pmid);
+
+        } catch (Exception e) { e.printStackTrace();}
+
         List<PubMedRecord> records;
 
-            records = fetcher.getPubMedRecordForIDs(pubmedIDs);
+        try {
+            records = fetcher.getPubMedRecordForIDs(pmid);
+            abstractPMID = records.toString().replaceAll("null", "").replaceAll("\t", "").replaceAll("\\[", "").replaceAll("\\]", "");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        }
 
 		/*
 		for (Reference r : t ) {
@@ -771,7 +794,7 @@ public class Application extends Controller {
 
 
         return ok(
-                refdisplay.render(notation, "View selected reference", t, u, taxsources, proteinsources, protsources, refmethodgp, compRefs)
+                refdisplay.render(notation, "View selected reference", t, u, taxsources, proteinsources, protsources, refmethodgp, compRefs, abstractPMID)
         );
     }
 

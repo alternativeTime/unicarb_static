@@ -46,20 +46,22 @@ public class PubmedCatcher {
      * @throws SAXException
      * @throws XMLParseException
      */
-    public List<PubMedRecord> getPubMedRecordForIDs(List<Integer> pubmedIDs) throws IOException, ParserConfigurationException, SAXException {
+    public List<PubMedRecord> getPubMedRecordForIDs(Integer id) throws IOException, ParserConfigurationException, SAXException {
         StringBuilder strb = new StringBuilder();
-        for (Integer id : pubmedIDs) {
+        //for (Integer id : pubmedIDs) {
             strb.append("," + id);
-        }
+       // }
 
-        if (pubmedIDs.size()==0) {
+        /*if (pubmedIDs.size()==0) {
             System.err.println("Warning : no ids found in pubmed id list");
             return new ArrayList<PubMedRecord>();
-        }
+        }*/
+
         URL eutils = new URL(eutilsURL + "db=pubmed&id=" + strb.toString().substring(1) + "&retmode=xml");
         Document doc = retriveDocument(eutils);
         List<PubMedRecord> records = new ArrayList<PubMedRecord>(2);
         try {
+            System.out.println("pubmed call $$$$$ ");
             records = parseDomToPubMed(doc);
         } catch (XMLParseException e) {
             System.err.println("Error reading pubmed records : " + e.getMessage());
@@ -208,11 +210,11 @@ public class PubmedCatcher {
             absStr = new StringBuilder("?");
 
         PubMedRecord rec = new PubMedRecord();
-        rec.title = title.replace("\t", " ");
+        //rec.title = title.replace("\t", " ");
         rec.abs = absStr.toString().replace("\t", " ");
-        rec.yearCreated = year;
-        rec.citation = citation;
-        rec.pubMedID = id;
+        //rec.yearCreated = year;
+        //rec.citation = citation;
+        //rec.pubMedID = id;
         return rec;
     }
 

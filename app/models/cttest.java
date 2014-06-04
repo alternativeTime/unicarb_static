@@ -32,14 +32,14 @@ import stage.sugargui.*;
 @Entity 
 @Table(schema="public", name="ct")
 
-public class ct {
+public class cttest {
 	
 	@Id
 	public Long id;
 	
 	public String ct;
 	
-	public static Finder<Long,ct> find = new Finder<Long,ct>(Long.class, ct.class);
+	public static Finder<Long,cttest> find = new Finder<Long,cttest>(Long.class, cttest.class);
 	
 	public Map<String, String> digest(String ct, String enzymesInput) throws IOException{
 		

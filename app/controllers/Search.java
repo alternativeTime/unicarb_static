@@ -182,7 +182,7 @@ public class Search extends Controller {
 			Logger.debug(key + " " + value);
 		}	
 
-		ct ct = new ct();
+		cttest ct = new cttest();
 
 		//replace str with value from session see above
 		/* String uuid = session("uuid").toString();

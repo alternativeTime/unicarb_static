@@ -1,4 +1,4 @@
-@(notation: String, message: String, references: List[Reference], refmethods: List[Reference], taxsources: ArrayList[String], proteinsources: ArrayList[Biolsource], prot: ArrayList[String],  refmethodsgp: List[Reference], compRefs: List[composition_protein.CompRef] )
+@(notation: String, message: String, references: List[Reference], refmethods: List[Reference], taxsources: ArrayList[String], proteinsources: ArrayList[Biolsource], prot: ArrayList[String],  refmethodsgp: List[Reference], compRefs: List[composition_protein.CompRef], abstractPMID: String )
 @import helper._
 
 @title(text: String) = @{
@@ -39,13 +39,14 @@
   <div class="row-fluid">
     <div class="span8">
 
-      <p><b>@title(r.title)</b></p>   	
+      <p><b>@title(r.title)</b></p>
+        <p id="abstract">@abstractPMID</p>
       <p>PubMed Entry: <a href="http://www.ncbi.nlm.nih.gov/pubmed/@r.pmid">@r.pmid</a></p>
       <div class="mini-layout">
         <div class="mini-layout-body"></div>
       </div>
 
-        @if(compRefs != null) {
+        @if(compRefs.size() > 0 ) {
         <div class='glycosylation-sites'>
             <div class="alert alert-info">Compositional data available for this curated publication</div>
         </div>
@@ -57,8 +58,10 @@
           @views.html.format.structure(notation, s.structure.id)
         </li>
         }
-        @for(c <- compRefs){
-        <li>@c.composition_structure.composition</li>
+        @if(compRefs.size() > 0) {
+            @for(c <- compRefs){
+            <li>@c.composition_structure.composition</li>
+            }
         }
       </ul>
     </div><!-- /col -->

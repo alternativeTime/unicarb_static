@@ -41,7 +41,7 @@ public class Glycodigest extends Controller {
 		Translation translation = new Translation();
 		Translation ctt = translation.translationCT(id);
 
-		ct ctt2 = new ct();
+		cttest ctt2 = new cttest();
 		//ctt = ct.find.byId(id);
 		
 		try{
@@ -77,7 +77,7 @@ public class Glycodigest extends Controller {
 		
 		Translation translation = new Translation();
 		Translation ctt = translation.translationCT(id);
-		ct ctt2 = new ct();
+		cttest ctt2 = new cttest();
 
 		try {
 			hashMap = ctt2.digest(ctt.ct, test);
