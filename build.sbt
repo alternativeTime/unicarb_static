@@ -1,10 +1,16 @@
-import play.Project._
-
 name := "UniCarbKB"
 
 version := "1.0"
 
-libraryDependencies ++= Seq(javaJdbc, javaEbean, javaCore, anorm, jdbc, javaJpa, filters, cache, "com.jolbox" % "bonecp" % "0.8.0-rc1")
+lazy val root = (project in file(".")).enablePlugins(PlayJava)
 
-playJavaSettings
+scalaVersion := "2.11.1"
+
+libraryDependencies ++= Seq(
+    javaCore,
+    javaJpa,
+    anorm,
+    javaEbean,
+    jdbc, filters, cache, "com.jolbox" % "bonecp" % "0.8.0-rc1", javaWs
+)
 
