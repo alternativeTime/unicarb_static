@@ -12,8 +12,8 @@ import com.avaje.ebean.*;
 /**
  * User entity managed by Ebean
  */
-@Entity 
-@Table(schema="public", name="user")
+@Entity
+@Table(name="account")
 public class User extends Model {
 
     @Id
@@ -30,7 +30,10 @@ public class User extends Model {
     // -- Queries
     
     public static Model.Finder<String,User> find = new Model.Finder(String.class, User.class);
-    
+
+    public User(String s, String bob, String secret) {
+    }
+
     /**
      * Retrieve all users.
      */

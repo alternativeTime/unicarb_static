@@ -20,8 +20,8 @@
       <sourceFolder url="file://$MODULE_DIR$/../../target/scala-2.10/src_managed/main" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../../test" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../target/scala-2.10/src_managed/test" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/../../conf" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/../../target/scala-2.10/resource_managed/main" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../conf" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/../../target/scala-2.10/resource_managed/test" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/../../test/resources" type="java-test-resource" />
     </content>

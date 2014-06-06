@@ -70,6 +70,14 @@ p {
   font-weight: lighter;
 }
 
+#abstract {
+  margin-bottom: 9px;
+  font-family:  sans-serif;
+  font-size: 12px; line-height: 22px;
+  font-weight: lighter;
+
+}
+
 /* !ELEMENTS - !TYPOGRAPHY - LINKS ///////////////////////////////////////////////////////////////*/
 
 a { color: #008FD5; } 
@@ -976,6 +984,7 @@ th[class*="span"] {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////*/
 
+
 .taxonomy, .protein, .source { margin: 0 0 10px 0; }
 
 #toggle-taxonomy, #toggle-protein, #toggle-source, #toggle-pubchen, #toggle-defined { cursor: pointer; }
@@ -1005,8 +1014,8 @@ th[class*="span"] {
   line-height: 20px;
 }
 #more-taxonomy li span { }
-#more-taxonomy li a, #more-protein li a, #more-source, #more-defined li a { color: rgba(255, 255, 255, 0.7500) }
-#more-taxonomy li a:hover, #more-protein li a:hover, #more-source, #more-defined li a:hover { color: #FFF; }
+#more-taxonomy li a, #more-protein li a, #more-source li a, #more-defined li a { color: rgba(255, 255, 255, 0.7500) }
+#more-taxonomy li a:hover, #more-protein li a:hover, #more-source li a:hover, #more-defined li a:hover { color: #FFF; }
 
 
 p.structures, p.publications, p.biological {

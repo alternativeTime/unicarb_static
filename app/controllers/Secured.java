@@ -19,7 +19,7 @@ public class Secured extends Security.Authenticator {
     }
     
     // Access rights
-   /* 
+
     public static boolean isMemberOf(Long project) {
         return Project.isMember(
             project,
@@ -33,5 +33,5 @@ public class Secured extends Security.Authenticator {
             Context.current().request().username()
         );
     }
-    */
+
 }

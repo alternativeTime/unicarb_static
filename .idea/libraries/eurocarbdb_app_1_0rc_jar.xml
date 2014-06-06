@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="eurocarbdb-app-1.0rc.jar">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/eurocarbdb-app-1.0rc.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

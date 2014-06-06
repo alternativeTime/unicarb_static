@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="uniprotjapi.jar">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/uniprotjapi.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/UniCarbKB.iml" filepath="$PROJECT_DIR$/.idea/modules/UniCarbKB.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/UniCarbKB-build.iml" filepath="$PROJECT_DIR$/.idea/modules/UniCarbKB-build.iml" />
-      <module fileurl="file://$PROJECT_DIR$/glycomics_working.iml" filepath="$PROJECT_DIR$/glycomics_working.iml" />
-      <module fileurl="file://$PROJECT_DIR$/target/scala-2.10/src_managed/src_managed.iml" filepath="$PROJECT_DIR$/target/scala-2.10/src_managed/src_managed.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea_modules/UniCarbKB.iml" filepath="$PROJECT_DIR$/.idea_modules/UniCarbKB.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea_modules/UniCarbKB-build.iml" filepath="$PROJECT_DIR$/.idea_modules/UniCarbKB-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/root.iml" filepath="$PROJECT_DIR$/.idea/modules/root.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/root-build.iml" filepath="$PROJECT_DIR$/.idea/modules/root-build.iml" />
     </modules>
   </component>
 </project>

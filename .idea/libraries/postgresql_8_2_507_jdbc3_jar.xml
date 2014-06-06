@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="postgresql-8.2-507.jdbc3.jar">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/postgresql-8.2-507.jdbc3.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

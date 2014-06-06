@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="commons-javaflow-20060411.jar">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/commons-javaflow-20060411.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
