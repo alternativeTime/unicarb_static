@@ -3,112 +3,152 @@
   <component name="DaemonCodeAnalyzer">
     <disable_hints />
   </component>
-  <component name="EntryPointsManager">
-    <entry_points version="2.0" />
-  </component>
-  <component name="MavenProjectsManager">
-    <option name="ignoredFiles">
-      <set>
-        <option value="$PROJECT_DIR$/../glycan-rdf-unicarbkb/rdf-service-glassfish/pom.xml" />
-        <option value="$PROJECT_DIR$/../glycan-rdf-unicarbkb/rdf-webservice/pom.xml" />
-      </set>
+  <component name="IvyIDEA.ProjectSettings">
+    <option name="artifactTypeSettings">
+      <ArtifactTypeSettings />
+    </option>
+    <option name="propertiesSettings">
+      <PropertiesSettings />
     </option>
   </component>
-  <component settingsEditedManually="false" name="ProjectLevelVcsManager">
-    <OptionsSetting id="Add" value="true" />
-    <OptionsSetting id="Remove" value="true" />
-    <OptionsSetting id="Checkout" value="true" />
-    <OptionsSetting id="Update" value="true" />
-    <OptionsSetting id="Status" value="true" />
-    <OptionsSetting id="Edit" value="true" />
-    <ConfirmationsSetting id="Add" value="0" />
-    <ConfirmationsSetting id="Remove" value="0" />
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+          <State>
+            <id>Android Lint</id>
+          </State>
+          <State>
+            <id>Class structure</id>
+          </State>
+          <State>
+            <id>Data flow issues</id>
+          </State>
+          <State>
+            <id>Declaration redundancy</id>
+          </State>
+          <State>
+            <id>Dependency issues</id>
+          </State>
+          <State>
+            <id>Imports</id>
+          </State>
+          <State>
+            <id>Modularization issues</id>
+          </State>
+          <State>
+            <id>Packaging issues</id>
+          </State>
+          <State>
+            <id>Pattern Validation</id>
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>Abstraction issues</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" assert-keyword="true" jdk-15="true" project-jdk-name="1.7" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
   <component name="RunManager">
-    <configuration factoryName="Plugin" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" default="true">
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
-      <option value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" name="VM_PARAMETERS" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
       <option name="PROGRAM_PARAMETERS" />
       <method />
     </configuration>
-    <configuration factoryName="Remote" type="Remote" default="true">
-      <option value="true" name="USE_SOCKET_TRANSPORT" />
-      <option value="false" name="SERVER_MODE" />
-      <option value="javadebug" name="SHMEM_ADDRESS" />
-      <option value="localhost" name="HOST" />
-      <option value="5005" name="PORT" />
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
       <method />
     </configuration>
-    <configuration factoryName="TestNG" type="TestNG" default="true">
+    <configuration default="true" type="Applet" factoryName="Applet">
       <module name="" />
-      <option value="false" name="ALTERNATIVE_JRE_PATH_ENABLED" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="SUITE_NAME" />
       <option name="PACKAGE_NAME" />
       <option name="MAIN_CLASS_NAME" />
       <option name="METHOD_NAME" />
       <option name="GROUP_NAME" />
-      <option value="CLASS" name="TEST_OBJECT" />
-      <option value="-ea" name="VM_PARAMETERS" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
-      <option value="$PROJECT_DIR$" name="WORKING_DIRECTORY" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="OUTPUT_DIRECTORY" />
       <option name="ANNOTATION_TYPE" />
       <option name="ENV_VARIABLES" />
-      <option value="true" name="PASS_PARENT_ENVS" />
+      <option name="PASS_PARENT_ENVS" value="true" />
       <option name="TEST_SEARCH_SCOPE">
         <value defaultName="moduleWithDependencies" />
       </option>
-      <option value="false" name="USE_DEFAULT_REPORTERS" />
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
       <option name="PROPERTIES_FILE" />
       <envs />
       <properties />
       <listeners />
       <method />
     </configuration>
-    <configuration factoryName="Applet" type="Applet" default="true">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option value="false" name="HTML_USED" />
-      <option value="400" name="WIDTH" />
-      <option value="300" name="HEIGHT" />
-      <option value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" name="POLICY_FILE" />
-      <option name="VM_PARAMETERS" />
-      <option value="false" name="ALTERNATIVE_JRE_PATH_ENABLED" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method />
-    </configuration>
-    <configuration factoryName="Application" type="Application" default="true">
+    <configuration default="true" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" />
       <option name="VM_PARAMETERS" />
       <option name="PROGRAM_PARAMETERS" />
-      <option value="$PROJECT_DIR$" name="WORKING_DIRECTORY" />
-      <option value="false" name="ALTERNATIVE_JRE_PATH_ENABLED" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option value="false" name="ENABLE_SWING_INSPECTOR" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
       <option name="ENV_VARIABLES" />
-      <option value="true" name="PASS_PARENT_ENVS" />
+      <option name="PASS_PARENT_ENVS" value="true" />
       <module name="" />
       <envs />
       <method />
     </configuration>
-    <configuration factoryName="JUnit" type="JUnit" default="true">
+    <configuration default="true" type="JUnit" factoryName="JUnit">
       <module name="" />
-      <option value="false" name="ALTERNATIVE_JRE_PATH_ENABLED" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" />
       <option name="MAIN_CLASS_NAME" />
       <option name="METHOD_NAME" />
-      <option value="class" name="TEST_OBJECT" />
-      <option value="-ea" name="VM_PARAMETERS" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
-      <option value="$PROJECT_DIR$" name="WORKING_DIRECTORY" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="ENV_VARIABLES" />
-      <option value="true" name="PASS_PARENT_ENVS" />
+      <option name="PASS_PARENT_ENVS" value="true" />
       <option name="TEST_SEARCH_SCOPE">
         <value defaultName="moduleWithDependencies" />
       </option>
@@ -117,10 +157,26 @@
       <method />
     </configuration>
     <list size="0" />
-    <configuration selected="false" default="true" type="WebApp" name="&lt;template&gt;">
+    <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
       <Port>5050</Port>
     </configuration>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.7</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>
 

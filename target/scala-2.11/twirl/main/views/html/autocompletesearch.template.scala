@@ -41,8 +41,8 @@ Seq[Any](_display_(/*1.2*/main/*1.6*/ {_display_(Seq[Any](format.raw/*1.8*/("""
 }
               /*
                   -- GENERATED --
-                  DATE: Fri Nov 14 11:35:22 EST 2014
-                  SOURCE: /Users/matthew/git/glycomics_working/app/views/autocompletesearch.scala.html
+                  DATE: Fri Nov 14 15:46:53 EST 2014
+                  SOURCE: /Users/matthew/playframework/glycomics_again/glycomics/app/views/autocompletesearch.scala.html
                   HASH: fa483543d6478687f6e8c4a68bf3560baff457f6
                   MATRIX: 811->1|822->5|860->7|887->8|935->27
                   LINES: 29->1|29->1|29->1|30->2|31->3

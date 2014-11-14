@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea_modules/UniCarbKB.iml" filepath="$PROJECT_DIR$/.idea_modules/UniCarbKB.iml" />
+      <module fileurl="file://$PROJECT_DIR$/glycomics.iml" filepath="$PROJECT_DIR$/glycomics.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/root.iml" filepath="$PROJECT_DIR$/.idea/modules/root.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/root-build.iml" filepath="$PROJECT_DIR$/.idea/modules/root-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/target/scala-2.10/src_managed/src_managed.iml" filepath="$PROJECT_DIR$/target/scala-2.10/src_managed/src_managed.iml" />
+      <module fileurl="file://$PROJECT_DIR$/target/scala-2.11/src_managed/src_managed1.iml" filepath="$PROJECT_DIR$/target/scala-2.11/src_managed/src_managed1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/target/scala-2.11/twirl/twirl.iml" filepath="$PROJECT_DIR$/target/scala-2.11/twirl/twirl.iml" />
     </modules>
   </component>
 </project>
