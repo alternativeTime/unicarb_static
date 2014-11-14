@@ -1220,6 +1220,33 @@ g.yaxis path.domain { stroke: #333; stroke-width: 0px; fill: none; }
 	color:#999;
 }
 
+/**********************************
+=> RDF Pages
+**********************************/
+.about-rdf {
+  color: #56afc0;
+  font-weight: 300;
+  text-transform: uppercase;
+  margin-top: 0px;
+  margin-bottom: 0;
+  padding-bottom: 20px;
+  font-size: 40px;
+  display: inline-block;
+}
+
+.blue-background {
+  background-color: rgba(86, 175, 192, 0.25) !important;
+}
+
+.align-centre {
+  text-align: center;
+}
+
+.section-header {
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
 /*******************************************************************************************************
 => Responsive Styles
 *******************************************************************************************************/
