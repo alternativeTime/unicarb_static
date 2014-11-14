@@ -3,9 +3,9 @@
 # ~~~~
 
 # Authentication
-GET     /login                 controllers.Application.login()
-POST    /login                 controllers.Application.authenticate()
-GET     /logout                controllers.Application.logout()
+#GET     /login                 controllers.Application.login()
+#POST    /login                 controllers.Application.authenticate()
+#GET     /logout                controllers.Application.logout()
 
 # Default path will just redirect to the computer list
 GET   /                         controllers.Application.index()
@@ -51,24 +51,36 @@ GET   /enzymes			        controllers.Application.enzymes()
 GET   /news					    controllers.Application.news()
 
 #external links
-GET  /swissprotFT	       	   controllers.UniprotConnection.swissprotFT(feature ?= "")
-GET  /pubchem/:s	           controllers.PubchemLinks.pubchemExternal(s: String)
+GET  /swissprotFT	       	    controllers.UniprotConnection.swissprotFT(feature ?= "")
+GET  /pubchem/:s	            controllers.PubchemLinks.pubchemExternal(s: String)
 
 
-GET  /format/:s		           controllers.Application.format(s: String)
+GET  /format/:s		            controllers.Application.format(s: String)
 
-GET  /workflows                controllers.Application.workflows()
+GET  /workflows                 controllers.Application.workflows()
 
-GET  /massspec                 controllers.Application.massspec()
+GET  /massspec                  controllers.Application.massspec()
 
-GET  /pubmed		           controllers.Pubmed.getpubmed()
+GET  /pubmed		            controllers.Pubmed.getpubmed()
+
+#IonmoB
+GET  /ionmobility               controllers.IonMobility.ionmobilityHome()
 
 #ANDS RIF OAI
-GET  /ands					   controllers.Ands.ands()
+GET  /ands					    controllers.Ands.ands()
+
+#RDF
+GET   /substructureRDFQuery     controllers.GlycoRDF.SubstructureSPARQLQuery()
+POST  /substructureRDFResult    controllers.GlycoRDF.SubstructureSPARQLQueryResult()
 
 
 #Testing
+#GET     /javascriptRoutes      controllers.Application.javascriptRoutes
 GET	 /testing					controllers.Search.SubstructureSearch()
+#GET     /item/:id      controllers.Application.getItem(id: Long)
+#POST    /item/new     controllers.Application.newItem
+#PUT     /item/:id     controllers.Application.updateItem(id: Long)
+#POST    /shortList/:userId  controllers.Application.addToShortList(userId: Long)
 
 # Map static resources from the /public folder to the /assets URL path
 GET  /assets/*file             controllers.Assets.at(path="/public", file)

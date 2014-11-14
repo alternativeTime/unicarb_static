@@ -17,10 +17,24 @@
       <profile default="true" name="Default" enabled="false">
         <processorPath useClasspath="true" />
       </profile>
+      <profile default="false" name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="rdf-service-glassfish" />
+        <module name="rdf-webservice" />
+      </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="glycan-rdf" target="1.7" />
+      <module name="rdf-core" target="1.7" />
+      <module name="rdf-service-glassfish" target="1.7" />
+      <module name="rdf-webservice" target="1.7" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
-    <option name="ADDITIONAL_OPTIONS_STRING" value="-encoding utf8 -g -encoding utf8 -g" />
+    <option name="ADDITIONAL_OPTIONS_STRING" value="-encoding utf8 -g" />
   </component>
 </project>
 

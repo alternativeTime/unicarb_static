@@ -1,8 +1,6 @@
 <component name="libraryTable">
   <library name="rdf-core">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../glycan-rdf-unicarbkb/classes/artifacts/rdf_core_jar/rdf-core.jar!/" />
-    </CLASSES>
+    <CLASSES />
     <JAVADOC />
     <SOURCES />
   </library>

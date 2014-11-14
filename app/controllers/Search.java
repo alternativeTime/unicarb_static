@@ -1,55 +1,30 @@
 package controllers;
 
-import java.util.*;
-
-import play.mvc.*;
-import play.*;
-import views.html.*;
-import models.*;
-import models.sub.*;
+import com.avaje.ebean.SqlRow;
+import com.google.common.base.Charsets;
+import com.google.common.io.Files;
+import models.Strtaxonomy;
+import models.Structure;
+import models.Translation;
+import models.cttest;
+import models.sub.GlycanResidueUnicarb;
+import org.apache.commons.io.FileUtils;
+import play.Logger;
 import play.cache.Cache;
-import com.avaje.ebean.*;
+import play.mvc.Controller;
+import play.mvc.Result;
+import views.html.builderDigest;
+import views.html.glycodigestBuilder;
+import views.html.glycodigesttestBuilder;
+import views.html.saySearch;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.MatchMode;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
-import org.hibernate.criterion.ProjectionList;
-import org.hibernate.criterion.Subqueries;
-import org.xml.sax.SAXException;
-
-import org.eurocarbdb.MolecularFramework.io.SugarImporterException;
-import org.eurocarbdb.MolecularFramework.io.GlycoCT.SugarExporterGlycoCT;
-import org.eurocarbdb.MolecularFramework.io.GlycoCT.SugarImporterGlycoCTCondensed;
-import org.eurocarbdb.MolecularFramework.util.visitor.GlycoVisitorException;
-import org.eurocarbdb.action.core.SearchUnicarbGlycanSequence;
-import org.eurocarbdb.action.core.*;
-import org.eurocarbdb.dataaccess.core.seq.*;
-import org.eurocarbdb.sugar.Sugar;
-import org.eurocarbdb.sugar.SugarSequence;
-import org.eurocarbdb.application.glycanbuilder.Glycan;
-import static org.eurocarbdb.dataaccess.core.seq.SubstructureQuery.Option.Must_Include_Reducing_Terminus;
-import static org.eurocarbdb.dataaccess.core.seq.SubstructureQuery.Option.Must_Include_All_Non_Reducing_Terminii;
-
-import org.apache.commons.io.FileUtils;
-
-import play.mvc.Controller;
-import play.mvc.Result;
-import views.html.*;
+import java.util.*;
 
 // import org.eurocarbdb.dataaccess.core.seq.SavedGlycanSubstructureSearch;
-
-
-import com.google.common.base.Charsets;
-import com.google.common.io.Files;
 
 public class Search extends Controller {
 

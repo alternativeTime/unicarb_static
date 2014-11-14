@@ -194,6 +194,8 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="SBT: com.fasterxml.jackson.core:jackson-databind:2.3.2" level="project" />
+    <orderEntry type="library" name="antlr-2.7.71" level="project" />
   </component>
 </module>
 

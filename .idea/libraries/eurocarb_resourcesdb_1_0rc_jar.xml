@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="eurocarb-resourcesdb-1.0rc.jar">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/eurocarb-resourcesdb-1.0rc.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
