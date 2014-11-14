@@ -1,11 +1,7 @@
 package controllers;
 
 import com.hp.hpl.jena.query.*;
-import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.ModelFactory;
-import org.apache.jena.riot.RDFFormat;
 import org.expasy.glycanrdf.query.QueryGenerator;
-import org.expasy.glycanrdf.rdf.model.RDFModelOne;
 import org.expasy.glycanrdf.rdf.query.VirtuosoQueryGeneratorExtend;
 import org.expasy.mzjava.glycomics.io.mol.glycoct.GlycoCTReader;
 import play.Logger;
@@ -14,8 +10,8 @@ import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 
-import java.io.ByteArrayOutputStream;
-import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -24,11 +20,12 @@ import java.io.OutputStream;
 public class GlycoRDF extends Controller {
 
     public static Result SubstructureSPARQLQuery(){
+
         return ok(views.html.rdf.substructureRDFQuery.render());
     }
 
     public static Result SubstructureSPARQLQueryResult() {
-
+        List<String> rdfResults = new ArrayList<>();
         DynamicForm dynamicForm = Form.form().bindFromRequest();
         Logger.info("form posted " + dynamicForm.data().values() );
         //prepareQuery(dynamicForm.data().values().toString());
@@ -79,28 +76,30 @@ public class GlycoRDF extends Controller {
                 "}\n" +
                 "}"; */
 
-        //Logger.info("QUERY " + sparqlQueryString2 );
+        Logger.info("QUERY " + queryRDF); //.replaceAll("\\.org", "\\.org\\.org") );
 
-        Query query = QueryFactory.create(queryRDF.replaceAll("\\.org", "\\.org\\.org")  );
+        Query query = QueryFactory.create(queryRDF); //  .replaceAll("\\.org", "\\.org\\.org")  );
         ARQ.getContext().setTrue(ARQ.useSAX);
         //Executing SPARQL Query and pointing to the DBpedia SPARQL Endpoint
-        QueryExecution qexec = QueryExecutionFactory.sparqlService("http://103.29.112.169:3030/KB/query", query);
+        QueryExecution qexec = QueryExecutionFactory.sparqlService("http://103.29.112.169:3030/unicarkb/query", query);
         //Retrieving the SPARQL Query results
         com.hp.hpl.jena.query.ResultSet results = qexec.execSelect();
 
 
 
         //Iterating over the SPARQL Query results
-        while (results.hasNext()) {
+         //rdfResults = new ArrayList<>();
+         while (results.hasNext()) {
             QuerySolution soln = results.nextSolution();
 
             //Logger.info("TESTING 2 " + results.nextSolution() ) ;
             //Printing DBpedia entries' abstract.
-            System.out.println(soln);  //get("?abstract"));
+            //System.out.println(soln.get("structureConnection")  );  //get("?abstract"));
+             rdfResults.add(soln.get("structureConnection").toString());
         }
         qexec.close();
 
-        return ok(views.html.rdf.substructureRDFResult.render());
+        return ok(views.html.rdf.substructureRDFResult.render(rdfResults));
     }
 
    public static String prepareQuery(String glycoCT){
