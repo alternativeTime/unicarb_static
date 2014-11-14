@@ -1,0 +1,46 @@
+@import helper.twitterBootstrap._
+
+@main{
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+<section id="layouts">
+
+    <div class="page-header row-fluid">
+        <h1 id="homeTitle" class="about-rdf">GlycoRDF Powering (Sub)Structure Searching</h1>
+     </div>
+
+    @helper.form(action = routes.GlycoRDF.SubstructureSPARQLQueryResult(), 'class -> "form-vertical", 'id -> "rdfStructureForm", 'method -> "POST") {
+    <div class="row blue-background">
+        <h2 class="section-header align-centre">Start querying</h2>
+        <div class=”span3″><i class="fa fa-pencil-square-o fa-3x"></i></div>
+        <div class=”span4″>
+            <textarea class=”form-control” id=”description” name=”glycoct” placeholder="Copy GlycoCT"></textarea>
+        </div>
+        <div class=”span8″>
+            <p>RES<br/>
+            1b:a-dgal-HEX-1:5<br/>
+            2s:n-acetyl<br/>
+            3b:b-dgal-HEX-1:5<br/>
+            4b:a-dgal-HEX-1:5<br/>
+            5b:a-dgal-HEX-1:5<br/>
+            6b:a-lgal-HEX-1:5|6:d<br/>
+            LIN<br/>
+            1:1d(2+1)2n<br/>
+            2:1o(3+1)3d<br/>
+            3:3o(4+1)4d<br/>
+            4:4o(3+1)5d<br/>
+            5:5o(2+1)6d</p>
+        </div>
+    </div>
+    <div class="row"><button type="submit" class="btn btn-default">Submit</button></div>
+    }
+
+    </div>
+
+</section>
+
+
+
+}
+

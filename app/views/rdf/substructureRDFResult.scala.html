@@ -1,0 +1,35 @@
+@(rdf: List[String])
+
+@import helper.twitterBootstrap._
+
+@main{
+
+@helper.form(action = routes.GlycoRDF.SubstructureSPARQLQueryResult(), 'name -> "rdfStructureForm", 'class -> "form-vertical", 'id -> "rdfStructureForm", 'method -> "POST") {
+
+
+
+<div class="well">
+    <fieldset>
+        <legend>(Sub)Structure Searching - Test Phase</<legend>>
+        <div class=”form-group”>
+            <label class=”col-sm-3 control-label no-padding-right” for=”description”>Description</label>
+            <div class=”col-lg-4 col-md-4 col-sm-5″>
+            <textarea class=”form-control” id=”description” name=”glycoct”></textarea>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </div>
+    </fieldset>
+
+<fieldset>
+        <legend>Results @rdf.size()</legend>
+
+        @for(s <- rdf) {
+            <p><a href='@s.replace("http://rdf.unicarbkb.org/structureConnection/", "/structure/")'>@s</a></p>
+        }
+</div>
+
+
+
+}
+
+
+}
