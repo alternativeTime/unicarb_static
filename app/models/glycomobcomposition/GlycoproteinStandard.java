@@ -2,10 +2,7 @@ package models.glycomobcomposition;
 
 import play.db.ebean.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -20,7 +17,7 @@ public class GlycoproteinStandard extends Model {
     public Long id;
     public String name;
 
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     public List<GlycoproteinStandard> glycoproteinStandardList;
 
     public static Model.Finder<Long,GlycoproteinStandard> find = new Model.Finder<Long,GlycoproteinStandard>(Long.class, GlycoproteinStandard.class);

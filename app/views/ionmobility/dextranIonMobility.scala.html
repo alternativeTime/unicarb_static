@@ -1,0 +1,100 @@
+@(negative: List[models.ionmob.DextranNegative], positive: List[models.ionmob.DextranPositive])
+
+
+@main{
+
+<ul class="breadcrumb">
+    <li><i class="icon-home"></i><a href="/"> UniCarbKB</a> <span class="divider">></span></li>
+    <li class="active"><i class="icon-th"></i> GlycoMob<span class="divider"></span></li>
+</ul>
+
+<section id="structureLayout">
+    <section id="layouts">
+
+        <div class="page-header row-fluid">
+            <h1>Dextran CSS Values</h1>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span8">
+                <ul class="nav nav-tabs" id="product-table">
+                    <li><a href="#1" data-toggle="tab">Negative</a>
+                    </li>
+                    <li><a href="#2" data-toggle="tab">Positve</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane" id="1">
+                        <h3>Negative Mode</h3>
+                        <table class="table table-condensed table-bordered table-striped volumes">
+                            <thead>
+                            <tr>
+                                <th>Mass (m/z)</th>
+                                <th>Charge</th>
+                                <th>Glucose Unit</th>
+                                <th>Ion Type</th>
+                                <th>CSS He &Aring; <sup>2</sup></th>
+                                <th>CSS N &Aring; <sup>2</sup></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @for(negative <- negative){
+                            <tr>
+                                <td>@("%.2f".format(negative.mass))</td>
+                                <td>@negative.charge</td>
+                                <td>@negative.glucose</td>
+                                <td>@negative.ion.toUpperCase</td>
+                                <td>@("%.2f".format(negative.cssHe))</td>
+                                <td>@("%.2f".format(negative.cssN))</td>
+                            </tr>
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane" id="2">
+                            <h3>Positive Mode</h3>
+                            <table class="table table-condensed table-bordered table-striped volumes">
+                                <thead>
+                                <tr>
+                                    <th>Mass (m/z)</th>
+                                    <th>Charge</th>
+                                    <th>Glucose Unit</th>
+                                    <th>Ion Type</th>
+                                    <th>CSS He &Aring; <sup>2</sup></th>
+                                    <th>CSS N &Aring; <sup>2</sup></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @for(positive <- positive){
+                                <tr>
+                                    <td>@("%.2f".format(positive.mass))</td>
+                                    <td>@positive.charge</td>
+                                    <td>@positive.glucose</td>
+                                    <td>@positive.ion.toUpperCase.replace("NA", "Na")</td>
+                                    <td>@("%.2f".format(positive.cssHe))</td>
+                                    <td>@("%.2f".format(positive.cssN))</td>
+                                </tr>
+                                }
+                                </tbody>
+                            </table>
+                    </div>
+                </div>
+                </div>
+
+                <div class="span4">
+                    <div class='info'>
+                        <h3>Ion Mobility</h3>
+
+                        <div class='taxonomy'>
+                            <span class='label label-success'>Dextra High-Mannose Structures</span><br/><br/>
+                            <span class='label label-info'>Glycoprotein Standards</span><br/><br/>
+                            <span class='label label-warning'>Dextran Ladder</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+    </section>
+</section>
+
+}

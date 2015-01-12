@@ -2,10 +2,7 @@ package models.glycomobcomposition;
 
 import play.db.ebean.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -26,7 +23,7 @@ public class GlycomobComposition extends Model {
     public int charge;
     public String mi; //multiple isomers
 
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     public List<GlycomobComposition> glycomobCompositionList;
 
     public static Model.Finder<Long,GlycomobComposition> find = new Model.Finder<Long,GlycomobComposition>(Long.class, GlycomobComposition.class);

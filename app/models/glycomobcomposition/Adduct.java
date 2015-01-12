@@ -1,9 +1,8 @@
 package models.glycomobcomposition;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import play.db.ebean.Model;
+
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -12,12 +11,12 @@ import java.util.List;
 @SuppressWarnings("serial")
 @Entity
 @Table(schema="glycomob_composition", name="adduct")
-public class Adduct {
+public class Adduct extends Model {
 
     @Id
     public Long id;
     public String adduct;
 
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     public List<Adduct> adductList;
 }
