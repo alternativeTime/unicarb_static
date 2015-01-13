@@ -10,7 +10,7 @@ import java.util.List;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(schema="glycomob_composition", name="adduct")
+@Table(schema="glycomobcomposition", name="adduct")
 public class Adduct extends Model {
 
     @Id

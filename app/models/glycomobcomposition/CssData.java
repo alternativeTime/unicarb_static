@@ -9,12 +9,13 @@ import javax.persistence.*;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(schema="glycomob_composition", name="css_data")
+@Table(schema="glycomobcomposition", name="css_data")
 public class CssData extends Model {
 
     @Id
     public Long id;
     public Double css;
+    public String mode;
 
 
     @ManyToOne

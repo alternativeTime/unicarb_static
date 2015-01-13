@@ -65,6 +65,9 @@ GET  /pubmed		            controllers.Pubmed.getpubmed()
 
 #IonmoB
 GET  /ionmobility               controllers.IonMobility.ionmobilityHome()
+GET  /dextranIonMobility        controllers.IonMobility.dextranIonMobilityHome()
+GET  /ionmobilityStandards      controllers.IonMobility.ionmobGlycoproteinStandards()
+GET  /ionmobGlycoproteinData/:id    controllers.IonMobility.ionmobGlycoproteinData(id:Long)
 
 #ANDS RIF OAI
 GET  /ands					    controllers.Ands.ands()

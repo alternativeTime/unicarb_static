@@ -10,7 +10,7 @@ import java.util.List;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(schema="glycomob_composition", name="glycomob_composition")
+@Table(schema="glycomobcomposition", name="glycomob_composition")
 public class GlycomobComposition extends Model {
 
     @Id
@@ -19,7 +19,7 @@ public class GlycomobComposition extends Model {
     public String hex;
     public String hexnac;
     public String dhex;
-    public String neuac;
+    public String neunac;
     public int charge;
     public String mi; //multiple isomers
 

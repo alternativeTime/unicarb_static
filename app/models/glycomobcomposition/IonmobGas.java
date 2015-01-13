@@ -10,7 +10,7 @@ import java.util.List;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(schema="glycomob_composition", name="ionmob_gas")
+@Table(schema="glycomobcomposition", name="ionmob_gas")
 public class IonmobGas extends Model {
 
     @Id
