@@ -5,12 +5,12 @@ import play.db.ebean.Model;
 import javax.persistence.*;
 
 /**
- * Created by matthew on 8/01/15.
+ * Created by matthew on 14/01/15.
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(schema="glycomobcomposition", name="css_data")
-public class CssData extends Model {
+@Table(schema="glycomobcomposition", name="css_data_general")
+public class CssDataGeneral extends Model {
 
     @Id
     public Long id;
@@ -31,10 +31,13 @@ public class CssData extends Model {
     public IonmobGas ionmobGasList;
 
     @ManyToOne
-    @JoinColumn(name="glycomob_composition_id")
-    public SodiatedGlycomobComposition sodiatedGlycomobCompositionList;
+    @JoinColumn(name="glycomobcomposition_id")
+    public Glycomobcomposition glycomobcompositionList;
 
-    public static Model.Finder<Long,CssData> find = new Model.Finder<Long,CssData>(Long.class, CssData.class);
+    public String ion;
+    public Double ionMass;
+
+    public static Model.Finder<Long,CssDataGeneral> find = new Model.Finder<Long,CssDataGeneral>(Long.class, CssDataGeneral.class);
 
 
 }
