@@ -1,13 +1,13 @@
 package controllers;
 
-import models.glycomobcomposition.CssData;
-import models.glycomobcomposition.CssDataGeneral;
-import models.glycomobcomposition.GlycoproteinStandard;
+import models.glycomobcomposition.*;
 import models.ionmob.*;
+import play.Logger;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.ionmobilityHome;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -51,8 +51,57 @@ public class IonMobility extends Controller {
         List<GlycoproteinStandard> glycoproteinStandardList = GlycoproteinStandard.find.all();
         List<CssDataGeneral> cssDataGeneralHe = CssDataGeneral.find.fetch("glycoproteinStandardList").where().eq("glycoproteinStandardList.id", id).eq("mode", "negative").eq("ionmob_gas_id", 1).order().asc("css").findList();
         List<CssDataGeneral> cssDataGeneralN = CssDataGeneral.find.fetch("glycoproteinStandardList").where().eq("glycoproteinStandardList.id", id).eq("mode", "negative").eq("ionmob_gas_id", 2).order().asc("css").findList();
+
+        if(request().queryString().size() > 0){
+            String hex = "0";
+            String hexnac = "0";
+            String dhex = "0";
+            String neunac = "0";
+            String nativeStructure= "off";
+            int numberNaCss = 0;
+            int numberCss = 0;
+            hex = request().getQueryString("hex");
+            hexnac = request().getQueryString("hexnac");
+            dhex = request().getQueryString("dhex");
+            neunac = request().getQueryString("neunac");
+            nativeStructure = request().getQueryString("native");
+
+            String unicarbkbComposition = "/compositions?glycanType=N-Linked&comp_Hex=" + hex + "&comp_HexNAc=" + hexnac + "&comp_Deoxyhexose=" + dhex + "&comp_NeuAc=" + neunac + "&comp_NeuGc=&comp_Pent=&comp_Sulph=&comp_Phos=&comp_KDN=&comp_KDO=&comp_HexA=&comp_methyl=&comp_acetyl=&comp_other=";
+            List<Glycomobcomposition> glycomobcomposition = new ArrayList<>();
+            List<SodiatedGlycomobComposition> sodiatedGlycomobComposition = new ArrayList<>();
+
+            Logger.info("native check " + nativeStructure);
+
+            if(nativeStructure != null && !nativeStructure.isEmpty()) {
+                glycomobcomposition = Glycomobcomposition.getMatchingCompositionsAll(hex, hexnac, dhex, neunac);
+                sodiatedGlycomobComposition = SodiatedGlycomobComposition.getMatchingCompositionsAll(hex, hexnac, dhex, neunac);
+
+                for(SodiatedGlycomobComposition s: sodiatedGlycomobComposition){
+                    numberNaCss = s.cssDatas.size();
+                }
+                for(Glycomobcomposition c : glycomobcomposition){
+                    numberCss = c.cssDataGenerals.size();
+                }
+
+            } else{
+                glycomobcomposition = Glycomobcomposition.getMatchingCompositions(hex, hexnac, dhex, neunac);
+                sodiatedGlycomobComposition = SodiatedGlycomobComposition.getMatchingCompositions(hex, hexnac, dhex, neunac);
+
+                for(SodiatedGlycomobComposition s: sodiatedGlycomobComposition){
+                    numberNaCss = s.cssDatas.size();
+                }
+                for(Glycomobcomposition c : glycomobcomposition){
+                    numberCss = c.cssDataGenerals.size();
+                }
+
+            }
+
+
+
+            return ok(views.html.ionmobility.ionmobilityComposition.render(numberCss, numberNaCss, glycomobcomposition, sodiatedGlycomobComposition, glycoproteinStandardList, unicarbkbComposition));
+        }
+
         return ok(views.html.ionmobility.ionmobilityCompleteProtein.render(cssDataGeneralHe, cssDataGeneralN, glycoproteinStandards, glycoproteinStandardList));
 
     }
-
 }
