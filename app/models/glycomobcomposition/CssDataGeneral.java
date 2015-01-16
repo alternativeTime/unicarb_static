@@ -3,6 +3,7 @@ package models.glycomobcomposition;
 import play.db.ebean.Model;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by matthew on 14/01/15.
@@ -36,8 +37,14 @@ public class CssDataGeneral extends Model {
 
     public String ion;
     public Double ionMass;
+    public String nativeStructure;
 
     public static Model.Finder<Long,CssDataGeneral> find = new Model.Finder<Long,CssDataGeneral>(Long.class, CssDataGeneral.class);
+
+    public static List<CssDataGeneral> getMatchingCSS(Double css) {
+        List<CssDataGeneral> cssDatas = find.where().between("css", css-4, css+4).findList();
+        return cssDatas;
+    }
 
 
 }

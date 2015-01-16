@@ -1,4 +1,5 @@
-@(summaryNegativeHe: List[models.glycomobcomposition.CssDataGeneral], summaryNegativeN: List[models.glycomobcomposition.CssDataGeneral], protein: models.glycomobcomposition.GlycoproteinStandard, proteinList: List[models.glycomobcomposition.GlycoproteinStandard])
+@(numberCss: Integer, numberNaCss: Integer, comp: List[models.glycomobcomposition.Glycomobcomposition], sodiatedcomp: List[models.glycomobcomposition.SodiatedGlycomobComposition], proteinList: List[models.glycomobcomposition.GlycoproteinStandard], kbComp: String)
+
 
 @main{
 
@@ -13,22 +14,24 @@
     <section id="layouts">
 
         <div class="page-header row-fluid">
-            <h1>@protein.name CSS Values</h1>
+            <h1>CSS Values - Composition Search</h1>
         </div>
 
         <div class="row-fluid">
             <div class="span8">
                 <input type="search" class="light-table-filter" data-table="order-table" placeholder="Filter" />
+                OR <a href="@kbComp"><span class="label label-light">Query UniCarbKB Compositions</span></a>
+
                 <ul class="nav nav-tabs" id="product-table">
-                    <li class="active"><a href="#1" data-toggle="tab">Negative Mode - Helium (@summaryNegativeHe.size)</a>
+                    <li class="active"><a href="#1" data-toggle="tab">Matching Structures (@numberCss)</a>
                     </li>
-                    <li><a href="#2" data-toggle="tab">Negative Mode - Nitrogen (@summaryNegativeN.size)</a>
+                    <li><a href="#2" data-toggle="tab">Sodiated Structures (@numberNaCss)</a>
                     </li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="1">
 
-                        <h3>Negative Mode (Helium)</h3>
+                        <h3>Matching Structures</h3>
                         <table class="table table-condensed table-bordered table-striped volumes order-table">
                             <thead>
                             <tr>
@@ -43,31 +46,32 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @for(negative <-  summaryNegativeHe){
+                            @for(negative <-  comp){
                             <tr>
-                                <td>@negative.css</td>
-                                <td>@negative.ionMass</td>
-                                <td>@negative.ion</td>
-                                <td>@negative.glycomobcompositionList.hex.replace("0", "")</td>
-                                <td>@negative.glycomobcompositionList.hexnac.replace("0", "")</td>
-                                <td>@negative.glycomobcompositionList.dhex.replace("0", "")</td>
-                                <td>@negative.glycomobcompositionList.neunac.replace("0", "")</td>
-                                <td></td>
+                            @for(n <- negative.cssDataGenerals) {
+                                <td>@n.css</td>
+                                <td>@n.glycomobcompositionList.mass</td>
+                                <td>@n.ion</td>
+                                <td>@n.glycomobcompositionList.hex</td>
+                                <td>@n.glycomobcompositionList.hexnac</td>
+                                <td>@n.glycomobcompositionList.dhex</td>
+                                <td>@n.glycomobcompositionList.neunac</td>
+                                <td>@n.glycomobcompositionList.mi</td>
                             </tr>
-                            }
+                            } }
                             </tbody>
                         </table>
                     </div>
 
 
                     <div class="tab-pane" id="2">
-                        <h3>Negative Mode (Nitrogen)</h3>
+                        <h3>Sodiated Structures</h3>
                         <table class="table table-condensed table-bordered table-striped volumes order-table">
                             <thead>
                             <tr>
                                 <th>CSS</th>
                                 <th>Mass (m/z)</th>
-                                <th>Ion</th>
+                                <th>Charge</th>
                                 <th>Hex</th>
                                 <th>HexNAc</th>
                                 <th>dHex</th>
@@ -76,18 +80,19 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @for(negativeN <-  summaryNegativeN){
+                            @for(negativeN <-  sodiatedcomp){
                             <tr>
-                                <td>@negativeN.css</td>
-                                <td>@negativeN.ionMass</td>
-                                <td>@negativeN.ion</td>
-                                <td>@negativeN.glycomobcompositionList.hex.replace("0", "")</td>
-                                <td>@negativeN.glycomobcompositionList.hexnac.replace("0", "")</td>
-                                <td>@negativeN.glycomobcompositionList.dhex.replace("0", "")</td>
-                                <td>@negativeN.glycomobcompositionList.neunac.replace("0", "")</td>
-                                <td></td>
+                            @for(s <- negativeN.cssDatas) {
+                                <td>@s.css</td>
+                                <td>@s.sodiatedGlycomobCompositionList.massCharge</td>
+                                <td>@s.sodiatedGlycomobCompositionList.charge</td>
+                                <td>@s.sodiatedGlycomobCompositionList.hex.replace("0", "")</td>
+                                <td>@s.sodiatedGlycomobCompositionList.hexnac.replace("0", "")</td>
+                                <td>@s.sodiatedGlycomobCompositionList.dhex.replace("0", "")</td>
+                                <td>@s.sodiatedGlycomobCompositionList.neunac.replace("0", "")</td>
+                                <td>@s.sodiatedGlycomobCompositionList.mi</td>
                             </tr>
-                            }
+                            }}
                             </tbody>
                         </table>
                     </div>
@@ -105,14 +110,14 @@
                         <span class='label label-warning'>Dextran Ladder</span>
                     </div>
                     <div>
-                    <ul id='more-taxonomy'>
-                        <h3 id='less-taxonomy'><span class='icon-tags icon-white'></span> Glycoproteins</h3>
-                        @for(p <- proteinList) {
-                        @if(!p.name.equals("Dextran")) {
+                        <ul id='more-taxonomy'>
+                            <h3 id='less-taxonomy'><span class='icon-tags icon-white'></span> Glycoproteins</h3>
+                            @for(p <- proteinList) {
+                            @if(!p.name.equals("Dextran")) {
                             <li><span class='icon-tag icon-white'></span> <a href='/ionmobCompleteProtein/@p.id'>@p.name</a></li>
-                        }
-                        }
-                    </ul>
+                            }
+                            }
+                        </ul>
                     </div>
                 </div>
 
@@ -144,7 +149,8 @@
                             <label class="labelionmob ionmobcomp">NeuNAc</label>
                             <input id="ionmobcomp" type="text" class="input-block-level" name="neunac" value="0">
                         </div>
-                        <div class="form-ionmobfooter">
+                        <label class="labelionmob ionmobcomp" style="width:100%; text-align:left"><span>By default only native structures will be search - tick box otherwise</span><input type="checkbox" class="checkbox"  name="native"/> </label>
+                        <div class="form-footer">
                             <button class="btn btn-primary btn-large btn-block" type="submit">Submit Query</button>
                         </div>
                     </form>

@@ -146,7 +146,7 @@ p.builder {
 
 .btn {
   text-shadow: 0 1px 1px rgba(255,255,255,0.75);
-  background-color: whiteSmoke;
+  /* background-color: whiteSmoke;  not sure when and why this was set ? */
   background-image: none;
   border: 1px solid #bbb;
   border-color: #e6e6e6 #e6e6e6 #bfbfbf;
@@ -229,6 +229,13 @@ a .label-important:hover { background-color: #CA2A2C; }
 
 .label-warning { background-color: #f89406; }
 a .label-warning:hover { background-color: #F07F26; }
+
+.label-sub { background-color: rgba(0, 0, 0, 0.35);}
+
+.label-ionmob {
+  margin-bottom: 0; padding-top: 6px; width: 30px;
+  font-size: 13px; line-height: 18px; text-align: right; color: #404040;
+}
 
 
 [class*="label"] .caret {
@@ -1276,3 +1283,45 @@ g.yaxis path.domain { stroke: #333; stroke-width: 0px; fill: none; }
 @font-face { font-family: 'OpenSans'; src: url('../fonts/OpenSans-ExtraBold-webfont.eot'); src: url('../fonts/OpenSans-ExtraBold-webfont.eot?#iefix') format("embedded-opentype"), url('../../fonts/OpenSans-ExtraBold-webfont.woff') format("woff"), url('../fonts/OpenSans-ExtraBold-webfont.ttf') format("truetype"), url('../fonts/OpenSans-ExtraBold-webfont.svg#OpenSansExtrabold') format("svg"); font-weight: bold; font-weight: 900; font-style: normal; }
 
 @font-face { font-family: 'OpenSans'; src: url('../fonts/OpenSans-ExtraBoldItalic-webfont.eot'); src: url('../fonts/OpenSans-ExtraBoldItalic-webfont.eot?#iefix') format("embedded-opentype"), url('../../fonts/OpenSans-ExtraBoldItalic-webfont.woff') format("woff"), url('../fonts/OpenSans-ExtraBoldItalic-webfont.ttf') format("truetype"), url('../fonts/OpenSans-ExtraBoldItalic-webfont.svg#OpenSansExtraboldItalic') format("svg"); font-weight: bold; font-weight: 900; font-style: italic; }
+
+
+/********************************************************************************************************
+=> Ionmob form
+*******************************************************************************************************/
+
+.form-ionmob
+max-width: 400px;
+margin: 0 auto;
+padding: 25px;
+
+}
+
+.form-ionmob input[type="text"],
+.form-ionmob input[type="email"],
+.form-ionmob input[type="password"] {
+font-size: 16px;
+height: auto;
+padding: 7px 9px;
+}
+.form-ionmobfooter a {
+font-size: 12px;
+display: inline-block;
+margin-top: 15px;
+}
+
+labelionmob {
+margin-bottom: 0;
+padding-top: 6px;
+width: 130px;
+font-size: 13px;
+line-height: 18px;
+color: #404040;}
+
+.ionmobcomp {
+width: 21%;
+display: inline-block;
+margin-bottom: 0px;
+}
+.ionmobcomp-align {
+float: center;
+}

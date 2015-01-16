@@ -24,7 +24,18 @@ public class Glycomobcomposition extends Model {
     public String mi; //multiple isomers
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
-    public List<Glycomobcomposition> glycomobCompositionList;
+    public List<CssDataGeneral> cssDataGenerals;
 
     public static Model.Finder<Long,Glycomobcomposition> find = new Model.Finder<Long,Glycomobcomposition>(Long.class, Glycomobcomposition.class);
+
+    /* will match compositions referenced to native structures only */
+    public static List<Glycomobcomposition> getMatchingCompositions(String hex, String hexnac, String dhex, String neunac){
+        List<Glycomobcomposition> glycomobcompositions = find.fetch("cssDataGenerals").where().eq("hex", hex).eq("hexnac", hexnac).eq("dhex", dhex).eq("neunac", neunac).eq("native_structure", "y").findList();
+        return glycomobcompositions;
+    }
+
+    public static List<Glycomobcomposition> getMatchingCompositionsAll(String hex, String hexnac, String dhex, String neunac){
+        List<Glycomobcomposition> glycomobcompositions = find.fetch("cssDataGenerals").where().eq("hex", hex).eq("hexnac", hexnac).eq("dhex", dhex).eq("neunac", neunac).findList();
+        return glycomobcompositions;
+    }
 }

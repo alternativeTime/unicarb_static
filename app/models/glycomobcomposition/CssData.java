@@ -3,6 +3,7 @@ package models.glycomobcomposition;
 import play.db.ebean.Model;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by matthew on 8/01/15.
@@ -16,6 +17,7 @@ public class CssData extends Model {
     public Long id;
     public Double css;
     public String mode;
+    public String nativeStructure;
 
 
     @ManyToOne
@@ -31,10 +33,15 @@ public class CssData extends Model {
     public IonmobGas ionmobGasList;
 
     @ManyToOne
-    @JoinColumn(name="glycomob_composition_id")
+    @JoinColumn(name="sodiated_glycomob_composition_id")
     public SodiatedGlycomobComposition sodiatedGlycomobCompositionList;
 
     public static Model.Finder<Long,CssData> find = new Model.Finder<Long,CssData>(Long.class, CssData.class);
+
+    public static List<CssData> getMatchingCSS(Double css) {
+        List<CssData> cssDatas = find.where().between("css", css-4, css+4).findList();
+        return cssDatas;
+    }
 
 
 }

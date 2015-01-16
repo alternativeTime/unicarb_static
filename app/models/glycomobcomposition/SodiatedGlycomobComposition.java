@@ -24,8 +24,19 @@ public class SodiatedGlycomobComposition extends Model {
     public String mi; //multiple isomers
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
-    public List<SodiatedGlycomobComposition> glycomobCompositionList;
+    public List<CssData> cssDatas;
 
     public static Model.Finder<Long,SodiatedGlycomobComposition> find = new Model.Finder<Long,SodiatedGlycomobComposition>(Long.class, SodiatedGlycomobComposition.class);
+
+    /* will match compositions referenced to native structures only */
+    public static List<SodiatedGlycomobComposition> getMatchingCompositions(String hex, String hexnac, String dhex, String neunac){
+        List<SodiatedGlycomobComposition> sodiatedGlycomobCompositions = find.fetch("cssDatas").where().eq("hex", hex).eq("hexnac", hexnac).eq("dhex", dhex).eq("neunac", neunac).eq("native_structure", "y").findList();
+        return sodiatedGlycomobCompositions;
+    }
+
+    public static List<SodiatedGlycomobComposition> getMatchingCompositionsAll(String hex, String hexnac, String dhex, String neunac){
+        List<SodiatedGlycomobComposition> sodiatedGlycomobCompositions = find.fetch("cssDatas").where().eq("hex", hex).eq("hexnac", hexnac).eq("dhex", dhex).eq("neunac", neunac).findList();
+        return sodiatedGlycomobCompositions;
+    }
 }
 
