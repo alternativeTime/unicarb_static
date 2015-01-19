@@ -16,8 +16,18 @@ public class GlycoproteinStandard extends Model {
     @Id
     public Long id;
     public String name;
-    public String dataAcquisition;
-    public Integer cssCount;
+    //public String dataAcquisition;
+    public Integer cssCount; //include native and all fragments
+    //public Integer nativeStructure;
+    public Integer cssPosHeNative;
+    public Integer cssPosNitrogenNative;
+    public Integer cssNegHeNative;
+    public Integer cssNegNitrogenNative;
+    public Integer totalCssPosHe;
+    public Integer totalCssPosN;
+    public Integer totalCssNegHe;
+    public Integer totalCssNegN;
+
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     public List<GlycoproteinStandard> glycoproteinStandardList;
