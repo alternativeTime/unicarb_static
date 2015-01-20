@@ -17,7 +17,7 @@ public class CssDataGeneral extends Model {
     public Long id;
     public Double css;
     public String mode;
-
+    public String nativeStructure;
 
     @ManyToOne
     @JoinColumn(name="adduct_id")
@@ -37,7 +37,7 @@ public class CssDataGeneral extends Model {
 
     public String ion;
     public Double ionMass;
-    public String nativeStructure;
+
 
     public static Model.Finder<Long,CssDataGeneral> find = new Model.Finder<Long,CssDataGeneral>(Long.class, CssDataGeneral.class);
 

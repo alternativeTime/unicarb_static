@@ -15,7 +15,8 @@ public class SodiatedGlycomobComposition extends Model {
 
     @Id
     public Long id;
-    public String massCharge;
+    public String massCharge; //with Na
+    public Double mass;
     public String hex;
     public String hexnac;
     public String dhex;

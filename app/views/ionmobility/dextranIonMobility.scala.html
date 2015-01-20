@@ -1,4 +1,4 @@
-@(negative: List[models.ionmob.DextranNegative], positive: List[models.ionmob.DextranPositive])
+@(negative: List[models.ionmob.DextranNegative], positive: List[models.ionmob.DextranPositive], proteinList: List[models.glycomobcomposition.GlycoproteinStandard])
 
 
 @main{
@@ -82,16 +82,7 @@
                 </div>
 
                 <div class="span4">
-                    <div class='info'>
-                        <h3>Ion Mobility</h3>
-
-                        <div class='taxonomy'>
-                            <span class='label label-success'>Dextra High-Mannose Structures</span><br/><br/>
-                            <span class='label label-info'>Glycoprotein Standards</span><br/><br/>
-                            <span class='label label-warning'>Dextran Ladder</span>
-                        </div>
-                    </div>
-
+                    @views.html.format.ionmob(proteinList)
                 </div>
             </div>
     </section>

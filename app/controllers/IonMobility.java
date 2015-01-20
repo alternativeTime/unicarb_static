@@ -5,7 +5,6 @@ import models.ionmob.*;
 import play.Logger;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.ionmobilityHome;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,13 +18,16 @@ public class IonMobility extends Controller {
         List<NitrogenPositive> nitrorogenPositiveList = NitrogenPositive.find.all();
         List<HeNegative> henegativeList = HeNegative.find.all();
         List<HePositive> hepositiveList = HePositive.find.all();
-        return ok(ionmobilityHome.render(glycanMobList, nitrogenNegativeList, nitrorogenPositiveList, henegativeList, hepositiveList ));
+
+        return ok(views.html.ionmobility.ionmobilityMannose.render(glycanMobList, nitrogenNegativeList, nitrorogenPositiveList, henegativeList, hepositiveList ));
     }
 
     public static Result dextranIonMobilityHome(){
+        List<GlycoproteinStandard> glycoproteinStandardList = GlycoproteinStandard.find.all();
         List<DextranPositive> dextranPositiveList = DextranPositive.find.all();
         List<DextranNegative> dextranNegativeList = DextranNegative.find.all();
-        return ok(views.html.ionmobility.dextranIonMobility.render(dextranNegativeList, dextranPositiveList));
+
+        return ok(views.html.ionmobility.dextranIonMobility.render(dextranNegativeList, dextranPositiveList, glycoproteinStandardList));
     }
 
     public static Result ionmobGlycoproteinStandards() {
@@ -35,12 +37,13 @@ public class IonMobility extends Controller {
 
     public static Result ionmobSodiatedGlycoproteinData(Long id){
         GlycoproteinStandard glycoproteinStandards = GlycoproteinStandard.find.byId(id);
+        List<GlycoproteinStandard> glycoproteinStandardList = GlycoproteinStandard.find.all();
         List<CssData> cssDataPositiveHe = CssData.find.fetch("glycoproteinStandardList").where().eq("glycoproteinStandardList.id", id).eq("mode", "positive").eq("ionmob_gas_id", 1).order().asc("css").findList();
         List<CssData> cssDataNegativeHe = CssData.find.fetch("glycoproteinStandardList").where().eq("glycoproteinStandardList.id", id).eq("mode", "negative").eq("ionmob_gas_id", 1).order().asc("css").findList();
 
         List<CssData> cssDataPositiveN = CssData.find.fetch("glycoproteinStandardList").where().eq("glycoproteinStandardList.id", id).eq("mode", "positive").eq("ionmob_gas_id", 2).order().asc("css").findList();
         List<CssData> cssDataNegativeN = CssData.find.fetch("glycoproteinStandardList").where().eq("glycoproteinStandardList.id", id).eq("mode", "negative").eq("ionmob_gas_id", 2).order().asc("css").findList();
-        return ok(views.html.ionmobility.ionmobilitySodiatedStandardData.render(cssDataPositiveHe, cssDataNegativeHe, glycoproteinStandards, cssDataPositiveN, cssDataNegativeN ));
+        return ok(views.html.ionmobility.ionmobilitySodiatedStandardData.render(cssDataPositiveHe, cssDataNegativeHe, glycoproteinStandards, cssDataPositiveN, cssDataNegativeN, glycoproteinStandardList ));
     }
 
     /*
@@ -58,6 +61,7 @@ public class IonMobility extends Controller {
             String dhex = "0";
             String neunac = "0";
             String nativeStructure= "off";
+            String cssSearch = "0";
             int numberNaCss = 0;
             int numberCss = 0;
             hex = request().getQueryString("hex");
@@ -65,6 +69,7 @@ public class IonMobility extends Controller {
             dhex = request().getQueryString("dhex");
             neunac = request().getQueryString("neunac");
             nativeStructure = request().getQueryString("native");
+            cssSearch = request().getHeader("css");
 
             String unicarbkbComposition = "/compositions?glycanType=N-Linked&comp_Hex=" + hex + "&comp_HexNAc=" + hexnac + "&comp_Deoxyhexose=" + dhex + "&comp_NeuAc=" + neunac + "&comp_NeuGc=&comp_Pent=&comp_Sulph=&comp_Phos=&comp_KDN=&comp_KDO=&comp_HexA=&comp_methyl=&comp_acetyl=&comp_other=";
             List<Glycomobcomposition> glycomobcomposition = new ArrayList<>();
@@ -96,6 +101,10 @@ public class IonMobility extends Controller {
 
             }
 
+            if(!cssSearch.matches("0")){
+                Logger.info("search css " + cssSearch);
+            }
+
 
 
             return ok(views.html.ionmobility.ionmobilityComposition.render(numberCss, numberNaCss, glycomobcomposition, sodiatedGlycomobComposition, glycoproteinStandardList, unicarbkbComposition));
@@ -103,5 +112,23 @@ public class IonMobility extends Controller {
 
         return ok(views.html.ionmobility.ionmobilityCompleteProtein.render(cssDataGeneralHe, cssDataGeneralN, glycoproteinStandards, glycoproteinStandardList));
 
+    }
+
+    public static Result cssSearch(){
+        String cssSearch = "0";
+        List<CssData> cssData = new ArrayList<>();
+        List<CssDataGeneral> cssDataGeneral = new ArrayList<>();
+        List<GlycoproteinStandard> glycoproteinStandardList = GlycoproteinStandard.find.all();
+
+        if(request().queryString().size() > 0){
+            cssSearch = request().getQueryString("css");
+            if(!cssSearch.matches("0")){
+                Logger.info("search css " + cssSearch);
+
+                cssData = CssData.getMatchingCSS(Double.valueOf(cssSearch));
+                cssDataGeneral = CssDataGeneral.getMatchingCSS(Double.valueOf(cssSearch));
+            }
+        }
+        return ok(views.html.ionmobility.cssSearch.render(cssData, cssDataGeneral, glycoproteinStandardList));
     }
 }

@@ -1,0 +1,78 @@
+@(gm: List[ionmob.GlycanMob], ne: List[ionmob.NitrogenNegative], np: List[ionmob.NitrogenPositive], he: List[ionmob.HeNegative], hp: List[ionmob.HePositive]  )
+@import helper._
+
+@main {
+<ul class="breadcrumb">
+  <li><i class="icon-home" ></i><a href="/"> UniCarbKB</a> <span class="divider">></span></li>
+  <li><i class="icon-book" ></i><a href=""> Ion Mobility</a> <span class="divider">></span></li>
+</ul>
+<section id="layouts">
+
+	<div class="page-header row-fluid">
+	<h2>GlycoMob - Ion Mobility Database</h2>
+   	</div>
+	
+	<div class="row-fluid">
+        <div class="span8">
+	<p></p>
+	@for(g <- gm) {
+        <img class="sugar_image" src="http://unicarbkb.org/images/cfgl/smaller/@{g.structureId}.png"/>
+            <table class="computers table table-striped">
+            <thead>
+	    <tr><th align="middle" colspan="2">Ion Mobility Gas: Nitrogen</th></tr>
+	    <tr><th align="middle" colspan="3">Negative</th><th align="middle" colspan="3">Positive</th></tr>
+            <tr>
+            <th>M+H</th>
+            <th>M+Cl</th>
+            <th>M+H2PO4</th>
+	    <th>M+H</th>
+	    <th>M+Na</th>
+	    <th>M+K</th>
+	    <th>
+            </tr>
+            </thead>
+            <tbody>
+	    @for(ne <- g.nitrogenNegativeList){
+            	<tr><td>@{"%.2f".format(ne.h)}</td><td>@{"%.2f".format(ne.cl)}</td><td>@{"%.2f".format(ne.p)}</td>
+	    }
+            @for(ne <- g.nitrogenPositiveList){
+		<td>@{"%.2f".format(ne.h)}</td><td>@{"%.2f".format(ne.na)}</td><td>@{"%.2f".format(ne.k)}</td></tr>
+	    }
+            </tbody>
+            </table>
+
+            <table class="computers table table-striped">
+            <thead>
+	    <tr><th align="middle" colspan="2">Ion Mobility Gas: Helium</th></tr>
+            <tr><th align="middle" colspan="3">Negative</th><th align="middle" colspan="3">Positive</th></tr>
+            <tr>
+            <th>M+H</th>
+            <th>M+Cl</th>
+            <th>M+H2PO4</th>
+            <th>M+H</th>
+            <th>M+Na</th>
+            <th>M+K</th>
+            <th>
+            </tr>
+            </thead>
+            <tbody>
+            @for(ne <- g.heNegativeList){
+                <tr><td>@{"%.2f".format(ne.h)}</td><td>@{"%.2f".format(ne.cl)}</td><td>@{"%.2f".format(ne.p)}</td>
+            }
+            @for(ne <- g.hePositiveList){
+                <td>@{"%.2f".format(ne.h)}</td><td>@{"%.2f".format(ne.na)}</td><td>@{"%.2f".format(ne.k)}</td></tr>
+            }
+            </tbody>
+            </table>
+
+        }
+    </div>
+
+    <div class="span4 sidebar">
+      @views.html.format.format()
+    </div><!-- /col -->
+</div>
+  @views.html.footerunicarb.footerunicarb()
+</section>
+
+}

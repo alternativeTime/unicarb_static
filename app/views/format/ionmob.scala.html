@@ -1,0 +1,183 @@
+@(proteinList: List[models.glycomobcomposition.GlycoproteinStandard])
+
+<div class='info'>
+    <h3>Ion Mobility</h3>
+
+    <div class='taxonomy'>
+        <a href="/ionmobilityMannose"><span class='label label-success'>High-Mannose Structures</span></a>
+        <a id='toggle-taxonomy'><span class='label label-important'><span class='icon-tags icon-white'></span> Glycoprotein Standards  <span class="caret"></span></span></a>
+
+        <a href="/dextranIonMobility"><span class='label label-warning'>Dextran Ladder</span></a>
+    </div>
+    <div>
+        <ul id='more-taxonomy'>
+            <h3 id='less-taxonomy'><span class='icon-tags icon-white'></span> Glycoproteins</h3>
+            @for(p <- proteinList) {
+            @if(!p.name.equals("Dextran")) {
+            <li><span class='icon-tag icon-white'></span> <a href='/ionmobCompleteProtein/@p.id'>@p.name</a></li>
+            }
+            }
+        </ul>
+    </div>
+</div>
+
+
+<div class="info">
+    <h3>Method Summary</h3>
+    <p style="text-align: justify">Measurements of absolute CCS values were performed using a Synapt G1 HDMS quadrupole/IMS/oa-ToF instrument (Waters Co., Manchester, U.K.) modified for drift tube operation (<a href="http://pubs.acs.org/doi/abs/10.1021/ac1022953">Bush, et al., 2010</a>).
+        Briefly, N-linked glycans were released with hydrazine from the well-characterized glycoproteins ribonuclease B, porcine thyroglobulin, chicken ovalbumin, and bovine fetuin
+        obtained from Sigma Chemical Co., Ltd. (Poole, Dorset, U.K.) and reacetylated. Sialic acids were removed from the thyroglobulin and fetuin samples by heating with 1% acetic acid for 1 h at 70 °C.
+        For electrospray analysis, samples were dissolved in water:methanol (1:1, v:v) at ∼1 mg/mL. More information refer to the supplementary section <a href="http://pubs.acs.org/doi/abs/10.1021/ac400403d">Pagel K and Harvey DJ, Analytical Chemistry 2013</a>.</p>
+</div>
+
+<div class="info">
+    <h3>GlycoMob Composition Search</h3>
+    <form class="form-ionmob">
+        <div class="control-group ionmobcomp">
+            <label class="labelionmob ionmobcomp">Hex</label>
+            <input id="ionmobcomp" type="text" class="input-block-level" name="hex" value="0">
+        </div>
+        <div class="control-group ionmobcomp ionmobcomp-align">
+            <label class="labelionmob ionmobcomp">HexNAc</label>
+            <input id="ionmobcomp" type="text" class="input-block-level" name="hexnac" value="0">
+        </div>
+        <div class="control-group ionmobcomp ionmobcomp-align">
+            <label class="labelionmob ionmobcomp">dHex</label>
+            <input id="ionmobcomp" type="text" class="input-block-level" name="dhex" value="0">
+        </div>
+        <div class="control-group ionmobcomp ionmobcomp-align">
+            <label class="labelionmob ionmobcomp">NeuNAc</label>
+            <input id="ionmobcomp" type="text" class="input-block-level" name="neunac" value="0">
+        </div>
+        <div class="form-ionmobfooter">
+            <button class="btn btn-primary btn btn-block" type="submit">Submit Query</button>
+        </div>
+    </form>
+</div>
+
+<div class="info">
+    <h3>CSS Search</h3>
+    <form class="form-ionmob">
+        <div class="control-group ionmobcomp">
+            <label class="labelionmob ionmobcomp">CSS Value:</label>
+            <input id="ionmobcomp" type="text" class="input-block-level" name="css" value="0">
+        </div>
+        <div class="form-ionmobfooter">
+            <button class="btn btn-primary btn btn-block" type="submit">Submit Query</button>
+        </div>
+    </form>
+
+
+    @* <div class="center">
+        <p>
+        </p><div class="input-group">
+          <span class="input-group-btn">
+              <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
+                  <span class="glyphicon glyphicon-minus"></span>
+              </button>
+          </span>
+        <input type="text" name="quant[1]" class="form-control input-number" value="1" min="1" max="10" size="40">
+          <span class="input-group-btn">
+              <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]">
+                  <span class="glyphicon glyphicon-plus"></span>
+              </button>
+          </span>
+    </div>
+        <p></p>
+        <p>
+        </p><div class="input-group">
+          <span class="input-group-btn">
+              <button type="button" class="btn btn-danger btn-number"  data-type="minus" data-field="quant[2]">
+                  <span class="glyphicon glyphicon-minus"></span>
+              </button>
+          </span>
+        <input type="text" name="quant[2]" class="form-control input-number" value="10" min="1" max="100">
+          <span class="input-group-btn">
+              <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="quant[2]">
+                  <span class="glyphicon glyphicon-plus"></span>
+              </button>
+          </span>
+    </div>
+        <p></p>
+    </div> *@
+
+
+</div>
+
+<script>
+    //plugin bootstrap minus and plus
+//http://jsfiddle.net/laelitenetwork/puJ6G/
+$('.btn-number').click(function(e){
+    e.preventDefault();
+
+    fieldName = $(this).attr('data-field');
+    type      = $(this).attr('data-type');
+    var input = $("input[name='"+fieldName+"']");
+    var currentVal = parseInt(input.val());
+    if (!isNaN(currentVal)) {
+        if(type == 'minus') {
+
+            if(currentVal > input.attr('min')) {
+                input.val(currentVal - 1).change();
+            }
+            if(parseInt(input.val()) == input.attr('min')) {
+                $(this).attr('disabled', true);
+            }
+
+        } else if(type == 'plus') {
+
+            if(currentVal < input.attr('max')) {
+                input.val(currentVal + 1).change();
+            }
+            if(parseInt(input.val()) == input.attr('max')) {
+                $(this).attr('disabled', true);
+            }
+
+        }
+    } else {
+        input.val(0);
+    }
+});
+$('.input-number').focusin(function(){
+   $(this).data('oldValue', $(this).val());
+});
+$('.input-number').change(function() {
+
+    minValue =  parseInt($(this).attr('min'));
+    maxValue =  parseInt($(this).attr('max'));
+    valueCurrent = parseInt($(this).val());
+
+    name = $(this).attr('name');
+    if(valueCurrent >= minValue) {
+        $(".btn-number[data-type='minus'][data-field='"+name+"']").removeAttr('disabled')
+    } else {
+        alert('Sorry, the minimum value was reached');
+        $(this).val($(this).data('oldValue'));
+    }
+    if(valueCurrent <= maxValue) {
+        $(".btn-number[data-type='plus'][data-field='"+name+"']").removeAttr('disabled')
+    } else {
+        alert('Sorry, the maximum value was reached');
+        $(this).val($(this).data('oldValue'));
+    }
+
+
+});
+$(".input-number").keydown(function (e) {
+        // Allow: backspace, delete, tab, escape, enter and .
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+             // Allow: Ctrl+A
+            (e.keyCode == 65 && e.ctrlKey === true) ||
+             // Allow: home, end, left, right
+            (e.keyCode >= 35 && e.keyCode <= 39)) {
+                 // let it happen, don't do anything
+                 return;
+        }
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
+
+
+</script>

@@ -45,60 +45,7 @@
             </div>
 
             <div class="span4">
-                <div class='info'>
-                    <h3>Ion Mobility</h3>
-
-                    <div class='taxonomy'>
-                        <span class='label label-success'>High-Mannose Structures</span>
-                        <a id='toggle-taxonomy'><span class='label label-important'><span class='icon-tags icon-white'></span> Glycoprotein Standards  <span class="caret"></span></span></a>
-
-                        <span class='label label-warning'>Dextran Ladder</span>
-                    </div>
-                    <div>
-                        <ul id='more-taxonomy'>
-                            <h3 id='less-taxonomy'><span class='icon-tags icon-white'></span> Glycoproteins</h3>
-                            @for(p <- standards) {
-                            @if(!p.name.equals("Dextran")) {
-                            <li><span class='icon-tag icon-white'></span> <a href='/ionmobCompleteProtein/@p.id'>@p.name</a></li>
-                            }
-                            }
-                        </ul>
-                    </div>
-                </div>
-
-
-                <div class="info">
-                    <h3>Method Summary</h3>
-                    <p style="text-align: justify">Measurements of absolute CCS values were performed using a Synapt G1 HDMS quadrupole/IMS/oa-ToF instrument (Waters Co., Manchester, U.K.) modified for drift tube operation (<a href="http://pubs.acs.org/doi/abs/10.1021/ac1022953">Bush, et al., 2010</a>).
-                        Briefly, N-linked glycans were released with hydrazine from the well-characterized glycoproteins ribonuclease B, porcine thyroglobulin, chicken ovalbumin, and bovine fetuin
-                        obtained from Sigma Chemical Co., Ltd. (Poole, Dorset, U.K.) and reacetylated. Sialic acids were removed from the thyroglobulin and fetuin samples by heating with 1% acetic acid for 1 h at 70 °C.
-                        For electrospray analysis, samples were dissolved in water:methanol (1:1, v:v) at ∼1 mg/mL. More information refer to the supplementary section <a href="http://pubs.acs.org/doi/abs/10.1021/ac400403d">Pagel K and Harvey DJ, Analytical Chemistry 2013</a>.</p>
-                </div>
-
-                <div class="info">
-                    <h3>GlycoMob Composition Search</h3>
-                    <form class="form-ionmob">
-                        <div class="control-group ionmobcomp">
-                            <label class="labelionmob ionmobcomp">Hex</label>
-                            <input id="ionmobcomp" type="text" class="input-block-level" name="hex" value="0">
-                        </div>
-                        <div class="control-group ionmobcomp ionmobcomp-align">
-                            <label class="labelionmob ionmobcomp">HexNAc</label>
-                            <input id="ionmobcomp" type="text" class="input-block-level" name="hexnac" value="0">
-                        </div>
-                        <div class="control-group ionmobcomp ionmobcomp-align">
-                            <label class="labelionmob ionmobcomp">dHex</label>
-                            <input id="ionmobcomp" type="text" class="input-block-level" name="dhex" value="0">
-                        </div>
-                        <div class="control-group ionmobcomp ionmobcomp-align">
-                            <label class="labelionmob ionmobcomp">NeuNAc</label>
-                            <input id="ionmobcomp" type="text" class="input-block-level" name="neunac" value="0">
-                        </div>
-                        <div class="form-ionmobfooter">
-                            <button class="btn btn-primary btn-large btn-block" type="submit">Submit Query</button>
-                        </div>
-                    </form>
-                </div>
+                @views.html.format.ionmob(standards)
             </div>
         </div>
     </section>
