@@ -63,12 +63,20 @@ GET  /massspec                  controllers.Application.massspec()
 
 GET  /pubmed		            controllers.Pubmed.getpubmed()
 
-#IonmoB
-GET  /ionmobility               controllers.IonMobility.ionmobilityHome()
+#Ionmob
+GET  /ionmobilityMannose        controllers.IonMobility.ionmobilityHome()
 GET  /dextranIonMobility        controllers.IonMobility.dextranIonMobilityHome()
 GET  /ionmobilityStandards      controllers.IonMobility.ionmobGlycoproteinStandards()
 GET  /ionmobSodiatedGlycoproteinData/:id    controllers.IonMobility.ionmobSodiatedGlycoproteinData(id:Long)
 GET  /ionmobCompleteProtein/:id controllers.IonMobility.ionmobCompleteProtein(id:Long)
+GET  /cssSearch                 controllers.IonMobility.cssSearch()
+
+#GSS
+GET  /glycospectrumscan         controllers.Glycospectrumscan.glycospectrumscan()
+POST /glycanFileUpload          controllers.Glycospectrumscan.glycanFileUpload()
+GET  /glycanFileProcess/:s      controllers.Glycospectrumscan.glycanFileProcess(s: String)
+GET  /gssSettings               controllers.Glycospectrumscan.gssSettings()
+POST  /gssCore                  controllers.Glycospectrumscan.gssCore()
 
 #ANDS RIF OAI
 GET  /ands					    controllers.Ands.ands()
