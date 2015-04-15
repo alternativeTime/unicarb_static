@@ -1,0 +1,26 @@
+
+@* <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at(" stylesheets/fileinput.min.css")"> *@
+
+@helper.form(action = routes.Glycospectrumscan.glycanFileUpload, 'method->"POST", 'enctype -> "multipart/form-data") {
+
+
+<div class="well">
+    <fieldset>
+        <legend>File Upload</legend>
+        <div style="position:relative;">
+            <a>
+                Choose File...
+
+
+                <input type="file" name="glycanfile" multiple>
+
+
+            </a>
+            &nbsp;
+            <span class='label label-info' id="upload-file-info"></span>
+            <button id="submit" type="submit" value="Submit" class="btn btn-primary">Submit</button>
+        </div>
+    </fieldset>
+</div>
+
+}

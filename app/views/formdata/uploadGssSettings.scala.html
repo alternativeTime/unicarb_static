@@ -1,0 +1,24 @@
+
+@helper.form(action = routes.Glycospectrumscan.gssCore, 'method->"POST", 'enctype -> "multipart/form-data") {
+
+
+<div class="well">
+    <fieldset>
+        <legend>Min Settings (for now)!</legend>
+        <div style="position:relative;">
+            UniProt Accession: <input type="text" name="uniprot">
+            <br/>
+            Window: <select name="window">
+                <option value="0.5">0.5</option>
+                <option value="0.3">0.3</option>
+                <option value="0.2">0.2</option>
+            </select>
+            <br/>
+            Intensity threshold: <input type="text" name="threshold">
+
+            <button id="submit" type="submit" value="Submit" class="btn btn-primary">Submit</button>
+        </div>
+    </fieldset>
+</div>
+
+}

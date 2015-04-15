@@ -1,0 +1,12 @@
+@(filename: String)
+
+@main{
+
+        @if(!filename.isEmpty() && !filename.matches("test")){
+        <p>Filename: @filename</p>
+        <p>Next upload the peak list</p>
+        }
+
+@formdata.fileUpload()
+
+}
